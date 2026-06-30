@@ -1,0 +1,25 @@
+---
+import { blockRegistry, isKnownBlock } from "@lib/wordpress/blocks";
+import type { WpBlock } from "@lib/wordpress/types";
+import RenderedHtml from "./RenderedHtml.astro";
+
+type Props = {
+  blocks?: WpBlock[];
+  fallbackHtml?: string;
+};
+
+const { blocks = [], fallbackHtml = "" } = Astro.props;
+---
+
+{blocks.length > 0 ? (
+  blocks.map((block) => {
+    if (!isKnownBlock(block.name)) {
+      return <RenderedHtml html={block.innerHTML} />;
+    }
+
+    const Component = blockRegistry[block.name];
+    return <Component {...block.attrs} innerBlocks={block.innerBlocks} />;
+  })
+) : (
+  <RenderedHtml html={fallbackHtml} />
+)}

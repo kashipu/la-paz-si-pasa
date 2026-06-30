@@ -1,0 +1,94 @@
+---
+import "../styles/global.css";
+import WordPressMenu from "@components/wordpress/WordPressMenu.astro";
+import { getSiteSettings } from "@lib/wordpress/settings";
+
+type Props = {
+  title?: string;
+  description?: string;
+};
+
+const settings = await getSiteSettings();
+const title = Astro.props.title ? `${Astro.props.title} | ${settings.name}` : settings.name;
+const description = Astro.props.description ?? settings.description;
+const tokens = settings.tokens.colors;
+---
+
+<!doctype html>
+<html
+  lang="es"
+  style={`--color-brand: ${tokens.brand}; --color-accent: ${tokens.accent}; --color-surface: ${tokens.surface}; --color-text: ${tokens.text};`}
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="site-header__brand" href="/">
+          {settings.logo ? (
+            <img src={settings.logo.src} width={settings.logo.width} height={settings.logo.height} alt={settings.logo.alt || settings.name} />
+          ) : (
+            <span>{settings.name}</span>
+          )}
+        </a>
+        <WordPressMenu items={settings.menus.primary} label="Principal" />
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <p>{settings.name}</p>
+        <WordPressMenu items={settings.menus.footer} label="Footer" />
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .site-header__inner,
+  .site-footer__inner {
+    width: min(100% - 2rem, var(--wide-width));
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    padding-block: var(--space-4);
+  }
+
+  .site-header__brand {
+    color: var(--color-brand);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .site-header__brand img {
+    width: auto;
+    max-height: 44px;
+  }
+
+  .site-footer {
+    margin-top: var(--space-16);
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface-muted);
+  }
+
+  @media (max-width: 760px) {
+    .site-header__inner,
+    .site-footer__inner {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+</style>

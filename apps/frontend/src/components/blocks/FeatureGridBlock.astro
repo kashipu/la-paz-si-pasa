@@ -1,0 +1,73 @@
+---
+type Feature = {
+  title?: string;
+  text?: string;
+};
+
+type Props = {
+  title?: string;
+  features?: Feature[];
+  columns?: 2 | 3 | 4;
+  innerBlocks?: unknown[];
+};
+
+const {
+  title = "Base modular",
+  features = [
+    { title: "WordPress", text: "Contenido, menus, media y campos." },
+    { title: "Astro", text: "Rutas, componentes, SEO y rendimiento." },
+    { title: "Dokploy", text: "Despliegue separado y reproducible." },
+  ],
+  columns = 3,
+} = Astro.props;
+---
+
+<section class="feature-grid">
+  <div class="feature-grid__inner">
+    <h2>{title}</h2>
+    <div class="feature-grid__items" style={`--feature-columns: ${columns};`}>
+      {features.map((feature) => (
+        <article class="feature-grid__item">
+          <h3>{feature.title}</h3>
+          {feature.text && <p>{feature.text}</p>}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature-grid {
+    padding-block: var(--space-16);
+  }
+
+  .feature-grid__inner {
+    width: min(100% - 2rem, var(--wide-width));
+    margin-inline: auto;
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  .feature-grid__items {
+    display: grid;
+    grid-template-columns: repeat(var(--feature-columns), minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+
+  .feature-grid__item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    padding: var(--space-6);
+  }
+
+  .feature-grid__item p {
+    color: var(--color-text-muted);
+    margin-block-start: var(--space-3);
+  }
+
+  @media (max-width: 760px) {
+    .feature-grid__items {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

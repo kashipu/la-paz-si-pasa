@@ -1,0 +1,16 @@
+---
+import FeatureGridBlock from "@components/blocks/FeatureGridBlock.astro";
+import HeroBlock from "@components/blocks/HeroBlock.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <HeroBlock
+    eyebrow="Plantilla base"
+    title="Astro 7 conectado a WordPress headless"
+    summary="Una arquitectura modular, rapida y preparada para Docker, Windows y Dokploy."
+    ctaLabel="Ver blog"
+    ctaUrl="/blog/"
+  />
+  <FeatureGridBlock />
+</BaseLayout>

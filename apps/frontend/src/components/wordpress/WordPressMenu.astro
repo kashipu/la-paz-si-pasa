@@ -1,0 +1,74 @@
+---
+import type { MenuItem } from "@lib/wordpress/types";
+
+type Props = {
+  items: MenuItem[];
+  label: string;
+};
+
+const { items, label } = Astro.props;
+const topLevel = items.filter((item) => item.parentId === 0).sort((a, b) => a.order - b.order);
+const childrenByParent = new Map<number, MenuItem[]>();
+
+for (const item of items) {
+  if (item.parentId === 0) continue;
+  const children = childrenByParent.get(item.parentId) ?? [];
+  children.push(item);
+  childrenByParent.set(item.parentId, children.sort((a, b) => a.order - b.order));
+}
+---
+
+{topLevel.length > 0 && (
+  <nav class="wp-menu" aria-label={label}>
+    <ul class="wp-menu__list">
+      {topLevel.map((item) => (
+        <li class="wp-menu__item">
+          <a href={item.url} target={item.target || undefined}>{item.label}</a>
+          {childrenByParent.has(item.id) && (
+            <ul class="wp-menu__children">
+              {childrenByParent.get(item.id)?.map((child) => (
+                <li><a href={child.url} target={child.target || undefined}>{child.label}</a></li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}
+
+<style>
+  .wp-menu__list,
+  .wp-menu__children {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .wp-menu__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .wp-menu__item {
+    position: relative;
+  }
+
+  .wp-menu a {
+    color: var(--color-text);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .wp-menu a:hover {
+    color: var(--color-accent);
+  }
+
+  .wp-menu__children {
+    display: grid;
+    gap: var(--space-2);
+    padding-block-start: var(--space-2);
+  }
+</style>

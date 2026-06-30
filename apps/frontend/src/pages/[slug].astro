@@ -1,0 +1,43 @@
+---
+import WordPressBlocks from "@components/wordpress/WordPressBlocks.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getPageBySlug, getPages } from "@lib/wordpress/pages";
+
+export async function getStaticPaths() {
+  const pages = await getPages();
+
+  return pages
+    .filter((page) => page.slug !== "home")
+    .map((page) => ({
+      params: { slug: page.slug },
+    }));
+}
+
+const { slug } = Astro.params;
+const page = slug ? await getPageBySlug(slug) : null;
+
+if (!page?.content) {
+  return Astro.redirect("/404");
+}
+---
+
+<BaseLayout title={page.title.rendered}>
+  <article class="page">
+    <header class="page__header">
+      <h1 set:html={page.title.rendered} />
+    </header>
+    <WordPressBlocks blocks={page.headless_blocks} fallbackHtml={page.content.rendered} />
+  </article>
+</BaseLayout>
+
+<style>
+  .page {
+    padding-block: var(--space-16);
+  }
+
+  .page__header {
+    width: min(100% - 2rem, var(--narrow-width));
+    margin-inline: auto;
+    margin-block-end: var(--space-10);
+  }
+</style>

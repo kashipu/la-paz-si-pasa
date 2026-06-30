@@ -1,0 +1,25 @@
+---
+type Props = {
+  html?: string;
+};
+
+const { html = "" } = Astro.props;
+---
+
+<div class="rendered-html" set:html={html} />
+
+<style>
+  .rendered-html {
+    width: min(100% - 2rem, var(--narrow-width));
+    margin-inline: auto;
+  }
+
+  .rendered-html :global(*) + :global(*) {
+    margin-block-start: var(--space-4);
+  }
+
+  .rendered-html :global(img) {
+    border-radius: var(--radius-card);
+    height: auto;
+  }
+</style>

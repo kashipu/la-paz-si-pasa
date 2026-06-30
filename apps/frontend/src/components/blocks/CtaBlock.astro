@@ -1,0 +1,77 @@
+---
+type Props = {
+  title?: string;
+  text?: string;
+  ctaLabel?: string;
+  ctaUrl?: string;
+  tone?: "light" | "brand";
+  innerBlocks?: unknown[];
+};
+
+const {
+  title = "Listo para personalizar",
+  text,
+  ctaLabel = "Continuar",
+  ctaUrl = "/",
+  tone = "light",
+} = Astro.props;
+---
+
+<section class:list={["cta", `cta--${tone}`]}>
+  <div class="cta__inner">
+    <div>
+      <h2>{title}</h2>
+      {text && <p>{text}</p>}
+    </div>
+    <a href={ctaUrl}>{ctaLabel}</a>
+  </div>
+</section>
+
+<style>
+  .cta {
+    padding-block: var(--space-12);
+  }
+
+  .cta__inner {
+    width: min(100% - 2rem, var(--content-width));
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    border-radius: var(--radius-card);
+    background: var(--color-surface-muted);
+    padding: var(--space-8);
+  }
+
+  .cta--brand .cta__inner {
+    background: var(--color-brand);
+    color: var(--color-surface);
+  }
+
+  .cta--brand h2 {
+    color: var(--color-surface);
+  }
+
+  .cta p {
+    color: color-mix(in srgb, currentColor 75%, transparent);
+    margin-block-start: var(--space-3);
+  }
+
+  .cta a {
+    flex: 0 0 auto;
+    border-radius: var(--radius-control);
+    background: var(--color-accent);
+    color: white;
+    font-weight: 700;
+    padding: var(--space-3) var(--space-5);
+    text-decoration: none;
+  }
+
+  @media (max-width: 760px) {
+    .cta__inner {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+</style>
