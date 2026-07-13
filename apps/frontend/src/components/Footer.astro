@@ -1,0 +1,29 @@
+---
+// Footer fijo según cotización: logos, texto de cierre, redes, link web — no editable desde WP
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <p>La Paz Sí Pasa — Fondo Colombia en Paz</p>
+    <a href="https://www.fondocolombiaenpaz.gov.co" target="_blank" rel="noopener noreferrer">
+      Sitio web del fondo
+    </a>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--space-16, 4rem);
+    border-top: 1px solid var(--color-border, #ddd);
+    background: var(--color-surface-muted, #f5f5f5);
+  }
+
+  .site-footer__inner {
+    width: min(100% - 2rem, var(--wide-width, 1200px));
+    margin-inline: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-6, 1.5rem);
+    padding-block: var(--space-4, 1rem);
+  }
+</style>

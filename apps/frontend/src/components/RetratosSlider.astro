@@ -1,0 +1,182 @@
+---
+import type { Retrato } from "@adapters/contracts";
+import fondoDesktop from "../assets/retratos/retratos-fondo.png";
+import fondoMobile from "../assets/retratos/retratos-fondo-mb.png";
+
+type Props = { retratos: Retrato[] };
+const { retratos } = Astro.props;
+---
+
+<section
+  class="retratos-slider"
+  aria-roledescription="carrusel"
+  aria-label="Retratos de la Paz"
+  style={`--bg-desktop: url(${fondoDesktop.src}); --bg-mobile: url(${fondoMobile.src});`}
+>
+  <div class="retratos-slider__page">
+    <div class="retratos-slider__visual">
+      {retratos.map((retrato, i) => (
+        <img
+          class="retratos-slider__foto"
+          data-slide={i}
+          aria-hidden={i !== 0}
+          src={retrato.fotoUrl}
+          alt={retrato.descripcion}
+        />
+      ))}
+
+      <button type="button" class="retratos-slider__arrow retratos-slider__arrow--prev" aria-label="Retrato anterior">
+        ‹‹
+      </button>
+      <button type="button" class="retratos-slider__arrow retratos-slider__arrow--next" aria-label="Retrato siguiente">
+        ››
+      </button>
+    </div>
+
+    <div class="retratos-slider__texto">
+      <h2>Retratos de la Paz</h2>
+      <p class="retratos-slider__etiqueta">Galería<br />fotográfica</p>
+
+      {retratos.map((retrato, i) => (
+        <div class="retratos-slider__campos" data-slide={i} aria-hidden={i !== 0}>
+          <p class="retratos-slider__descripcion">{retrato.descripcion}</p>
+          <p class="retratos-slider__campo"><strong>Proyecto:</strong><br />{retrato.proyecto}</p>
+          <p class="retratos-slider__campo"><strong>Lugar:</strong><br />{retrato.lugar}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".retratos-slider").forEach((slider) => {
+    const fotos = slider.querySelectorAll<HTMLElement>(".retratos-slider__foto");
+    const campos = slider.querySelectorAll<HTMLElement>(".retratos-slider__campos");
+    const total = fotos.length;
+    let current = 0;
+
+    function render() {
+      fotos.forEach((el) => el.setAttribute("aria-hidden", String(Number(el.dataset.slide) !== current)));
+      campos.forEach((el) => el.setAttribute("aria-hidden", String(Number(el.dataset.slide) !== current)));
+    }
+
+    slider.querySelector(".retratos-slider__arrow--prev")?.addEventListener("click", () => {
+      current = (current - 1 + total) % total;
+      render();
+    });
+
+    slider.querySelector(".retratos-slider__arrow--next")?.addEventListener("click", () => {
+      current = (current + 1) % total;
+      render();
+    });
+  });
+</script>
+
+<style>
+  .retratos-slider__page {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin-inline: auto;
+  }
+
+  .retratos-slider__visual {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1240 / 830;
+    background-image: var(--bg-mobile);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+
+  @media (min-width: 640px) {
+    .retratos-slider__visual {
+      background-image: var(--bg-desktop);
+    }
+  }
+
+  .retratos-slider__foto {
+    position: absolute;
+    left: 6%;
+    top: 10%;
+    width: 44%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .retratos-slider__foto[aria-hidden="true"] {
+    display: none;
+  }
+
+  .retratos-slider__texto {
+    position: absolute;
+    right: 6%;
+    top: 8%;
+    width: 38%;
+    color: var(--color-nav-text);
+  }
+
+  @media (max-width: 639px) {
+    .retratos-slider__texto {
+      position: static;
+      width: 100%;
+      margin-top: var(--space-4);
+    }
+  }
+
+  .retratos-slider__texto h2 {
+    font-size: clamp(1rem, 2.2vw, 1.75rem);
+    margin: 0 0 var(--space-3) 0;
+  }
+
+  .retratos-slider__etiqueta {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--color-nav-border);
+    padding-bottom: var(--space-2);
+    margin-bottom: var(--space-3);
+  }
+
+  .retratos-slider__campos[aria-hidden="true"] {
+    display: none;
+  }
+
+  .retratos-slider__campos p {
+    margin: 0 0 var(--space-3) 0;
+    font-size: 0.85rem;
+  }
+
+  .retratos-slider__campo strong {
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+  }
+
+  .retratos-slider__arrow {
+    position: absolute;
+    bottom: 4%;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  .retratos-slider__arrow--prev {
+    left: 12%;
+    background: var(--color-surface);
+    border: 1px solid var(--color-nav-border);
+    color: var(--color-nav-text);
+  }
+
+  .retratos-slider__arrow--next {
+    right: 6%;
+    background: var(--color-nav-text);
+    border: none;
+    color: var(--color-surface);
+  }
+</style>

@@ -1,16 +1,39 @@
 ---
-import FeatureGridBlock from "@components/blocks/FeatureGridBlock.astro";
-import HeroBlock from "@components/blocks/HeroBlock.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import Hero from "@components/Hero.astro";
+import Nav from "@components/Nav.astro";
+import Intro from "@components/Intro.astro";
+import LoQueHacemos from "@components/LoQueHacemos.astro";
+import ActualidadGaleria from "@components/ActualidadGaleria.astro";
+import { getRetratos, getSubcuentas, getNoticias, getVideos } from "../adapters";
+
+const [retratos, subcuentas, noticias, videos] = await Promise.all([
+  getRetratos(),
+  getSubcuentas(),
+  getNoticias(),
+  getVideos(),
+]);
 ---
 
 <BaseLayout>
-  <HeroBlock
-    eyebrow="Plantilla base"
-    title="Astro 7 conectado a WordPress headless"
-    summary="Una arquitectura modular, rapida y preparada para Docker, Windows y Dokploy."
-    ctaLabel="Ver blog"
-    ctaUrl="/blog/"
-  />
-  <FeatureGridBlock />
+  <Hero />
+  <Nav />
+
+  <div class="contenedor">
+    <Intro retratos={retratos} />
+  </div>
+
+  <LoQueHacemos noticias={noticias} subcuentas={subcuentas} />
+
+  <div class="contenedor">
+    <ActualidadGaleria videos={videos} />
+  </div>
 </BaseLayout>
+
+<style>
+  .contenedor {
+    width: min(100% - 2rem, var(--wide-width));
+    margin-inline: auto;
+    padding-block: var(--space-8, 2rem);
+  }
+</style>

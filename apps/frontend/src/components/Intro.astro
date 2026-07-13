@@ -1,0 +1,27 @@
+---
+import type { Retrato } from "@adapters/contracts";
+import IntroText from "@components/IntroText.astro";
+import RetratosSlider from "@components/RetratosSlider.astro";
+
+type Props = { retratos: Retrato[] };
+const { retratos } = Astro.props;
+---
+
+<section class="intro">
+  <IntroText />
+  <RetratosSlider retratos={retratos} />
+</section>
+
+<style>
+  .intro {
+    display: grid;
+    gap: var(--space-8, 2rem);
+  }
+
+  @media (min-width: 1024px) {
+    .intro {
+      grid-template-columns:1fr 1fr;
+      align-items: start;
+    }
+  }
+</style>

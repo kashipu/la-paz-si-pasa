@@ -1,0 +1,43 @@
+---
+import type { Video } from "@adapters/contracts";
+
+type Props = { videos: Video[] };
+const { videos } = Astro.props;
+---
+
+<section class="actualidad" aria-labelledby="actualidad-titulo" id="actualidad">
+  <h2 id="actualidad-titulo">Actualidad</h2>
+  <ul>
+    {videos.map((video) => (
+      <li>
+        <a href={video.youtubeUrl} target="_blank" rel="noopener noreferrer">
+          <img src={video.thumbnailUrl} alt={video.titulo} loading="lazy" />
+          <h3>{video.titulo}</h3>
+        </a>
+        <p>{video.descripcion}</p>
+        <p class="tags">{video.tags.join(" · ")}</p>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .actualidad ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-6, 1.5rem);
+  }
+
+  .actualidad img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .tags {
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+</style>

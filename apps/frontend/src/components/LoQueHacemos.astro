@@ -1,0 +1,70 @@
+---
+import type { Noticia, Subcuenta } from "@adapters/contracts";
+import TextoDestacado from "@components/TextoDestacado.astro";
+import Subcuentas from "@components/Subcuentas.astro";
+import BannerCta from "@components/BannerCta.astro";
+import NoticiasTimeline from "@components/NoticiasTimeline.astro";
+
+type Props = { noticias: Noticia[]; subcuentas: Subcuenta[] };
+const { noticias, subcuentas } = Astro.props;
+---
+
+<section class="lo-que-hacemos" id="lo-que-hacemos">
+  <h2 class="lo-que-hacemos__titulo">Lo que hacemos en el fondo</h2>
+
+  <div class="lo-que-hacemos__grid">
+    <div class="lo-que-hacemos__columna">
+      <TextoDestacado />
+
+      <div id="subcuentas">
+        <h3 class="lo-que-hacemos__subtitulo">Conoce las subcuentas:</h3>
+        <Subcuentas subcuentas={subcuentas} />
+      </div>
+
+      <BannerCta />
+    </div>
+
+    <NoticiasTimeline noticias={noticias} />
+  </div>
+</section>
+
+<style>
+  .lo-que-hacemos__titulo {
+    background: var(--color-loquehacemos-bg);
+    color: white;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    text-align: center;
+    padding-block: var(--space-6);
+    margin: 0;
+  }
+
+  .lo-que-hacemos__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    padding: var(--space-8) var(--space-4);
+  }
+
+  .lo-que-hacemos__columna {
+    display: grid;
+    gap: var(--space-6);
+    align-content: start;
+    min-width: 0;
+  }
+
+  .lo-que-hacemos__subtitulo {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    color: var(--color-nav-text);
+    margin-bottom: var(--space-3);
+  }
+
+  @media (min-width: 900px) {
+    .lo-que-hacemos__grid {
+      grid-template-columns: 1fr 1fr;
+      width: min(100% - 2rem, var(--wide-width));
+      margin-inline: auto;
+    }
+  }
+</style>
