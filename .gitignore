@@ -2,12 +2,30 @@
 .env.*
 !.env.example
 
-node_modules/
-dist/
-.astro/
+# dependencies (any depth, monorepo)
+**/node_modules/
+**/vendor/
+
+# build output (any depth)
+**/dist/
+**/build/
+**/.astro/
+**/.angular/
+**/.next/
+**/.nuxt/
+**/.cache/
+**/coverage/
+**/storybook-static/
 
 apps/wordpress/data/
 apps/wordpress/uploads/
+
+# design source files (heavy binaries, never needed for build)
+*.psd
+*.ai
+*.xd
+*.sketch
+*.fig
 
 .DS_Store
 Thumbs.db
