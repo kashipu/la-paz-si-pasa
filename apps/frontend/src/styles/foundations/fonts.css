@@ -1,15 +1,40 @@
+/* Komet weight scale: 300 Light, 400 Regular, 700 Bold, 800 Heavy, 900 Black */
 @font-face {
   font-family: "Komet";
-  src: url("/fonts/Komet_Heavy.otf") format("opentype");
+  src: url("/fonts/Komet_Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Komet";
+  src: url("/fonts/Komet_Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Komet";
+  src: url("/fonts/Komet_Bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Komet Light SC";
-  src: url("/fonts/Komet_Light_SC.otf") format("opentype");
-  font-weight: 300;
+  font-family: "Komet";
+  src: url("/fonts/Komet_Heavy.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Komet";
+  src: url("/fonts/Komet_Black.otf") format("opentype");
+  font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
