@@ -1,4 +1,8 @@
-export type Proyecto = "Colombia Sostenible" | "PaisSana" | "PDET";
+export type Proyecto =
+  | "Colombia Sostenible"
+  | "PaisSana"
+  | "PDET"
+  | "Programa Piloto de Inversiones Prioritarias en Municipios PDET";
 
 export interface Retrato {
   id: string;

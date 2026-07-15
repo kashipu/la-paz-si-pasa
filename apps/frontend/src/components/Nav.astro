@@ -1,4 +1,10 @@
 ---
+interface Props {
+  siteName: string;
+}
+
+const { siteName } = Astro.props;
+
 const items = [
   { href: "/#lo-que-hacemos", label: "Lo que hacemos" },
   { href: "/proyectos-destacados", label: "Proyectos destacados" },
@@ -6,19 +12,22 @@ const items = [
 ];
 ---
 
-<nav class="nav" aria-label="Principal">
+<header class="site-header">
+  <a class="site-header__brand" href="/">{siteName}</a>
   <button type="button" class="nav__toggle" aria-expanded="false" aria-controls="nav-list">
     <span class="nav__toggle-bar"></span>
     <span class="nav__toggle-bar"></span>
     <span class="nav__toggle-bar"></span>
     <span class="nav__toggle-label">Menú</span>
   </button>
-  <ul class="nav__list" id="nav-list">
-    {items.map((item) => (
-      <li><a href={item.href}>{item.label}</a></li>
-    ))}
-  </ul>
-</nav>
+  <nav class="nav" aria-label="Principal">
+    <ul class="nav__list" id="nav-list">
+      {items.map((item) => (
+        <li><a href={item.href}>{item.label}</a></li>
+      ))}
+    </ul>
+  </nav>
+</header>
 
 <script>
   const toggle = document.querySelector<HTMLButtonElement>(".nav__toggle");
@@ -31,6 +40,10 @@ const items = [
 </script>
 
 <style>
+  .site-header__brand {
+    display: none;
+  }
+
   .nav {
     width: min(100% - 2rem, var(--wide-width));
     margin-inline: auto;
@@ -72,9 +85,22 @@ const items = [
   }
 
   @media (max-width: 760px) {
+    .site-header__brand {
+      display: block;
+      position: fixed;
+      top: var(--space-4);
+      left: var(--space-4);
+      z-index: 20;
+      color: var(--color-brand);
+      font-family: var(--font-display);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
     .nav__toggle {
       display: grid;
       place-items: center;
+      align-content: center;
       gap: 4px;
       width: 44px;
       height: 44px;

@@ -1,8 +1,7 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Hero from "@components/Hero.astro";
-import Nav from "@components/Nav.astro";
-import Intro from "@components/Intro.astro";
+import RetratosPaz from "@components/RetratosPaz.astro";
 import LoQueHacemos from "@components/LoQueHacemos.astro";
 import ActualidadGaleria from "@components/ActualidadGaleria.astro";
 import { getRetratos, getSubcuentas, getNoticias, getVideos } from "../adapters";
@@ -16,11 +15,10 @@ const [retratos, subcuentas, noticias, videos] = await Promise.all([
 ---
 
 <BaseLayout>
-  <Hero />
-  <Nav />
+  <Hero slot="hero" />
 
   <div class="contenedor">
-    <Intro retratos={retratos} />
+    <RetratosPaz retratos={retratos} />
   </div>
 
   <LoQueHacemos noticias={noticias} subcuentas={subcuentas} />

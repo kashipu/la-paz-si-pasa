@@ -23,6 +23,7 @@ import logoBidPrestamo from "../assets/subcuentas/bid-prestamo.png";
 import logoPdet from "../assets/subcuentas/pdet.png";
 import logoArnReincorporacion from "../assets/subcuentas/arn-reincorporacion.png";
 import logoSustitucion from "../assets/subcuentas/sustitucion.png";
+import fotoRetrato1 from "../assets/retratos/foto-retratos@3x.png";
 
 // ponytail: mocks de desarrollo — se usan como fallback mientras los CPT no existan en WP
 export const mockHero: HeroData = {
@@ -33,24 +34,27 @@ export const mockHero: HeroData = {
 export const mockRetratos: Retrato[] = [
   {
     id: "1",
-    fotoUrl: "https://picsum.photos/seed/retrato1/600/800",
-    descripcion: "Familia campesina retomando su tierra",
-    proyecto: "Colombia Sostenible",
-    lugar: "Caquetá",
+    fotoUrl: fotoRetrato1.src,
+    descripcion:
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+    proyecto: "Programa Piloto de Inversiones Prioritarias en Municipios PDET",
+    lugar: "Santander de Quilichao, Cauca",
   },
   {
     id: "2",
     fotoUrl: "https://picsum.photos/seed/retrato2/600/800",
-    descripcion: "Brigada de salud rural",
+    descripcion:
+      "Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.",
     proyecto: "PaisSana",
-    lugar: "Chocó",
+    lugar: "Tumaco, Nariño",
   },
   {
     id: "3",
     fotoUrl: "https://picsum.photos/seed/retrato3/600/800",
-    descripcion: "Vía terciaria terminada",
-    proyecto: "PDET",
-    lugar: "Catatumbo",
+    descripcion:
+      "Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.",
+    proyecto: "Colombia Sostenible",
+    lugar: "San Vicente del Caguán, Caquetá",
   },
 ];
 

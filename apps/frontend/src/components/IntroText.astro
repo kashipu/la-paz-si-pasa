@@ -1,26 +1,24 @@
 ---
+import logoFondoPaz from "../assets/retratos/logo-fondo-paz.svg";
 // Texto fijo introductorio, no editable desde WP (ver docs/content.md sección 1)
 ---
 
-<div class="intro-texto">
-  <div class="intro-texto__sello" aria-hidden="true">
-    <!-- ponytail: placeholder del sello "Fondo Colombia en Paz" — reemplazar por el logo real en assets/intro/ -->
-    Fondo<br />Colombia<br />en Paz
-  </div>
+<div class="retratos-texto">
+  <img class="retratos-texto__sello" src={logoFondoPaz.src} alt="Fondo Colombia en Paz" />
 
   <div>
     <h1>La Paz Sí Pasa,<br />pasa en los territorios</h1>
 
-    <p>
+    <p class="retratos-texto__parrafo">
       La paz no se queda en los escritorios; la paz es una realidad tangible que se vive en las
       regiones y en las comunidades que lideran el cambio. Con la estrategia La Paz Sí Pasa,
       visibilizamos las cifras, los logros y las historias reales que demuestran que la
       transformación del campo colombiano es imparable. A través de crónicas y datos de gestión,
-      abrimos una ventana al corazón de las regiones para mostrar los resultados de un esfuerzo
-      que conecta la legalidad con el progreso sostenible.
+      <strong> abrimos una ventana al corazón de las regiones para mostrar los resultados de un
+      esfuerzo que conecta la legalidad con el progreso sostenible.</strong>
     </p>
 
-    <p class="intro-texto__destacado">
+    <p class="retratos-texto__destacado">
       Porque la transformación se consolida allí donde debe pasar: en los territorios y de la
       mano de su gente.
     </p>
@@ -28,39 +26,43 @@
 </div>
 
 <style>
-  .intro-texto {
+  .retratos-texto {
     display: grid;
     gap: var(--space-4);
   }
 
-  .intro-texto__sello {
-    display: grid;
-    place-items: center;
-    width: 96px;
+  .retratos-texto__sello {
+    width: 160px;
     height: 96px;
-    border-radius: 50%;
-    border: 1px solid var(--color-nav-border);
-    color: var(--color-nav-text);
-    font-family: var(--font-display);
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    line-height: 1.2;
-    text-align: center;
     flex-shrink: 0;
+    padding-bottom: 1rem;
   }
 
-  .intro-texto h1 {
+  .retratos-texto h1 {
     color: var(--color-nav-text);
-  }
-
-  .intro-texto p {
-    color: var(--color-text-muted);
-  }
-
-  .intro-texto__destacado {
-    font-weight: 700;
     text-transform: uppercase;
-    color: var(--color-text);
+    font-size: 32px;
+    padding: 1rem 0;
+    line-height: 1.2;
+  }
+
+  .retratos-texto__parrafo {
+    color: #32509d;
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .retratos-texto__parrafo strong {
+    font-weight: 700;
+  }
+
+  .retratos-texto__destacado {
+    color: #32509d;
+    padding: 2rem 0;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 18px;
   }
 </style>

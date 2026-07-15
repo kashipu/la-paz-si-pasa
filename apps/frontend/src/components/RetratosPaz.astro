@@ -1,26 +1,30 @@
 ---
 import type { Retrato } from "@adapters/contracts";
 import IntroText from "@components/IntroText.astro";
-import RetratosSlider from "@components/RetratosSlider.astro";
+import RetratosPazSlider from "@components/RetratosPazSlider.astro";
 
 type Props = { retratos: Retrato[] };
 const { retratos } = Astro.props;
 ---
 
-<section class="intro">
+<section class="retratos-paz">
   <IntroText />
-  <RetratosSlider retratos={retratos} />
+  <RetratosPazSlider retratos={retratos} />
 </section>
 
 <style>
-  .intro {
+  .retratos-paz {
     display: grid;
     gap: var(--space-8, 2rem);
   }
 
+  .retratos-paz > * {
+    min-width: 0;
+  }
+
   @media (min-width: 1024px) {
-    .intro {
-      grid-template-columns:1fr 1fr;
+    .retratos-paz {
+      grid-template-columns: 35% 1fr;
       align-items: start;
     }
   }
