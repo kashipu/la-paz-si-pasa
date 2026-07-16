@@ -1,0 +1,48 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const fuentes = [
+  { familia: "Komet", peso: 300, etiqueta: "Light", token: "--font-komet", css: 'font-weight: 300; font-family: var(--font-komet);' },
+  { familia: "Komet", peso: 400, etiqueta: "Regular", token: "--font-komet", css: 'font-weight: 400; font-family: var(--font-komet);' },
+  { familia: "Komet", peso: 700, etiqueta: "Bold", token: "--font-komet", css: 'font-weight: 700; font-family: var(--font-komet);' },
+  { familia: "Komet", peso: 800, etiqueta: "Heavy", token: "--font-komet", css: 'font-weight: 800; font-family: var(--font-komet);' },
+  { familia: "Komet", peso: 900, etiqueta: "Black", token: "--font-komet", css: 'font-weight: 900; font-family: var(--font-komet);' },
+  { familia: "Monique Round", peso: 400, etiqueta: "Regular", token: "--font-monique-regular", css: 'font-weight: 400; font-family: var(--font-monique-regular);' },
+  { familia: "Monique Round", peso: 700, etiqueta: "Bold", token: "--font-monique-regular", css: 'font-weight: 700; font-family: var(--font-monique-regular);' },
+];
+---
+
+<BaseLayout title="Guía de estilos — Fuentes">
+  <section class="contenedor">
+    <h1>Fuentes importadas</h1>
+    <p>Fuentes disponibles vía <code>@font-face</code> (<code>styles/foundations/fonts.css</code>) y sus tokens en <code>tokens.css</code>.</p>
+
+    {fuentes.map((f) => (
+      <article class="muestra">
+        <p class="texto" style={f.css}>{f.familia} {f.etiqueta} — Ag Ñ 123</p>
+        <p class="meta"><code>font-family: var({f.token})</code> · <code>font-weight: {f.peso}</code></p>
+      </article>
+    ))}
+  </section>
+</BaseLayout>
+
+<style>
+  .contenedor {
+    width: min(100% - 2rem, var(--wide-width));
+    margin-inline: auto;
+    padding-block: var(--space-8, 2rem);
+  }
+  .muestra {
+    padding-block: var(--space-4, 1rem);
+    border-bottom: 1px solid #ddd;
+  }
+  .texto {
+    font-size: 1.75rem;
+    margin: 0;
+  }
+  .meta {
+    margin: 0.25rem 0 0;
+    font-size: 0.85rem;
+    color: #666;
+  }
+</style>

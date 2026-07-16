@@ -5,6 +5,9 @@
   font-weight: 300;
   font-style: normal;
   font-display: swap;
+  ascent-override: 100%;
+  descent-override: 20%;
+  line-gap-override: 0%;
 }
 
 @font-face {
@@ -13,6 +16,9 @@
   font-weight: 400;
   font-style: normal;
   font-display: swap;
+  ascent-override: 100%;
+  descent-override: 20%;
+  line-gap-override: 0%;
 }
 
 @font-face {
@@ -21,6 +27,9 @@
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+  ascent-override: 100%;
+  descent-override: 20%;
+  line-gap-override: 0%;
 }
 
 @font-face {
@@ -29,6 +38,9 @@
   font-weight: 800;
   font-style: normal;
   font-display: swap;
+  ascent-override: 100%;
+  descent-override: 20%;
+  line-gap-override: 0%;
 }
 
 @font-face {
@@ -37,6 +49,9 @@
   font-weight: 900;
   font-style: normal;
   font-display: swap;
+  ascent-override: 100%;
+  descent-override: 20%;
+  line-gap-override: 0%;
 }
 
 @font-face {
@@ -45,6 +60,10 @@
   font-weight: 400;
   font-style: normal;
   font-display: swap;
+  /* ponytail: el .ttf trae descent=28.3% del em (normal ~20%), causa espacio extra bajo el texto */
+  ascent-override: 100%;
+  descent-override: 20%;
+  line-gap-override: 0%;
 }
 
 @font-face {
@@ -53,4 +72,7 @@
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+  ascent-override: 100%;
+  descent-override: 20%;
+  line-gap-override: 0%;
 }

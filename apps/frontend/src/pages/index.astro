@@ -19,11 +19,11 @@ const [retratos, subcuentas, noticias, videos] = await Promise.all([
 
   <div class="contenedor">
     <RetratosPaz retratos={retratos} />
+    <LoQueHacemos noticias={noticias} subcuentas={subcuentas} />
+    <ActualidadGaleria videos={videos} />
   </div>
 
-  <LoQueHacemos noticias={noticias} subcuentas={subcuentas} />
 
-  <ActualidadGaleria videos={videos} />
 </BaseLayout>
 
 <style>
@@ -31,5 +31,7 @@ const [retratos, subcuentas, noticias, videos] = await Promise.all([
     width: min(100% - 2rem, var(--wide-width));
     margin-inline: auto;
     padding-block: var(--space-8, 2rem);
+    display: grid;
+    gap: 80px;
   }
 </style>

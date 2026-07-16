@@ -1,7 +1,7 @@
 body {
   background: var(--color-surface);
   color: var(--color-text);
-  font-family: var(--font-sans);
+  font-family: var(--font-komet);
   line-height: 1.6;
 }
 
@@ -18,7 +18,7 @@ h2,
 h3,
 h4 {
   color: var(--color-brand);
-  font-family: var(--font-display);
+  font-family: var(--font-monique-regular);
   line-height: 1.1;
 }
 

@@ -1,9 +1,9 @@
 ---
 import type { Noticia, Subcuenta } from "@adapters/contracts";
-import TextoDestacado from "@components/TextoDestacado.astro";
-import Subcuentas from "@components/Subcuentas.astro";
-import BannerCta from "@components/BannerCta.astro";
-import NoticiasTimeline from "@components/NoticiasTimeline.astro";
+import TextoDestacado from "@components/LoQueHacemosTextoDestacado.astro";
+import Subcuentas from "@components/LoQueHacemosSubcuentas.astro";
+import BannerCta from "@components/LoQueHacemosBannerCta.astro";
+import NoticiasTimeline from "@components/LoQueHacemosNoticiasTimeline.astro";
 
 type Props = { noticias: Noticia[]; subcuentas: Subcuenta[] };
 const { noticias, subcuentas } = Astro.props;
@@ -32,39 +32,39 @@ const { noticias, subcuentas } = Astro.props;
   .lo-que-hacemos__titulo {
     background: var(--color-loquehacemos-bg);
     color: white;
-    font-family: var(--font-display);
+    font-family: var(--font-monique-regular);
+    font-weight: 400;
+    font-size: 2.2rem;
+    padding: 2rem;
     text-transform: uppercase;
-    text-align: center;
-    padding-block: var(--space-6);
-    margin: 0;
   }
 
   .lo-que-hacemos__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-8);
-    padding: var(--space-8) var(--space-4);
+    gap: var(--space-4);
   }
 
   .lo-que-hacemos__columna {
     display: grid;
-    gap: var(--space-6);
+    gap: var(--space-12);
     align-content: start;
     min-width: 0;
+    padding: 2rem 1.5rem;
   }
 
   .lo-que-hacemos__subtitulo {
-    font-family: var(--font-display);
+    font-family: var(--font-monique-regular);
+    font-weight: 300;
+    font-size: 1.25rem;
     text-transform: uppercase;
     color: var(--color-nav-text);
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-4);
   }
 
   @media (min-width: 900px) {
     .lo-que-hacemos__grid {
       grid-template-columns: 1fr 1fr;
-      width: min(100% - 2rem, var(--wide-width));
-      margin-inline: auto;
     }
   }
 </style>
