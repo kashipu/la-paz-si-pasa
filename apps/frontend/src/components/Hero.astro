@@ -29,9 +29,16 @@ import heroLogo from "../assets/hero/hero-logo.svg";
   }
 
   .hero__logo {
-    width: 50vw;
-    max-width: 80%;
+    width: 100%;
+    max-width: 960px;
+    padding-inline: 24px;
     height: auto;
     filter: drop-shadow(0 6px 24px rgb(0 0 0 / 85%));
+  }
+
+  @media (max-width: 849px) {
+    .hero__logo {
+      padding-inline: 16px;
+    }
   }
 </style>
