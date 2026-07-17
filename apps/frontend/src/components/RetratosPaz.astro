@@ -18,6 +18,8 @@ const { retratos } = Astro.props;
     grid-template-columns: 35% 1fr;
     align-items: start;
     gap: var(--space-8);
+    width: 100%;
+    min-width: 0;
   }
 
   .retratos-paz :global(.retratos-texto),
@@ -28,6 +30,11 @@ const { retratos } = Astro.props;
   @media (max-width: 849px) {
     .retratos-paz {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .retratos-paz {
     }
   }
 </style>

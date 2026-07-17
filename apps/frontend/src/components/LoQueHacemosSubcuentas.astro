@@ -44,6 +44,7 @@ const { subcuentas } = Astro.props;
     margin: 0;
     padding: var(--space-2) 0;
     display: flex;
+    flex: 1 1 auto;
     gap: var(--space-4);
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -75,5 +76,17 @@ const { subcuentas } = Astro.props;
     font-size: 1.5rem;
     cursor: pointer;
     padding: var(--space-2);
+  }
+
+  @media (max-width: 360px) {
+    .subcuentas__track li {
+      flex: 1 0 100%;
+      width: 100%;
+    }
+
+    .subcuentas__track img {
+      width: 100%;
+      height: auto;
+    }
   }
 </style>

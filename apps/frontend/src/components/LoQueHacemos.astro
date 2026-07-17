@@ -53,6 +53,10 @@ const { noticias, subcuentas } = Astro.props;
     padding: var(--space-8) var(--space-6);
   }
 
+  #subcuentas {
+    min-width: 0;
+  }
+
   .lo-que-hacemos__subtitulo {
     font-family: var(--font-monique-regular);
     font-weight: 300;
@@ -81,6 +85,9 @@ const { noticias, subcuentas } = Astro.props;
     .lo-que-hacemos__titulo {
       font-size: 1.5rem;
       padding: var(--space-4);
+    }
+    .lo-que-hacemos__columna {
+      padding: var(--space-6) var(--space-1);
     }
   }
 </style>
