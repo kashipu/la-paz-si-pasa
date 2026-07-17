@@ -13,7 +13,7 @@ const {
 ---
 
 <div class="destacado">
-  <h3>{titulo}</h3>
+  <h3 class="destacado__titulo">{titulo}</h3>
   {parrafos.map((parrafo) => <p>{parrafo}</p>)}
 </div>
 
@@ -22,20 +22,12 @@ const {
     color: var(--color-nav-text);
   }
 
-  .destacado h3 {
+  .destacado__titulo {
     font-family: var(--font-komet);
     font-weight: var(--font-weight-komet-heavy);
     color: var(--color-nav-text);
     font-size: 1.2rem;
     line-height: 1.5;
     padding-bottom: var(--space-4);
-  }
-
-  .destacado__cta {
-    display: inline-block;
-    margin-top: var(--space-4);
-    font-family: var(--font-monique-regular);
-    text-transform: uppercase;
-    color: var(--color-nav-text);
   }
 </style>

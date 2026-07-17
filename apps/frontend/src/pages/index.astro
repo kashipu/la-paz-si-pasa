@@ -4,7 +4,12 @@ import Hero from "@components/Hero.astro";
 import RetratosPaz from "@components/RetratosPaz.astro";
 import LoQueHacemos from "@components/LoQueHacemos.astro";
 import ActualidadGaleria from "@components/ActualidadGaleria.astro";
+import Nav from "@components/Nav.astro";
+import NavMenu from "@components/NavMenu.astro";
+import NavMenuDesktop from "@components/NavMenuDesktop.astro";
 import { getRetratos, getSubcuentas, getNoticias, getVideos } from "../adapters";
+
+const siteName = "La Paz Sí Pasa";
 
 const [retratos, subcuentas, noticias, videos] = await Promise.all([
   getRetratos(),
@@ -15,7 +20,10 @@ const [retratos, subcuentas, noticias, videos] = await Promise.all([
 ---
 
 <BaseLayout>
+  <Nav siteName={siteName} slot="header" />
+  <NavMenu slot="header" />
   <Hero slot="hero" />
+  <NavMenuDesktop />
 
   <div class="contenedor">
     <RetratosPaz retratos={retratos} />

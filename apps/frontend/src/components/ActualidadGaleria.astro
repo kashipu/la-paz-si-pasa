@@ -9,11 +9,11 @@ const [destacado, ...resto] = videos;
 <section class="actualidad" aria-labelledby="actualidad-titulo" id="actualidad">
   <h2 id="actualidad-titulo" class="actualidad__titulo">Actualidad</h2>
 
-  <div class="actualidad__contenedor">
+  <div class="actualidad__contenedor container--wide">
     <div class="actualidad__destacado" data-destacado>
       <div class="actualidad__info">
-        <h3 data-campo="titulo">{destacado?.titulo}</h3>
-        <p data-campo="descripcion">{destacado?.descripcion}</p>
+        <h3 class="actualidad__info-titulo" data-campo="titulo">{destacado?.titulo}</h3>
+        <p class="actualidad__descripcion" data-campo="descripcion">{destacado?.descripcion}</p>
         <p class="actualidad__etiquetas">
           Etiquetas:
           <span data-campo="tags">
@@ -233,27 +233,23 @@ const [destacado, ...resto] = videos;
 
   .actualidad__titulo {
     background: var(--color-actualidad-bg);
-    color: white;
+    color: var(--color-surface);
     font-family: var(--font-monique-regular);
     font-weight: 400;
     font-size: 2.2rem;
-    padding: 2rem;
+    padding: var(--space-8);
     text-transform: uppercase;
   }
 
   .actualidad__contenedor {
-    width: min(100% - 2rem, var(--wide-width));
-    margin-inline: auto;
     padding-block: var(--space-8);
   }
 
   .actualidad__destacado {
     display: grid;
+    grid-template-columns: 2fr 3fr;
+    align-items: start;
     gap: var(--space-8);
-  }
-
-  .actualidad__player {
-    order: -1;
   }
 
   .actualidad__info {
@@ -262,7 +258,7 @@ const [destacado, ...resto] = videos;
     align-content: start;
   }
 
-  .actualidad__info h3 {
+  .actualidad__info-titulo {
     color: var(--color-nav-text);
     font-family: var(--font-komet);
     font-size: 2.5rem;
@@ -271,7 +267,7 @@ const [destacado, ...resto] = videos;
     margin: 0;
   }
 
-  .actualidad__info p[data-campo="descripcion"] {
+  .actualidad__descripcion {
     color: var(--color-text);
     line-height: 1.6;
     margin: 0;
@@ -417,14 +413,13 @@ const [destacado, ...resto] = videos;
     padding: var(--space-2);
   }
 
-  @media (min-width: 900px) {
+  @media (max-width: 849px) {
     .actualidad__destacado {
-      grid-template-columns: 2fr 3fr;
-      align-items: start;
+      grid-template-columns: 1fr;
     }
 
     .actualidad__player {
-      order: 0;
+      order: -1;
     }
   }
 </style>

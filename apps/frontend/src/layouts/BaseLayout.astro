@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Footer from "@components/Footer.astro";
 import Nav from "@components/Nav.astro";
+import NavMenu from "@components/NavMenu.astro";
 
 type Props = {
   title?: string;
@@ -23,8 +24,8 @@ const description = Astro.props.description ?? "Cierre de gestión del Fondo Col
     <title>{title}</title>
   </head>
   <body>
+    <slot name="header" />
     <slot name="hero" />
-    <Nav siteName={siteName} />
     <main>
       <slot />
     </main>

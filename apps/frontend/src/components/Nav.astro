@@ -4,12 +4,6 @@ interface Props {
 }
 
 const { siteName } = Astro.props;
-
-const items = [
-  { href: "/#lo-que-hacemos", label: "Lo que hacemos" },
-  { href: "/proyectos-destacados", label: "Proyectos destacados" },
-  { href: "/#actualidad", label: "Actualidad" },
-];
 ---
 
 <header class="site-header">
@@ -20,13 +14,6 @@ const items = [
     <span class="nav__toggle-bar"></span>
     <span class="nav__toggle-label">Menú</span>
   </button>
-  <nav class="nav" aria-label="Principal">
-    <ul class="nav__list" id="nav-list">
-      {items.map((item) => (
-        <li><a href={item.href}>{item.label}</a></li>
-      ))}
-    </ul>
-  </nav>
 </header>
 
 <script>
@@ -35,62 +22,39 @@ const items = [
 
   toggle?.addEventListener("click", () => {
     const isOpen = list?.classList.toggle("is-open");
+    toggle.classList.toggle("is-open", Boolean(isOpen));
     toggle.setAttribute("aria-expanded", String(Boolean(isOpen)));
+    document.body.classList.toggle("nav-lock", Boolean(isOpen));
   });
 </script>
 
 <style>
-  .site-header__brand {
+  .site-header {
     display: none;
   }
 
-  .nav {
-    width: min(100% - 2rem, var(--wide-width));
-    margin-inline: auto;
-    padding-block: var(--space-4);
-  }
-
-  .nav__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-4);
-  }
-
-  .nav__list a {
-    display: block;
-    text-align: center;
-    padding-block: var(--space-3);
-    border: 1px solid var(--color-nav-border);
-    color: var(--color-nav-text);
-    font-family: var(--font-monique-regular);
-    font-size: 0.9rem;
+  .site-header__brand {
+    display: none;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    text-decoration: none;
-    background: var(--color-surface);
-    transition: background-color 0.15s ease;
-    line-height: 1.5;
-  }
-
-  .nav__list a:hover,
-  .nav__list a:focus-visible {
-    background: var(--color-nav-bg-active);
   }
 
   .nav__toggle {
     display: none;
   }
 
-  @media (max-width: 760px) {
+  @media (max-width: 849px) {
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      padding: var(--space-4) var(--space-10);
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-nav-border);
+    }
+
     .site-header__brand {
       display: block;
-      position: fixed;
-      top: var(--space-4);
-      left: var(--space-4);
-      z-index: 20;
       color: var(--color-brand);
       font-family: var(--font-monique-regular);
       font-weight: 700;
@@ -107,17 +71,28 @@ const items = [
       border: 1px solid var(--color-nav-border);
       border-radius: var(--radius-control);
       background: var(--color-surface);
-      position: fixed;
-      top: var(--space-4);
-      right: var(--space-4);
-      z-index: 20;
       cursor: pointer;
+      position: relative;
+      z-index: 20;
     }
 
     .nav__toggle-bar {
       width: 20px;
       height: 2px;
       background: var(--color-nav-text);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav__toggle.is-open .nav__toggle-bar:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .nav__toggle.is-open .nav__toggle-bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav__toggle.is-open .nav__toggle-bar:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
     }
 
     .nav__toggle-label {
@@ -126,21 +101,6 @@ const items = [
       height: 1px;
       overflow: hidden;
       clip: rect(0 0 0 0);
-    }
-
-    .nav__list {
-      position: fixed;
-      inset: 0;
-      z-index: 10;
-      display: none;
-      grid-template-columns: 1fr;
-      align-content: center;
-      background: var(--color-surface);
-      padding: var(--space-4);
-    }
-
-    .nav__list.is-open {
-      display: grid;
     }
   }
 </style>

@@ -8,6 +8,15 @@
   margin-inline: auto;
 }
 
+.container--wide {
+  width: min(100% - 2rem, var(--wide-width));
+  margin-inline: auto;
+}
+
 .section {
   padding-block: var(--space-16);
+}
+
+body.nav-lock {
+  overflow: hidden;
 }

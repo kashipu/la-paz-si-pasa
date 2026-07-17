@@ -13,6 +13,9 @@
 
   --color-loquehacemos-bg: #008861;
   --color-actualidad-bg: #d49ec7;
+  --color-scrollbar-thumb: #3b8fd4;
+
+  --border-subtle-light: rgba(255, 255, 255, 0.6);
 
   --font-komet: "Komet", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-monique-regular: "Monique Round", var(--font-komet);

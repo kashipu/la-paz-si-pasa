@@ -15,17 +15,19 @@ const { retratos } = Astro.props;
 <style>
   .retratos-paz {
     display: grid;
-    gap: var(--space-8, 2rem);
+    grid-template-columns: 35% 1fr;
+    align-items: start;
+    gap: var(--space-8);
   }
 
-  .retratos-paz > * {
+  .retratos-paz :global(.retratos-texto),
+  .retratos-paz :global(.retratos-slider) {
     min-width: 0;
   }
 
-  @media (min-width: 1024px) {
+  @media (max-width: 849px) {
     .retratos-paz {
-      grid-template-columns: 35% 1fr;
-      align-items: start;
+      grid-template-columns: 1fr;
     }
   }
 </style>

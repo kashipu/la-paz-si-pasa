@@ -7,7 +7,7 @@ import logoFondoPaz from "../assets/retratos/logo-fondo-paz.svg";
   <img class="retratos-texto__sello" src={logoFondoPaz.src} alt="Fondo Colombia en Paz" />
 
   <div>
-    <h1>La Paz Sí Pasa,<br />pasa en los territorios</h1>
+    <h1 class="retratos-texto__titulo">La Paz Sí Pasa,<br />pasa en los territorios</h1>
 
     <p class="retratos-texto__parrafo">
       La paz no se queda en los escritorios; la paz es una realidad tangible que se vive en las
@@ -35,21 +35,21 @@ import logoFondoPaz from "../assets/retratos/logo-fondo-paz.svg";
     width: 160px;
     height: 96px;
     flex-shrink: 0;
-    padding-bottom: 1rem;
+    padding-bottom: var(--space-4);
   }
 
-  .retratos-texto h1 {
+  .retratos-texto__titulo {
     color: var(--color-nav-text);
     text-transform: uppercase;
-    font-size: 32px;
-    padding: 1rem 0;
+    font-size: 2rem;
+    padding: var(--space-4) 0;
     line-height: 1.2;
   }
 
   .retratos-texto__parrafo {
-    color: #32509d;
+    color: var(--color-nav-text);
     font-family: var(--font-komet);
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 400;
     line-height: 1.6;
   }
@@ -59,10 +59,37 @@ import logoFondoPaz from "../assets/retratos/logo-fondo-paz.svg";
   }
 
   .retratos-texto__destacado {
-    color: #32509d;
-    padding: 2rem 0;
+    color: var(--color-nav-text);
+    padding: var(--space-8) 0;
     font-weight: 800;
     text-transform: uppercase;
-    font-size: 18px;
+    font-size: 1.125rem;
+  }
+
+  @media (max-width: 849px) {
+    .retratos-texto__sello {
+      width: 120px;
+      height: 72px;
+    }
+
+    .retratos-texto__titulo {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .retratos-texto__sello {
+      width: 96px;
+      height: 58px;
+    }
+
+    .retratos-texto__titulo {
+      font-size: 1.25rem;
+    }
+
+    .retratos-texto__parrafo,
+    .retratos-texto__destacado {
+      font-size: 1rem;
+    }
   }
 </style>
