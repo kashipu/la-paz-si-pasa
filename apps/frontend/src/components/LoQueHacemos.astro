@@ -34,8 +34,8 @@ const { noticias, subcuentas } = Astro.props;
     color: var(--color-surface);
     font-family: var(--font-monique-regular);
     font-weight: 400;
-    font-size: 2.2rem;
-    padding: var(--space-8);
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    padding: clamp(var(--space-4), 4vw, var(--space-8));
     text-transform: uppercase;
   }
 
@@ -67,11 +67,6 @@ const { noticias, subcuentas } = Astro.props;
   }
 
   @media (max-width: 849px) {
-    .lo-que-hacemos__titulo {
-      font-size: 1.75rem;
-      padding: var(--space-6);
-    }
-
     .lo-que-hacemos__grid {
       grid-template-columns: 1fr;
     }
@@ -82,10 +77,6 @@ const { noticias, subcuentas } = Astro.props;
   }
 
   @media (max-width: 360px) {
-    .lo-que-hacemos__titulo {
-      font-size: 1.5rem;
-      padding: var(--space-4);
-    }
     .lo-que-hacemos__columna {
       padding: var(--space-6) var(--space-1);
     }

@@ -120,20 +120,36 @@ const { retratos } = Astro.props;
   @media (max-width: 849px) {
     .retratos-slider__visual {
       background-image: var(--bg-mobile);
+      aspect-ratio: 1 / 1.1;
+      background-size: cover;
+      background-position: center bottom;
     }
 
     .retratos-slider__texto {
       position: static;
       width: 100%;
-      margin-top: var(--space-4);
+      margin-top: var(--space-8);
       transform: none;
+      text-align: center;
     }
 
     .retratos-slider__foto {
       left: 50%;
-      top: 8%;
-      width: 60%;
-      transform: translateX(-50%) rotate(-4deg);
+      top: 12%;
+      width: 55%;
+      transform: translateX(-50%) rotate(-2deg);
+    }
+
+    .retratos-slider__arrow {
+      bottom: 8%;
+    }
+
+    .retratos-slider__arrow--prev {
+      left: 20%;
+    }
+
+    .retratos-slider__arrow--next {
+      right: 20%;
     }
   }
 

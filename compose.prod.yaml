@@ -1,0 +1,52 @@
+services:
+  db:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: ${WORDPRESS_DB_NAME:-wordpress}
+      MARIADB_USER: ${WORDPRESS_DB_USER:-wordpress}
+      MARIADB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${WORDPRESS_DB_ROOT_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+
+  cms:
+    image: wordpress:php8.3-apache
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME:-wordpress}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER:-wordpress}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX:-wp_}
+      PUBLIC_SITE_URL: ${PUBLIC_SITE_URL}
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_HOME', '${WORDPRESS_URL}');
+        define('WP_SITEURL', '${WORDPRESS_URL}');
+        define('DISALLOW_FILE_EDIT', true);
+        define('WP_ENVIRONMENT_TYPE', 'production');
+    volumes:
+      - wordpress_data:/var/www/html
+      - ./apps/wordpress/plugins/headless-core:/var/www/html/wp-content/plugins/headless-core
+      - ./apps/wordpress/themes/headless-redirect:/var/www/html/wp-content/themes/headless-redirect
+    expose:
+      - "80"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/astro/Dockerfile
+      args:
+        WORDPRESS_URL: ${WORDPRESS_URL}
+        PUBLIC_SITE_URL: ${PUBLIC_SITE_URL}
+    restart: unless-stopped
+    depends_on:
+      - cms
+    expose:
+      - "80"
+
+volumes:
+  db_data:
+  wordpress_data:

@@ -65,6 +65,7 @@ const anios = [...porAnio.keys()].sort().reverse();
     display: grid;
     grid-template-rows: auto 1fr auto;
     padding: var(--space-4);
+    min-width: 0;
   }
 
   .timeline__titulo {
@@ -130,6 +131,7 @@ const anios = [...porAnio.keys()].sort().reverse();
   .timeline__news a {
     color: var(--color-nav-text);
     text-decoration: none;
+    word-break: break-word;
   }
 
   @media (max-width: 849px) {

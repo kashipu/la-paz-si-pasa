@@ -228,7 +228,7 @@ const [destacado, ...resto] = videos;
 
 <style>
   .actualidad {
-    margin-bottom: 80px;
+    /* Spacing now handled by index.astro contenedor grid gap */
   }
 
   .actualidad__titulo {
@@ -236,8 +236,8 @@ const [destacado, ...resto] = videos;
     color: var(--color-surface);
     font-family: var(--font-monique-regular);
     font-weight: 400;
-    font-size: 2.2rem;
-    padding: var(--space-8);
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    padding: clamp(var(--space-4), 4vw, var(--space-8));
     text-transform: uppercase;
   }
 
@@ -261,9 +261,9 @@ const [destacado, ...resto] = videos;
   .actualidad__info-titulo {
     color: var(--color-nav-text);
     font-family: var(--font-komet);
-    font-size: 2.5rem;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
     font-weight: 800;
-    line-height: 1.2;
+    line-height: 1.1;
     margin: 0;
   }
 
@@ -340,6 +340,7 @@ const [destacado, ...resto] = videos;
     display: flex;
     align-items: center;
     gap: var(--space-2);
+    min-width: 0;
   }
 
   .actualidad__track {
@@ -360,8 +361,7 @@ const [destacado, ...resto] = videos;
 
   .actualidad__track li {
     scroll-snap-align: start;
-    flex: 1 1 0;
-    min-width: 0;
+    flex: 0 0 calc((100% - (var(--space-4) * 2)) / 3);
   }
 
   .actualidad__card {
@@ -420,6 +420,10 @@ const [destacado, ...resto] = videos;
 
     .actualidad__player {
       order: -1;
+    }
+
+    .actualidad__track li {
+      flex: 0 0 100%;
     }
   }
 </style>

@@ -36,9 +36,12 @@ const [retratos, subcuentas, noticias, videos] = await Promise.all([
 
 <style>
   .contenedor {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(var(--space-8), 6vw, var(--space-16));
     width: 100%;
     max-width: 1376px;
     margin: 0 auto;
-    padding: var(--space-8) var(--space-4);
+    padding: clamp(var(--space-4), 4vw, var(--space-8)) var(--space-4);
   }
 </style>

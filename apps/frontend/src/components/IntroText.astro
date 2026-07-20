@@ -41,9 +41,9 @@ import logoFondoPaz from "../assets/retratos/logo-fondo-paz.svg";
   .retratos-texto__titulo {
     color: var(--color-nav-text);
     text-transform: uppercase;
-    font-size: 2rem;
+    font-size: clamp(1.25rem, 3.5vw, 2rem);
     padding: var(--space-4) 0;
-    line-height: 1.2;
+    line-height: 1.1;
   }
 
   .retratos-texto__parrafo {
@@ -71,20 +71,12 @@ import logoFondoPaz from "../assets/retratos/logo-fondo-paz.svg";
       width: 120px;
       height: 72px;
     }
-
-    .retratos-texto__titulo {
-      font-size: 1.5rem;
-    }
   }
 
   @media (max-width: 360px) {
     .retratos-texto__sello {
       width: 96px;
       height: 58px;
-    }
-
-    .retratos-texto__titulo {
-      font-size: 1.25rem;
     }
 
     .retratos-texto__parrafo,
