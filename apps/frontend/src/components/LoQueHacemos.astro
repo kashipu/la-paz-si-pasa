@@ -1,0 +1,84 @@
+---
+import type { Noticia, Subcuenta } from "@adapters/contracts";
+import TextoDestacado from "@components/LoQueHacemosTextoDestacado.astro";
+import Subcuentas from "@components/LoQueHacemosSubcuentas.astro";
+import BannerCta from "@components/LoQueHacemosBannerCta.astro";
+import NoticiasTimeline from "@components/LoQueHacemosNoticiasTimeline.astro";
+
+type Props = { noticias: Noticia[]; subcuentas: Subcuenta[] };
+const { noticias, subcuentas } = Astro.props;
+---
+
+<section class="lo-que-hacemos" id="lo-que-hacemos">
+  <h2 class="lo-que-hacemos__titulo">Lo que hacemos en el fondo</h2>
+
+  <div class="lo-que-hacemos__grid">
+    <div class="lo-que-hacemos__columna">
+      <TextoDestacado />
+
+      <div id="subcuentas">
+        <h3 class="lo-que-hacemos__subtitulo">Conoce las subcuentas:</h3>
+        <Subcuentas subcuentas={subcuentas} />
+      </div>
+
+      <BannerCta />
+    </div>
+
+    <NoticiasTimeline noticias={noticias} />
+  </div>
+</section>
+
+<style>
+  .lo-que-hacemos__titulo {
+    background: var(--color-loquehacemos-bg);
+    color: var(--color-surface);
+    font-family: var(--font-monique-regular);
+    font-weight: 400;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    padding: clamp(var(--space-4), 4vw, var(--space-8));
+    text-transform: uppercase;
+  }
+
+  .lo-que-hacemos__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .lo-que-hacemos__columna {
+    display: grid;
+    gap: var(--space-12);
+    align-content: start;
+    min-width: 0;
+    padding: var(--space-8) var(--space-6);
+  }
+
+  #subcuentas {
+    min-width: 0;
+  }
+
+  .lo-que-hacemos__subtitulo {
+    font-family: var(--font-monique-regular);
+    font-weight: 300;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    color: var(--color-nav-text);
+    margin-bottom: var(--space-4);
+  }
+
+  @media (max-width: 849px) {
+    .lo-que-hacemos__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .lo-que-hacemos__columna {
+      padding: var(--space-6) var(--space-4);
+    }
+  }
+
+  @media (max-width: 360px) {
+    .lo-que-hacemos__columna {
+      padding: var(--space-6) var(--space-1);
+    }
+  }
+</style>

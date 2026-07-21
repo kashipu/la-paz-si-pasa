@@ -1,4 +1,5 @@
 @import "./foundations/reset.css";
+@import "./foundations/fonts.css";
 @import "./foundations/tokens.css";
 @import "./foundations/typography.css";
 @import "./foundations/layout.css";

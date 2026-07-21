@@ -1,0 +1,272 @@
+---
+// Footer fijo según cotización: logos, texto de cierre, redes, link web — no editable desde WP
+import footerFoto from "../assets/footer/footer-foto@3x.png";
+import footerBurst from "../assets/footer/lemotiv-footer@3x.png";
+import footerTotop from "../assets/footer/footer-boton-volver-inicio@3x.png";
+import footerLogo from "../assets/footer/footer-logo@3x.png";
+import footerPazLogo from "../assets/footer/footer-paz-logo@3x.png";
+import iconoWeb from "../assets/footer/icono-web@3x.png";
+import iconoInsta from "../assets/footer/icono-insta@3x.png";
+import iconoX from "../assets/footer/icono-x@3x.png";
+---
+
+<footer class="site-footer" id="contacto">
+  <div class="site-footer__media">
+    <img src={footerFoto.src} alt="" class="site-footer__photo" loading="lazy" />
+    <img src={footerBurst.src} alt="" class="site-footer__burst" aria-hidden="true" />
+  </div>
+
+  <div class="site-footer__panel">
+    <button class="site-footer__totop" type="button" aria-label="Volver arriba">
+      <img src={footerTotop.src} alt="" width="44" height="44" />
+    </button>
+
+    <div class="site-footer__logos">
+      <img src={footerLogo.src} alt="Fondo Colombia en Paz" class="site-footer__logo" />
+      <img src={footerPazLogo.src} alt="La Paz Sí Pasa — pasa en los territorios" class="site-footer__paz-logo" />
+    </div>
+
+    <p class="site-footer__text">
+      Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+      tincidunt ut laoreet dolore magna aliquam erat volutpat.
+    </p>
+
+    <div class="site-footer__social">
+      <p class="site-footer__social-label">SÍGUENOS:</p>
+      <ul class="site-footer__links">
+        <li>
+          <a href="https://www.fcp.gov.co" target="_blank" rel="noopener noreferrer">
+            <span class="site-footer__icon" aria-hidden="true">
+              <img src={iconoWeb.src} alt="" width="16" height="16" />
+            </span>
+            fcp.gov.co
+          </a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/fondo_colombiaenpaz" target="_blank" rel="noopener noreferrer">
+            <span class="site-footer__icon" aria-hidden="true">
+              <img src={iconoInsta.src} alt="" width="16" height="16" />
+            </span>
+            @fondo_colombiaenpaz
+          </a>
+        </li>
+        <li>
+          <a href="https://x.com/fcolombiaenpaz" target="_blank" rel="noopener noreferrer">
+            <span class="site-footer__icon" aria-hidden="true">
+              <img src={iconoX.src} alt="" width="16" height="16" />
+            </span>
+            @fcolombiaenpaz
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toTopButton = document.querySelector<HTMLButtonElement>(".site-footer__totop");
+  toTopButton?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+</script>
+
+<style>
+  .site-footer {
+    display: grid;
+    grid-template-columns: minmax(220px, 30%) 1fr;
+    grid-template-rows: 500px;
+    background: var(--color-surface);
+  }
+
+  .site-footer__media {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .site-footer__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .site-footer__burst {
+    position: absolute;
+    left: -8%;
+    bottom: -12%;
+    width: 46%;
+    height: auto;
+  }
+
+  .site-footer__panel {
+    position: relative;
+    background: var(--color-nav-bg-active);
+    padding: var(--space-8) var(--space-10);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    justify-content: center;
+  }
+
+  .site-footer__totop {
+    position: absolute;
+    top: var(--space-6);
+    right: var(--space-6);
+    width: 64px;
+    height: 64px;
+    border: none;
+    background: none;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .site-footer__totop img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .site-footer__logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-6);
+    padding-right: 80px;
+  }
+
+  .site-footer__logo {
+    height: 90px;
+    width: auto;
+  }
+
+  .site-footer__paz-logo {
+    height: 90px;
+    width: auto;
+  }
+
+  .site-footer__text {
+    max-width: 80ch;
+    font-size: 1rem;
+    color: var(--color-nav-text);
+    line-height: 1.5;
+  }
+
+  .site-footer__social-label {
+    font-family: var(--font-monique-regular);
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    color: var(--color-nav-text);
+    margin-bottom: var(--space-2);
+  }
+
+  .site-footer__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .site-footer__links li {
+    padding-left: var(--space-4);
+    border-left: 1px solid var(--color-nav-border);
+  }
+
+  .site-footer__links li:first-child {
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .site-footer__links a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-nav-text);
+    text-decoration: none;
+    font-size: 1rem;
+  }
+
+  .site-footer__icon {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    overflow: hidden;
+  }
+
+  .site-footer__icon img {
+    max-width: 70%;
+    max-height: 70%;
+  }
+
+  @media (max-width: 849px) {
+    .site-footer {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+    }
+
+    .site-footer__media {
+      height: 200px;
+    }
+
+    .site-footer__panel {
+      padding: var(--space-12);
+    }
+
+    .site-footer__logos {
+      padding-right: 0;
+    }
+
+    .site-footer__totop {
+      width: 48px;
+      height: 48px;
+    }
+
+    .site-footer__links {
+      flex-direction: column;
+    }
+
+    .site-footer__links li {
+      padding-left: 0;
+      border-left: none;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .site-footer__panel {
+      padding: var(--space-4);
+    }
+
+    .site-footer__totop {
+      width: 48px;
+      height: 48px;
+      top: var(--space-4);
+      right: var(--space-4);
+    }
+
+    .site-footer__logos {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+
+    .site-footer__logo {
+      height: auto;
+      width: 100%;
+      max-width: 180px;
+    }
+
+    .site-footer__paz-logo {
+      height: auto;
+      width: 100%;
+    }
+
+    .site-footer__text,
+    .site-footer__social-label,
+    .site-footer__links a {
+      font-size: 0.875rem;
+    }
+  }
+</style>

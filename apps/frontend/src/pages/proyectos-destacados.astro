@@ -1,0 +1,19 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+// ponytail: placeholder — el diseño visual de esta página lo entrega el cliente (fuera del alcance actual)
+---
+
+<BaseLayout title="Proyectos destacados">
+  <section class="contenedor">
+    <h1>Proyectos destacados</h1>
+    <p>Colombia Sostenible · PaisSana · PDET</p>
+  </section>
+</BaseLayout>
+
+<style>
+  .contenedor {
+    width: min(100% - 2rem, var(--wide-width));
+    margin-inline: auto;
+    padding-block: var(--space-8, 2rem);
+  }
+</style>

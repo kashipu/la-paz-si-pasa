@@ -1,0 +1,429 @@
+---
+import type { Video } from "@adapters/contracts";
+
+type Props = { videos: Video[] };
+const { videos } = Astro.props;
+const [destacado, ...resto] = videos;
+---
+
+<section class="actualidad" aria-labelledby="actualidad-titulo" id="actualidad">
+  <h2 id="actualidad-titulo" class="actualidad__titulo">Actualidad</h2>
+
+  <div class="actualidad__contenedor container--wide">
+    <div class="actualidad__destacado" data-destacado>
+      <div class="actualidad__info">
+        <h3 class="actualidad__info-titulo" data-campo="titulo">{destacado?.titulo}</h3>
+        <p class="actualidad__descripcion" data-campo="descripcion">{destacado?.descripcion}</p>
+        <p class="actualidad__etiquetas">
+          Etiquetas:
+          <span data-campo="tags">
+            {destacado?.tags.map((tag) => <span class="actualidad__tag">{tag}</span>)}
+          </span>
+        </p>
+      </div>
+
+      <div
+        class="actualidad__player"
+        data-player
+        data-fuente={destacado?.fuente}
+        data-src={destacado?.videoUrl}
+        data-thumbnail={destacado?.thumbnailUrl}
+      >
+        <img data-campo="thumbnail" src={destacado?.thumbnailUrl} alt={destacado?.titulo} />
+        <button type="button" class="actualidad__play" aria-label={`Reproducir ${destacado?.titulo}`}>
+          <svg viewBox="0 0 24 24" width="48" height="48" aria-hidden="true">
+            <circle cx="12" cy="12" r="12" fill="white" opacity="0.9" />
+            <path d="M9.5 7.5v9l7-4.5z" fill="var(--color-actualidad-bg)" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    {resto.length > 0 && (
+      <div class="actualidad__carrusel">
+        <h4 class="actualidad__carrusel-titulo">Ver más:</h4>
+        <div class="actualidad__carrusel-fila">
+          <button type="button" class="actualidad__nav" data-dir="-1" aria-label="Anterior">‹</button>
+
+          <ul class="actualidad__track" data-track>
+            {resto.map((video) => (
+              <li>
+                <button
+                  type="button"
+                  class="actualidad__card"
+                  data-video-id={video.id}
+                  data-titulo={video.titulo}
+                  data-descripcion={video.descripcion}
+                  data-fuente={video.fuente}
+                  data-src={video.videoUrl}
+                  data-thumbnail={video.thumbnailUrl}
+                  data-tags={JSON.stringify(video.tags)}
+                >
+                  <span class="actualidad__card-thumb">
+                    <img src={video.thumbnailUrl} alt="" loading="lazy" />
+                    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+                      <circle cx="12" cy="12" r="12" fill="white" opacity="0.9" />
+                      <path d="M9.5 7.5v9l7-4.5z" fill="var(--color-actualidad-bg)" />
+                    </svg>
+                  </span>
+                  <span class="actualidad__card-titulo">{video.titulo}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+
+          <button type="button" class="actualidad__nav" data-dir="1" aria-label="Siguiente">›</button>
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
+<script>
+  type VideoData = {
+    id: string;
+    titulo: string;
+    descripcion: string;
+    fuente: string;
+    src: string;
+    thumbnail: string;
+    tags: string[];
+  };
+
+  // Elementos creados por JS no tienen el atributo data-astro-cid-* del CSS scoped de Astro,
+  // así que se estilan inline para que .actualidad__player los cubra igual que al thumbnail estático.
+  const FILL_STYLE = "display:block;width:100%;height:100%;border:none;object-fit:cover;";
+
+  function renderPlayer(player: HTMLElement, fuente: string, src: string, alt: string) {
+    player.dataset.fuente = fuente;
+    player.dataset.src = src;
+    player.innerHTML = "";
+
+    if (fuente === "youtube") {
+      const iframe = document.createElement("iframe");
+      iframe.src = `${src}?autoplay=1`;
+      iframe.allow = "autoplay; encrypted-media; picture-in-picture";
+      iframe.allowFullscreen = true;
+      iframe.setAttribute("title", alt);
+      iframe.setAttribute("style", FILL_STYLE);
+      player.appendChild(iframe);
+    } else {
+      const video = document.createElement("video");
+      video.src = src;
+      video.controls = true;
+      video.autoplay = true;
+      video.setAttribute("style", FILL_STYLE);
+      player.appendChild(video);
+    }
+  }
+
+  function resetPlayer(player: HTMLElement, thumbnail: string, alt: string) {
+    player.innerHTML = "";
+
+    const img = document.createElement("img");
+    img.dataset.campo = "thumbnail";
+    img.src = thumbnail;
+    img.alt = alt;
+    img.setAttribute("style", FILL_STYLE);
+    player.appendChild(img);
+
+    const play = document.createElement("button");
+    play.type = "button";
+    play.className = "actualidad__play";
+    play.setAttribute("aria-label", `Reproducir ${alt}`);
+    play.setAttribute(
+      "style",
+      "position:absolute;inset:0;margin:auto;width:48px;height:48px;border:none;background:none;cursor:pointer;",
+    );
+    play.innerHTML = `<svg viewBox="0 0 24 24" width="48" height="48" aria-hidden="true">
+      <circle cx="12" cy="12" r="12" fill="white" opacity="0.9" />
+      <path d="M9.5 7.5v9l7-4.5z" fill="var(--color-actualidad-bg)" />
+    </svg>`;
+    player.appendChild(play);
+  }
+
+  document.querySelectorAll<HTMLElement>(".actualidad").forEach((actualidad) => {
+    const destacadoEl = actualidad.querySelector<HTMLElement>("[data-destacado]");
+    const player = actualidad.querySelector<HTMLElement>("[data-player]");
+    if (!destacadoEl || !player) return;
+
+    const tituloEl = destacadoEl.querySelector<HTMLElement>('[data-campo="titulo"]');
+    const descripcionEl = destacadoEl.querySelector<HTMLElement>('[data-campo="descripcion"]');
+    const tagsEl = destacadoEl.querySelector<HTMLElement>('[data-campo="tags"]');
+
+    // Delegado en el contenedor: el botón play se recrea en cada reset/swap, así que un
+    // listener atado directamente al botón inicial no sobreviviría a un reemplazo.
+    player.addEventListener("click", (e) => {
+      if (!(e.target as HTMLElement).closest(".actualidad__play")) return;
+      const fuente = player!.dataset.fuente ?? "";
+      const src = player!.dataset.src ?? "";
+      const alt = tituloEl?.textContent ?? "";
+      renderPlayer(player!, fuente, src, alt);
+    });
+
+    function setDestacado(data: VideoData) {
+      if (tituloEl) tituloEl.textContent = data.titulo;
+      if (descripcionEl) descripcionEl.textContent = data.descripcion;
+      if (tagsEl) {
+        tagsEl.innerHTML = "";
+        data.tags.forEach((tag) => {
+          const span = document.createElement("span");
+          span.className = "actualidad__tag";
+          span.textContent = tag;
+          tagsEl!.appendChild(span);
+        });
+      }
+      resetPlayer(player!, data.thumbnail, data.titulo);
+      player!.dataset.fuente = data.fuente;
+      player!.dataset.src = data.src;
+      player!.dataset.thumbnail = data.thumbnail;
+    }
+
+    const track = actualidad.querySelector<HTMLElement>("[data-track]");
+
+    actualidad.querySelectorAll<HTMLButtonElement>(".actualidad__card").forEach((card) => {
+      card.addEventListener("click", () => {
+        const swap: VideoData = {
+          id: card.dataset.videoId ?? "",
+          titulo: card.dataset.titulo ?? "",
+          descripcion: card.dataset.descripcion ?? "",
+          fuente: card.dataset.fuente ?? "",
+          src: card.dataset.src ?? "",
+          thumbnail: card.dataset.thumbnail ?? "",
+          tags: JSON.parse(card.dataset.tags ?? "[]"),
+        };
+
+        const previoTitulo = tituloEl?.textContent ?? "";
+        const previoDescripcion = descripcionEl?.textContent ?? "";
+        const previoFuente = player!.dataset.fuente ?? "";
+        const previoSrc = player!.dataset.src ?? "";
+        const previoThumbTags = Array.from(tagsEl?.children ?? []).map((el) => el.textContent ?? "");
+        const previoThumb = player!.dataset.thumbnail ?? "";
+
+        setDestacado(swap);
+
+        card.dataset.titulo = previoTitulo;
+        card.dataset.descripcion = previoDescripcion;
+        card.dataset.fuente = previoFuente;
+        card.dataset.src = previoSrc;
+        card.dataset.thumbnail = previoThumb;
+        card.dataset.tags = JSON.stringify(previoThumbTags);
+        const cardImg = card.querySelector("img");
+        const cardTitulo = card.querySelector(".actualidad__card-titulo");
+        if (cardImg) cardImg.src = previoThumb;
+        if (cardTitulo) cardTitulo.textContent = previoTitulo;
+
+        destacadoEl!.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    actualidad.querySelectorAll<HTMLButtonElement>(".actualidad__nav").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const dir = Number(btn.dataset.dir);
+        track?.scrollBy({ left: dir * 280, behavior: "smooth" });
+      });
+    });
+  });
+</script>
+
+<style>
+  .actualidad {
+    /* Spacing now handled by index.astro contenedor grid gap */
+  }
+
+  .actualidad__titulo {
+    background: var(--color-actualidad-bg);
+    color: var(--color-surface);
+    font-family: var(--font-monique-regular);
+    font-weight: 400;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    padding: clamp(var(--space-4), 4vw, var(--space-8));
+    text-transform: uppercase;
+  }
+
+  .actualidad__contenedor {
+    padding-block: var(--space-8);
+  }
+
+  .actualidad__destacado {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    align-items: start;
+    gap: var(--space-8);
+  }
+
+  .actualidad__info {
+    display: grid;
+    gap: var(--space-4);
+    align-content: start;
+  }
+
+  .actualidad__info-titulo {
+    color: var(--color-nav-text);
+    font-family: var(--font-komet);
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .actualidad__descripcion {
+    color: var(--color-text);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .actualidad__etiquetas {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    color: var(--color-nav-text);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .actualidad__tag {
+    background: var(--color-nav-bg-active);
+    color: var(--color-nav-text);
+    border-radius: var(--radius-control);
+    padding: var(--space-1) var(--space-3);
+    font-family: var(--font-monique-regular);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    margin-right: var(--space-2);
+    display: inline-block;
+  }
+
+  .actualidad__player {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: black;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .actualidad__player img,
+  .actualidad__player iframe,
+  .actualidad__player video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border: none;
+  }
+
+  .actualidad__play {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 48px;
+    height: 48px;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+
+  .actualidad__carrusel {
+    margin-top: var(--space-8);
+  }
+
+  .actualidad__carrusel-titulo {
+    font-family: var(--font-monique-regular);
+    text-transform: uppercase;
+    color: var(--color-nav-text);
+    margin-bottom: var(--space-3);
+  }
+
+  .actualidad__carrusel-fila {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-width: 0;
+  }
+
+  .actualidad__track {
+    list-style: none;
+    margin: 0;
+    padding: var(--space-2) 0;
+    display: flex;
+    gap: var(--space-4);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    min-width: 0;
+    scrollbar-width: none;
+  }
+
+  .actualidad__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .actualidad__track li {
+    scroll-snap-align: start;
+    flex: 0 0 calc((100% - (var(--space-4) * 2)) / 3);
+  }
+
+  .actualidad__card {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+  }
+
+  .actualidad__card-thumb {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  .actualidad__card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .actualidad__card-thumb svg {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 28px;
+    height: 28px;
+  }
+
+  .actualidad__card-titulo {
+    display: block;
+    margin-top: var(--space-2);
+    color: var(--color-nav-text);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .actualidad__nav {
+    flex: none;
+    border: none;
+    background: none;
+    color: var(--color-nav-text);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--space-2);
+  }
+
+  @media (max-width: 849px) {
+    .actualidad__destacado {
+      grid-template-columns: 1fr;
+    }
+
+    .actualidad__player {
+      order: -1;
+    }
+
+    .actualidad__track li {
+      flex: 0 0 100%;
+    }
+  }
+</style>

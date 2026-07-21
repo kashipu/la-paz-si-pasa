@@ -1,0 +1,87 @@
+---
+import logoFondoPaz from "../assets/retratos/logo-fondo-paz.svg";
+// Texto fijo introductorio, no editable desde WP (ver docs/content.md sección 1)
+---
+
+<div class="retratos-texto">
+  <img class="retratos-texto__sello" src={logoFondoPaz.src} alt="Fondo Colombia en Paz" />
+
+  <div>
+    <h1 class="retratos-texto__titulo">La Paz Sí Pasa,<br />pasa en los territorios</h1>
+
+    <p class="retratos-texto__parrafo">
+      La paz no se queda en los escritorios; la paz es una realidad tangible que se vive en las
+      regiones y en las comunidades que lideran el cambio. Con la estrategia La Paz Sí Pasa,
+      visibilizamos las cifras, los logros y las historias reales que demuestran que la
+      transformación del campo colombiano es imparable. A través de crónicas y datos de gestión,
+      <strong> abrimos una ventana al corazón de las regiones para mostrar los resultados de un
+      esfuerzo que conecta la legalidad con el progreso sostenible.</strong>
+    </p>
+
+    <p class="retratos-texto__destacado">
+      Porque la transformación se consolida allí donde debe pasar: en los territorios y de la
+      mano de su gente.
+    </p>
+  </div>
+</div>
+
+<style>
+  .retratos-texto {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .retratos-texto__sello {
+    width: 160px;
+    height: 96px;
+    flex-shrink: 0;
+    padding-bottom: var(--space-4);
+  }
+
+  .retratos-texto__titulo {
+    color: var(--color-nav-text);
+    text-transform: uppercase;
+    font-size: clamp(1.25rem, 3.5vw, 2rem);
+    padding: var(--space-4) 0;
+    line-height: 1.1;
+  }
+
+  .retratos-texto__parrafo {
+    color: var(--color-nav-text);
+    font-family: var(--font-komet);
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .retratos-texto__parrafo strong {
+    font-weight: 700;
+  }
+
+  .retratos-texto__destacado {
+    color: var(--color-nav-text);
+    padding: var(--space-8) 0;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 1.125rem;
+  }
+
+  @media (max-width: 849px) {
+    .retratos-texto__sello {
+      width: 120px;
+      height: 72px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .retratos-texto__sello {
+      width: 96px;
+      height: 58px;
+    }
+
+    .retratos-texto__parrafo,
+    .retratos-texto__destacado {
+      font-size: 1rem;
+    }
+  }
+</style>

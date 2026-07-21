@@ -1,0 +1,112 @@
+---
+interface Props {
+  siteName: string;
+}
+
+const { siteName } = Astro.props;
+---
+
+<header class="site-header">
+  <a class="site-header__brand" href="/">{siteName}</a>
+  <button type="button" class="nav__toggle" aria-expanded="false" aria-controls="nav-list">
+    <span class="nav__toggle-bar"></span>
+    <span class="nav__toggle-bar"></span>
+    <span class="nav__toggle-bar"></span>
+    <span class="nav__toggle-label">Menú</span>
+  </button>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>(".nav__toggle");
+  const list = document.querySelector<HTMLUListElement>(".nav__list");
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = list?.classList.toggle("is-open");
+    toggle.classList.toggle("is-open", Boolean(isOpen));
+    toggle.setAttribute("aria-expanded", String(Boolean(isOpen)));
+    document.body.classList.toggle("nav-lock", Boolean(isOpen));
+  });
+</script>
+
+<style>
+  .site-header {
+    display: none;
+  }
+
+  .site-header__brand {
+    display: none;
+    text-transform: uppercase;
+  }
+
+  .nav__toggle {
+    display: none;
+  }
+
+  @media (max-width: 849px) {
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      padding: var(--space-4) var(--space-10);
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-nav-border);
+    }
+
+    .site-header__brand {
+      display: block;
+      color: var(--color-brand);
+      font-family: var(--font-monique-regular);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .nav__toggle {
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 4px;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--color-nav-border);
+      border-radius: var(--radius-control);
+      background: var(--color-surface);
+      cursor: pointer;
+      position: relative;
+      z-index: 20;
+    }
+
+    .nav__toggle-bar {
+      width: 20px;
+      height: 2px;
+      background: var(--color-nav-text);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav__toggle.is-open .nav__toggle-bar:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .nav__toggle.is-open .nav__toggle-bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav__toggle.is-open .nav__toggle-bar:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .nav__toggle-label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+  }
+
+  @media (max-width: 360px) {
+    .site-header {
+      padding: var(--space-4);
+    }
+  }
+</style>

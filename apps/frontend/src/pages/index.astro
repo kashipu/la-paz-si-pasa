@@ -1,16 +1,47 @@
 ---
-import FeatureGridBlock from "@components/blocks/FeatureGridBlock.astro";
-import HeroBlock from "@components/blocks/HeroBlock.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import Hero from "@components/Hero.astro";
+import RetratosPaz from "@components/RetratosPaz.astro";
+import LoQueHacemos from "@components/LoQueHacemos.astro";
+import ActualidadGaleria from "@components/ActualidadGaleria.astro";
+import Nav from "@components/Nav.astro";
+import NavMenu from "@components/NavMenu.astro";
+import NavMenuDesktop from "@components/NavMenuDesktop.astro";
+import { getRetratos, getSubcuentas, getNoticias, getVideos } from "../adapters";
+
+const siteName = "La Paz Sí Pasa";
+
+const [retratos, subcuentas, noticias, videos] = await Promise.all([
+  getRetratos(),
+  getSubcuentas(),
+  getNoticias(),
+  getVideos(),
+]);
 ---
 
 <BaseLayout>
-  <HeroBlock
-    eyebrow="Plantilla base"
-    title="Astro 7 conectado a WordPress headless"
-    summary="Una arquitectura modular, rapida y preparada para Docker, Windows y Dokploy."
-    ctaLabel="Ver blog"
-    ctaUrl="/blog/"
-  />
-  <FeatureGridBlock />
+  <Nav siteName={siteName} slot="header" />
+  <NavMenu slot="header" />
+  <Hero slot="hero" />
+  <NavMenuDesktop />
+
+  <div class="contenedor">
+    <RetratosPaz retratos={retratos} />
+    <LoQueHacemos noticias={noticias} subcuentas={subcuentas} />
+    <ActualidadGaleria videos={videos} />
+  </div>
+
+
 </BaseLayout>
+
+<style>
+  .contenedor {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(var(--space-8), 6vw, var(--space-16));
+    width: 100%;
+    max-width: 1376px;
+    margin: 0 auto;
+    padding: clamp(var(--space-4), 4vw, var(--space-8)) var(--space-4);
+  }
+</style>

@@ -10,6 +10,17 @@ The frontend uses pure CSS.
 - Components inherit global custom properties.
 - WordPress can choose semantic tokens and variants, but cannot inject arbitrary classes or CSS.
 
+## Breakpoints
+
+Two breakpoints only, desktop-first: base styles are the desktop layout, `@media` blocks only override what changes.
+
+```css
+@media (max-width: 849px) { /* tablet / mobile */ }
+@media (max-width: 360px) { /* small mobile */ }
+```
+
+No `min-width` queries and no other pixel values — consolidate to these two everywhere. CSS custom properties can't be used inside a `@media` condition without a PostCSS plugin (none configured, this is pure CSS), so the values stay as literals.
+
 ## Foundation Files
 
 ```text

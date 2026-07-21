@@ -1,0 +1,225 @@
+---
+import type { Retrato } from "@adapters/contracts";
+import fondoDesktop from "../assets/retratos/retratos-fondo.png";
+import fondoMobile from "../assets/retratos/retratos-fondo-mb.png";
+import arrowSvg from "../assets/retratos/retratos-arrow.svg?raw";
+
+type Props = { retratos: Retrato[] };
+const { retratos } = Astro.props;
+---
+
+<section
+  class="retratos-slider"
+  aria-roledescription="carrusel"
+  aria-label="Retratos de la Paz"
+  style={`--bg-desktop: url(${fondoDesktop.src}); --bg-mobile: url(${fondoMobile.src});`}
+>
+  <div class="retratos-slider__page">
+    <div class="retratos-slider__visual">
+      {retratos.map((retrato, i) => (
+        <img
+          class="retratos-slider__foto"
+          data-slide={i}
+          aria-hidden={i !== 0}
+          src={retrato.fotoUrl}
+          alt={retrato.descripcion}
+        />
+      ))}
+
+      <button type="button" class="retratos-slider__arrow retratos-slider__arrow--prev" aria-label="Retrato anterior" set:html={arrowSvg} />
+      <button type="button" class="retratos-slider__arrow retratos-slider__arrow--next" aria-label="Retrato siguiente" set:html={arrowSvg} />
+    </div>
+
+    <div class="retratos-slider__texto">
+      <h2 class="retratos-slider__titulo">Retratos de la Paz</h2>
+      <p class="retratos-slider__etiqueta">Galería<br />fotográfica</p>
+
+      {retratos.map((retrato, i) => (
+        <div class="retratos-slider__campos" data-slide={i} aria-hidden={i !== 0}>
+          <p class="retratos-slider__descripcion">{retrato.descripcion}</p>
+          <p class="retratos-slider__campo"><strong>Proyecto:</strong><br />{retrato.proyecto}</p>
+          <p class="retratos-slider__campo"><strong>Lugar:</strong><br />{retrato.lugar}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".retratos-slider").forEach((slider) => {
+    const fotos = slider.querySelectorAll<HTMLElement>(".retratos-slider__foto");
+    const campos = slider.querySelectorAll<HTMLElement>(".retratos-slider__campos");
+    const total = fotos.length;
+    let current = 0;
+
+    function render() {
+      fotos.forEach((el) => el.setAttribute("aria-hidden", String(Number(el.dataset.slide) !== current)));
+      campos.forEach((el) => el.setAttribute("aria-hidden", String(Number(el.dataset.slide) !== current)));
+    }
+
+    slider.querySelector(".retratos-slider__arrow--prev")?.addEventListener("click", () => {
+      current = (current - 1 + total) % total;
+      render();
+    });
+
+    slider.querySelector(".retratos-slider__arrow--next")?.addEventListener("click", () => {
+      current = (current + 1) % total;
+      render();
+    });
+  });
+</script>
+
+<style>
+  .retratos-slider {
+    /* shadow-1: strong, offset — reads as stacked on top of another photo */
+    --shadow-1: 0 2.2rem 3rem rgba(0, 0, 0, 0.55), 0 0.4rem 1rem rgba(0, 0, 0, 0.3);
+  }
+
+  .retratos-slider__page {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    margin-inline: auto;
+  }
+
+  .retratos-slider__visual {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1240 / 830;
+    background-image: var(--bg-desktop);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+
+  .retratos-slider__foto {
+    position: absolute;
+    left: 0%;
+    top: 15%;
+    width: 45%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    box-sizing: border-box;
+    border: 10px solid var(--color-surface);
+    box-shadow: var(--shadow-1);
+    transform: rotate(-4deg);
+  }
+
+  .retratos-slider__foto[aria-hidden="true"] {
+    display: none;
+  }
+
+  .retratos-slider__texto {
+    position: absolute;
+    right: 9%;
+    top: 15%;
+    width: 38%;
+    color: var(--color-nav-text);
+    transform: rotate(-4deg);
+  }
+
+  @media (max-width: 849px) {
+    .retratos-slider__visual {
+      background-image: var(--bg-mobile);
+      aspect-ratio: 1 / 1.1;
+      background-size: cover;
+      background-position: center bottom;
+    }
+
+    .retratos-slider__texto {
+      position: static;
+      width: 100%;
+      margin-top: var(--space-8);
+      transform: none;
+      text-align: center;
+    }
+
+    .retratos-slider__foto {
+      left: 50%;
+      top: 12%;
+      width: 55%;
+      transform: translateX(-50%) rotate(-2deg);
+    }
+
+    .retratos-slider__arrow {
+      bottom: 8%;
+    }
+
+    .retratos-slider__arrow--prev {
+      left: 20%;
+    }
+
+    .retratos-slider__arrow--next {
+      right: 20%;
+    }
+  }
+
+  .retratos-slider__titulo {
+    font-size: clamp(1rem, 2.2vw, 1.75rem);
+    margin: 0 0 var(--space-3) 0;
+    text-transform: uppercase;
+    color: var(--color-nav-text);
+  }
+
+  .retratos-slider__etiqueta {
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--color-nav-border);
+    padding-bottom: var(--space-2);
+    margin-bottom: var(--space-3);
+  }
+
+  .retratos-slider__campos[aria-hidden="true"] {
+    display: none;
+  }
+
+  .retratos-slider__campos p {
+    margin: 0 0 var(--space-3) 0;
+    font-size: 1rem;
+  }
+
+  .retratos-slider__campo strong {
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+  }
+
+  .retratos-slider__arrow {
+    position: absolute;
+    bottom: 4%;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    background: var(--color-surface);
+    border: 1px solid var(--color-nav-border);
+    color: var(--color-nav-text);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .retratos-slider__arrow :global(svg) {
+    width: 20px;
+    height: 15px;
+  }
+
+  .retratos-slider__arrow--prev {
+    left: 12%;
+  }
+
+  .retratos-slider__arrow--next {
+    right: 6%;
+  }
+
+  .retratos-slider__arrow--next :global(svg) {
+    transform: rotate(180deg);
+  }
+
+  .retratos-slider__arrow:hover {
+    background: var(--color-nav-text);
+    border-color: var(--color-nav-text);
+    color: var(--color-surface);
+  }
+</style>
+

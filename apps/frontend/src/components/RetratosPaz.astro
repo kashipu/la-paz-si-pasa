@@ -1,0 +1,41 @@
+---
+import type { Retrato } from "@adapters/contracts";
+import IntroText from "@components/IntroText.astro";
+import RetratosPazSlider from "@components/RetratosPazSlider.astro";
+
+type Props = { retratos: Retrato[] };
+const { retratos } = Astro.props;
+---
+
+<section class="retratos-paz">
+  <IntroText />
+  <RetratosPazSlider retratos={retratos} />
+</section>
+
+<style>
+  .retratos-paz {
+    display: grid;
+    grid-template-columns: 35% 1fr;
+    align-items: start;
+    gap: var(--space-8);
+    width: 100%;
+    min-width: 0;
+  }
+
+  .retratos-paz :global(.retratos-texto),
+  .retratos-paz :global(.retratos-slider) {
+    min-width: 0;
+  }
+
+  @media (max-width: 849px) {
+    .retratos-paz {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .retratos-paz {
+      gap: var(--space-4);
+    }
+  }
+</style>

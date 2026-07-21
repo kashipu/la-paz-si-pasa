@@ -1,0 +1,72 @@
+---
+const items = [
+  { href: "/#lo-que-hacemos", label: "Lo que hacemos" },
+  { href: "/proyectos-destacados", label: "Proyectos destacados" },
+  { href: "/#actualidad", label: "Actualidad" },
+];
+---
+
+<nav class="nav container--wide" aria-label="Principal">
+  <ul class="nav__list" id="nav-list">
+    {items.map((item) => (
+      <li><a href={item.href}>{item.label}</a></li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .nav {
+    display: none;
+  }
+
+  .nav__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+
+  .nav__list a {
+    display: block;
+    text-align: center;
+    padding-block: var(--space-3);
+    border: 1px solid var(--color-nav-border);
+    color: var(--color-nav-text);
+    font-family: var(--font-monique-regular);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    background: var(--color-surface);
+    transition: background-color 0.15s ease;
+    line-height: 1.5;
+  }
+
+  .nav__list a:hover,
+  .nav__list a:focus-visible {
+    background: var(--color-nav-bg-active);
+  }
+
+  @media (max-width: 849px) {
+    .nav {
+      display: block;
+    }
+
+    .nav__list {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: none;
+      grid-template-columns: 1fr;
+      align-content: center;
+      background: var(--color-nav-bg-active);
+      padding: var(--space-4);
+    }
+
+    .nav__list.is-open {
+      display: grid;
+    }
+  }
+</style>

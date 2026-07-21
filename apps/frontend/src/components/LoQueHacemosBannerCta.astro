@@ -1,0 +1,27 @@
+---
+import { Image } from "astro:assets";
+import noticiasBanner from "../assets/hacemos/noticias-banner@3x.png";
+
+type Props = {
+  imageAlt?: string;
+  href?: string;
+};
+
+// ponytail: placeholder hasta tener la URL final de la página de noticias
+const { imageAlt = "Más noticias del fondo aquí", href = "#" } = Astro.props;
+---
+
+<a href={href} class="banner-cta">
+  <Image src={noticiasBanner} alt={imageAlt} loading="lazy" />
+</a>
+
+<style>
+  .banner-cta {
+    display: block;
+  }
+
+  .banner-cta img {
+    width: 100%;
+    height: auto;
+  }
+</style>

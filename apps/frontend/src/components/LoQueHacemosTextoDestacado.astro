@@ -1,0 +1,33 @@
+---
+type Props = {
+  titulo?: string;
+  parrafos?: string[];
+};
+
+const {
+  titulo = "Somos el principal vehículo financiero e institucional encargado de garantizar la transparencia, eficiencia y agilidad en la ejecución de los recursos para la implementación de la paz en el país.",
+  parrafos = [
+    "A través de subcuentas estratégicas, articulamos la inversión en proyectos de desarrollo rural, conservación ambiental, infraestructura y fortalecimiento de economías locales. Conectamos la gestión institucional y la cooperación internacional con las necesidades reales de los territorios PDET para consolidar un progreso seguro, sostenible y transparente."
+  ],
+} = Astro.props;
+---
+
+<div class="destacado">
+  <h3 class="destacado__titulo">{titulo}</h3>
+  {parrafos.map((parrafo) => <p>{parrafo}</p>)}
+</div>
+
+<style>
+  .destacado {
+    color: var(--color-nav-text);
+  }
+
+  .destacado__titulo {
+    font-family: var(--font-komet);
+    font-weight: var(--font-weight-komet-heavy);
+    color: var(--color-nav-text);
+    font-size: 1.2rem;
+    line-height: 1.5;
+    padding-bottom: var(--space-4);
+  }
+</style>
