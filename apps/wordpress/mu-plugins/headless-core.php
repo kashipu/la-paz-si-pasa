@@ -17,6 +17,44 @@ add_action('after_setup_theme', function () {
     ]);
 });
 
+add_action('init', function () {
+    register_post_type('retrato', [
+        'label' => 'Retratos',
+        'public' => true,
+        'show_in_rest' => true,
+        'rest_base' => 'retrato',
+        'supports' => ['title', 'thumbnail'],
+        'menu_icon' => 'dashicons-format-image',
+    ]);
+
+    register_post_type('subcuenta', [
+        'label' => 'Subcuentas',
+        'public' => true,
+        'show_in_rest' => true,
+        'rest_base' => 'subcuenta',
+        'supports' => ['title'],
+        'menu_icon' => 'dashicons-money-alt',
+    ]);
+
+    register_post_type('noticia', [
+        'label' => 'Noticias',
+        'public' => true,
+        'show_in_rest' => true,
+        'rest_base' => 'noticia',
+        'supports' => ['title'],
+        'menu_icon' => 'dashicons-megaphone',
+    ]);
+
+    register_post_type('video', [
+        'label' => 'Videos',
+        'public' => true,
+        'show_in_rest' => true,
+        'rest_base' => 'video',
+        'supports' => ['title'],
+        'menu_icon' => 'dashicons-video-alt3',
+    ]);
+});
+
 add_action('rest_api_init', function () {
     register_rest_route('headless/v1', '/site', [
         'methods' => 'GET',
