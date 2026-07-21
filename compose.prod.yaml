@@ -26,11 +26,11 @@ services:
         define('WP_HOME', '${WORDPRESS_URL}');
         define('WP_SITEURL', '${WORDPRESS_URL}');
         define('DISALLOW_FILE_EDIT', true);
+        define('FORCE_SSL_ADMIN', true);
         define('WP_ENVIRONMENT_TYPE', 'production');
     volumes:
       - wordpress_data:/var/www/html
-      - ./apps/wordpress/plugins/headless-core:/var/www/html/wp-content/plugins/headless-core
-      - ./apps/wordpress/themes/headless-redirect:/var/www/html/wp-content/themes/headless-redirect
+      - ./apps/wordpress/mu-plugins:/var/www/html/wp-content/mu-plugins
     expose:
       - "80"
 
