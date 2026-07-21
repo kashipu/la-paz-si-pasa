@@ -1,4 +1,10 @@
 <?php
+/**
+ * Plugin Name: Headless Redirect
+ * Description: Redirects public WordPress frontend traffic to Astro; keeps wp-admin, wp-login.php, wp-json and uploads reachable.
+ * Version: 0.1.0
+ * Author: William Moreno
+ */
 
 defined('ABSPATH') || exit;
 

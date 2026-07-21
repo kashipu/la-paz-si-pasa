@@ -220,13 +220,14 @@ Generated baseline routes:
 
 ## Project-Specific WordPress Pieces
 
-Plugin:
+Both live under `wp-content/mu-plugins`, which WordPress always loads — no activation step, no admin toggle, survives a fresh `wordpress_data` volume:
 
 ```text
-apps/wordpress/plugins/headless-core
+apps/wordpress/mu-plugins/headless-core.php
+apps/wordpress/mu-plugins/headless-redirect.php
 ```
 
-Purpose:
+`headless-core.php` purpose:
 
 ```text
 Expose /wp-json/headless/v1/site
@@ -235,13 +236,7 @@ Expose headless_blocks on pages and posts
 Provide the normalized contract consumed by Astro
 ```
 
-Theme:
-
-```text
-apps/wordpress/themes/headless-redirect
-```
-
-Purpose:
+`headless-redirect.php` purpose:
 
 ```text
 Redirect normal WordPress frontend requests to Astro
@@ -290,18 +285,6 @@ If Astro says `WORDPRESS_URL is required`:
 ```powershell
 cd apps/frontend
 Copy-Item .env.example .env
-```
-
-If `/wp-json` redirects to Astro:
-
-```powershell
-docker compose --profile tools run --rm wpcli wp theme activate headless-redirect
-```
-
-Then confirm the theme guard in:
-
-```text
-apps/wordpress/themes/headless-redirect/functions.php
 ```
 
 If `/wp-json` returns an empty HTML response:

@@ -31,8 +31,7 @@ services:
         define('WP_ENVIRONMENT_TYPE', 'local');
     volumes:
       - wordpress_data:/var/www/html
-      - ./apps/wordpress/plugins/headless-core:/var/www/html/wp-content/plugins/headless-core
-      - ./apps/wordpress/themes/headless-redirect:/var/www/html/wp-content/themes/headless-redirect
+      - ./apps/wordpress/mu-plugins:/var/www/html/wp-content/mu-plugins
     ports:
       - "8080:80"
 
@@ -66,8 +65,7 @@ services:
       WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX:-wp_}
     volumes:
       - wordpress_data:/var/www/html
-      - ./apps/wordpress/plugins/headless-core:/var/www/html/wp-content/plugins/headless-core
-      - ./apps/wordpress/themes/headless-redirect:/var/www/html/wp-content/themes/headless-redirect
+      - ./apps/wordpress/mu-plugins:/var/www/html/wp-content/mu-plugins
 
 volumes:
   db_data:
