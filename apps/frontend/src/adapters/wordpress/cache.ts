@@ -1,9 +1,5 @@
-const cache = new Map<string, Promise<unknown>>();
-
-export function cached<T>(key: string, loader: () => Promise<T>): Promise<T> {
-  if (!cache.has(key)) {
-    cache.set(key, loader());
-  }
-
-  return cache.get(key) as Promise<T>;
+// ponytail: no memoization under SSR — every request should see fresh WordPress content.
+// Re-add a short TTL here if WordPress load ever becomes a problem.
+export function cached<T>(_key: string, loader: () => Promise<T>): Promise<T> {
+  return loader();
 }
