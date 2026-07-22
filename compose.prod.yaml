@@ -44,6 +44,9 @@ services:
     restart: unless-stopped
     depends_on:
       - cms
+    environment:
+      WORDPRESS_URL: ${WORDPRESS_URL}
+      PUBLIC_SITE_URL: ${PUBLIC_SITE_URL}
     expose:
       - "80"
 

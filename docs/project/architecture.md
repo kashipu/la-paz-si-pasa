@@ -4,10 +4,10 @@ This project separates the public site from the CMS.
 
 ```text
 Astro frontend
-  Astro 7 static site generation
+  Astro 7 server-rendered (SSR, node adapter, standalone mode)
   renders public routes
   owns CSS, layout, components, SEO and performance
-  fetches WordPress server-side at build time
+  fetches WordPress server-side on every request
 
 WordPress CMS
   owns content, media, menus and editor configuration
@@ -21,9 +21,9 @@ Dokploy
 
 ## Default Rendering Mode
 
-Astro starts as SSG. This keeps the public site fast and simple in Dokploy. Content changes require a frontend rebuild.
+Astro runs as SSR: every request fetches fresh data from WordPress, so publishing content shows up immediately without a frontend rebuild or redeploy.
 
-Move specific routes to SSR only when content must update immediately, depends on request context, or needs authenticated preview behavior.
+`apps/frontend/src/adapters/wordpress/cache.ts` intentionally does not memoize across requests for this reason. Move back to SSG (or add a short TTL to that cache) only if WordPress load becomes a real problem — most of this site's content changes rarely enough that per-request fetches are cheap.
 
 ## API Strategy
 
