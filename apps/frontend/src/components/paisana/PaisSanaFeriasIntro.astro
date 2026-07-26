@@ -1,0 +1,144 @@
+---
+// Sección 5 · Mockup: documentacion/seccion5@2x-100.jpg
+// Introducción a "PaisSana en ferias": texto sobre la presencia de los
+// productores en Agroexpo, ChocoShow, Cafés de Colombia, ANATO, Carnaval de
+// Barranquilla e ICARRD, con ilustración circular de la productora al lado y
+// banner de paisaje ilustrado a lo ancho en la parte inferior.
+---
+
+<section class="ferias-intro">
+  <div class="ferias-intro-grid">
+    <div class="ferias-intro-text">
+      <h2>PAISSANA EN FERIAS:</h2>
+      <h3>Nuestros productores en las grandes vitrinas del país</h3>
+      <p>Del campo a los escenarios más grandes de Colombia y el mundo. Revive el recorrido comercial de nuestras organizaciones en eventos como <strong>Agroexpo, ChocoShow, Cafés de Colombia, ANATO, Carnaval de Barranquilla e ICCARD</strong>.</p>
+      <p>Aquí se cruzan las miradas, las catas, los intercambios comerciales y el talento para demostrar que en la ruralidad está el futuro.</p>
+    </div>
+    
+    <div class="ferias-intro-illustration">
+      <div class="illustration-wrapper">
+        <img src="https://placehold.co/400x400/png?text=Ilustracion+Productora" alt="Productora Ferias" width="400" height="400" class="circular-illustration" />
+      </div>
+    </div>
+  </div>
+  
+  <div class="ferias-landscape-banner">
+    <img src="https://placehold.co/1200x200/png?text=Ilustracion+Paisaje" alt="Paisaje de Colombia" width="1200" height="200" class="landscape-img" />
+  </div>
+</section>
+
+<style>
+  .ferias-intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8, 2rem);
+    width: 100%;
+    font-family: var(--font-komet);
+    color: var(--color-text);
+  }
+
+  /* INTRO GRID (Text + Circular Illustration) */
+  .ferias-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8, 2rem);
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .ferias-intro-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-12, 3rem);
+    }
+  }
+
+  /* TEXT AREA */
+  .ferias-intro-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2, 0.5rem);
+  }
+
+  .ferias-intro-text h2 {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 900;
+    color: var(--color-nav-text, #32509d);
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  .ferias-intro-text h3 {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-weight: 700;
+    color: var(--color-brand, #171717);
+    margin-bottom: var(--space-4, 1rem);
+    line-height: 1.2;
+  }
+
+  .ferias-intro-text p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-2, 0.5rem);
+  }
+
+  .ferias-intro-text strong {
+    color: var(--color-text);
+    font-weight: 700;
+  }
+
+  /* ILLUSTRATION AREA */
+  .ferias-intro-illustration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .illustration-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .circular-illustration {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%; /* Make sure it looks circular if the asset isn't perfectly cut */
+    filter: drop-shadow(0 15px 25px rgba(0,0,0,0.1));
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .circular-illustration:hover {
+    transform: scale(1.05) rotate(2deg);
+  }
+
+  /* LANDSCAPE BANNER */
+  .ferias-landscape-banner {
+    width: 100%;
+    border-radius: var(--radius-card, 8px);
+    overflow: hidden;
+    margin-top: var(--space-4, 1rem);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .landscape-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    /* Aspect ratio for 1200x200 */
+    aspect-ratio: 6 / 1;
+  }
+
+  @media (max-width: 767px) {
+    .landscape-img {
+      /* Show more height on mobile so it doesn't get too thin */
+      aspect-ratio: 3 / 1; 
+    }
+  }
+</style>

@@ -1,0 +1,310 @@
+---
+import PaisSanaRegionTabBtn from "./PaisSanaRegionTabBtn.astro";
+
+// Sección 3 · Mockup: documentacion/seccion3@2x-100.jpg
+// Carrusel de mapas por región. Refactorizado para usar un arreglo de datos
+// y no repetir código (DRY).
+
+const regions = [
+  {
+    id: "caribe",
+    name: "CARIBE",
+    color: "#e88e2d", // Naranja
+    total: 0,
+    deptos: []
+  },
+  {
+    id: "pacifica",
+    name: "PACÍFICA",
+    color: "var(--color-nav-text, #32509d)", // Azul
+    total: 120,
+    deptos: [
+      { name: "CHOCÓ", value: 16, top: "30%", left: "45%" },
+      { name: "VALLE DEL CAUCA", value: 34, top: "50%", left: "55%" },
+      { name: "CAUCA", value: 63, top: "65%", left: "48%" },
+      { name: "NARIÑO", value: 7, top: "80%", left: "35%" }
+    ]
+  },
+  {
+    id: "andina",
+    name: "ANDINA",
+    color: "#e65550", // Rojo Coral
+    total: 0,
+    deptos: []
+  },
+  {
+    id: "orinoquia",
+    name: "ORINOQUÍA",
+    color: "#845396", // Morado
+    total: 0,
+    deptos: []
+  },
+  {
+    id: "amazonia",
+    name: "AMAZONÍA",
+    color: "var(--color-loquehacemos-bg, #008861)", // Verde
+    total: 0,
+    deptos: []
+  }
+];
+---
+
+<section class="mapa-carrusel">
+  <nav class="region-tabs" aria-label="Navegación de regiones">
+    {regions.map((r) => (
+      <PaisSanaRegionTabBtn 
+        id={r.id} 
+        name={r.name} 
+        color={r.color} 
+        isActive={r.id === 'pacifica'} 
+      />
+    ))}
+  </nav>
+
+  <div class="region-content-container">
+    {regions.map((r) => (
+      <div class={`region-content-grid tab-content ${r.id === 'pacifica' ? 'active' : ''}`} id={`tab-${r.id}`}>
+        
+        <!-- Columna izquierda: Stats -->
+        <div class="region-stats">
+          <div class="total-badge">
+            <span class="count" style={`color: ${r.color}`}>{r.total > 0 ? r.total : '00'}</span>
+            <span class="label">PRODUCTORES</span>
+          </div>
+          
+          <ul class="deptos-list">
+            {r.deptos.length > 0 ? (
+              r.deptos.map(d => (
+                <li><strong>{d.name}:</strong> {d.value < 10 ? '0'+d.value : d.value}</li>
+              ))
+            ) : (
+              <li style="color: var(--color-text-muted);">Información en desarrollo...</li>
+            )}
+          </ul>
+        </div>
+
+        <!-- Columna derecha: Mapa interactivo -->
+        <div class="region-map-wrapper">
+          <img 
+            src={`https://placehold.co/650x750/e0f0ff/003366?text=Mapa+Colombia+${r.id}`} 
+            alt={`Mapa Región ${r.id}`} 
+            width="650" height="750" class="map-image" 
+          />
+          
+          {r.deptos.map(d => (
+            <div class="map-pin" style={`top: ${d.top}; left: ${d.left}; background-color: ${r.color};`}>
+              <span class="pin-value">{d.value < 10 ? '0'+d.value : d.value}</span>
+              <span class="pin-tooltip" style={`background-color: ${r.color};`}>{d.name}</span>
+            </div>
+          ))}
+        </div>
+        
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .mapa-carrusel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-family: var(--font-komet);
+    color: var(--color-text);
+  }
+
+  /* TABS NAVIGATION */
+  .region-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4, 1rem);
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* CONTENT GRID */
+  .region-content-container {
+    position: relative;
+    width: 100%;
+    margin-top: var(--space-8, 2rem);
+  }
+
+  .region-content-grid {
+    display: none;
+    grid-template-columns: 1fr;
+    gap: var(--space-8, 2rem);
+    align-items: center;
+  }
+
+  .region-content-grid.active {
+    display: grid;
+    animation: fadeIn 0.4s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (min-width: 768px) {
+    .region-content-grid {
+      grid-template-columns: 1fr 1.5fr;
+      align-items: center;
+    }
+  }
+
+  /* LEFT COL: STATS */
+  .region-stats {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8, 2rem);
+    background-color: var(--color-surface-muted, #f5f5f4);
+    padding: var(--space-8, 2rem);
+    border-radius: var(--radius-card, 8px);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .total-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .total-badge .count {
+    font-size: clamp(3.5rem, 6vw, 5rem);
+    font-weight: 900;
+    line-height: 0.9;
+  }
+
+  .total-badge .label {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-brand, #171717);
+    letter-spacing: 0.05em;
+  }
+
+  .deptos-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3, 0.75rem);
+    font-size: 1.125rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-6, 1.5rem);
+  }
+
+  .deptos-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .deptos-list li strong {
+    font-weight: 700;
+  }
+
+  /* RIGHT COL: MAP & PINS */
+  .region-map-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: var(--radius-card, 8px);
+    overflow: hidden;
+    background-color: #e0f0ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .map-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  .map-pin {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    color: var(--color-surface, #ffffff);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+
+  .map-pin:hover {
+    transform: translate(-50%, -50%) scale(1.15);
+    filter: brightness(0.9);
+    z-index: 10;
+  }
+
+  .pin-tooltip {
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    color: var(--color-surface, #ffffff);
+    padding: var(--space-1, 0.25rem) var(--space-2, 0.5rem);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 400;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .pin-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    /* Usamos inherit border-color en el elemento o pseudo para flecha, pero es complicado pasar variable CSS al after de forma limpia en pseudo-elementos sin variables extra. Usaremos transparent y currentColor no funciona bien en borders a veces si el font no es de ese color. 
+    Usaremos un pequeño truco: no necesitamos flecha si el borde no coincide.
+    */
+  }
+
+  .map-pin:hover .pin-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+</style>
+
+<script>
+  // Manejo de tabs en el cliente para el carrusel de regiones
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.mapa-carrusel .tab-btn');
+    const contents = document.querySelectorAll('.mapa-carrusel .tab-content');
+    
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Remover estado activo de todos
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+        
+        // Activar seleccionado
+        tab.classList.add('active');
+        const targetId = tab.getAttribute('data-target');
+        
+        // Mostrar contenedor correspondiente
+        const targetContent = document.getElementById(`tab-${targetId}`);
+        if (targetContent) {
+          targetContent.classList.add('active');
+        }
+      });
+    });
+  });
+</script>
