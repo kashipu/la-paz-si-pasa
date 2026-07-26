@@ -1,19 +1,56 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro";
-// ponytail: placeholder — el diseño visual de esta página lo entrega el cliente (fuera del alcance actual)
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PaisSanaHero from "../components/paisana/PaisSanaHero.astro";
+import PaisSanaMapaIntro from "../components/paisana/PaisSanaMapaIntro.astro";
+import PaisSanaMapaCarrusel from "../components/paisana/PaisSanaMapaCarrusel.astro";
+import PaisSanaAudioPlayer from "../components/paisana/PaisSanaAudioPlayer.astro";
+import PaisSanaFeriasIntro from "../components/paisana/PaisSanaFeriasIntro.astro";
+import PaisSanaFeriasAcordeon from "../components/paisana/PaisSanaFeriasAcordeon.astro";
+import PaisSanaProductoresVideos from "../components/paisana/PaisSanaProductoresVideos.astro";
+import Hero from "../components/Hero.astro";
 ---
 
-<BaseLayout title="Proyectos destacados">
-  <section class="contenedor">
-    <h1>Proyectos destacados</h1>
-    <p>Colombia Sostenible · PaisSana · PDET</p>
-  </section>
+<BaseLayout title="Proyectos destacados - PaisSana">
+  <Hero />
+  <main class="paisana-page">
+    <PaisSanaHero />
+    <PaisSanaMapaIntro />
+    <PaisSanaMapaCarrusel />
+    <PaisSanaAudioPlayer />
+    <PaisSanaFeriasIntro />
+    <PaisSanaFeriasAcordeon />
+    <PaisSanaProductoresVideos />
+  </main>
 </BaseLayout>
 
 <style>
-  .contenedor {
-    width: min(100% - 2rem, var(--wide-width));
+  .paisana-page {
+    display: flex;
+    flex-direction: column;
     margin-inline: auto;
-    padding-block: var(--space-8, 2rem);
+    width: 100%;
+    max-width: var(--wide-width);
+    
+    /* Espaciado general contra el Header y Footer + padding lateral */
+    padding: 10rem 1rem;
+    
+    /* ESPACIO ENTRE COMPONENTES (Forma mantenible en lugar de paddings individuales) */
+    gap: 5rem; 
+  }
+
+  /* Tablet */
+  @media (min-width: 768px) {
+    .paisana-page {
+      padding: 10rem 2rem;
+      gap: 7rem; 
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    .paisana-page {
+      padding: 10rem 1rem;
+      gap: 10rem; /* Separación masiva entre secciones */
+    }
   }
 </style>

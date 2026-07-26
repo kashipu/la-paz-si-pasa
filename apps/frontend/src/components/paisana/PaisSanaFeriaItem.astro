@@ -1,0 +1,268 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  isOpen?: boolean;
+}
+
+const { 
+  title, 
+  description = "En esta feria, nuestros productores presentaron lo mejor del campo colombiano, mostrando procesos sostenibles y fortaleciendo sus lazos comerciales directos con grandes superficies, sin intermediarios. Una muestra clara de resiliencia y calidad.", 
+  isOpen = false 
+} = Astro.props;
+---
+
+<details class="feria-item" open={isOpen}>
+  <summary class="feria-header">
+    <span class="feria-title">{title}</span>
+    <span class="chevron">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </span>
+  </summary>
+  <div class="feria-body-grid">
+    <div class="feria-left">
+      <p class="feria-desc">{description}</p>
+      <h3 class="gallery-title">GALERÍA FOTOGRÁFICA</h3>
+      <div class="gallery-grid-3x2">
+        <img src="https://placehold.co/300x200?text=Foto+Feria+1" alt={`${title} 1`} width="300" height="200" />
+        <img src="https://placehold.co/300x200?text=Foto+Feria+2" alt={`${title} 2`} width="300" height="200" />
+        <img src="https://placehold.co/300x200?text=Foto+Feria+3" alt={`${title} 3`} width="300" height="200" />
+        <img src="https://placehold.co/300x200?text=Foto+Feria+4" alt={`${title} 4`} width="300" height="200" />
+        <img src="https://placehold.co/300x200?text=Foto+Feria+5" alt={`${title} 5`} width="300" height="200" />
+        <img src="https://placehold.co/300x200?text=Foto+Feria+6" alt={`${title} 6`} width="300" height="200" />
+      </div>
+    </div>
+    <div class="feria-right">
+      <div class="vertical-video-card">
+        <div class="video-media">
+          <img src="https://placehold.co/400x600?text=Video+Feria" alt={`Video ${title}`} width="400" height="600" />
+          <button class="play-btn-overlay" aria-label="Reproducir video">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          </button>
+        </div>
+        <p class="video-caption">«Aquí en la feria logramos que la gente conozca nuestro trabajo y el valor de nuestra tierra.»</p>
+        <div class="video-nav-arrows">
+          <button class="nav-arrow" aria-label="Anterior video">&lt;</button>
+          <button class="nav-arrow" aria-label="Siguiente video">&gt;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<style>
+  /* DETAILS / SUMMARY STRUCTURE */
+  .feria-item {
+    background-color: var(--color-surface, #ffffff);
+    border: 1px solid var(--color-border, #d6d3d1);
+    border-radius: var(--radius-card, 8px);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .feria-item[open] {
+    box-shadow: var(--shadow-soft);
+    border-color: var(--color-nav-border, #32509d);
+  }
+
+  .feria-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4, 1rem) var(--space-6, 1.5rem);
+    cursor: pointer;
+    list-style: none; /* Hide default triangle */
+    background-color: var(--color-surface-muted, #f5f5f4);
+    transition: background-color 0.2s ease;
+  }
+  
+  /* Hide native summary marker for webkit */
+  .feria-header::-webkit-details-marker {
+    display: none;
+  }
+
+  .feria-header:hover {
+    background-color: var(--color-nav-bg-active, #cbe9f8);
+  }
+
+  .feria-item[open] .feria-header {
+    background-color: var(--color-nav-bg-active, #cbe9f8);
+    border-bottom: 1px solid var(--color-border, #d6d3d1);
+  }
+
+  .feria-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-nav-text, #32509d);
+  }
+
+  .chevron {
+    color: var(--color-nav-text, #32509d);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+
+  .feria-item[open] .chevron {
+    transform: rotate(180deg);
+  }
+
+  /* ACORDION CONTENT GRID */
+  .feria-body-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8, 2rem);
+    padding: var(--space-6, 1.5rem);
+    animation: slideDown 0.4s ease;
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (min-width: 768px) {
+    .feria-body-grid {
+      grid-template-columns: 2fr 1fr;
+    }
+  }
+
+  /* LEFT SIDE (Desc + Gallery) */
+  .feria-left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6, 1.5rem);
+  }
+
+  .feria-desc {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+
+  .gallery-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-brand, #171717);
+    border-left: 4px solid var(--color-loquehacemos-bg, #008861);
+    padding-left: var(--space-2, 0.5rem);
+  }
+
+  .gallery-grid-3x2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3, 0.75rem);
+  }
+
+  @media (min-width: 640px) {
+    .gallery-grid-3x2 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .gallery-grid-3x2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 3 / 2;
+    border-radius: 4px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    cursor: pointer;
+  }
+
+  .gallery-grid-3x2 img:hover {
+    transform: scale(1.03);
+    filter: brightness(1.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    z-index: 2;
+  }
+
+  /* RIGHT SIDE (Video Card) */
+  .feria-right {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .vertical-video-card {
+    background-color: var(--color-surface, #ffffff);
+    padding: var(--space-4, 1rem);
+    border-radius: var(--radius-card, 8px);
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4, 1rem);
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .video-media {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    aspect-ratio: 9 / 16;
+  }
+
+  .video-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .play-btn-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 72px;
+    height: 72px;
+    background-color: rgba(15, 118, 110, 0.85); /* brand accent */
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: all 0.2s ease;
+  }
+
+  .play-btn-overlay:hover {
+    background-color: var(--color-loquehacemos-bg, #008861);
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  .video-caption {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: var(--color-text-muted);
+    font-style: italic;
+    text-align: center;
+    margin: 0;
+  }
+
+  .video-nav-arrows {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4, 1rem);
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-3, 0.75rem);
+  }
+
+  .nav-arrow {
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-nav-text, #32509d);
+    cursor: pointer;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+
+  .nav-arrow:hover {
+    background-color: var(--color-surface-muted);
+  }
+</style>

@@ -3,10 +3,7 @@ import { wpFetch, wpFetchAll } from "./wordpress/client";
 import { cached } from "./wordpress/cache";
 import { endpoints } from "./wordpress/endpoints";
 import { mapHero } from "./wordpress/mappers/mapHero";
-import { mapRetrato } from "./wordpress/mappers/mapRetrato";
-import { mapSubcuenta } from "./wordpress/mappers/mapSubcuenta";
 import { mapNoticia } from "./wordpress/mappers/mapNoticia";
-import { mapVideo } from "./wordpress/mappers/mapVideo";
 import { mockHero, mockRetratos, mockSubcuentas, mockNoticias, mockVideos } from "./mocks";
 
 export type { HeroData, Retrato, Subcuenta, Noticia, Video, Proyecto } from "./contracts";
@@ -31,20 +28,14 @@ export function getHero(): Promise<HeroData> {
   );
 }
 
+// ponytail: mock forzado — retrato aún no tiene integración WP lista, quitar cuando esté
 export function getRetratos(): Promise<Retrato[]> {
-  return withFallback(
-    "retratos",
-    async () => (await wpFetchAll<any>(endpoints.retratos)).map(mapRetrato),
-    mockRetratos,
-  );
+  return Promise.resolve(mockRetratos);
 }
 
+// ponytail: mock forzado — subcuenta aún no tiene integración WP lista, quitar cuando esté
 export function getSubcuentas(): Promise<Subcuenta[]> {
-  return withFallback(
-    "subcuentas",
-    async () => (await wpFetchAll<any>(endpoints.subcuentas)).map(mapSubcuenta),
-    mockSubcuentas,
-  );
+  return Promise.resolve(mockSubcuentas);
 }
 
 export async function getNoticias(limit?: number): Promise<Noticia[]> {
@@ -57,10 +48,7 @@ export async function getNoticias(limit?: number): Promise<Noticia[]> {
   return limit ? ordenadas.slice(0, limit) : ordenadas;
 }
 
+// ponytail: mock forzado — video aún no tiene integración WP lista, quitar cuando esté
 export function getVideos(): Promise<Video[]> {
-  return withFallback(
-    "videos",
-    async () => (await wpFetchAll<any>(endpoints.videos)).map(mapVideo),
-    mockVideos,
-  );
+  return Promise.resolve(mockVideos);
 }

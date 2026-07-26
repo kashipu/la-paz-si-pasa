@@ -26,6 +26,7 @@ apps/wordpress/uploads/
 *.xd
 *.sketch
 *.fig
+apps/frontend/documentacion/*.jpg
 
 .DS_Store
 Thumbs.db

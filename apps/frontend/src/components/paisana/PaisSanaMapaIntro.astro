@@ -1,0 +1,130 @@
+---
+// Sección 2 · Mockup: documentacion/seccion2@2x-100.jpg
+// Introducción a "Paissanos en el mapa": columna de texto con el título, la
+// explicación del mapa interactivo y el instructivo "¿Cómo navegarlo?"; a la
+// derecha el retrato de la productora dentro de un marco de papel kraft.
+---
+
+<section class="mapa-intro">
+  <div class="mapa-intro-text">
+    <h2>PAISSANOS EN EL MAPA</h2>
+    <p>Cada rincón de Colombia guarda una historia de transformación y resiliencia.</p>
+    <p>En este mapa interactivo reunimos los orígenes de nuestros productores, mostrando la fuerza de los territorios donde se siembra la paz todos los días.</p>
+    
+    <div class="instrucciones-navegacion">
+      <h3>¿CÓMO NAVEGARLO?</h3>
+      <p>Haz <strong>clic sobre el recuadro</strong> con la región de tu interés para conocer las métricas y los departamentos donde estamos presentes.</p>
+      <p class="cta-text">¡Haz clic en tu región y descubre su talento!</p>
+    </div>
+  </div>
+  
+  <div class="mapa-intro-card">
+    <div class="paper-frame">
+      <img src="https://placehold.co/600x500?text=Paissana+Retrato" alt="Paissanos" width="600" height="500" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .mapa-intro {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8, 2rem);
+    align-items: center;
+    font-family: var(--font-komet);
+    color: var(--color-text);
+  }
+
+  @media (min-width: 768px) {
+    .mapa-intro {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-12, 3rem);
+    }
+  }
+
+  /* TEXT COLUMN */
+  .mapa-intro-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4, 1rem);
+  }
+
+  .mapa-intro-text h2 {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 900;
+    color: var(--color-nav-text, #32509d);
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: var(--space-2, 0.5rem);
+  }
+
+  .mapa-intro-text p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .instrucciones-navegacion {
+    margin-top: var(--space-4, 1rem);
+    background-color: var(--color-surface-muted, #f5f5f4);
+    padding: var(--space-6, 1.5rem);
+    border-radius: var(--radius-card, 8px);
+    border-left: 4px solid var(--color-accent, #0f766e);
+  }
+
+  .instrucciones-navegacion h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-brand, #171717);
+    margin-bottom: var(--space-2, 0.5rem);
+  }
+
+  .cta-text {
+    font-weight: 700;
+    color: var(--color-nav-text, #32509d);
+    margin-top: var(--space-2, 0.5rem);
+  }
+
+  /* IMAGE COLUMN */
+  .mapa-intro-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-4, 1rem);
+  }
+
+  .paper-frame {
+    /* Emulating a kraft paper frame with CSS */
+    background-color: #e5d3b3; /* Kraft paper base color */
+    background-image: 
+      linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    padding: var(--space-4, 1rem);
+    padding-bottom: var(--space-10, 2.5rem); /* Polaroid/polaroid-like bottom padding */
+    border-radius: 4px;
+    box-shadow: 
+      0 10px 25px rgba(0,0,0,0.1),
+      inset 0 0 40px rgba(139, 90, 43, 0.2); /* Inner texture shadow */
+    transform: rotate(2deg); /* Slight tilt for organic feel */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .paper-frame:hover {
+    transform: rotate(0deg) scale(1.02);
+    box-shadow: 
+      0 15px 35px rgba(0,0,0,0.15),
+      inset 0 0 40px rgba(139, 90, 43, 0.2);
+  }
+
+  .paper-frame img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 6 / 5;
+    border-radius: 2px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2); /* Inset shadow on image */
+  }
+</style>
