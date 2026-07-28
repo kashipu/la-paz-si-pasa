@@ -1,8 +1,8 @@
 # Production Rules
 
-Standing rules for build, images, resources and deploy. Each one names the file
-it lives in and the reason it exists. Break one on purpose if you must, but
-update this page when you do.
+Standing rules for build, images, resources, mail, secrets and deploy. Each one
+names the file it lives in and the reason it exists. Break one on purpose if you
+must, but update this page when you do.
 
 ## Images
 
@@ -102,9 +102,57 @@ the limit; that headroom is deliberate, not an oversight.
 
 This is why the `db` service carries no `command:`.
 
+## Mail
+
+### R11 · Mail goes through SMTP, configured by environment
+
+The `wordpress` image ships **no MTA**, so PHP's `mail()` always fails — and
+WordPress still tells the user the message was sent. Password recovery is dead
+without this.
+
+[`headless-smtp.php`](../../apps/wordpress/mu-plugins/headless-smtp.php) wires
+PHPMailer from `SMTP_*` variables. Provider today is Resend, on its free tier.
+
+No SMTP plugin: the config stays versioned in the repo, the credential stays in
+the environment instead of the database, and swapping providers is an env change
+with no code touched. The plugin no-ops when `SMTP_HOST` is unset, so local dev
+keeps the default behaviour.
+
+### R12 · The From address lives on the DKIM-signed domain
+
+`SMTP_FROM` must be at `lapazsipasa.com` — never a personal Gmail. Mail sent to
+third parties with a mismatched From fails DMARC alignment and gets filtered,
+however successful the provider reports the send.
+
+This is also why a personal mailbox is not an option once real users need to
+recover their own passwords: the domain has to be one we control and can sign.
+
+The domain needs SPF, DKIM (both issued by the provider) and DMARC in DNS.
+DMARC starts at `p=none` to observe, and hardens to `quarantine` once reports
+show alignment.
+
+### R13 · Delivery failures get logged
+
+`wp_mail_failed` writes to the container log with a `[headless-smtp]` prefix.
+Silent failures are how this problem stayed invisible in the first place — the
+lost-password screen reports success either way.
+
+## Secrets
+
+### R14 · No credential ever goes in a versioned file
+
+**This repository is public.** [`compose.prod.yaml`](../../compose.prod.yaml)
+carries `${VARIABLES}` for anything secret; the values live in the Dokploy
+Environment tab. Non-secrets (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`,
+`SMTP_FROM`) stay inline — hiding them buys nothing.
+
+A key that reaches a commit is compromised even if the next commit removes it:
+it stays in the git history, and scanners find public-repo credentials within
+minutes. Rotate first, clean up second.
+
 ## Deploy
 
-### R11 · Dokploy deploys `main`, not `frontend`
+### R15 · Dokploy deploys `main`, not `frontend`
 
 ```text
 branch:      main
@@ -115,13 +163,13 @@ autoDeploy:  true  (fires on push)
 Pushing to `frontend` **deploys nothing**. Publishing means merging to `main`.
 See [`dokploy.md`](dokploy.md).
 
-### R12 · Data lives in named volumes
+### R16 · Data lives in named volumes
 
 `wordpress_data` (`/var/www/html`, which includes `wp-content/uploads`) and
 `db_data` (`/var/lib/mysql`). Recreating a container does **not** wipe the
 volume — only `docker volume rm` or `compose down -v` do.
 
-### R13 · Changing a service's config recreates it
+### R17 · Changing a service's config recreates it
 
 Compose recreates a container when its `config-hash` changes, not only when the
 image does. Adding memory limits to `cms` and `db` recreated both, with the
@@ -132,9 +180,15 @@ service interruption that implies. Deploys that only touch frontend code leave
 
 Deliberate calls, not oversights:
 
-- **Production DB passwords are the example ones** (`wordpress` /
-  `root-password`). MariaDB's port is not published, so exposure is internal,
-  but they need rotating.
+- **MariaDB's `root` password does not match its variable.** The `wordpress`
+  user was rotated to a strong password and the environment matches it, but
+  `root` inside the engine is still the original while
+  `WORDPRESS_DB_ROOT_PASSWORD` says otherwise. Nothing breaks — WordPress never
+  connects as root — but the two need aligning with an `ALTER USER`.
+  Rotating either one is a two-step operation: `MARIADB_PASSWORD` and
+  `MARIADB_ROOT_PASSWORD` only apply on first init with an empty datadir, so
+  changing the variable alone leaves the engine untouched and takes the site
+  down on the next deploy. Change it inside MariaDB first, then the variable.
 - **Source PNGs over 3MB** in `src/assets/` (footer 6.5M, hero 5.2M, retratos
   4.1M and 3.8M) — pending compression, see R4.
 - **Unreferenced SVGs** in `src/assets/mapas/` (~9.1M): the components use the
