@@ -130,7 +130,7 @@ const regions = [
         <!-- Columna derecha: Mapa interactivo -->
         <div class="region-map-wrapper">
           <img 
-            src={mapImages[r.id].src} 
+            src={mapImages[r.id as keyof typeof mapImages].src}
             alt={`Mapa Región ${r.name}`} 
             class="map-image" 
           />
