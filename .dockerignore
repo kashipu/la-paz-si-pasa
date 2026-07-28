@@ -1,0 +1,20 @@
+.git
+.gitignore
+.gitattributes
+.vscode
+.DS_Store
+
+# rebuilt inside the image, never copy from the host
+**/node_modules/
+**/dist/
+**/.astro/
+
+# not needed by any build stage
+docs/
+skills/
+apps/frontend/documentacion/
+compose.yaml
+README.md
+.env
+.env.*
+!.env.example

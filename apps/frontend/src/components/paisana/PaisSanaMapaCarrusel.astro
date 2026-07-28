@@ -1,5 +1,19 @@
 ---
 import PaisSanaRegionTabBtn from "./PaisSanaRegionTabBtn.astro";
+import mapAmazonia from "../../assets/mapas/amazonia@3x.png";
+import mapAndina from "../../assets/mapas/andina@3x.png";
+import mapCaribe from "../../assets/mapas/caribe@3x.png";
+import mapOrinoquia from "../../assets/mapas/orinoquia@3x.png";
+import mapPacifica from "../../assets/mapas/pacifica@3x.png";
+
+// Mapeo dinámico de imágenes
+const mapImages = {
+  amazonia: mapAmazonia,
+  andina: mapAndina,
+  caribe: mapCaribe,
+  orinoquia: mapOrinoquia,
+  pacifica: mapPacifica
+};
 
 // Sección 3 · Mockup: documentacion/seccion3@2x-100.jpg
 // Carrusel de mapas por región. Refactorizado para usar un arreglo de datos
@@ -9,42 +23,72 @@ const regions = [
   {
     id: "caribe",
     name: "CARIBE",
-    color: "#e88e2d", // Naranja
-    total: 0,
-    deptos: []
+    color: "#e88e2d",
+    total: 61,
+    deptos: [
+      { name: "LA GUAJIRA", value: 3 },
+      { name: "SUCRE", value: 17 },
+      { name: "CESAR", value: 18 },
+      { name: "BOLÍVAR", value: 13 },
+      { name: "MAGDALENA", value: 1 },
+      { name: "CÓRDOBA", value: 8 },
+      { name: "ATLÁNTICO", value: 1 }
+    ]
   },
   {
     id: "pacifica",
     name: "PACÍFICA",
-    color: "var(--color-nav-text, #32509d)", // Azul
+    color: "var(--color-nav-text, #32509d)",
     total: 120,
     deptos: [
-      { name: "CHOCÓ", value: 16, top: "30%", left: "45%" },
-      { name: "VALLE DEL CAUCA", value: 34, top: "50%", left: "55%" },
-      { name: "CAUCA", value: 63, top: "65%", left: "48%" },
-      { name: "NARIÑO", value: 7, top: "80%", left: "35%" }
+      { name: "CHOCÓ", value: 16 },
+      { name: "VALLE DEL CAUCA", value: 34 },
+      { name: "CAUCA", value: 63 },
+      { name: "NARIÑO", value: 7 }
     ]
   },
   {
     id: "andina",
     name: "ANDINA",
-    color: "#e65550", // Rojo Coral
-    total: 0,
-    deptos: []
+    color: "#e65550",
+    total: 152,
+    deptos: [
+      { name: "RISARALDA", value: 2 },
+      { name: "TOLIMA", value: 35 },
+      { name: "CALDAS", value: 1 },
+      { name: "HUILA", value: 11 },
+      { name: "QUINDÍO", value: 1 },
+      { name: "BOYACÁ", value: 10 },
+      { name: "ANTIOQUIA", value: 47 },
+      { name: "BOGOTÁ", value: 20 },
+      { name: "SANTANDER", value: 9 },
+      { name: "CUNDINAMARCA", value: 1 },
+      { name: "NORTE DE SANTANDER", value: 15 }
+    ]
   },
   {
     id: "orinoquia",
     name: "ORINOQUÍA",
-    color: "#845396", // Morado
-    total: 0,
-    deptos: []
+    color: "#845396",
+    total: 93,
+    deptos: [
+      { name: "ARAUCA", value: 57 },
+      { name: "CASANARE", value: 25 },
+      { name: "VICHADA", value: 0 },
+      { name: "META", value: 11 }
+    ]
   },
   {
     id: "amazonia",
     name: "AMAZONÍA",
-    color: "var(--color-loquehacemos-bg, #008861)", // Verde
-    total: 0,
-    deptos: []
+    color: "var(--color-loquehacemos-bg, #008861)",
+    total: 42,
+    deptos: [
+      { name: "AMAZONAS", value: 1 },
+      { name: "GUAVIARE", value: 4 },
+      { name: "PUTUMAYO", value: 9 },
+      { name: "CAQUETÁ", value: 28 }
+    ]
   }
 ];
 ---
@@ -68,14 +112,14 @@ const regions = [
         <!-- Columna izquierda: Stats -->
         <div class="region-stats">
           <div class="total-badge">
-            <span class="count" style={`color: ${r.color}`}>{r.total > 0 ? r.total : '00'}</span>
+            <span class="count">{r.total > 0 ? r.total : '00'}</span>
             <span class="label">PRODUCTORES</span>
           </div>
           
           <ul class="deptos-list">
             {r.deptos.length > 0 ? (
               r.deptos.map(d => (
-                <li><strong>{d.name}:</strong> {d.value < 10 ? '0'+d.value : d.value}</li>
+                <li><span>{d.name}:</span> <strong>{d.value < 10 ? '0'+d.value : d.value}</strong></li>
               ))
             ) : (
               <li style="color: var(--color-text-muted);">Información en desarrollo...</li>
@@ -86,17 +130,10 @@ const regions = [
         <!-- Columna derecha: Mapa interactivo -->
         <div class="region-map-wrapper">
           <img 
-            src={`https://placehold.co/650x750/e0f0ff/003366?text=Mapa+Colombia+${r.id}`} 
-            alt={`Mapa Región ${r.id}`} 
-            width="650" height="750" class="map-image" 
+            src={mapImages[r.id as keyof typeof mapImages].src}
+            alt={`Mapa Región ${r.name}`} 
+            class="map-image" 
           />
-          
-          {r.deptos.map(d => (
-            <div class="map-pin" style={`top: ${d.top}; left: ${d.left}; background-color: ${r.color};`}>
-              <span class="pin-value">{d.value < 10 ? '0'+d.value : d.value}</span>
-              <span class="pin-tooltip" style={`background-color: ${r.color};`}>{d.name}</span>
-            </div>
-          ))}
         </div>
         
       </div>
@@ -148,7 +185,8 @@ const regions = [
 
   @media (min-width: 768px) {
     .region-content-grid {
-      grid-template-columns: 1fr 1.5fr;
+      /* Le damos mucho más espacio al mapa (ej. 33% a los stats y 67% al mapa) */
+      grid-template-columns: 1fr 2fr;
       align-items: center;
     }
   }
@@ -158,47 +196,56 @@ const regions = [
     display: flex;
     flex-direction: column;
     gap: var(--space-8, 2rem);
-    background-color: var(--color-surface-muted, #f5f5f4);
-    padding: var(--space-8, 2rem);
-    border-radius: var(--radius-card, 8px);
-    box-shadow: var(--shadow-soft);
+    /* Removido el contenedor gris oscuro/claro */
+    background-color: transparent;
+    padding: 0;
+    min-width: 320px;
   }
 
   .total-badge {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    /* Todo el texto es azul según diseño */
+    color: var(--color-nav-text, #32509d);
   }
 
   .total-badge .count {
-    font-size: clamp(3.5rem, 6vw, 5rem);
-    font-weight: 900;
-    line-height: 0.9;
+    font-size: clamp(4rem, 8vw, 6rem); 
+    font-weight: 500; /* Ajustado para parecerse más a la fuente del mockup */
+    line-height: 1;
+    font-family: var(--font-komet);
   }
 
   .total-badge .label {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--color-brand, #171717);
-    letter-spacing: 0.05em;
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-family: var(--font-komet);
+    text-transform: uppercase;
   }
 
   .deptos-list {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3, 0.75rem);
-    font-size: 1.125rem;
-    border-top: 1px solid var(--color-border);
-    padding-top: var(--space-6, 1.5rem);
+    display: grid;
+    /* Divide la lista en 2 columnas para regiones con muchos departamentos (ej. Andina, Caribe) */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--space-4, 1rem);
+    font-size: 1.25rem;
+    /* Removida la línea superior */
+    padding-top: var(--space-4, 1rem);
+    color: var(--color-nav-text, #32509d);
+    font-family: var(--font-monique-regular);
+    font-weight: 700;
+    text-transform: uppercase;
   }
 
   .deptos-list li {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+    gap: 0.5em;
   }
 
   .deptos-list li strong {
@@ -209,13 +256,13 @@ const regions = [
   .region-map-wrapper {
     position: relative;
     width: 100%;
+    max-width: 700px;
+    margin-inline: auto; /* Para centrarlo en la columna */
     border-radius: var(--radius-card, 8px);
-    overflow: hidden;
-    background-color: #e0f0ff;
+    background-color: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: var(--shadow-soft);
   }
 
   .map-image {
@@ -223,64 +270,9 @@ const regions = [
     height: auto;
     object-fit: contain;
     display: block;
+    padding: 0;
   }
 
-  .map-pin {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    color: var(--color-surface, #ffffff);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 700;
-    font-size: 1.1rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    transform: translate(-50%, -50%);
-    cursor: pointer;
-    transition: transform 0.2s ease, filter 0.2s ease;
-  }
-
-  .map-pin:hover {
-    transform: translate(-50%, -50%) scale(1.15);
-    filter: brightness(0.9);
-    z-index: 10;
-  }
-
-  .pin-tooltip {
-    position: absolute;
-    bottom: 110%;
-    left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    color: var(--color-surface, #ffffff);
-    padding: var(--space-1, 0.25rem) var(--space-2, 0.5rem);
-    border-radius: 4px;
-    font-size: 0.85rem;
-    font-weight: 400;
-    opacity: 0;
-    pointer-events: none;
-    white-space: nowrap;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-  }
-
-  .pin-tooltip::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 5px;
-    border-style: solid;
-    /* Usamos inherit border-color en el elemento o pseudo para flecha, pero es complicado pasar variable CSS al after de forma limpia en pseudo-elementos sin variables extra. Usaremos transparent y currentColor no funciona bien en borders a veces si el font no es de ese color. 
-    Usaremos un pequeño truco: no necesitamos flecha si el borde no coincide.
-    */
-  }
-
-  .map-pin:hover .pin-tooltip {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
 </style>
 
 <script>

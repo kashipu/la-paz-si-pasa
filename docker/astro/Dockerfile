@@ -11,9 +11,12 @@ RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
 
 COPY apps/frontend/ ./
 RUN npm run build
+# drop devDependencies before they get copied into the runtime image
+RUN npm prune --omit=dev
 
 FROM node:22-alpine
 WORKDIR /app
+ENV NODE_ENV=production
 ENV HOST=0.0.0.0
 ENV PORT=80
 

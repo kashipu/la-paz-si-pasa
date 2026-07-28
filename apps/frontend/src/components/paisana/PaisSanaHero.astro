@@ -1,4 +1,9 @@
 ---
+import logoPaisana from "../../assets/paissana/logo-paisana.svg";
+import flor from "../../assets/paissana/flor.svg";
+import icon from "../../assets/paissana/icon.svg";
+import leaf from "../../assets/paissana/leaf.svg";
+
 // Sección 1 · Mockup: documentacion/Seccion1@2x-100.jpg
 // Encabezado de marca PaisSana: logo + texto de introducción, bloque de "Datos
 // relevantes" con ilustración de flor arriba a la derecha, y abajo la lista 
@@ -8,14 +13,14 @@
 <section class="paisana-hero">
   <div class="hero-top-grid">
     <div class="hero-brand">
-      <img src="https://placehold.co/240x80/003366/FFFFFF?text=paiSana+Logo" alt="PaisSana" width="240" height="80" class="brand-logo" />
+      <img src={logoPaisana.src} alt="PaisSana" width="240" height="80" class="brand-logo" />
       <h2>Un país que sana desde la tierra</h2>
       <p>PaiSana no es solo una marca; es la voz, las manos y el orgullo de cientos de familias campesinas e indígenas que cultivan esperanza en los territorios de Colombia.</p>
       <p>Detrás de cada grano de café, de cada barra de cacao, y de cada producto que lleva nuestro sello, hay una historia de resiliencia y paz.</p>
     </div>
     
     <div class="hero-stats">
-      <img src="https://placehold.co/300x300/png?text=Flor+Ilustracion" alt="Flor" class="flor-bg" width="300" height="300" />
+      <img src={flor.src} alt="Flor" class="flor-bg" width="300" height="300" />
       <h3>Datos relevantes:</h3>
       <ul class="stats-list">
         <li>
@@ -24,7 +29,7 @@
         </li>
         <li>
           <div class="stat-icon-wrapper">
-            <img src="https://placehold.co/48x48/003366/FFFFFF?text=Icon" width="48" height="48" alt="Sello" />
+            <img src={icon.src} width="48" height="48" alt="Sello" />
           </div>
           <div class="stat-content">
             <span class="stat-number">3.402</span>
@@ -33,7 +38,7 @@
         </li>
         <li>
           <div class="stat-icon-wrapper">
-            <img src="https://placehold.co/48x48/003366/FFFFFF?text=Leaf" width="48" height="48" alt="Municipios" />
+            <img src={leaf.src} width="48" height="48" alt="Municipios" />
           </div>
           <div class="stat-content">
             <span class="stat-number">168</span>
