@@ -2,6 +2,9 @@
 
 This project separates the public site from the CMS.
 
+The operating rules that follow from this architecture (images, build, resource
+limits and deploy) live in [production-rules.md](production-rules.md).
+
 ```text
 Astro frontend
   Astro 7 server-rendered (SSR, node adapter, standalone mode)
