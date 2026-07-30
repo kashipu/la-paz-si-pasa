@@ -1,5 +1,6 @@
 ---
 import paisaje from "../../assets/paissana/paisaje.svg";
+import ilustracionProductora from "../../assets/paissana/ilustracion-productora@3x.png";
 
 // Sección 5 · Mockup: documentacion/seccion5@2x-100.jpg
 // Introducción a "PaisSana en ferias": texto sobre la presencia de los
@@ -13,19 +14,40 @@ import paisaje from "../../assets/paissana/paisaje.svg";
     <div class="ferias-intro-text">
       <h2>PAISSANA EN FERIAS:</h2>
       <h3>Nuestros productores en las grandes vitrinas del país</h3>
-      <p>Del campo a los escenarios más grandes de Colombia y el mundo. Revive el recorrido comercial de nuestras organizaciones en eventos como <strong>Agroexpo, ChocoShow, Cafés de Colombia, ANATO, Carnaval de Barranquilla e ICCARD</strong>.</p>
-      <p>Aquí se cruzan las miradas, las catas, los intercambios comerciales y el talento para demostrar que en la ruralidad está el futuro.</p>
+      <p>
+        Del campo a los escenarios más grandes de Colombia y el mundo. Revive el
+        recorrido comercial de nuestras organizaciones en eventos como <strong
+          >Agroexpo, ChocoShow, Cafés de Colombia, ANATO, Carnaval de
+          Barranquilla e ICCARD</strong
+        >.
+      </p>
+      <p>
+        Aquí se cruzan las miradas, las catas, los intercambios comerciales y el
+        talento para demostrar que en la ruralidad está el futuro.
+      </p>
     </div>
-    
+
     <div class="ferias-intro-illustration">
       <div class="illustration-wrapper">
-        <img src="https://placehold.co/400x400/png?text=Ilustracion+Productora" alt="Productora Ferias" width="400" height="400" class="circular-illustration" />
+        <img
+          src={ilustracionProductora.src}
+          alt="Productora Ferias"
+          width="400"
+          height="400"
+          class="circular-illustration"
+        />
       </div>
     </div>
   </div>
-  
+
   <div class="ferias-landscape-banner">
-    <img src={paisaje.src} alt="Paisaje de Colombia" width="1200" height="200" class="landscape-img" />
+    <img
+      src={paisaje.src}
+      alt="Paisaje de Colombia"
+      width="1200"
+      height="200"
+      class="landscape-img"
+    />
   </div>
 </section>
 
@@ -92,8 +114,6 @@ import paisaje from "../../assets/paissana/paisaje.svg";
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 50%; /* Make sure it looks circular if the asset isn't perfectly cut */
-    filter: drop-shadow(0 15px 25px rgba(0,0,0,0.1));
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
@@ -104,25 +124,23 @@ import paisaje from "../../assets/paissana/paisaje.svg";
   /* LANDSCAPE BANNER */
   .ferias-landscape-banner {
     width: 100%;
-    border-radius: var(--radius-card, 8px);
     overflow: hidden;
     margin-top: var(--space-4, 1rem);
-    box-shadow: var(--shadow-soft);
   }
 
   .landscape-img {
     width: 100%;
     height: auto;
     display: block;
-    object-fit: cover;
-    /* Aspect ratio for 1200x200 */
-    aspect-ratio: 6 / 1;
   }
 
-  @media (max-width: 767px) {
+  /* =========================================
+     BREAKPOINT 360px
+     ========================================= */
+  @media (max-width: 360px) {
     .landscape-img {
-      /* Show more height on mobile so it doesn't get too thin */
-      aspect-ratio: 3 / 1; 
+      height: 200px;
+      object-fit: cover;
     }
   }
 </style>

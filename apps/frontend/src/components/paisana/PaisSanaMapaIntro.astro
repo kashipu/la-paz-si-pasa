@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import retratoImage from '../../assets/paissana/paisana-retrato@3x.png';
+
 // Sección 2 · Mockup: documentacion/seccion2@2x-100.jpg
 // Introducción a "Paissanos en el mapa": columna de texto con el título, la
 // explicación del mapa interactivo y el instructivo "¿Cómo navegarlo?"; a la
@@ -20,7 +23,7 @@
   
   <div class="mapa-intro-card">
     <div class="paper-frame">
-      <img src="https://placehold.co/600x500?text=Paissana+Retrato" alt="Paissanos" width="600" height="500" />
+      <Image src={retratoImage} alt="Paissanos" width={600} height={500} />
     </div>
   </div>
 </section>
