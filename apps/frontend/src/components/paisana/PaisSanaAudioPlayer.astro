@@ -9,11 +9,25 @@
 <section class="corazon-campo">
   <div class="audio-header">
     <div class="header-left">
-      <h2>EL CORAZÓN<br/>DEL CAMPO:<br/><span class="highlight">La voz del territorio</span></h2>
+      <h2>
+        EL CORAZÓN<br />DEL CAMPO:<br /><span class="highlight"
+          >La voz del territorio</span
+        >
+      </h2>
     </div>
     <div class="header-right">
-      <p>Nadie narra la transformación mejor que quienes la viven día a día en el surco, la parcela o el taller. <strong>Te invitamos a cerrar los ojos y escuchar estos relatos sonoros grabados directamente en el territorio.</strong></p>
-      <p>En sus propias voces, las y los productores nos comparten sus memorias, sus sueños y la emoción de ver cómo el trabajo de la tierra está transformando el futuro de sus familias.</p>
+      <p>
+        Nadie narra la transformación mejor que quienes la viven día a día en el
+        surco, la parcela o el taller. <strong
+          >Te invitamos a cerrar los ojos y escuchar estos relatos sonoros
+          grabados directamente en el territorio.</strong
+        >
+      </p>
+      <p>
+        En sus propias voces, las y los productores nos comparten sus memorias,
+        sus sueños y la emoción de ver cómo el trabajo de la tierra está
+        transformando el futuro de sus familias.
+      </p>
     </div>
   </div>
 
@@ -21,50 +35,99 @@
     <div class="audio-player-card">
       <div class="player-left">
         <div class="producer-info-container">
-          <button class="play-pause-btn" aria-label="Reproducir audio" id="playPauseBtn">
+          <button
+            class="play-pause-btn"
+            aria-label="Reproducir audio"
+            id="playPauseBtn"
+          >
             <!-- Icono de Play -->
-            <svg class="icon-play" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+            <svg
+              class="icon-play"
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              stroke="none"
+            >
               <polygon points="5 3 19 12 5 21 5 3"></polygon>
             </svg>
             <!-- Icono de Pause -->
-            <svg class="icon-pause" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="display: none;">
+            <svg
+              class="icon-pause"
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              stroke="none"
+              style="display: none;"
+            >
               <rect x="6" y="4" width="4" height="16"></rect>
               <rect x="14" y="4" width="4" height="16"></rect>
             </svg>
           </button>
-          
+
           <div class="producer-info">
             <h4>Andrés Pineda</h4>
             <p class="brand">Café Montepineda</p>
             <p class="location">Pradera, Valle del Cauca</p>
           </div>
         </div>
-        
+
         <div class="nav-controls">
           <button class="nav-btn nav-prev" aria-label="Anterior audio">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><polyline points="15 18 9 12 15 6"></polyline></svg
+            >
           </button>
           <button class="nav-btn nav-next" aria-label="Siguiente audio">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><polyline points="9 18 15 12 9 6"></polyline></svg
+            >
           </button>
         </div>
       </div>
 
       <div class="player-right">
         <div class="timeline">
-          <input type="range" min="0" max="110" value="0" class="progress-bar" id="audioProgress" />
+          <input
+            type="range"
+            min="0"
+            max="110"
+            value="0"
+            class="progress-bar"
+            id="audioProgress"
+          />
           <div class="timestamps">
             <span id="currentTime">00:00</span>
             <span id="duration">01:50</span>
           </div>
         </div>
         <div class="subtitles-box">
-          <p>Subtítulos: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet</p>
+          <p>
+            Subtítulos: Lorem ipsum dolor sit amet, consectetuer adipiscing
+            elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+          </p>
         </div>
       </div>
     </div>
   </div>
-  
+
   <!-- Elemento de audio nativo oculto -->
   <audio id="audioElement" preload="metadata">
     <!-- <source src="/audio/ejemplo.mp3" type="audio/mpeg"> -->
@@ -80,8 +143,6 @@
     flex-direction: column;
     gap: var(--space-8, 2rem);
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
     padding: var(--space-6, 1.5rem);
     font-family: var(--font-monique-regular, sans-serif);
   }
@@ -89,8 +150,6 @@
   .audio-header {
     display: flex;
     flex-direction: column;
-    gap: var(--space-6, 1.5rem);
-    margin-bottom: var(--space-2, 0.5rem);
   }
 
   .header-left h2 {
@@ -162,7 +221,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   }
 
@@ -294,15 +355,14 @@
      ========================================= */
   @media (min-width: 768px) {
     .audio-header {
-      flex-direction: row;
+      display: grid;
+      grid-template-columns: 380px 1fr;
       align-items: flex-start;
-      justify-content: space-between;
       gap: var(--space-8, 2rem);
     }
     
     .header-left {
-      flex: 1;
-      max-width: 40%;
+      max-width: 100%;
     }
 
     .header-left h2 {
@@ -314,20 +374,19 @@
     }
 
     .header-right {
-      flex: 1;
-      max-width: 55%;
+      max-width: 100%;
     }
 
     .audio-player-card {
-      flex-direction: row;
+      display: grid;
+      grid-template-columns: 380px 1fr;
       align-items: center;
-      gap: var(--space-12, 3rem);
+      gap: var(--space-8, 2rem);
     }
 
     .player-left {
       flex-direction: column;
-      align-items: center;
-      min-width: 300px;
+      align-items: flex-start;
     }
 
     .nav-controls {
