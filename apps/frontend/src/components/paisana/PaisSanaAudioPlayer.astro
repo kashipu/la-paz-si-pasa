@@ -21,18 +21,16 @@
     <div class="audio-player-card">
       <div class="player-left">
         <div class="producer-info-container">
-          <button class="mic-play-btn" aria-label="Reproducir audio" id="playPauseBtn">
-            <div class="mic-icon-bg">
-              <svg class="mic-icon" viewBox="0 0 24 24" fill="none" stroke="#32509d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
-                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
-                <line x1="12" y1="19" x2="12" y2="23"></line>
-                <line x1="8" y1="23" x2="16" y2="23"></line>
-              </svg>
-            </div>
-            <div class="play-overlay">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-            </div>
+          <button class="play-pause-btn" aria-label="Reproducir audio" id="playPauseBtn">
+            <!-- Icono de Play -->
+            <svg class="icon-play" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <!-- Icono de Pause -->
+            <svg class="icon-pause" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="display: none;">
+              <rect x="6" y="4" width="4" height="16"></rect>
+              <rect x="14" y="4" width="4" height="16"></rect>
+            </svg>
           </button>
           
           <div class="producer-info">
@@ -151,73 +149,34 @@
     gap: var(--space-4, 1rem);
   }
 
-  .mic-play-btn {
-    position: relative;
-    width: 72px;
-    height: 72px;
+  .play-pause-btn {
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     border: none;
-    background: #d4f1f9;
+    background: var(--color-nav-text, #32509d);
+    color: var(--color-surface, #ffffff);
     padding: 0;
     cursor: pointer;
-    overflow: hidden;
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   }
 
-  .mic-play-btn:hover {
+  .play-pause-btn:hover {
     transform: scale(1.05);
+    opacity: 0.9;
   }
 
-  .mic-icon-bg {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .mic-icon {
-    width: 32px;
-    height: 32px;
-  }
-
-  .play-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 51, 102, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-
-  .mic-play-btn:hover .play-overlay {
-    opacity: 1;
-  }
-
-  .mic-play-btn.playing .play-overlay {
-    opacity: 1;
-  }
-
-  .mic-play-btn.playing .play-overlay svg polygon {
+  .play-pause-btn.playing .icon-play {
     display: none;
   }
 
-  .mic-play-btn.playing .play-overlay::after {
-    content: '';
-    width: 12px;
-    height: 16px;
-    border-left: 4px solid white;
-    border-right: 4px solid white;
-    position: absolute;
+  .play-pause-btn.playing .icon-pause {
+    display: block !important;
   }
 
   .producer-info {
