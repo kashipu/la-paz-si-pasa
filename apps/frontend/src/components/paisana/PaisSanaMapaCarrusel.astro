@@ -145,9 +145,8 @@ const regions = [
   .mapa-carrusel {
     display: flex;
     flex-direction: column;
+    gap: var(--space-8, 2rem);
     width: 100%;
-    font-family: var(--font-komet);
-    color: var(--color-text);
   }
 
   /* TABS NAVIGATION */
@@ -206,21 +205,17 @@ const regions = [
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    /* Todo el texto es azul según diseño */
-    color: var(--color-nav-text, #32509d);
   }
 
   .total-badge .count {
     font-size: clamp(4rem, 8vw, 6rem); 
     font-weight: 500; /* Ajustado para parecerse más a la fuente del mockup */
     line-height: 1;
-    font-family: var(--font-komet);
   }
 
   .total-badge .label {
     font-size: 1.5rem;
     font-weight: 500;
-    font-family: var(--font-komet);
     text-transform: uppercase;
   }
 

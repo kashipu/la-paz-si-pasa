@@ -1,0 +1,340 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Design System" description="Guía de estilos y tokens del proyecto">
+  <div class="container section page-wrapper">
+    <h1>Guía de Estilos & Design System</h1>
+    <p>Tokens, colores, tipografías y variables disponibles en el proyecto.</p>
+    
+    <hr class="divider" />
+    
+    <section class="ds-section">
+      <h2>Colores</h2>
+      <p>Variables definidas en <code>:root</code> (tokens.css).</p>
+      
+      <div class="swatch-grid">
+        <div class="swatch" style="--bg: var(--color-brand)">
+          <div class="swatch-color"></div>
+          <div class="swatch-info">
+            <strong>--color-brand</strong>
+            <span>#171717</span>
+          </div>
+        </div>
+        <div class="swatch" style="--bg: var(--color-accent)">
+          <div class="swatch-color"></div>
+          <div class="swatch-info">
+            <strong>--color-accent</strong>
+            <span>#0f766e</span>
+          </div>
+        </div>
+        <div class="swatch" style="--bg: var(--color-surface); border: 1px solid var(--color-border)">
+          <div class="swatch-color"></div>
+          <div class="swatch-info">
+            <strong>--color-surface</strong>
+            <span>#ffffff</span>
+          </div>
+        </div>
+        <div class="swatch" style="--bg: var(--color-surface-muted)">
+          <div class="swatch-color"></div>
+          <div class="swatch-info">
+            <strong>--color-surface-muted</strong>
+            <span>#f5f5f4</span>
+          </div>
+        </div>
+        <div class="swatch" style="--bg: var(--color-text)">
+          <div class="swatch-color"></div>
+          <div class="swatch-info">
+            <strong>--color-text</strong>
+            <span>#1c1917</span>
+          </div>
+        </div>
+        <div class="swatch" style="--bg: var(--color-text-muted)">
+          <div class="swatch-color"></div>
+          <div class="swatch-info">
+            <strong>--color-text-muted</strong>
+            <span>#57534e</span>
+          </div>
+        </div>
+        <div class="swatch" style="--bg: var(--color-border)">
+          <div class="swatch-color"></div>
+          <div class="swatch-info">
+            <strong>--color-border</strong>
+            <span>#d6d3d1</span>
+          </div>
+        </div>
+        <div class="swatch" style="--bg: var(--color-nav-text)">
+          <div class="swatch-color"></div>
+          <div class="swatch-info">
+            <strong>--color-nav-text</strong>
+            <span>#32509d</span>
+          </div>
+        </div>
+        <div class="swatch" style="--bg: var(--color-nav-border)">
+          <div class="swatch-color"></div>
+          <div class="swatch-info">
+            <strong>--color-nav-border</strong>
+            <span>#32509d</span>
+          </div>
+        </div>
+        <div class="swatch" style="--bg: var(--color-nav-bg-active)">
+          <div class="swatch-color"></div>
+          <div class="swatch-info">
+            <strong>--color-nav-bg-active</strong>
+            <span>#cbe9f8</span>
+          </div>
+        </div>
+        <div class="swatch" style="--bg: var(--color-loquehacemos-bg)">
+          <div class="swatch-color"></div>
+          <div class="swatch-info">
+            <strong>--color-loquehacemos-bg</strong>
+            <span>#008861</span>
+          </div>
+        </div>
+        <div class="swatch" style="--bg: var(--color-actualidad-bg)">
+          <div class="swatch-color"></div>
+          <div class="swatch-info">
+            <strong>--color-actualidad-bg</strong>
+            <span>#d49ec7</span>
+          </div>
+        </div>
+        <div class="swatch" style="--bg: var(--color-scrollbar-thumb)">
+          <div class="swatch-color"></div>
+          <div class="swatch-info">
+            <strong>--color-scrollbar-thumb</strong>
+            <span>#3b8fd4</span>
+          </div>
+        </div>
+        <div class="swatch" style="--bg: var(--border-subtle-light)">
+          <div class="swatch-color"></div>
+          <div class="swatch-info">
+            <strong>--border-subtle-light</strong>
+            <span>rgba(255, 255, 255, 0.6)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+    
+    <section class="ds-section">
+      <h2>Tipografía</h2>
+      <p>Fuentes y elementos tipográficos (definidos en <code>typography.css</code> y tokens).</p>
+      
+      <div class="typography-preview">
+        <div>
+          <h3>--font-monique-regular (Títulos)</h3>
+          <p style="font-family: var(--font-monique-regular); font-size: 2rem;">ABCDEFGHIJKLMNÑOPQRSTUVWXYZ<br/>abcdefghijklmnñopqrstuvwxyz<br/>0123456789</p>
+        </div>
+        <div>
+          <h3>--font-komet (Cuerpo, defecto)</h3>
+          <p style="font-family: var(--font-komet); font-size: 1.5rem;">ABCDEFGHIJKLMNÑOPQRSTUVWXYZ<br/>abcdefghijklmnñopqrstuvwxyz<br/>0123456789</p>
+        </div>
+      </div>
+
+      <h3>Etiquetas de encabezado</h3>
+      <div class="headings-preview">
+        <h1>Heading 1 (h1)</h1>
+        <h2>Heading 2 (h2)</h2>
+        <h3>Heading 3 (h3)</h3>
+        <h4>Heading 4 (h4)</h4>
+        <p>Paragraph (p) - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non orci ac mi congue aliquam.</p>
+      </div>
+      
+      <h3>Pesos de fuente (Komet)</h3>
+      <ul class="font-weights">
+        <li style="font-weight: var(--font-weight-komet-light);">--font-weight-komet-light (300)</li>
+        <li style="font-weight: var(--font-weight-komet-regular);">--font-weight-komet-regular (400)</li>
+        <li style="font-weight: var(--font-weight-komet-bold);">--font-weight-komet-bold (700)</li>
+        <li style="font-weight: var(--font-weight-komet-heavy);">--font-weight-komet-heavy (800)</li>
+        <li style="font-weight: var(--font-weight-komet-black);">--font-weight-komet-black (900)</li>
+      </ul>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="ds-section">
+      <h2>Espaciado (Spacing)</h2>
+      <p>Variables para márgenes y paddings.</p>
+      <div class="spacing-list">
+        <div class="space-item">
+          <div class="space-label">--space-1 (0.25rem / 4px)</div>
+          <div class="space-box" style="width: var(--space-1); height: var(--space-4);"></div>
+        </div>
+        <div class="space-item">
+          <div class="space-label">--space-2 (0.5rem / 8px)</div>
+          <div class="space-box" style="width: var(--space-2); height: var(--space-4);"></div>
+        </div>
+        <div class="space-item">
+          <div class="space-label">--space-3 (0.75rem / 12px)</div>
+          <div class="space-box" style="width: var(--space-3); height: var(--space-4);"></div>
+        </div>
+        <div class="space-item">
+          <div class="space-label">--space-4 (1rem / 16px)</div>
+          <div class="space-box" style="width: var(--space-4); height: var(--space-4);"></div>
+        </div>
+        <div class="space-item">
+          <div class="space-label">--space-5 (1.25rem / 20px)</div>
+          <div class="space-box" style="width: var(--space-5); height: var(--space-4);"></div>
+        </div>
+        <div class="space-item">
+          <div class="space-label">--space-6 (1.5rem / 24px)</div>
+          <div class="space-box" style="width: var(--space-6); height: var(--space-4);"></div>
+        </div>
+        <div class="space-item">
+          <div class="space-label">--space-8 (2rem / 32px)</div>
+          <div class="space-box" style="width: var(--space-8); height: var(--space-4);"></div>
+        </div>
+        <div class="space-item">
+          <div class="space-label">--space-10 (2.5rem / 40px)</div>
+          <div class="space-box" style="width: var(--space-10); height: var(--space-4);"></div>
+        </div>
+        <div class="space-item">
+          <div class="space-label">--space-12 (3rem / 48px)</div>
+          <div class="space-box" style="width: var(--space-12); height: var(--space-4);"></div>
+        </div>
+        <div class="space-item">
+          <div class="space-label">--space-16 (4rem / 64px)</div>
+          <div class="space-box" style="width: var(--space-16); height: var(--space-4);"></div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="ds-section">
+      <h2>Misceláneos (Radios y Sombras)</h2>
+      <div class="misc-grid">
+        <div class="misc-item" style="border-radius: var(--radius-card); box-shadow: var(--shadow-soft);">
+          <div><strong>--radius-card</strong> (8px)</div>
+          <div><strong>--shadow-soft</strong></div>
+        </div>
+        <div class="misc-item" style="border-radius: var(--radius-control); background: var(--color-surface-muted);">
+          <div><strong>--radius-control</strong> (6px)</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="ds-section">
+      <h2>Clases de Layout</h2>
+      <p>Clases utilitarias definidas en <code>layout.css</code>.</p>
+      <ul>
+        <li><code>.container</code> (ancho máximo: <code>--content-width</code> / 72rem)</li>
+        <li><code>.container--narrow</code> (ancho máximo: <code>--narrow-width</code> / 48rem)</li>
+        <li><code>.container--wide</code> (ancho máximo: <code>--wide-width</code> / 86rem)</li>
+        <li><code>.section</code> (padding vertical de <code>--space-16</code>)</li>
+      </ul>
+    </section>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .page-wrapper {
+    padding-top: var(--space-10);
+    padding-bottom: var(--space-10);
+  }
+  .divider {
+    margin-block: var(--space-10);
+    border: none;
+    border-top: 1px solid var(--color-border);
+  }
+  .ds-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+  
+  /* Swatches */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-4);
+  }
+  .swatch {
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+  }
+  .swatch-color {
+    height: 100px;
+    background: var(--bg);
+  }
+  .swatch-info {
+    padding: var(--space-3);
+    background: var(--color-surface);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    font-size: 0.875rem;
+  }
+  
+  /* Typography */
+  .typography-preview {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    background: var(--color-surface-muted);
+    padding: var(--space-6);
+    border-radius: var(--radius-card);
+  }
+  .headings-preview {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    background: var(--color-surface-muted);
+    padding: var(--space-6);
+    border-radius: var(--radius-card);
+  }
+  .font-weights {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    font-size: 1.25rem;
+  }
+
+  /* Spacing */
+  .spacing-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .space-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+  .space-label {
+    width: 250px;
+    font-family: monospace;
+    font-size: 0.875rem;
+  }
+  .space-box {
+    background: var(--color-accent);
+    border-radius: 2px;
+  }
+
+  /* Misc */
+  .misc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-6);
+  }
+  .misc-item {
+    padding: var(--space-6);
+    background: var(--color-surface);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 150px;
+    gap: var(--space-2);
+  }
+</style>

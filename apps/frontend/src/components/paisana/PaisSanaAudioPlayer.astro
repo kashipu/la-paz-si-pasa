@@ -69,8 +69,6 @@
     flex-direction: column;
     gap: var(--space-8, 2rem);
     width: 100%;
-    font-family: var(--font-komet);
-    color: var(--color-text);
   }
 
   .audio-header {
@@ -83,11 +81,7 @@
   }
 
   .audio-header h2 {
-    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-    font-weight: 900;
-    color: var(--color-brand, #171717);
     text-transform: uppercase;
-    line-height: 1.1;
   }
 
   .audio-header h2 .highlight {
@@ -95,15 +89,10 @@
     display: block;
   }
 
-  .audio-header p {
-    font-size: 1.125rem;
-    line-height: 1.6;
-    color: var(--color-text-muted);
-  }
+
 
   .audio-header strong {
-    color: var(--color-text);
-    font-weight: 700;
+    font-weight: var(--font-weight-komet-heavy, 800);
   }
 
   /* WRAPPER FOR CARD AND CONTROLS */
@@ -245,16 +234,13 @@
 
   .producer-info h4 {
     font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--color-nav-text, #32509d);
+    font-weight: var(--font-weight-komet-heavy, 800);
     margin: 0;
     line-height: 1.2;
   }
 
   .producer-info .brand {
     font-size: 1rem;
-    font-weight: 400;
-    color: var(--color-text);
     margin: 0;
   }
 
@@ -334,8 +320,6 @@
 
   .subtitles-box p {
     font-size: 0.95rem;
-    line-height: 1.5;
-    color: var(--color-text);
     margin: 0;
     font-style: italic;
   }

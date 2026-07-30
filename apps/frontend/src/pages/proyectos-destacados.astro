@@ -7,12 +7,14 @@ import PaisSanaAudioPlayer from "../components/paisana/PaisSanaAudioPlayer.astro
 import PaisSanaFeriasIntro from "../components/paisana/PaisSanaFeriasIntro.astro";
 import PaisSanaFeriasAcordeon from "../components/paisana/PaisSanaFeriasAcordeon.astro";
 import PaisSanaProductoresVideos from "../components/paisana/PaisSanaProductoresVideos.astro";
+import ProyectosNav from "../components/ProyectosNav.astro";
 import Hero from "../components/Hero.astro";
 ---
 
 <BaseLayout title="Proyectos destacados - PaisSana">
   <Hero />
   <main class="paisana-page">
+    <ProyectosNav />
     <PaisSanaHero />
     <PaisSanaMapaIntro />
     <PaisSanaMapaCarrusel />
@@ -30,19 +32,19 @@ import Hero from "../components/Hero.astro";
     margin-inline: auto;
     width: 100%;
     max-width: var(--wide-width);
-    
+
     /* Espaciado general contra el Header y Footer + padding lateral */
     padding: 10rem 1rem;
-    
+
     /* ESPACIO ENTRE COMPONENTES (Forma mantenible en lugar de paddings individuales) */
-    gap: 5rem; 
+    gap: 5rem;
   }
 
   /* Tablet */
   @media (min-width: 768px) {
     .paisana-page {
       padding: 10rem 2rem;
-      gap: 7rem; 
+      gap: 7rem;
     }
   }
 
@@ -52,5 +54,46 @@ import Hero from "../components/Hero.astro";
       padding: 10rem 1rem;
       gap: 10rem; /* Separación masiva entre secciones */
     }
+  }
+</style>
+
+<style is:global>
+  /* =========================================
+     GLOBAL TYPOGRAPHY PARA COMPONENTES PAISSANA
+     ========================================= */
+  .paisana-page {
+    font-family: var(--font-komet);
+    color: var(--color-nav-text, #32509d);
+  }
+
+  .paisana-page h2,
+  .paisana-page h3 {
+    font-family: var(--font-komet);
+    font-weight: var(--font-weight-komet-heavy, 800);
+    color: var(--color-nav-text, #32509d);
+    line-height: 1.1;
+  }
+  
+  .paisana-page h2 {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  }
+  
+  .paisana-page h3 {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+  }
+
+  .paisana-page p,
+  .paisana-page li,
+  .paisana-page .text {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.6;
+    font-family: var(--font-komet);
+    font-weight: var(--font-weight-komet-light, 300);
+    letter-spacing: -0.5px;
+    color: var(--color-nav-text, #32509d);
+  }
+
+  .paisana-page strong {
+    font-weight: var(--font-weight-komet-heavy, 800);
   }
 </style>

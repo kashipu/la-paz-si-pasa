@@ -3,29 +3,57 @@ import logoPaisana from "../../assets/paissana/logo-paisana.svg";
 import flor from "../../assets/paissana/flor.svg";
 import icon from "../../assets/paissana/icon.svg";
 import leaf from "../../assets/paissana/leaf.svg";
+import heroImage from "../../assets/paissana/paisana-hero-image@3x.png";
 
 // Sección 1 · Mockup: documentacion/Seccion1@2x-100.jpg
 // Encabezado de marca PaisSana: logo + texto de introducción, bloque de "Datos
-// relevantes" con ilustración de flor arriba a la derecha, y abajo la lista 
+// relevantes" con ilustración de flor arriba a la derecha, y abajo la lista
 // de beneficios para productores junto a la foto cuadrada de la productora.
 ---
 
 <section class="paisana-hero">
   <div class="hero-top-grid">
     <div class="hero-brand">
-      <img src={logoPaisana.src} alt="PaisSana" width="240" height="80" class="brand-logo" />
+      <img
+        src={logoPaisana.src}
+        alt="PaisSana"
+        width="350"
+        height="116"
+        class="brand-logo"
+      />
       <h2>Un país que sana desde la tierra</h2>
-      <p>PaiSana no es solo una marca; es la voz, las manos y el orgullo de cientos de familias campesinas e indígenas que cultivan esperanza en los territorios de Colombia.</p>
-      <p>Detrás de cada grano de café, de cada barra de cacao, y de cada producto que lleva nuestro sello, hay una historia de resiliencia y paz.</p>
+      <p>
+        PaisSana no es solo una marca; es la voz, las manos y el orgullo de
+        miles de familias productoras que decidieron transformar la historia de
+        sus territorios.
+      </p>
+      <p>
+        Detrás de cada grano de café, de cada barra de cacao, de la miel o de
+        las artesanías que nacen en las regiones PDET, hay un relato de
+        <strong> resiliencia, trabajo honesto y esperanza renovada. </strong>
+        Aquí, el comercio se convierte en una herramienta para construir equidad y
+        los frutos de la tierra en el reflejo de un país que florece en paz.
+      </p>
     </div>
-    
+
     <div class="hero-stats">
-      <img src={flor.src} alt="Flor" class="flor-bg" width="300" height="300" />
+      <div class="flor-content">
+        <img
+          src={flor.src}
+          alt="Flor"
+          class="flor-img"
+          width="300"
+          height="300"
+        />
+      </div>
       <h3>Datos relevantes:</h3>
       <ul class="stats-list">
         <li>
           <span class="stat-number">450</span>
-          <span class="stat-text">Organizaciones y productores vigentes con acuerdos comerciales en pie.</span>
+          <span class="stat-text"
+            >Organizaciones y productores vigentes con acuerdos comerciales en
+            pie.</span
+          >
         </li>
         <li>
           <div class="stat-icon-wrapper">
@@ -33,7 +61,10 @@ import leaf from "../../assets/paissana/leaf.svg";
           </div>
           <div class="stat-content">
             <span class="stat-number">3.402</span>
-            <span class="stat-text">Productos con sello de origen que garantizan calidad y procedencia.</span>
+            <span class="stat-text"
+              >Productos con sello de origen que garantizan calidad y
+              procedencia.</span
+            >
           </div>
         </li>
         <li>
@@ -42,31 +73,54 @@ import leaf from "../../assets/paissana/leaf.svg";
           </div>
           <div class="stat-content">
             <span class="stat-number">168</span>
-            <span class="stat-text">Municipios sembrando el cambio en las regiones más afectadas por el conflicto.</span>
+            <span class="stat-text"
+              >Municipios sembrando el cambio en las regiones más afectadas por
+              el conflicto.</span
+            >
           </div>
         </li>
       </ul>
     </div>
   </div>
-  
+
   <div class="hero-bottom-grid">
     <div class="hero-benefits">
       <h3>Beneficios para los productores:</h3>
       <ul class="benefits-list">
         <li>Registro ante la Superintendencia de Industria y Comercio.</li>
-        <li>Acompañamiento ante el INVIMA: asistencia técnica especializada para trámites y requisitos.</li>
-        <li>Acompañamiento ante el ICA: capacitaciones en normatividad y apoyo en la certificación.</li>
-        <li>Alianzas estratégicas con Fondo Emprender y CampeSENA para acceso a capital semilla.</li>
-        <li>Conexión con comercializadoras y plataformas de mercado nacional e internacional.</li>
+        <li>
+          Acompañamiento ante el INVIMA: asistencia técnica especializada para
+          trámites y requisitos.
+        </li>
+        <li>
+          Acompañamiento ante el ICA: capacitaciones en normatividad y apoyo en
+          la certificación.
+        </li>
+        <li>
+          Alianzas estratégicas con Fondo Emprender y CampeSENA para acceso a
+          capital semilla.
+        </li>
+        <li>
+          Conexión con comercializadoras y plataformas de mercado nacional e
+          internacional.
+        </li>
       </ul>
     </div>
     <div class="hero-photo">
-      <img src="https://placehold.co/600x600?text=Productora+PaisSana" alt="Productora PaisSana" width="600" height="600" />
+      <img
+        src={heroImage.src}
+        alt="Productora PaisSana"
+        width="600"
+        height="600"
+      />
     </div>
   </div>
 </section>
 
 <style>
+  /* =========================================
+     CSS GENERAL
+     ========================================= */
   .paisana-hero {
     display: flex;
     flex-direction: column;
@@ -76,21 +130,11 @@ import leaf from "../../assets/paissana/leaf.svg";
     color: var(--color-text);
   }
 
-  .hero-top-grid, .hero-bottom-grid {
+  .hero-top-grid,
+  .hero-bottom-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-8, 2rem);
-  }
-
-  @media (min-width: 768px) {
-    .hero-top-grid {
-      grid-template-columns: 1fr 1fr;
-      align-items: start;
-    }
-    .hero-bottom-grid {
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-    }
   }
 
   /* BRAND SECTION */
@@ -101,64 +145,48 @@ import leaf from "../../assets/paissana/leaf.svg";
   }
 
   .brand-logo {
-    max-width: 240px;
+    width: 100%;
+    max-width: 350px;
     height: auto;
     object-fit: contain;
   }
 
   .hero-brand h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
-    color: var(--color-nav-text, #32509d); /* Assuming a dark blue based on the logo placeholder color */
-    line-height: 1.1;
     margin-top: var(--space-4, 1rem);
-  }
-
-  .hero-brand p {
-    font-size: 1.125rem;
-    line-height: 1.6;
-    color: var(--color-text-muted);
   }
 
   /* STATS SECTION */
   .hero-stats {
     position: relative;
-    background-color: var(--color-surface-muted);
-    border-radius: var(--radius-card, 8px);
-    padding: var(--space-6, 1.5rem);
     display: flex;
     flex-direction: column;
-    gap: var(--space-6, 1.5rem);
-    box-shadow: var(--shadow-soft);
-    overflow: hidden;
+    gap: var(--space-4, 1rem);
   }
 
-  @media (min-width: 768px) {
-    .hero-stats {
-      padding: var(--space-8, 2rem);
-    }
-  }
-
-  .flor-bg {
-    position: absolute;
-    top: -50px;
-    right: -50px;
-    opacity: 0.15;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  .hero-stats h3, .hero-benefits h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-nav-text);
-    z-index: 1;
+  .flor-content {
     position: relative;
+    padding: 0;
+  }
+
+  .flor-img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    max-width: 180px;
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-stats h3 {
+    position: relative;
+    z-index: 1;
   }
 
   .stats-list {
     list-style: none;
-    padding: 0;
+    padding: 1rem 5rem 3rem 1rem;
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -168,6 +196,8 @@ import leaf from "../../assets/paissana/leaf.svg";
   }
 
   .stats-list li {
+    list-style: none;
+    list-style-type: none;
     display: flex;
     align-items: flex-start;
     gap: var(--space-4, 1rem);
@@ -180,16 +210,12 @@ import leaf from "../../assets/paissana/leaf.svg";
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--color-surface);
-    border-radius: 50%;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    overflow: hidden;
   }
 
   .stat-icon-wrapper img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   .stat-content {
@@ -198,23 +224,21 @@ import leaf from "../../assets/paissana/leaf.svg";
     gap: var(--space-1, 0.25rem);
   }
 
-  /* Emulating the first li format from the prompt */
   .stats-list li:first-child {
     flex-direction: column;
     gap: var(--space-1, 0.25rem);
   }
 
   .stat-number {
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: var(--color-nav-text);
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-family: var(--font-komet);
+    font-weight: var(--font-weight-komet-heavy, 800);
+    color: var(--color-nav-text, #32509d);
     line-height: 1;
   }
 
   .stat-text {
-    font-size: 1rem;
-    line-height: 1.4;
-    color: var(--color-text-muted);
+    padding: 0 1rem 0 0;
   }
 
   /* BENEFITS SECTION */
@@ -222,12 +246,14 @@ import leaf from "../../assets/paissana/leaf.svg";
     display: flex;
     flex-direction: column;
     gap: var(--space-4, 1rem);
-    padding-right: var(--space-4, 1rem);
+    padding-right: 0;
   }
 
+
+
   .benefits-list {
-    list-style: none;
-    padding: 0;
+    list-style: disc;
+    padding: 0 0 0 1.5rem;
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -236,19 +262,6 @@ import leaf from "../../assets/paissana/leaf.svg";
 
   .benefits-list li {
     position: relative;
-    padding-left: var(--space-6, 1.5rem);
-    font-size: 1.05rem;
-    line-height: 1.5;
-    color: var(--color-text);
-  }
-
-  .benefits-list li::before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: var(--color-loquehacemos-bg, #008861);
-    font-weight: 700;
   }
 
   /* PHOTO SECTION */
@@ -269,5 +282,51 @@ import leaf from "../../assets/paissana/leaf.svg";
 
   .hero-photo:hover img {
     transform: scale(1.03);
+  }
+
+  /* =========================================
+     BREAKPOINT 850px
+     ========================================= */
+  @media (min-width: 850px) {
+    .hero-top-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+      gap: 0;
+    }
+    .hero-bottom-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+    .hero-brand {
+      padding: 0 var(--space-8, 2rem) 0 0;
+    }
+    .hero-stats {
+      border-left: 1px solid var(--color-nav-text, #32509d);
+      padding: 0 0 0 var(--space-8, 2rem);
+    }
+    .flor-img {
+      max-width: 250px;
+    }
+    .stat-text {
+      padding: 0 3rem 0 0;
+    }
+    .hero-benefits {
+      padding-right: var(--space-4, 1rem);
+    }
+  }
+
+  /* =========================================
+     BREAKPOINT 360px
+     ========================================= */
+  @media (max-width: 360px) {
+    .stats-list {
+      padding-right: 16px;
+    }
+    .flor-content {
+      padding: 1rem;
+    }
+    .flor-img {
+      max-width: 100px;
+    }
   }
 </style>
