@@ -8,33 +8,47 @@
 
 <section class="corazon-campo">
   <div class="audio-header">
-    <h2>EL CORAZÓN DEL CAMPO: <span class="highlight">La voz del territorio</span></h2>
-    <p>Nadie narra la transformación mejor que quienes la viven día a día. <strong>Te invitamos a cerrar los ojos y escuchar estos relatos sonoros grabados directamente en el territorio.</strong></p>
+    <div class="header-left">
+      <h2>EL CORAZÓN<br/>DEL CAMPO:<br/><span class="highlight">La voz del territorio</span></h2>
+    </div>
+    <div class="header-right">
+      <p>Nadie narra la transformación mejor que quienes la viven día a día en el surco, la parcela o el taller. <strong>Te invitamos a cerrar los ojos y escuchar estos relatos sonoros grabados directamente en el territorio.</strong></p>
+      <p>En sus propias voces, las y los productores nos comparten sus memorias, sus sueños y la emoción de ver cómo el trabajo de la tierra está transformando el futuro de sus familias.</p>
+    </div>
   </div>
 
   <div class="audio-player-wrapper">
-    <!-- Controles prev/next integrados como botones a los lados en desktop, o abajo en móvil -->
-    <button class="nav-btn nav-prev" aria-label="Anterior audio">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-    </button>
-    
     <div class="audio-player-card">
       <div class="player-left">
-        <button class="mic-play-btn" aria-label="Reproducir audio" id="playPauseBtn">
-          <!-- Mic icon as placeholder for play button -->
-          <img src="https://placehold.co/64x64/003366/FFFFFF?text=Mic" alt="Reproducir" width="64" height="64" class="mic-icon" />
-          <!-- Play overlay icon -->
-          <div class="play-overlay">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        <div class="producer-info-container">
+          <button class="mic-play-btn" aria-label="Reproducir audio" id="playPauseBtn">
+            <div class="mic-icon-bg">
+              <svg class="mic-icon" viewBox="0 0 24 24" fill="none" stroke="#32509d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                <line x1="12" y1="19" x2="12" y2="23"></line>
+                <line x1="8" y1="23" x2="16" y2="23"></line>
+              </svg>
+            </div>
+            <div class="play-overlay">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+          </button>
+          
+          <div class="producer-info">
+            <h4>Andrés Pineda</h4>
+            <p class="brand">Café Montepineda</p>
+            <p class="location">Pradera, Valle del Cauca</p>
           </div>
-        </button>
-        <div class="producer-info">
-          <h4>Andrés Pineda</h4>
-          <p class="brand">Café Montepineda</p>
-          <p class="location">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-            Pradera, Valle del Cauca
-          </p>
+        </div>
+        
+        <div class="nav-controls">
+          <button class="nav-btn nav-prev" aria-label="Anterior audio">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button class="nav-btn nav-next" aria-label="Siguiente audio">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
         </div>
       </div>
 
@@ -47,14 +61,10 @@
           </div>
         </div>
         <div class="subtitles-box">
-          <p>«En sus propias voces, las y los productores nos comparten sus memorias, los retos que enfrentan y cómo el cultivo se convirtió en su herramienta de paz.»</p>
+          <p>Subtítulos: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet</p>
         </div>
       </div>
     </div>
-    
-    <button class="nav-btn nav-next" aria-label="Siguiente audio">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-    </button>
   </div>
   
   <!-- Elemento de audio nativo oculto -->
@@ -64,101 +74,78 @@
 </section>
 
 <style>
+  /* =========================================
+     CSS GENERAL
+     ========================================= */
   .corazon-campo {
     display: flex;
     flex-direction: column;
     gap: var(--space-8, 2rem);
     width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-6, 1.5rem);
+    font-family: var(--font-monique-regular, sans-serif);
   }
 
   .audio-header {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: var(--space-4, 1rem);
+    gap: var(--space-6, 1.5rem);
+    margin-bottom: var(--space-2, 0.5rem);
   }
 
-  .audio-header h2 {
-    text-transform: uppercase;
-  }
-
-  .audio-header h2 .highlight {
+  .header-left h2 {
     color: var(--color-nav-text, #32509d);
-    display: block;
-  }
-
-
-
-  .audio-header strong {
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin: 0;
+    text-transform: uppercase;
     font-weight: var(--font-weight-komet-heavy, 800);
   }
 
-  /* WRAPPER FOR CARD AND CONTROLS */
+  .header-left h2 .highlight {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-transform: none;
+  }
+
+  .header-right {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4, 1rem);
+    color: var(--color-nav-text, #32509d);
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+
+  .header-right p {
+    margin: 0;
+  }
+
   .audio-player-wrapper {
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: var(--space-4, 1rem);
     width: 100%;
   }
 
-  .nav-btn {
-    background-color: var(--color-surface, #ffffff);
-    border: 2px solid var(--color-border, #d6d3d1);
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: var(--color-nav-text, #32509d);
-    transition: all 0.2s ease;
-    flex-shrink: 0;
-  }
-
-  .nav-btn:hover {
-    background-color: var(--color-nav-text, #32509d);
-    border-color: var(--color-nav-text, #32509d);
-    color: var(--color-surface, #ffffff);
-  }
-
-  @media (max-width: 767px) {
-    .audio-player-wrapper {
-      flex-wrap: wrap;
-    }
-    .nav-btn {
-      order: 3;
-      margin-top: var(--space-2, 0.5rem);
-    }
-  }
-
-  /* CARD STYLES */
   .audio-player-card {
-    flex-grow: 1;
-    max-width: 800px;
-    background-color: var(--color-surface, #ffffff);
-    border: 1px solid var(--color-border, #d6d3d1);
-    border-radius: var(--radius-card, 8px);
-    padding: var(--space-6, 1.5rem);
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-6, 1.5rem);
-    box-shadow: var(--shadow-soft);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8, 2rem);
+    background-color: transparent;
   }
 
-  @media (min-width: 768px) {
-    .audio-player-card {
-      grid-template-columns: 3fr 5fr;
-      align-items: center;
-      padding: var(--space-8, 2rem);
-    }
-  }
-
-  /* LEFT SIDE: INFO & BUTTON */
   .player-left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6, 1.5rem);
+    align-items: center;
+  }
+
+  .producer-info-container {
     display: flex;
     align-items: center;
     gap: var(--space-4, 1rem);
@@ -166,16 +153,18 @@
 
   .mic-play-btn {
     position: relative;
-    width: 64px;
-    height: 64px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
     border: none;
-    background: transparent;
+    background: #d4f1f9;
     padding: 0;
     cursor: pointer;
     overflow: hidden;
     flex-shrink: 0;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: transform 0.2s ease;
   }
 
@@ -183,10 +172,17 @@
     transform: scale(1.05);
   }
 
-  .mic-icon {
+  .mic-icon-bg {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mic-icon {
+    width: 32px;
+    height: 32px;
   }
 
   .play-overlay {
@@ -207,58 +203,77 @@
     opacity: 1;
   }
 
-  /* Playing state */
   .mic-play-btn.playing .play-overlay {
     opacity: 1;
   }
 
   .mic-play-btn.playing .play-overlay svg polygon {
-    display: none; /* Hide play */
+    display: none;
   }
 
-  /* Draw a pause icon when playing (using lines or rectangles, simpler with CSS but inline SVG override works here) */
   .mic-play-btn.playing .play-overlay::after {
     content: '';
-    width: 10px;
-    height: 14px;
-    border-left: 3px solid white;
-    border-right: 3px solid white;
+    width: 12px;
+    height: 16px;
+    border-left: 4px solid white;
+    border-right: 4px solid white;
     position: absolute;
   }
 
   .producer-info {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    color: var(--color-nav-text, #32509d);
   }
 
   .producer-info h4 {
-    font-size: 1.25rem;
-    font-weight: var(--font-weight-komet-heavy, 800);
+    font-size: 1.1rem;
+    font-weight: bold;
     margin: 0;
     line-height: 1.2;
   }
 
   .producer-info .brand {
     font-size: 1rem;
-    margin: 0;
+    font-weight: bold;
+    margin: 0 0 2px 0;
   }
 
   .producer-info .location {
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-    display: flex;
-    align-items: center;
-    gap: 4px;
+    font-size: 0.9rem;
     margin: 0;
-    margin-top: 4px;
+    opacity: 0.8;
   }
 
-  /* RIGHT SIDE: TIMELINE & SUBTITLES */
+  .nav-controls {
+    display: flex;
+    gap: var(--space-4, 1rem);
+    justify-content: center;
+  }
+
+  .nav-btn {
+    background-color: var(--color-nav-text, #32509d);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--color-surface, #ffffff);
+    transition: opacity 0.2s ease;
+  }
+
+  .nav-btn:hover {
+    opacity: 0.8;
+  }
+
   .player-right {
     display: flex;
     flex-direction: column;
     gap: var(--space-4, 1rem);
+    width: 100%;
   }
 
   .timeline {
@@ -267,14 +282,13 @@
     gap: var(--space-2, 0.5rem);
   }
 
-  /* Styling the range input */
   .progress-bar {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
-    height: 6px;
-    background: var(--color-border, #d6d3d1);
-    border-radius: 3px;
+    height: 4px;
+    background: var(--color-nav-text, #32509d);
+    border-radius: 2px;
     outline: none;
     cursor: pointer;
   }
@@ -282,8 +296,8 @@
   .progress-bar::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background: var(--color-nav-text, #32509d);
     cursor: pointer;
@@ -291,77 +305,132 @@
   }
 
   .progress-bar::-moz-range-thumb {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background: var(--color-nav-text, #32509d);
     cursor: pointer;
     border: none;
   }
 
-  .progress-bar:active::-webkit-slider-thumb {
-    transform: scale(1.2);
-  }
-
   .timestamps {
     display: flex;
     justify-content: space-between;
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    font-family: var(--font-monique-regular);
+    font-size: 0.9rem;
+    color: var(--color-nav-text, #32509d);
   }
 
   .subtitles-box {
-    background-color: var(--color-surface-muted, #f5f5f4);
-    padding: var(--space-3, 0.75rem) var(--space-4, 1rem);
-    border-radius: var(--radius-control, 6px);
-    border-left: 3px solid var(--color-nav-text, #32509d);
+    color: var(--color-nav-text, #32509d);
   }
 
   .subtitles-box p {
-    font-size: 0.95rem;
+    font-size: 1rem;
     margin: 0;
-    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* =========================================
+     BREAKPOINT 768px
+     ========================================= */
+  @media (min-width: 768px) {
+    .audio-header {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-8, 2rem);
+    }
+    
+    .header-left {
+      flex: 1;
+      max-width: 40%;
+    }
+
+    .header-left h2 {
+      font-size: 3rem;
+    }
+
+    .header-left h2 .highlight {
+      font-size: 2rem;
+    }
+
+    .header-right {
+      flex: 1;
+      max-width: 55%;
+    }
+
+    .audio-player-card {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-12, 3rem);
+    }
+
+    .player-left {
+      flex-direction: column;
+      align-items: center;
+      min-width: 300px;
+    }
+
+    .nav-controls {
+      align-self: center;
+    }
+
+    .player-right {
+      flex: 1;
+    }
+  }
+
+  /* =========================================
+     BREAKPOINT 1024px
+     ========================================= */
+  @media (min-width: 1024px) {
+    .corazon-campo {
+      padding: var(--space-8, 2rem);
+    }
   }
 </style>
 
 <script>
   // Script para manejar el reproductor de audio (mock)
-  document.addEventListener('DOMContentLoaded', () => {
-    const playBtn = document.getElementById('playPauseBtn');
-    const progressBar = document.getElementById('audioProgress') as HTMLInputElement;
-    const audioElement = document.getElementById('audioElement') as HTMLAudioElement;
-    
+  document.addEventListener("DOMContentLoaded", () => {
+    const playBtn = document.getElementById("playPauseBtn");
+    const progressBar = document.getElementById(
+      "audioProgress",
+    ) as HTMLInputElement;
+    const audioElement = document.getElementById(
+      "audioElement",
+    ) as HTMLAudioElement;
+
     let isPlaying = false;
     let mockInterval: any = null;
 
-    if(playBtn && progressBar) {
-      playBtn.addEventListener('click', () => {
+    if (playBtn && progressBar) {
+      playBtn.addEventListener("click", () => {
         isPlaying = !isPlaying;
-        
-        if(isPlaying) {
-          playBtn.classList.add('playing');
+
+        if (isPlaying) {
+          playBtn.classList.add("playing");
           // Simular reproducción si no hay source real
-          if(!audioElement.src || audioElement.src === window.location.href) {
+          if (!audioElement.src || audioElement.src === window.location.href) {
             mockInterval = setInterval(() => {
               let val = parseInt(progressBar.value);
-              if(val < parseInt(progressBar.max)) {
+              if (val < parseInt(progressBar.max)) {
                 progressBar.value = (val + 1).toString();
                 // Aquí se actualizaría el tiempo actual (currentTime)
               } else {
                 // Termina
                 clearInterval(mockInterval);
-                playBtn.classList.remove('playing');
+                playBtn.classList.remove("playing");
                 isPlaying = false;
-                progressBar.value = '0';
+                progressBar.value = "0";
               }
             }, 1000);
           } else {
             audioElement.play();
           }
         } else {
-          playBtn.classList.remove('playing');
-          if(!audioElement.src || audioElement.src === window.location.href) {
+          playBtn.classList.remove("playing");
+          if (!audioElement.src || audioElement.src === window.location.href) {
             clearInterval(mockInterval);
           } else {
             audioElement.pause();
