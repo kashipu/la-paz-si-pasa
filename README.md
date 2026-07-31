@@ -1,74 +1,63 @@
-# WordPress + Astro 7 Headless Base
+# La Paz Sí Pasa
 
-Base modular para construir sitios Astro 7 conectados a WordPress headless, con Docker local en Windows y una ruta clara hacia Dokploy.
+Sitio público construido con Astro 7 y WordPress headless. Astro renderiza el
+frontend mediante SSR y WordPress administra el contenido por su API REST.
 
 ## Estructura
 
 ```text
-apps/frontend/                 Astro 7
-apps/wordpress/plugins/        plugin headless propio
-apps/wordpress/themes/         tema de redireccion headless
-docker/astro/                  Dockerfile y nginx para Astro
-docs/project/                  documentacion del proyecto
-docs/skill-notes/              aprendizajes para alimentar la skill
-skills/astro-wordpress-headless/ skill reusable
+apps/frontend/               aplicación Astro
+apps/wordpress/mu-plugins/   integración propia de WordPress
+apps/wordpress/php/          configuración PHP
+docker/astro/                imagen del frontend
+docker-compose.yml           entorno local
+compose.prod.yaml            despliegue de producción
 ```
 
-## Local
+La documentación operativa, los entregables y la configuración de asistentes
+se mantienen localmente fuera del repositorio público.
 
-Full local setup, credentials, URLs and verification steps live in:
+## Desarrollo local
 
-[docs/project/local-environment.md](docs/project/local-environment.md)
+1. Crea los archivos locales de variables:
 
-Quick start:
-
-1. Copiar variables:
-
-```powershell
-Copy-Item .env.example .env
+```sh
+cp .env.example .env
+cp apps/frontend/.env.example apps/frontend/.env
 ```
 
-2. Levantar WordPress y base de datos:
+2. Levanta WordPress y MariaDB:
 
-```powershell
+```sh
 docker compose up -d cms db
 ```
 
-3. Instalar dependencias del frontend:
+3. Inicia el frontend:
 
-```powershell
+```sh
 cd apps/frontend
-Copy-Item .env.example .env
 npm install
 npm run dev
 ```
 
-4. URLs locales:
+Servicios locales:
 
 ```text
 Astro:     http://localhost:4321
 WordPress: http://localhost:8080
 REST:      http://localhost:8080/wp-json/wp/v2/
-Headless:  http://localhost:8080/wp-json/headless/v1/site
 ```
 
-## Principios
+## Verificación
 
-- WordPress edita contenido, menus, media, tokens y configuracion.
-- Astro renderiza rutas, layouts, componentes, SEO y CSS.
-- CSS puro: foundations globales y estilos propios por componente.
-- API WordPress centralizada, con `_fields`, cache de build y paginacion.
-- Dokploy mantiene frontend, CMS y base de datos como servicios separados.
-
-## Documentacion
-
-```text
-docs/project/local-environment.md     entorno local, URLs y credenciales
-docs/project/architecture.md          arquitectura general
-docs/project/wordpress-headless.md    contrato WordPress headless
-docs/project/astro-css-system.md      sistema CSS puro
-docs/project/dokploy.md               estrategia Dokploy
-docs/project/git-strategy.md          ramas, commits y entornos
-docs/project/troubleshooting.md       problemas comunes
-docs/skill-notes/                     aprendizajes para alimentar la skill
+```sh
+cd apps/frontend
+npm run check
+npm run build
 ```
+
+## Despliegue
+
+`compose.prod.yaml` define los servicios de producción para Dokploy. Las
+credenciales y variables reales deben configurarse en el entorno de despliegue;
+nunca se guardan en Git.

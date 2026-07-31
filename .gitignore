@@ -1,12 +1,21 @@
+# Secretos y configuración local
 .env
 .env.*
-!.env.example
+!**/.env.example
+credenciales*.txt
+*.pem
+*.key
+*.p12
+*.pfx
 
-# dependencies (any depth, monorepo)
+# Documentación interna y entregables privados
+docs/
+
+# Dependencias (monorepo, a cualquier profundidad)
 **/node_modules/
 **/vendor/
 
-# build output (any depth)
+# Salidas de compilación, cachés y pruebas
 **/dist/
 **/build/
 **/.astro/
@@ -17,10 +26,25 @@
 **/coverage/
 **/storybook-static/
 
+# Datos locales de WordPress y respaldos
 apps/wordpress/data/
 apps/wordpress/uploads/
+*.sql
+*.sql.gz
+*.dump
 
-# design source files (heavy binaries, never needed for build)
+# Configuración local de editores y asistentes
+.vscode/
+**/.agents/
+**/.claude/
+**/skills-lock.json
+skills/
+apps/frontend/documentacion/
+
+# npm es el gestor de paquetes oficial del proyecto
+**/bun.lock
+
+# Fuentes de diseño pesadas que no participan en el build
 *.psd
 *.ai
 *.xd
@@ -28,6 +52,7 @@ apps/wordpress/uploads/
 *.fig
 apps/frontend/documentacion/*.jpg
 
+# Archivos del sistema y registros
 .DS_Store
 Thumbs.db
 *.log
