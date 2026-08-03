@@ -1,28 +1,39 @@
 ---
 import type { Retrato } from "@adapters/contracts";
+import { getImage } from "astro:assets";
+import OptimizedImage from "./OptimizedImage.astro";
 import fondoDesktop from "../assets/retratos/retratos-fondo.png";
 import fondoMobile from "../assets/retratos/retratos-fondo-mb.png";
 import arrowSvg from "../assets/retratos/retratos-arrow.svg?raw";
 
 type Props = { retratos: Retrato[] };
 const { retratos } = Astro.props;
+const [fondoDesktopImage, fondoMobileImage] = await Promise.all([
+  getImage({ src: fondoDesktop, width: 1100, format: "webp" }),
+  getImage({ src: fondoMobile, width: 600, format: "webp" }),
+]);
 ---
 
 <section
   class="retratos-slider"
   aria-roledescription="carrusel"
   aria-label="Retratos de la Paz"
-  style={`--bg-desktop: url(${fondoDesktop.src}); --bg-mobile: url(${fondoMobile.src});`}
 >
   <div class="retratos-slider__page">
     <div class="retratos-slider__visual">
+      <picture class="retratos-slider__background">
+        <source media="(max-width: 849px)" srcset={fondoMobileImage.src} width={fondoMobileImage.attributes.width} height={fondoMobileImage.attributes.height} />
+        <img src={fondoDesktopImage.src} width={fondoDesktopImage.attributes.width} height={fondoDesktopImage.attributes.height} alt="" loading="lazy" decoding="async" />
+      </picture>
       {retratos.map((retrato, i) => (
-        <img
+        <OptimizedImage
           class="retratos-slider__foto"
-          data-slide={i}
-          aria-hidden={i !== 0}
+          slide={i}
+          hidden={i !== 0}
           src={retrato.fotoUrl}
           alt={retrato.descripcion}
+          loading={i === 0 ? "eager" : "lazy"}
+          sizes="(min-width: 850px) 45vw, 55vw"
         />
       ))}
 
@@ -46,6 +57,7 @@ const { retratos } = Astro.props;
 </section>
 
 <script>
+  document.addEventListener("astro:page-load", () => {
   document.querySelectorAll<HTMLElement>(".retratos-slider").forEach((slider) => {
     const fotos = slider.querySelectorAll<HTMLElement>(".retratos-slider__foto");
     const campos = slider.querySelectorAll<HTMLElement>(".retratos-slider__campos");
@@ -67,6 +79,7 @@ const { retratos } = Astro.props;
       render();
     });
   });
+  });
 </script>
 
 <style>
@@ -86,9 +99,19 @@ const { retratos } = Astro.props;
     position: relative;
     width: 100%;
     aspect-ratio: 1240 / 830;
-    background-image: var(--bg-desktop);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
+  }
+
+  .retratos-slider__background,
+  .retratos-slider__background img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .retratos-slider__background img {
+    object-fit: fill;
   }
 
   .retratos-slider__foto {
@@ -96,12 +119,14 @@ const { retratos } = Astro.props;
     left: 0%;
     top: 15%;
     width: 45%;
+    height: 67.23%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
     box-sizing: border-box;
     border: 10px solid var(--color-surface);
     box-shadow: var(--shadow-1);
     transform: rotate(-4deg);
+    z-index: 1;
   }
 
   .retratos-slider__foto[aria-hidden="true"] {
@@ -119,10 +144,7 @@ const { retratos } = Astro.props;
 
   @media (max-width: 849px) {
     .retratos-slider__visual {
-      background-image: var(--bg-mobile);
       aspect-ratio: 1 / 1.1;
-      background-size: cover;
-      background-position: center bottom;
     }
 
     .retratos-slider__texto {
@@ -137,6 +159,7 @@ const { retratos } = Astro.props;
       left: 50%;
       top: 12%;
       width: 55%;
+      height: 50%;
       transform: translateX(-50%) rotate(-2deg);
     }
 
@@ -222,4 +245,3 @@ const { retratos } = Astro.props;
     color: var(--color-surface);
   }
 </style>
-

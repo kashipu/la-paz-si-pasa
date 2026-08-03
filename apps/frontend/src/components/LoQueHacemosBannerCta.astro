@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { getImage } from "astro:assets";
 import noticiasBanner from "../assets/hacemos/noticias-banner@3x.png";
 
 type Props = {
@@ -9,10 +9,19 @@ type Props = {
 
 // ponytail: placeholder hasta tener la URL final de la página de noticias
 const { imageAlt = "Más noticias del fondo aquí", href = "#" } = Astro.props;
+const [desktop, tablet, mobile] = await Promise.all([
+  getImage({ src: noticiasBanner, width: 1440, format: "webp" }),
+  getImage({ src: noticiasBanner, width: 960, format: "webp" }),
+  getImage({ src: noticiasBanner, width: 640, format: "webp" }),
+]);
 ---
 
 <a href={href} class="banner-cta">
-  <Image src={noticiasBanner} alt={imageAlt} loading="lazy" />
+  <picture>
+    <source media="(max-width: 360px)" srcset={mobile.src} width={mobile.attributes.width} height={mobile.attributes.height} />
+    <source media="(max-width: 849px)" srcset={tablet.src} width={tablet.attributes.width} height={tablet.attributes.height} />
+    <img src={desktop.src} width={desktop.attributes.width} height={desktop.attributes.height} alt={imageAlt} loading="lazy" decoding="async" />
+  </picture>
 </a>
 
 <style>

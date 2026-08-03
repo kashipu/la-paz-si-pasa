@@ -1,5 +1,6 @@
 ---
 import paisaje from "../../assets/paissana/paisaje.svg";
+import { Image } from "astro:assets";
 import ilustracionProductora from "../../assets/paissana/ilustracion-productora@3x.png";
 
 // Sección 5 · Mockup: documentacion/seccion5@2x-100.jpg
@@ -9,7 +10,7 @@ import ilustracionProductora from "../../assets/paissana/ilustracion-productora@
 // banner de paisaje ilustrado a lo ancho en la parte inferior.
 ---
 
-<section class="ferias-intro">
+<section class="ferias-intro" id="paissana-en-ferias">
   <div class="ferias-intro-grid">
     <div class="ferias-intro-text">
       <h2>PAISSANA EN FERIAS:</h2>
@@ -29,11 +30,12 @@ import ilustracionProductora from "../../assets/paissana/ilustracion-productora@
 
     <div class="ferias-intro-illustration">
       <div class="illustration-wrapper">
-        <img
-          src={ilustracionProductora.src}
+        <Image
+          src={ilustracionProductora}
           alt="Productora Ferias"
-          width="400"
-          height="400"
+          width={400}
+          height={400}
+          format="webp"
           class="circular-illustration"
         />
       </div>

@@ -1,5 +1,6 @@
 ---
 // Footer fijo según cotización: logos, texto de cierre, redes, link web — no editable desde WP
+import { Image } from "astro:assets";
 import footerFoto from "../assets/footer/footer-foto@3x.png";
 import footerBurst from "../assets/footer/lemotiv-footer@3x.png";
 import footerTotop from "../assets/footer/footer-boton-volver-inicio@3x.png";
@@ -12,18 +13,18 @@ import iconoX from "../assets/footer/icono-x@3x.png";
 
 <footer class="site-footer" id="contacto">
   <div class="site-footer__media">
-    <img src={footerFoto.src} alt="" class="site-footer__photo" loading="lazy" />
-    <img src={footerBurst.src} alt="" class="site-footer__burst" aria-hidden="true" />
+    <Image src={footerFoto} alt="" class="site-footer__photo" loading="lazy" format="webp" width={600} />
+    <Image src={footerBurst} alt="" class="site-footer__burst" aria-hidden="true" format="webp" width={300} />
   </div>
 
   <div class="site-footer__panel">
     <button class="site-footer__totop" type="button" aria-label="Volver arriba">
-      <img src={footerTotop.src} alt="" width="44" height="44" />
+      <Image src={footerTotop} alt="" width={44} height={44} format="webp" />
     </button>
 
     <div class="site-footer__logos">
-      <img src={footerLogo.src} alt="Fondo Colombia en Paz" class="site-footer__logo" />
-      <img src={footerPazLogo.src} alt="La Paz Sí Pasa — pasa en los territorios" class="site-footer__paz-logo" />
+      <Image src={footerLogo} alt="Fondo Colombia en Paz" class="site-footer__logo" format="webp" />
+      <Image src={footerPazLogo} alt="La Paz Sí Pasa — pasa en los territorios" class="site-footer__paz-logo" format="webp" />
     </div>
 
     <p class="site-footer__text">
@@ -37,7 +38,7 @@ import iconoX from "../assets/footer/icono-x@3x.png";
         <li>
           <a href="https://www.fcp.gov.co" target="_blank" rel="noopener noreferrer">
             <span class="site-footer__icon" aria-hidden="true">
-              <img src={iconoWeb.src} alt="" width="16" height="16" />
+              <Image src={iconoWeb} alt="" width={16} height={16} format="webp" />
             </span>
             fcp.gov.co
           </a>
@@ -45,7 +46,7 @@ import iconoX from "../assets/footer/icono-x@3x.png";
         <li>
           <a href="https://www.instagram.com/fondo_colombiaenpaz" target="_blank" rel="noopener noreferrer">
             <span class="site-footer__icon" aria-hidden="true">
-              <img src={iconoInsta.src} alt="" width="16" height="16" />
+              <Image src={iconoInsta} alt="" width={16} height={16} format="webp" />
             </span>
             @fondo_colombiaenpaz
           </a>
@@ -53,7 +54,7 @@ import iconoX from "../assets/footer/icono-x@3x.png";
         <li>
           <a href="https://x.com/fcolombiaenpaz" target="_blank" rel="noopener noreferrer">
             <span class="site-footer__icon" aria-hidden="true">
-              <img src={iconoX.src} alt="" width="16" height="16" />
+              <Image src={iconoX} alt="" width={16} height={16} format="webp" />
             </span>
             @fcolombiaenpaz
           </a>
@@ -64,8 +65,10 @@ import iconoX from "../assets/footer/icono-x@3x.png";
 </footer>
 
 <script>
-  const toTopButton = document.querySelector<HTMLButtonElement>(".site-footer__totop");
-  toTopButton?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+  document.addEventListener("astro:page-load", () => {
+    const toTopButton = document.querySelector<HTMLButtonElement>(".site-footer__totop");
+    toTopButton?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+  });
 </script>
 
 <style>

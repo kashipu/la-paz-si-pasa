@@ -1,4 +1,5 @@
 import type { HeroData, Retrato, Subcuenta, Noticia, Video } from "./contracts";
+import { youtubeId, youtubeVideo } from "./youtube.js";
 
 import logoVictimas from "../assets/subcuentas/victimas.png";
 import logoServicioSocial from "../assets/subcuentas/servicio-social-paz.png";
@@ -34,7 +35,7 @@ export const mockHero: HeroData = {
 export const mockRetratos: Retrato[] = [
   {
     id: "1",
-    fotoUrl: fotoRetrato1.src,
+    fotoUrl: "https://picsum.photos/seed/retrato2/600/800",
     descripcion:
       "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
     proyecto: "Programa Piloto de Inversiones Prioritarias en Municipios PDET",
@@ -42,7 +43,7 @@ export const mockRetratos: Retrato[] = [
   },
   {
     id: "2",
-    fotoUrl: "https://picsum.photos/seed/retrato2/600/800",
+    fotoUrl: "https://picsum.photos/seed/retrato3/600/800",
     descripcion:
       "Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.",
     proyecto: "PaisSana",
@@ -50,7 +51,7 @@ export const mockRetratos: Retrato[] = [
   },
   {
     id: "3",
-    fotoUrl: "https://picsum.photos/seed/retrato3/600/800",
+    fotoUrl: fotoRetrato1,
     descripcion:
       "Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.",
     proyecto: "Colombia Sostenible",
@@ -107,8 +108,8 @@ export const mockVideos: Video[] = [
     descripcion:
       "El Castillo, Meta, ha sido uno de los territorios más golpeados por la violencia. Pero allí, un grupo de mujeres decidió organizarse y crear un proyecto que las ha llevado de la tierra al aire. Sus Artonitas: tostaditas de plátano llanero, hoy se venden en supermercados y vuelan en los aviones de clic",
     fuente: "youtube",
-    videoUrl: "https://www.youtube-nocookie.com/embed/WEYN6vodbPc",
-    thumbnailUrl: "https://img.youtube.com/vi/WEYN6vodbPc/hqdefault.jpg",
+    estado: "disponible",
+    ...youtubeVideo(youtubeId("https://www.youtube.com/watch?v=WEYN6vodbPc")!),
     tags: ["PaiSana"],
   },
   {
@@ -117,8 +118,8 @@ export const mockVideos: Video[] = [
     descripcion:
       "Las mujeres de nuestro campo no solo cultivan: transforman realidades y siembran esperanza. Desde Rionegro, Santander, la asociación de cacaocultores víctimas, Aroma de Paz, nos enseña el verdadero significado de la resiliencia: estas mujeres decidieron darle un giro a sus vidas, pasando de la comercialización del grano a convertirse en empresarias de su propio chocolate de mesa.",
     fuente: "youtube",
-    videoUrl: "https://www.youtube-nocookie.com/embed/GlSj8XMwMyA",
-    thumbnailUrl: "https://img.youtube.com/vi/GlSj8XMwMyA/hqdefault.jpg",
+    estado: "disponible",
+    ...youtubeVideo(youtubeId("https://youtu.be/GlSj8XMwMyA")!),
     tags: ["PaiSana"],
   },
   {
@@ -127,8 +128,8 @@ export const mockVideos: Video[] = [
     descripcion:
       "Detrás de cada taza de Café Del Oriente hay una historia que se escribe con berraquera. Leylis, madre, líder comunitaria y representante legal de la Asociación Jóvenes Agricultores del Perijá, nos abre las puertas de San José del Oriente para mostrarnos cómo el campo se transforma gracias al empoderamiento femenino y juvenil.",
     fuente: "youtube",
-    videoUrl: "https://www.youtube-nocookie.com/embed/qzaVIDIdFPA",
-    thumbnailUrl: "https://img.youtube.com/vi/qzaVIDIdFPA/hqdefault.jpg",
+    estado: "disponible",
+    ...youtubeVideo(youtubeId("https://www.youtube.com/embed/qzaVIDIdFPA")!),
     tags: ["PaiSana"],
   },
   {
@@ -137,9 +138,9 @@ export const mockVideos: Video[] = [
     descripcion:
       "San Antonio de Palmito guarda un encanto que va más allá del paisaje, es un lugar donde la naturaleza y la espiritualidad se encuentran. La Ruta Etnoecoturística del Pueblo Zenú combina recorridos culturales, gastronómicos y productivos que permiten conocer una tradición viva. Los visitantes no solo llegan a un destino, llegan a una historia milenaria que los invita a descubrirse a sí mismos.",
     fuente: "youtube",
+    estado: "disponible",
     // ponytail: el CSV repite el enlace del vídeo 3 aquí — reemplazar cuando llegue el correcto
-    videoUrl: "https://www.youtube-nocookie.com/embed/qzaVIDIdFPA",
-    thumbnailUrl: "https://img.youtube.com/vi/qzaVIDIdFPA/hqdefault.jpg",
+    ...youtubeVideo(youtubeId("https://www.youtube.com/shorts/qzaVIDIdFPA")!),
     tags: ["Programa Colombia Sostenible"],
   },
   {
@@ -148,8 +149,8 @@ export const mockVideos: Video[] = [
     descripcion:
       "A los 16 años, Juan Pablo quería irse de su vereda, dejar atrás el trabajo del campo y buscar una vida distinta. Pero eso cambió. Lo que antes era rutina se convirtió en pasión. Junto a su padre aprendió sobre la catación, el tostado y el valor que tiene cuidar cada planta de café. Entendió que su finca no era solo un terreno: era una empresa familiar, una herencia viva.",
     fuente: "youtube",
-    videoUrl: "https://www.youtube-nocookie.com/embed/QU9YVzdOX6Q",
-    thumbnailUrl: "https://img.youtube.com/vi/QU9YVzdOX6Q/hqdefault.jpg",
+    estado: "disponible",
+    ...youtubeVideo(youtubeId("https://www.youtube.com/live/QU9YVzdOX6Q")!),
     tags: ["Programa Colombia Sostenible"],
   },
   {
@@ -158,8 +159,8 @@ export const mockVideos: Video[] = [
     descripcion:
       "En medio de las dificultades nacen las mejores oportunidades. En el 2013, Tumaco enfrentaba un comercio de cacao desorganizado y lleno de intermediarios. Allí surgió la idea de unirse y crear Chocolates Tumaco, una asociación que se convirtió en referente de resiliencia y construcción de paz. Con el apoyo del Programa Colombia Sostenible del Fondo Colombia en Paz, 500 familias de 7 Consejos Comunitarios lograron mejorar la productividad, fortalecer la infraestructura y acceder a conocimientos técnicos que transformaron sus economías. Hoy, el cacao no solo es su sustento, también es la herramienta con la que las comunidades apuestan por un futuro inclusivo, con mujeres liderando procesos y niños soñando con quedarse en su territorio. #ConDignidadCumplimos",
     fuente: "youtube",
-    videoUrl: "https://www.youtube-nocookie.com/embed/mgSRb-MAUeM",
-    thumbnailUrl: "https://img.youtube.com/vi/mgSRb-MAUeM/hqdefault.jpg",
+    estado: "disponible",
+    ...youtubeVideo(youtubeId("https://www.youtube.com/watch?v=mgSRb-MAUeM")!),
     tags: ["Programa Colombia Sostenible"],
   },
 ];

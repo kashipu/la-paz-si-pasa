@@ -17,6 +17,7 @@ const { siteName } = Astro.props;
 </header>
 
 <script>
+  document.addEventListener("astro:page-load", () => {
   const toggle = document.querySelector<HTMLButtonElement>(".nav__toggle");
   const list = document.querySelector<HTMLUListElement>(".nav__list");
 
@@ -38,6 +39,7 @@ const { siteName } = Astro.props;
     if ((e.target as HTMLElement).closest("a")) {
       closeMenu();
     }
+  });
   });
 </script>
 

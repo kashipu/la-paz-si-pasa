@@ -64,7 +64,7 @@ import PaisSanaFeriaItem from './PaisSanaFeriaItem.astro';
 
 <script>
   // Exclusividad de acordeón: sólo una pestaña abierta a la vez
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('astro:page-load', () => {
     const feriaItems = document.querySelectorAll<HTMLDetailsElement>('.ferias-acordeon-list .feria-item');
     
     feriaItems.forEach((item) => {

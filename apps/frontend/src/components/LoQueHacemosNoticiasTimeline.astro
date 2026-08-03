@@ -39,6 +39,7 @@ const anios = [...porAnio.keys()].sort().reverse();
 </aside>
 
 <script>
+  document.addEventListener("astro:page-load", () => {
   document.querySelectorAll<HTMLElement>(".timeline").forEach((timeline) => {
     const list = timeline.querySelector<HTMLElement>(".timeline__list");
     const rows = [...timeline.querySelectorAll<HTMLElement>(".timeline__row")];
@@ -54,6 +55,7 @@ const anios = [...porAnio.keys()].sort().reverse();
         list.scrollTo({ top: target ? target.offsetTop : dir > 0 ? list.scrollHeight : 0, behavior: "smooth" });
       });
     });
+  });
   });
 </script>
 
