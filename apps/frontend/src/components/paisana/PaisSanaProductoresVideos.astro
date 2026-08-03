@@ -1,5 +1,9 @@
 ---
 import tucan from "../../assets/paissana/tucan.svg";
+import { mockVideos } from "../../adapters/mocks";
+
+// Seleccionamos los videos mock del proyecto con el sello PaiSana
+const paisanaVideos = mockVideos.filter((v) => v.tags.includes("PaiSana"));
 ---
 
 <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
@@ -17,65 +21,26 @@ import tucan from "../../assets/paissana/tucan.svg";
   </div>
 
   <div class="videos-list">
-    <!-- Video 1 -->
-    <article class="video-row-card">
-      <div class="video-thumb">
-        <div class="plyr__video-embed js-plyr">
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
-            allowfullscreen
-            allowtransparency
-            allow="autoplay"
-            title="Crónica #1"
-          ></iframe>
+    {paisanaVideos.map((video, index) => (
+      <article class="video-row-card">
+        <div class="video-thumb">
+          <div class="plyr__video-embed js-plyr">
+            <iframe
+              src={`${video.videoUrl}?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1`}
+              allowfullscreen
+              allowtransparency
+              allow="autoplay"
+              title={video.titulo}
+            ></iframe>
+          </div>
         </div>
-      </div>
-      <div class="video-info">
-        <h3>Crónica #1</h3>
-        <p class="video-subtitle">Crónica</p>
-        <p class="video-desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</p>
-      </div>
-    </article>
-
-    <!-- Video 2 -->
-    <article class="video-row-card">
-      <div class="video-thumb">
-        <div class="plyr__video-embed js-plyr">
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/L_LUpnjgPso?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
-            allowfullscreen
-            allowtransparency
-            allow="autoplay"
-            title="Crónica #2"
-          ></iframe>
+        <div class="video-info">
+          <h3>{video.titulo}</h3>
+          <p class="video-subtitle">Crónica #{index + 1}</p>
+          <p class="video-desc">{video.descripcion}</p>
         </div>
-      </div>
-      <div class="video-info">
-        <h3>Crónica #2</h3>
-        <p class="video-subtitle">Crónica</p>
-        <p class="video-desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</p>
-      </div>
-    </article>
-
-    <!-- Video 3 -->
-    <article class="video-row-card">
-      <div class="video-thumb">
-        <div class="plyr__video-embed js-plyr">
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/M7lc1UVf-VE?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
-            allowfullscreen
-            allowtransparency
-            allow="autoplay"
-            title="Crónica #3"
-          ></iframe>
-        </div>
-      </div>
-      <div class="video-info">
-        <h3>Crónica #3</h3>
-        <p class="video-subtitle">Crónica</p>
-        <p class="video-desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</p>
-      </div>
-    </article>
+      </article>
+    ))}
   </div>
 </section>
 
@@ -203,26 +168,26 @@ import tucan from "../../assets/paissana/tucan.svg";
     margin: 0;
     font-family: var(--font-komet);
     font-weight: var(--font-weight-komet-heavy, 800);
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     color: var(--color-nav-text, #32509d);
-    line-height: 1.2;
+    line-height: 1.25;
   }
 
   .video-subtitle {
     margin: 0;
     font-family: var(--font-komet);
     font-weight: var(--font-weight-komet-light, 300);
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--color-nav-text, #32509d);
     opacity: 0.9;
   }
 
   .video-desc {
     margin: 0;
-    margin-top: var(--space-3, 0.75rem);
+    margin-top: var(--space-2, 0.5rem);
     font-family: var(--font-komet);
     font-weight: var(--font-weight-komet-light, 300);
-    font-size: 1.05rem;
+    font-size: 1rem;
     line-height: 1.5;
     color: var(--color-nav-text, #32509d);
   }
