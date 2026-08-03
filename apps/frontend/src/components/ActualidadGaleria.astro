@@ -9,7 +9,7 @@ const [destacado, ...resto] = videos;
 <section class="actualidad" aria-labelledby="actualidad-titulo" id="actualidad">
   <h2 id="actualidad-titulo" class="actualidad__titulo">Actualidad</h2>
 
-  <div class="actualidad__contenedor container--wide">
+  <div class="actualidad__contenedor">
     <div class="actualidad__destacado" data-destacado>
       <div class="actualidad__info">
         <h3 class="actualidad__info-titulo" data-campo="titulo">{destacado?.titulo}</h3>
@@ -227,6 +227,9 @@ const [destacado, ...resto] = videos;
 </script>
 
 <style>
+  /* =========================================
+     CSS GENERAL
+     ========================================= */
   .actualidad {
     /* Spacing now handled by index.astro contenedor grid gap */
   }
@@ -268,7 +271,9 @@ const [destacado, ...resto] = videos;
   }
 
   .actualidad__descripcion {
-    color: var(--color-text);
+    color: var(--color-nav-text);
+    font-family: var(--font-komet);
+    font-weight: 300;
     line-height: 1.6;
     margin: 0;
   }
@@ -283,7 +288,7 @@ const [destacado, ...resto] = videos;
     margin: 0;
   }
 
-  .actualidad__tag {
+  :global(.actualidad__tag) {
     background: var(--color-nav-bg-active);
     color: var(--color-nav-text);
     border-radius: var(--radius-control);
@@ -413,6 +418,9 @@ const [destacado, ...resto] = videos;
     padding: var(--space-2);
   }
 
+  /* =========================================
+     BREAKPOINT 850px
+     ========================================= */
   @media (max-width: 849px) {
     .actualidad__destacado {
       grid-template-columns: 1fr;
@@ -426,4 +434,8 @@ const [destacado, ...resto] = videos;
       flex: 0 0 100%;
     }
   }
+
+  /* =========================================
+     BREAKPOINT 360px
+     ========================================= */
 </style>

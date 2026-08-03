@@ -69,11 +69,15 @@ import iconoX from "../assets/footer/icono-x@3x.png";
 </script>
 
 <style>
+  /* =========================================
+     CSS GENERAL
+     ========================================= */
   .site-footer {
     display: grid;
     grid-template-columns: minmax(220px, 30%) 1fr;
     grid-template-rows: 500px;
     background: var(--color-surface);
+    width: 100%;
   }
 
   .site-footer__media {
@@ -201,6 +205,9 @@ import iconoX from "../assets/footer/icono-x@3x.png";
     max-height: 70%;
   }
 
+  /* =========================================
+     BREAKPOINT 850px
+     ========================================= */
   @media (max-width: 849px) {
     .site-footer {
       grid-template-columns: 1fr;
@@ -234,6 +241,9 @@ import iconoX from "../assets/footer/icono-x@3x.png";
     }
   }
 
+  /* =========================================
+     BREAKPOINT 360px
+     ========================================= */
   @media (max-width: 360px) {
     .site-footer__panel {
       padding: var(--space-4);

@@ -44,5 +44,6 @@
 
   --content-width: 72rem;
   --narrow-width: 48rem;
-  --wide-width: 86rem;
+  --container-max-width: 1376px;
+  --wide-width: 1376px;
 }

@@ -4,12 +4,7 @@ import Hero from "@components/Hero.astro";
 import RetratosPaz from "@components/RetratosPaz.astro";
 import LoQueHacemos from "@components/LoQueHacemos.astro";
 import ActualidadGaleria from "@components/ActualidadGaleria.astro";
-import Nav from "@components/Nav.astro";
-import NavMenu from "@components/NavMenu.astro";
-import NavMenuDesktop from "@components/NavMenuDesktop.astro";
 import { getRetratos, getSubcuentas, getNoticias, getVideos } from "../adapters";
-
-const siteName = "La Paz Sí Pasa";
 
 const [retratos, subcuentas, noticias, videos] = await Promise.all([
   getRetratos(),
@@ -20,28 +15,31 @@ const [retratos, subcuentas, noticias, videos] = await Promise.all([
 ---
 
 <BaseLayout>
-  <Nav siteName={siteName} slot="header" />
-  <NavMenu slot="header" />
   <Hero slot="hero" />
-  <NavMenuDesktop />
 
-  <div class="contenedor">
+  <div class="contenedor container--wide">
     <RetratosPaz retratos={retratos} />
     <LoQueHacemos noticias={noticias} subcuentas={subcuentas} />
     <ActualidadGaleria videos={videos} />
   </div>
-
-
 </BaseLayout>
 
 <style>
+  /* =========================================
+     CSS GENERAL
+     ========================================= */
   .contenedor {
     display: flex;
     flex-direction: column;
     gap: clamp(var(--space-8), 6vw, var(--space-16));
-    width: 100%;
-    max-width: 1376px;
-    margin: 0 auto;
-    padding: clamp(var(--space-4), 4vw, var(--space-8)) var(--space-4);
+    padding-block: clamp(var(--space-4), 4vw, var(--space-8));
   }
+
+  /* =========================================
+     BREAKPOINT 850px
+     ========================================= */
+
+  /* =========================================
+     BREAKPOINT 360px
+     ========================================= */
 </style>

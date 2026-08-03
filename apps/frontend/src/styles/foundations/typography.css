@@ -1,7 +1,8 @@
 body {
   background: var(--color-surface);
-  color: var(--color-text);
+  color: var(--color-nav-text);
   font-family: var(--font-komet);
+  font-weight: 300;
   line-height: 1.6;
 }
 
@@ -17,9 +18,13 @@ h1,
 h2,
 h3,
 h4 {
-  color: var(--color-brand);
+  color: var(--color-nav-text);
   font-family: var(--font-monique-regular);
   line-height: 1.1;
+}
+
+p {
+  font-weight: 300;
 }
 
 h1 {
@@ -27,7 +32,7 @@ h1 {
 }
 
 h2 {
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
 }
 
 h3 {
@@ -37,3 +42,4 @@ h3 {
 a {
   color: inherit;
 }
+

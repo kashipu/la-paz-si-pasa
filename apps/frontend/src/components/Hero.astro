@@ -6,16 +6,22 @@ import heroLogo from "../assets/hero/hero-logo.svg";
 
 <section class="hero">
   <Image src={heroImage} alt="" class="hero__bg" loading="eager" />
-  <img src={heroLogo.src} alt="La Paz Sí Pasa" class="hero__logo" width="420" />
+  <a href="/" class="hero__logo-link" aria-label="Ir al inicio">
+    <img src={heroLogo.src} alt="La Paz Sí Pasa" class="hero__logo" width="420" />
+  </a>
 </section>
 
 <style>
+  /* =========================================
+     CSS GENERAL
+     ========================================= */
   .hero {
     position: relative;
     display: grid;
     place-items: center;
     min-height: 60vh;
     overflow: hidden;
+    width: 100%;
   }
 
   .hero__bg {
@@ -28,6 +34,12 @@ import heroLogo from "../assets/hero/hero-logo.svg";
     z-index: -1;
   }
 
+  .hero__logo-link {
+    display: block;
+    width: 100%;
+    max-width: 960px;
+  }
+
   .hero__logo {
     width: 100%;
     max-width: 960px;
@@ -36,9 +48,16 @@ import heroLogo from "../assets/hero/hero-logo.svg";
     filter: drop-shadow(0 6px 24px rgb(0 0 0 / 85%));
   }
 
+  /* =========================================
+     BREAKPOINT 850px
+     ========================================= */
   @media (max-width: 849px) {
     .hero__logo {
       padding-inline: 16px;
     }
   }
+
+  /* =========================================
+     BREAKPOINT 360px
+     ========================================= */
 </style>

@@ -12,8 +12,8 @@ import Hero from "../components/Hero.astro";
 ---
 
 <BaseLayout title="Proyectos destacados - PaisSana">
-  <Hero />
-  <main class="paisana-page">
+  <Hero slot="hero" />
+  <div class="paisana-page container--wide">
     <ProyectosNav />
     <PaisSanaHero />
     <PaisSanaMapaIntro />
@@ -22,37 +22,37 @@ import Hero from "../components/Hero.astro";
     <PaisSanaFeriasIntro />
     <PaisSanaFeriasAcordeon />
     <PaisSanaProductoresVideos />
-  </main>
+  </div>
 </BaseLayout>
 
 <style>
+  /* =========================================
+     CSS GENERAL
+     ========================================= */
   .paisana-page {
     display: flex;
     flex-direction: column;
-    margin-inline: auto;
-    width: 100%;
-    max-width: var(--wide-width);
-
-    /* Espaciado general contra el Header y Footer + padding lateral */
-    padding: 10rem 1rem;
-
-    /* ESPACIO ENTRE COMPONENTES (Forma mantenible en lugar de paddings individuales) */
-    gap: 5rem;
+    padding-block: clamp(3rem, 6vw, 6rem);
+    gap: clamp(3.5rem, 6vw, 6rem);
   }
 
-  /* Tablet */
-  @media (min-width: 768px) {
+  /* =========================================
+     BREAKPOINT 850px
+     ========================================= */
+  @media (min-width: 850px) {
     .paisana-page {
-      padding: 10rem 2rem;
-      gap: 7rem;
+      padding-block: clamp(4rem, 8vw, 8rem);
+      gap: clamp(5rem, 8vw, 8rem);
     }
   }
 
-  /* Desktop */
-  @media (min-width: 1024px) {
+  /* =========================================
+     BREAKPOINT 360px
+     ========================================= */
+  @media (max-width: 360px) {
     .paisana-page {
-      padding: 10rem 1rem;
-      gap: 10rem; /* Separación masiva entre secciones */
+      padding-block: 2rem;
+      gap: 2.5rem;
     }
   }
 </style>
@@ -63,34 +63,35 @@ import Hero from "../components/Hero.astro";
      ========================================= */
   .paisana-page {
     font-family: var(--font-komet);
-    color: var(--color-nav-text, #32509d);
+    color: var(--color-nav-text);
   }
 
+  .paisana-page h1,
   .paisana-page h2,
   .paisana-page h3 {
-    font-family: var(--font-komet);
-    font-weight: var(--font-weight-komet-heavy, 800);
-    color: var(--color-nav-text, #32509d);
-    line-height: 1.1;
+    font-family: var(--font-monique-regular);
+    font-weight: 400;
+    color: var(--color-nav-text);
+    line-height: 1.15;
   }
-  
+
   .paisana-page h2 {
-    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
   }
-  
+
   .paisana-page h3 {
-    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-size: clamp(1.25rem, 2.5vw, 1.85rem);
   }
 
   .paisana-page p,
   .paisana-page li,
   .paisana-page .text {
-    font-size: clamp(1rem, 2vw, 1.125rem);
-    line-height: 1.6;
     font-family: var(--font-komet);
+    font-size: clamp(1rem, 2vw, 1.125rem);
     font-weight: var(--font-weight-komet-light, 300);
-    letter-spacing: -0.5px;
-    color: var(--color-nav-text, #32509d);
+    line-height: 1.6;
+    letter-spacing: -0.02em;
+    color: var(--color-nav-text);
   }
 
   .paisana-page strong {
