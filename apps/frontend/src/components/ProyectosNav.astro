@@ -5,23 +5,6 @@
 <nav class="proyectos-nav" aria-label="Navegación de proyectos">
   <ul class="nav-list">
     <li>
-      <a href="#" class="btn-home" aria-label="Inicio">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          class="home-icon"
-        >
-          <path
-            d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z"
-          ></path>
-          <path
-            d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z"
-          ></path>
-        </svg>
-      </a>
-    </li>
-    <li>
       <a href="#" class="btn-project btn-blue">PAISSANA</a>
     </li>
     <li>
@@ -36,6 +19,9 @@
 </nav>
 
 <style>
+  /* =========================================
+     CSS GENERAL
+     ========================================= */
   .proyectos-nav {
     display: flex;
     justify-content: flex-start;
@@ -44,8 +30,9 @@
 
   .nav-list {
     display: flex;
+    flex-direction: column;
     align-items: stretch;
-    gap: 2rem;
+    gap: var(--space-4);
     list-style: none;
     margin: 0;
     padding: 0;
@@ -54,32 +41,7 @@
 
   .nav-list li {
     display: flex;
-  }
-
-  .nav-list li:not(:first-child) {
     flex: 1;
-  }
-
-  .btn-home {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    border: 2px solid var(--color-nav-border, #32509d);
-    border-radius: 50%;
-    color: var(--color-nav-border, #32509d);
-    text-decoration: none;
-    transition: background-color 0.2s;
-  }
-
-  .btn-home:hover {
-    background-color: var(--color-nav-bg-active, #cbe9f8);
-  }
-
-  .home-icon {
-    width: 24px;
-    height: 24px;
   }
 
   .btn-project {
@@ -89,7 +51,7 @@
     padding: 0 var(--space-6);
     color: white;
     font-family: var(--font-monique-regular);
-    font-weight: bold;
+    font-weight: 400;
     font-size: 0.875rem;
     text-transform: uppercase;
     text-decoration: none;
@@ -117,12 +79,22 @@
     background-color: #eb7b00; /* Color naranja basado en el diseño */
   }
 
-  @media (max-width: 1024px) {
+  /* =========================================
+     BREAKPOINT 850px
+     ========================================= */
+  @media (min-width: 850px) {
     .nav-list {
-      flex-wrap: wrap;
+      flex-direction: row;
+      gap: 2rem;
     }
+  }
+
+  /* =========================================
+     BREAKPOINT 360px
+     ========================================= */
+  @media (max-width: 360px) {
     .btn-project {
-      width: 100%;
+      padding-inline: var(--space-3, 12px);
     }
   }
 </style>

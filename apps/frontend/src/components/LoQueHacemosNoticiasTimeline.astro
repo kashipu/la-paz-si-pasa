@@ -58,6 +58,9 @@ const anios = [...porAnio.keys()].sort().reverse();
 </script>
 
 <style>
+  /* =========================================
+     CSS GENERAL
+     ========================================= */
   .timeline {
     background: var(--color-nav-bg-active);
     color: var(--color-nav-text);
@@ -130,10 +133,15 @@ const anios = [...porAnio.keys()].sort().reverse();
 
   .timeline__news a {
     color: var(--color-nav-text);
+    font-family: var(--font-komet);
+    font-weight: 300;
     text-decoration: none;
     word-break: break-word;
   }
 
+  /* =========================================
+     BREAKPOINT 850px
+     ========================================= */
   @media (max-width: 849px) {
     .timeline__list {
       max-height: 60vh;
@@ -148,6 +156,9 @@ const anios = [...porAnio.keys()].sort().reverse();
     }
   }
 
+  /* =========================================
+     BREAKPOINT 360px
+     ========================================= */
   @media (max-width: 360px) {
     .timeline__list {
       max-height: 50vh;

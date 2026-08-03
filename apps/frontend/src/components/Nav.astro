@@ -20,11 +20,24 @@ const { siteName } = Astro.props;
   const toggle = document.querySelector<HTMLButtonElement>(".nav__toggle");
   const list = document.querySelector<HTMLUListElement>(".nav__list");
 
+  function closeMenu() {
+    list?.classList.remove("is-open");
+    toggle?.classList.remove("is-open");
+    toggle?.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("nav-lock");
+  }
+
   toggle?.addEventListener("click", () => {
     const isOpen = list?.classList.toggle("is-open");
     toggle.classList.toggle("is-open", Boolean(isOpen));
     toggle.setAttribute("aria-expanded", String(Boolean(isOpen)));
     document.body.classList.toggle("nav-lock", Boolean(isOpen));
+  });
+
+  list?.addEventListener("click", (e) => {
+    if ((e.target as HTMLElement).closest("a")) {
+      closeMenu();
+    }
   });
 </script>
 
