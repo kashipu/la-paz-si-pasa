@@ -43,10 +43,40 @@ import PaisSanaFeriaItem from './PaisSanaFeriaItem.astro';
 </section>
 
 <style>
+  /* =========================================
+     CSS GENERAL
+     ========================================= */
   .ferias-acordeon-list {
     display: flex;
     flex-direction: column;
     gap: var(--space-4, 1rem);
     width: 100%;
   }
+
+  /* =========================================
+     BREAKPOINT 850px
+     ========================================= */
+
+  /* =========================================
+     BREAKPOINT 360px
+     ========================================= */
 </style>
+
+<script>
+  // Exclusividad de acordeón: sólo una pestaña abierta a la vez
+  document.addEventListener('DOMContentLoaded', () => {
+    const feriaItems = document.querySelectorAll<HTMLDetailsElement>('.ferias-acordeon-list .feria-item');
+    
+    feriaItems.forEach((item) => {
+      item.addEventListener('toggle', () => {
+        if (item.open) {
+          feriaItems.forEach((other) => {
+            if (other !== item && other.open) {
+              other.open = false;
+            }
+          });
+        }
+      });
+    });
+  });
+</script>
