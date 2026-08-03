@@ -8,50 +8,21 @@
 
 defined('ABSPATH') || exit;
 
+add_filter('acf/settings/save_json', function () {
+    return WP_CONTENT_DIR . '/scf-json';
+});
+
+add_filter('acf/settings/load_json', function ($paths) {
+    $paths[] = WP_CONTENT_DIR . '/scf-json';
+    return array_unique($paths);
+});
+
 add_action('after_setup_theme', function () {
     add_theme_support('custom-logo');
 
     register_nav_menus([
         'primary' => 'Primary navigation',
         'footer' => 'Footer navigation',
-    ]);
-});
-
-add_action('init', function () {
-    register_post_type('retrato', [
-        'label' => 'Retratos',
-        'public' => true,
-        'show_in_rest' => true,
-        'rest_base' => 'retrato',
-        'supports' => ['title', 'thumbnail'],
-        'menu_icon' => 'dashicons-format-image',
-    ]);
-
-    register_post_type('subcuenta', [
-        'label' => 'Subcuentas',
-        'public' => true,
-        'show_in_rest' => true,
-        'rest_base' => 'subcuenta',
-        'supports' => ['title'],
-        'menu_icon' => 'dashicons-money-alt',
-    ]);
-
-    register_post_type('noticia', [
-        'label' => 'Noticias',
-        'public' => true,
-        'show_in_rest' => true,
-        'rest_base' => 'noticia',
-        'supports' => ['title'],
-        'menu_icon' => 'dashicons-megaphone',
-    ]);
-
-    register_post_type('video', [
-        'label' => 'Videos',
-        'public' => true,
-        'show_in_rest' => true,
-        'rest_base' => 'video',
-        'supports' => ['title'],
-        'menu_icon' => 'dashicons-video-alt3',
     ]);
 });
 

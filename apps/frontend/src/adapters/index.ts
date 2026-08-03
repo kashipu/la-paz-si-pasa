@@ -4,6 +4,7 @@ import { cached } from "./wordpress/cache";
 import { endpoints } from "./wordpress/endpoints";
 import { mapHero } from "./wordpress/mappers/mapHero";
 import { mapNoticia } from "./wordpress/mappers/mapNoticia";
+import { mapRetrato } from "./wordpress/mappers/mapRetrato";
 import { mockHero, mockRetratos, mockSubcuentas, mockNoticias, mockVideos } from "./mocks";
 
 export type { HeroData, Retrato, Subcuenta, Noticia, Video, Proyecto } from "./contracts";
@@ -28,9 +29,12 @@ export function getHero(): Promise<HeroData> {
   );
 }
 
-// ponytail: mock forzado — retrato aún no tiene integración WP lista, quitar cuando esté
 export function getRetratos(): Promise<Retrato[]> {
-  return Promise.resolve(mockRetratos);
+  return withFallback(
+    "retratos",
+    async () => (await wpFetchAll<any>(endpoints.retratos)).map(mapRetrato),
+    mockRetratos,
+  );
 }
 
 // ponytail: mock forzado — subcuenta aún no tiene integración WP lista, quitar cuando esté

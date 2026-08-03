@@ -14,7 +14,8 @@ function buildUrl(apiPath: string, params: QueryParams) {
     throw new Error("WORDPRESS_URL is required");
   }
   const normalizedPath = apiPath.replace(/^\/?wp-json\//, "").replace(/^\//, "");
-  const url = new URL(`/wp-json/${normalizedPath}`, WP_URL);
+  const url = new URL("/index.php", WP_URL);
+  url.searchParams.set("rest_route", `/${normalizedPath}`);
   appendParams(url, params);
   return url;
 }

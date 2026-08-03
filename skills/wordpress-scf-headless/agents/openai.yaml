@@ -1,0 +1,4 @@
+interface:
+  display_name: "WordPress SCF Headless"
+  short_description: "Integrate SCF content with Astro"
+  default_prompt: "Use $wordpress-scf-headless to add a versioned SCF content type to this headless WordPress and Astro stack."

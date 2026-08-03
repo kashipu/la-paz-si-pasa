@@ -42,6 +42,7 @@ services:
     volumes:
       - wordpress_data:/var/www/html
       - ./apps/wordpress/mu-plugins:/var/www/html/wp-content/mu-plugins
+      - ./apps/wordpress/scf-json:/var/www/html/wp-content/scf-json
       - ./apps/wordpress/php/zz-opcache-overrides.ini:/usr/local/etc/php/conf.d/zz-opcache-overrides.ini
     expose:
       - "80"

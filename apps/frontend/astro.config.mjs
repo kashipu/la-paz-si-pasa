@@ -1,5 +1,8 @@
 import { defineConfig } from "astro/config";
 import node from "@astrojs/node";
+import { loadEnv } from "vite";
+
+const env = { ...loadEnv(process.env.NODE_ENV ?? "development", process.cwd(), ""), ...process.env };
 
 function hostname(value) {
   if (!value) return undefined;
@@ -16,13 +19,13 @@ const imageDomains = [
   "fastly.picsum.photos",
   "i.ytimg.com",
   "img.youtube.com",
-  hostname(process.env.WORDPRESS_URL),
-  ...(process.env.WORDPRESS_IMAGE_DOMAINS ?? "").split(",").map(hostname),
+  hostname(env.WORDPRESS_URL),
+  ...(env.WORDPRESS_IMAGE_DOMAINS ?? "").split(",").map(hostname),
 ].filter(Boolean);
 
 export default defineConfig({
   output: "server",
   adapter: node({ mode: "standalone" }),
-  site: process.env.PUBLIC_SITE_URL,
+  site: env.PUBLIC_SITE_URL,
   image: { domains: [...new Set(imageDomains)] },
 });
