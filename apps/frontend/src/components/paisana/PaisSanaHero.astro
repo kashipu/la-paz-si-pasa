@@ -126,7 +126,6 @@ import heroImage from "../../assets/paissana/paisana-hero-image@3x.png";
     flex-direction: column;
     gap: var(--space-12, 3rem);
     width: 100%;
-    font-family: var(--font-komet);
     color: var(--color-text);
   }
 
@@ -153,6 +152,8 @@ import heroImage from "../../assets/paissana/paisana-hero-image@3x.png";
 
   .hero-brand h2 {
     margin-top: var(--space-4, 1rem);
+    font-family: var(--font-komet);
+    font-weight: var(--font-weight-komet-heavy, 800);
   }
 
   /* STATS SECTION */
@@ -182,6 +183,8 @@ import heroImage from "../../assets/paissana/paisana-hero-image@3x.png";
   .hero-stats h3 {
     position: relative;
     z-index: 1;
+    font-family: var(--font-komet);
+    font-weight: var(--font-weight-komet-heavy, 800);
   }
 
   .stats-list {
@@ -249,6 +252,11 @@ import heroImage from "../../assets/paissana/paisana-hero-image@3x.png";
     padding-right: 0;
   }
 
+  .hero-benefits h3 {
+    font-family: var(--font-komet);
+    font-weight: var(--font-weight-komet-heavy, 800);
+  }
+
 
 
   .benefits-list {
@@ -266,22 +274,29 @@ import heroImage from "../../assets/paissana/paisana-hero-image@3x.png";
 
   /* PHOTO SECTION */
   .hero-photo {
-    border-radius: var(--radius-card, 8px);
-    overflow: hidden;
-    box-shadow: var(--shadow-soft);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
   }
 
   .hero-photo img {
     width: 100%;
+    max-width: 80%;
     height: auto;
     display: block;
     object-fit: cover;
     aspect-ratio: 1 / 1;
+    box-sizing: border-box;
+    border: 10px solid var(--color-surface);
+    box-shadow: 0 2.2rem 3rem rgba(0, 0, 0, 0.55), 0 0.4rem 1rem rgba(0, 0, 0, 0.3);
+    transform: rotate(-4deg);
     transition: transform 0.5s ease;
   }
 
   .hero-photo:hover img {
-    transform: scale(1.03);
+    transform: rotate(-2deg) scale(1.02);
   }
 
   /* =========================================
