@@ -142,11 +142,15 @@ const regions = [
 </section>
 
 <style>
+  /* =========================================
+     CSS GENERAL
+     ========================================= */
   .mapa-carrusel {
     display: flex;
     flex-direction: column;
     gap: var(--space-8, 2rem);
     width: 100%;
+    font-family: var(--font-komet);
   }
 
   /* TABS NAVIGATION */
@@ -182,23 +186,14 @@ const regions = [
     to { opacity: 1; transform: translateY(0); }
   }
 
-  @media (min-width: 768px) {
-    .region-content-grid {
-      /* Le damos mucho más espacio al mapa (ej. 33% a los stats y 67% al mapa) */
-      grid-template-columns: 1fr 2fr;
-      align-items: center;
-    }
-  }
-
   /* LEFT COL: STATS */
   .region-stats {
     display: flex;
     flex-direction: column;
     gap: var(--space-8, 2rem);
-    /* Removido el contenedor gris oscuro/claro */
     background-color: transparent;
     padding: 0;
-    min-width: 320px;
+    min-width: 280px;
   }
 
   .total-badge {
@@ -208,15 +203,19 @@ const regions = [
   }
 
   .total-badge .count {
+    font-family: var(--font-komet);
     font-size: clamp(4rem, 8vw, 6rem); 
-    font-weight: 500; /* Ajustado para parecerse más a la fuente del mockup */
+    font-weight: var(--font-weight-komet-heavy, 800);
     line-height: 1;
+    color: var(--color-nav-text, #32509d);
   }
 
   .total-badge .label {
+    font-family: var(--font-komet);
     font-size: 1.5rem;
-    font-weight: 500;
+    font-weight: var(--font-weight-komet-heavy, 800);
     text-transform: uppercase;
+    color: var(--color-nav-text, #32509d);
   }
 
   .deptos-list {
@@ -224,15 +223,13 @@ const regions = [
     padding: 0;
     margin: 0;
     display: grid;
-    /* Divide la lista en 2 columnas para regiones con muchos departamentos (ej. Andina, Caribe) */
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: var(--space-4, 1rem);
-    font-size: 1.25rem;
-    /* Removida la línea superior */
+    font-size: 1.125rem;
     padding-top: var(--space-4, 1rem);
     color: var(--color-nav-text, #32509d);
-    font-family: var(--font-monique-regular);
-    font-weight: 700;
+    font-family: var(--font-komet);
+    font-weight: var(--font-weight-komet-light, 300);
     text-transform: uppercase;
   }
 
@@ -241,18 +238,20 @@ const regions = [
     justify-content: flex-start;
     align-items: center;
     gap: 0.5em;
+    font-weight: var(--font-weight-komet-light, 300);
   }
 
   .deptos-list li strong {
-    font-weight: 700;
+    font-family: var(--font-komet);
+    font-weight: var(--font-weight-komet-heavy, 800);
   }
 
   /* RIGHT COL: MAP & PINS */
   .region-map-wrapper {
     position: relative;
     width: 100%;
-    max-width: 700px;
-    margin-inline: auto; /* Para centrarlo en la columna */
+    max-width: 480px;
+    margin-inline: auto;
     border-radius: var(--radius-card, 8px);
     background-color: transparent;
     display: flex;
@@ -262,12 +261,35 @@ const regions = [
 
   .map-image {
     width: 100%;
+    max-width: 100%;
     height: auto;
     object-fit: contain;
     display: block;
     padding: 0;
   }
 
+  /* =========================================
+     BREAKPOINT 850px
+     ========================================= */
+  @media (min-width: 850px) {
+    .region-content-grid {
+      grid-template-columns: 1fr 2fr;
+      align-items: center;
+    }
+
+    .region-map-wrapper {
+      max-width: 650px;
+    }
+  }
+
+  /* =========================================
+     BREAKPOINT 360px
+     ========================================= */
+  @media (max-width: 360px) {
+    .deptos-list {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
 
 <script>
