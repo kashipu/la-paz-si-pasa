@@ -26,6 +26,8 @@ services:
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
       WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX:-wp_}
       PUBLIC_SITE_URL: ${PUBLIC_SITE_URL}
+      # secret: lives in the Dokploy Environment tab, never in this file
+      REVALIDATE_SECRET: ${REVALIDATE_SECRET}
       SMTP_HOST: smtp.resend.com
       SMTP_PORT: 587
       SMTP_USER: resend
@@ -64,6 +66,8 @@ services:
     environment:
       WORDPRESS_URL: ${WORDPRESS_URL}
       PUBLIC_SITE_URL: ${PUBLIC_SITE_URL}
+      # secret: lives in the Dokploy Environment tab, never in this file; must match the cms service
+      REVALIDATE_SECRET: ${REVALIDATE_SECRET}
     expose:
       - "80"
     deploy:
