@@ -1,5 +1,6 @@
 ---
 import logoPaisana from "../../assets/paissana/logo-paisana.svg";
+import { Image } from "astro:assets";
 import flor from "../../assets/paissana/flor.svg";
 import icon from "../../assets/paissana/icon.svg";
 import leaf from "../../assets/paissana/leaf.svg";
@@ -107,14 +108,29 @@ import heroImage from "../../assets/paissana/paisana-hero-image@3x.png";
       </ul>
     </div>
     <div class="hero-photo">
-      <img
-        src={heroImage.src}
+      <Image
+        src={heroImage}
         alt="Productora PaisSana"
-        width="600"
-        height="600"
+        width={600}
+        height={600}
+        format="webp"
+        sizes="(min-width: 850px) 50vw, 100vw"
       />
     </div>
   </div>
+  <nav class="hero-nav" aria-label="Navegación de secciones PaisSana">
+    <ul class="hero-nav__list">
+      <li>
+        <a href="#escucha-el-corazon-del-campo">ESCUCHA EL CORAZÓN DEL CAMPO</a>
+      </li>
+      <li>
+        <a href="#paissana-en-ferias">PAISSANA EN FERIAS</a>
+      </li>
+      <li>
+        <a href="#productores-paissana">PRODUCTORES PAISSANA</a>
+      </li>
+    </ul>
+  </nav>
 </section>
 
 <style>
@@ -299,10 +315,48 @@ import heroImage from "../../assets/paissana/paisana-hero-image@3x.png";
     transform: rotate(-2deg) scale(1.02);
   }
 
+  /* HERO NAV BUTTONS */
+  .hero-nav {
+    width: 100%;
+  }
+
+  .hero-nav__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .hero-nav__list a {
+    display: block;
+    text-align: center;
+    padding-block: var(--space-3);
+    border: 1px solid var(--color-nav-border);
+    color: var(--color-nav-text);
+    font-family: var(--font-monique-regular);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    background: var(--color-surface);
+    transition: background-color 0.15s ease;
+    line-height: 1.5;
+  }
+
+  .hero-nav__list a:hover,
+  .hero-nav__list a:focus-visible {
+    background: var(--color-nav-bg-active);
+  }
+
   /* =========================================
      BREAKPOINT 850px
      ========================================= */
   @media (min-width: 850px) {
+    .hero-nav__list {
+      grid-template-columns: repeat(3, 1fr);
+    }
     .hero-top-grid {
       grid-template-columns: 1fr 1fr;
       align-items: start;

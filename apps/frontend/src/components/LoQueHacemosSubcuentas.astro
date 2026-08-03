@@ -1,5 +1,6 @@
 ---
 import type { Subcuenta } from "@adapters/contracts";
+import OptimizedImage from "./OptimizedImage.astro";
 
 type Props = { subcuentas: Subcuenta[] };
 const { subcuentas } = Astro.props;
@@ -11,7 +12,7 @@ const { subcuentas } = Astro.props;
   <ul class="subcuentas__track">
     {subcuentas.map((subcuenta) => (
       <li>
-        <img src={subcuenta.iconoUrl} alt={subcuenta.nombre} loading="lazy" />
+        <OptimizedImage src={subcuenta.iconoUrl} alt={subcuenta.nombre} />
       </li>
     ))}
   </ul>
@@ -20,6 +21,7 @@ const { subcuentas } = Astro.props;
 </div>
 
 <script>
+  document.addEventListener("astro:page-load", () => {
   document.querySelectorAll<HTMLElement>(".subcuentas").forEach((subcuentas) => {
     const track = subcuentas.querySelector<HTMLElement>(".subcuentas__track");
     subcuentas.querySelectorAll<HTMLButtonElement>(".subcuentas__nav").forEach((btn) => {
@@ -28,6 +30,7 @@ const { subcuentas } = Astro.props;
         track?.scrollBy({ left: dir * 180, behavior: "smooth" });
       });
     });
+  });
   });
 </script>
 

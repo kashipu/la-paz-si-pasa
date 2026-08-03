@@ -5,7 +5,7 @@
 // con timestamps, caja de subtítulos y flechas para pasar de un audio a otro.
 ---
 
-<section class="corazon-campo">
+<section class="corazon-campo" id="escucha-el-corazon-del-campo">
   <div class="audio-header">
     <div class="header-left">
       <h2>
@@ -416,7 +416,7 @@
 
 <script>
   // Script interactivo para el reproductor y carrusel de relatos sonoros (4 tracks mock)
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("astro:page-load", () => {
     const tracks = [
       {
         producer: "Andrés Pineda",

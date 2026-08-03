@@ -14,8 +14,11 @@ import Hero from "../components/Hero.astro";
 <BaseLayout title="Proyectos destacados - PaisSana">
   <Hero slot="hero" />
   <div class="paisana-page container--wide">
-    <ProyectosNav />
-    <PaisSanaHero />
+    <div class="paisana-header">
+      <ProyectosNav />
+      <PaisSanaHero />
+    </div>
+
     <PaisSanaMapaIntro />
     <PaisSanaMapaCarrusel />
     <PaisSanaAudioPlayer />
@@ -32,29 +35,23 @@ import Hero from "../components/Hero.astro";
   .paisana-page {
     display: flex;
     flex-direction: column;
-    padding-block: clamp(3rem, 6vw, 6rem);
-    gap: clamp(3.5rem, 6vw, 6rem);
+    padding-block: 0 10rem;
+    gap: 10rem;
+  }
+
+  .paisana-header {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2rem, 4vw, 3.5rem);
   }
 
   /* =========================================
      BREAKPOINT 850px
      ========================================= */
-  @media (min-width: 850px) {
-    .paisana-page {
-      padding-block: clamp(4rem, 8vw, 8rem);
-      gap: clamp(5rem, 8vw, 8rem);
-    }
-  }
 
   /* =========================================
      BREAKPOINT 360px
      ========================================= */
-  @media (max-width: 360px) {
-    .paisana-page {
-      padding-block: 2rem;
-      gap: 2.5rem;
-    }
-  }
 </style>
 
 <style is:global>

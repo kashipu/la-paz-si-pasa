@@ -6,8 +6,9 @@ export type Proyecto =
 
 export interface Retrato {
   id: string;
-  fotoUrl: string;
+  fotoUrl: string | ImageMetadata;
   descripcion: string;
   proyecto: Proyecto;
   lugar: string;
 }
+import type { ImageMetadata } from "astro";

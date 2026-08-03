@@ -1,5 +1,6 @@
 ---
 import PaisSanaRegionTabBtn from "./PaisSanaRegionTabBtn.astro";
+import { Image } from "astro:assets";
 import mapAmazonia from "../../assets/mapas/amazonia@3x.png";
 import mapAndina from "../../assets/mapas/andina@3x.png";
 import mapCaribe from "../../assets/mapas/caribe@3x.png";
@@ -100,14 +101,14 @@ const regions = [
         id={r.id} 
         name={r.name} 
         color={r.color} 
-        isActive={r.id === 'pacifica'} 
+        isActive={r.id === 'caribe'}
       />
     ))}
   </nav>
 
   <div class="region-content-container">
     {regions.map((r) => (
-      <div class={`region-content-grid tab-content ${r.id === 'pacifica' ? 'active' : ''}`} id={`tab-${r.id}`}>
+      <div class={`region-content-grid tab-content ${r.id === 'caribe' ? 'active' : ''}`} id={`tab-${r.id}`}>
         
         <!-- Columna izquierda: Stats -->
         <div class="region-stats">
@@ -129,10 +130,14 @@ const regions = [
 
         <!-- Columna derecha: Mapa interactivo -->
         <div class="region-map-wrapper">
-          <img 
-            src={mapImages[r.id as keyof typeof mapImages].src}
+          <Image
+            src={mapImages[r.id as keyof typeof mapImages]}
             alt={`Mapa Región ${r.name}`} 
             class="map-image" 
+            loading={r.id === "pacifica" ? "eager" : "lazy"}
+            format="webp"
+            width={650}
+            sizes="(min-width: 850px) 66vw, 100vw"
           />
         </div>
         
@@ -294,7 +299,7 @@ const regions = [
 
 <script>
   // Manejo de tabs en el cliente para el carrusel de regiones
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('astro:page-load', () => {
     const tabs = document.querySelectorAll('.mapa-carrusel .tab-btn');
     const contents = document.querySelectorAll('.mapa-carrusel .tab-content');
     

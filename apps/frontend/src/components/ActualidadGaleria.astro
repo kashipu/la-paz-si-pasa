@@ -1,5 +1,6 @@
 ---
 import type { Video } from "@adapters/contracts";
+import OptimizedImage from "./OptimizedImage.astro";
 
 type Props = { videos: Video[] };
 const { videos } = Astro.props;
@@ -29,7 +30,7 @@ const [destacado, ...resto] = videos;
         data-src={destacado?.videoUrl}
         data-thumbnail={destacado?.thumbnailUrl}
       >
-        <img data-campo="thumbnail" src={destacado?.thumbnailUrl} alt={destacado?.titulo} />
+        {destacado?.thumbnailUrl && <OptimizedImage data-campo="thumbnail" src={destacado.thumbnailUrl} alt={destacado.titulo} loading="eager" sizes="(min-width: 850px) 60vw, 100vw" />}
         <button type="button" class="actualidad__play" aria-label={`Reproducir ${destacado?.titulo}`}>
           <svg viewBox="0 0 24 24" width="48" height="48" aria-hidden="true">
             <circle cx="12" cy="12" r="12" fill="white" opacity="0.9" />
@@ -60,7 +61,7 @@ const [destacado, ...resto] = videos;
                   data-tags={JSON.stringify(video.tags)}
                 >
                   <span class="actualidad__card-thumb">
-                    <img src={video.thumbnailUrl} alt="" loading="lazy" />
+                    {video.thumbnailUrl && <OptimizedImage src={video.thumbnailUrl} alt="" sizes="280px" />}
                     <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
                       <circle cx="12" cy="12" r="12" fill="white" opacity="0.9" />
                       <path d="M9.5 7.5v9l7-4.5z" fill="var(--color-actualidad-bg)" />
@@ -80,6 +81,7 @@ const [destacado, ...resto] = videos;
 </section>
 
 <script>
+  document.addEventListener("astro:page-load", () => {
   type VideoData = {
     id: string;
     titulo: string;
@@ -223,6 +225,7 @@ const [destacado, ...resto] = videos;
         track?.scrollBy({ left: dir * 280, behavior: "smooth" });
       });
     });
+  });
   });
 </script>
 

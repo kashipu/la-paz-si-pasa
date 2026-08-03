@@ -5,7 +5,7 @@ import heroLogo from "../assets/hero/hero-logo.svg";
 ---
 
 <section class="hero">
-  <Image src={heroImage} alt="" class="hero__bg" loading="eager" />
+  <Image src={heroImage} alt="" class="hero__bg" loading="eager" format="webp" sizes="100vw" widths={[640, 960, 1440, 1920]} />
   <a href="/" class="hero__logo-link" aria-label="Ir al inicio">
     <img src={heroLogo.src} alt="La Paz Sí Pasa" class="hero__logo" width="420" />
   </a>
