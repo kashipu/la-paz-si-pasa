@@ -1,11 +1,8 @@
 ---
 import tucan from "../../assets/paissana/tucan.svg";
-
-// Sección 7 · Mockup: documentacion/seccion7@2x-100.jpg
-// "Productores PaisSana": encabezado con la ilustración del tucán a la derecha y
-// listado de historias audiovisuales (crónicas). Cada fila lleva thumbnail 16:9
-// a la izquierda con botón de play, título, subtítulo y descripción.
 ---
+
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 
 <section class="productores-videos">
   <div class="productores-header-grid">
@@ -23,12 +20,15 @@ import tucan from "../../assets/paissana/tucan.svg";
     <!-- Video 1 -->
     <article class="video-row-card">
       <div class="video-thumb">
-        <img src="https://placehold.co/600x350?text=Cronica+1" alt="Crónica #1" width="600" height="350" class="thumb-img" />
-        <button class="play-btn-large" aria-label="Reproducir Crónica #1">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--color-nav-text, #32509d)" stroke="none">
-            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-          </svg>
-        </button>
+        <div class="plyr__video-embed js-plyr">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
+            allowfullscreen
+            allowtransparency
+            allow="autoplay"
+            title="Crónica #1"
+          ></iframe>
+        </div>
       </div>
       <div class="video-info">
         <h3>Crónica #1</h3>
@@ -40,16 +40,39 @@ import tucan from "../../assets/paissana/tucan.svg";
     <!-- Video 2 -->
     <article class="video-row-card">
       <div class="video-thumb">
-        <img src="https://placehold.co/600x350?text=Cronica+2" alt="Crónica #2" width="600" height="350" class="thumb-img" />
-        <button class="play-btn-large" aria-label="Reproducir Crónica #2">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--color-nav-text, #32509d)" stroke="none">
-            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-          </svg>
-        </button>
+        <div class="plyr__video-embed js-plyr">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/L_LUpnjgPso?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
+            allowfullscreen
+            allowtransparency
+            allow="autoplay"
+            title="Crónica #2"
+          ></iframe>
+        </div>
       </div>
       <div class="video-info">
         <h3>Crónica #2</h3>
-        <p class="video-subtitle">Crónicaz</p>
+        <p class="video-subtitle">Crónica</p>
+        <p class="video-desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</p>
+      </div>
+    </article>
+
+    <!-- Video 3 -->
+    <article class="video-row-card">
+      <div class="video-thumb">
+        <div class="plyr__video-embed js-plyr">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/M7lc1UVf-VE?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
+            allowfullscreen
+            allowtransparency
+            allow="autoplay"
+            title="Crónica #3"
+          ></iframe>
+        </div>
+      </div>
+      <div class="video-info">
+        <h3>Crónica #3</h3>
+        <p class="video-subtitle">Crónica</p>
         <p class="video-desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</p>
       </div>
     </article>
@@ -124,7 +147,7 @@ import tucan from "../../assets/paissana/tucan.svg";
   .videos-list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-6, 1.5rem);
+    gap: 0;
     margin-top: var(--space-4, 1rem);
   }
 
@@ -135,14 +158,18 @@ import tucan from "../../assets/paissana/tucan.svg";
     gap: var(--space-6, 1.5rem);
     background-color: transparent;
     border-top: 1px solid var(--color-nav-text, #32509d);
-    border-bottom: 1px solid var(--color-nav-text, #32509d);
+    border-bottom: none;
     border-left: none;
     border-right: none;
     padding-block: var(--space-6, 1.5rem);
     padding-inline: 0;
   }
 
-  /* THUMBNAIL */
+  .video-row-card:last-child {
+    border-bottom: 1px solid var(--color-nav-text, #32509d);
+  }
+
+  /* THUMBNAIL / PLYR CONTAINER */
   .video-thumb {
     position: relative;
     border-radius: 6px;
@@ -152,38 +179,13 @@ import tucan from "../../assets/paissana/tucan.svg";
     order: 1;
   }
 
-  .thumb-img {
+  /* PLYR STYLES OVERRIDE */
+  :global(.plyr) {
+    --plyr-color-main: #32509d;
+    border-radius: 6px;
+    overflow: hidden;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-
-  .video-row-card:hover .thumb-img {
-    transform: scale(1.02);
-  }
-
-  .play-btn-large {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 68px;
-    height: 68px;
-    background-color: rgba(255, 255, 255, 0.92);
-    border: none;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    transition: all 0.2s ease;
-  }
-
-  .play-btn-large:hover {
-    background-color: #ffffff;
-    transform: translate(-50%, -50%) scale(1.1);
   }
 
   /* VIDEO INFO */
@@ -252,3 +254,25 @@ import tucan from "../../assets/paissana/tucan.svg";
      BREAKPOINT 360px
      ========================================= */
 </style>
+
+<script is:inline src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const initPlyr = () => {
+      const players = document.querySelectorAll('.js-plyr');
+      players.forEach((player) => {
+        if (typeof (window as any).Plyr !== 'undefined') {
+          new (window as any).Plyr(player, {
+            controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen']
+          });
+        }
+      });
+    };
+
+    if (typeof (window as any).Plyr !== 'undefined') {
+      initPlyr();
+    } else {
+      setTimeout(initPlyr, 500);
+    }
+  });
+</script>
