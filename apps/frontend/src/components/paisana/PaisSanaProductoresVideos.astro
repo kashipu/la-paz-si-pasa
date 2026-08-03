@@ -3,8 +3,8 @@ import tucan from "../../assets/paissana/tucan.svg";
 
 // Sección 7 · Mockup: documentacion/seccion7@2x-100.jpg
 // "Productores PaisSana": encabezado con la ilustración del tucán a la derecha y
-// listado de historias audiovisuales (documental + crónicas). Cada fila lleva
-// thumbnail 16:9 con botón de play, título, etiqueta de tipo y descripción.
+// listado de historias audiovisuales (crónicas). Cada fila lleva thumbnail 16:9
+// a la izquierda con botón de play, título, subtítulo y descripción.
 ---
 
 <section class="productores-videos">
@@ -12,7 +12,7 @@ import tucan from "../../assets/paissana/tucan.svg";
     <div class="productores-header-text">
       <h2>PRODUCTORES PAISSANA:</h2>
       <h3>Historias que transforman: el rostro de la paz</h3>
-      <p>Detrás de cada producto con el sello PaisSana hay hombres y mujeres valientes que decidieron apostarle al campo y a la reconciliación. A través de estas <strong>crónicas audiovisuales y contenidos</strong>, conoce a los verdaderos protagonistas de PaisSana y escucha sus historias de vida y transformación.</p>
+      <p>Detrás de cada producto con el sello PaisSana hay hombres y mujeres valientes que creyeron en el poder de la legalidad, el trabajo asociativo y el desarrollo sostenible. <strong>A través de estas crónicas audiovisuales y contenidos, conoce a los verdaderos protagonistas de PaisSana:</strong> historias inspiradoras que demuestran cómo la producción local construye una Colombia que sana y avanza.</p>
     </div>
     <div class="productores-header-tucan">
       <img src={tucan.src} alt="Tucán" width="200" height="300" class="tucan-img" />
@@ -20,54 +20,46 @@ import tucan from "../../assets/paissana/tucan.svg";
   </div>
 
   <div class="videos-list">
-    <!-- Video 1: Documental -->
+    <!-- Video 1 -->
     <article class="video-row-card">
       <div class="video-thumb">
-        <img src="https://placehold.co/600x350?text=De+la+tierra+al+aire" alt="De la tierra al aire" width="600" height="350" class="thumb-img" />
-        <button class="play-btn-large" aria-label="Reproducir documental">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        <img src="https://placehold.co/600x350?text=Cronica+1" alt="Crónica #1" width="600" height="350" class="thumb-img" />
+        <button class="play-btn-large" aria-label="Reproducir Crónica #1">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--color-nav-text, #32509d)" stroke="none">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
         </button>
       </div>
       <div class="video-info">
-        <h3>De la tierra al aire</h3>
-        <span class="video-type type-documental">Documental</span>
-        <p>Acompaña el viaje de tres organizaciones campesinas desde sus parcelas en zonas históricamente afectadas por el conflicto hasta los grandes escenarios comerciales. Un relato sobre cómo cultivar la paz.</p>
+        <h3>Crónica #1</h3>
+        <p class="video-subtitle">Crónica</p>
+        <p class="video-desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</p>
       </div>
     </article>
 
-    <!-- Video 2: Crónica -->
+    <!-- Video 2 -->
     <article class="video-row-card">
       <div class="video-thumb">
-        <img src="https://placehold.co/600x350?text=Cronica+1" alt="Crónica 1" width="600" height="350" class="thumb-img" />
-        <button class="play-btn-large" aria-label="Reproducir crónica">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        <img src="https://placehold.co/600x350?text=Cronica+2" alt="Crónica #2" width="600" height="350" class="thumb-img" />
+        <button class="play-btn-large" aria-label="Reproducir Crónica #2">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--color-nav-text, #32509d)" stroke="none">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
         </button>
       </div>
       <div class="video-info">
-        <h3>Volver a sembrar esperanza</h3>
-        <span class="video-type type-cronica">Crónica</span>
-        <p>La historia de María y su familia, quienes retornaron a su territorio en el Tolima tras años de desplazamiento, encontrando en el cacao una oportunidad para reconstruir su hogar y su comunidad.</p>
-      </div>
-    </article>
-
-    <!-- Video 3: Crónica -->
-    <article class="video-row-card">
-      <div class="video-thumb">
-        <img src="https://placehold.co/600x350?text=Cronica+2" alt="Crónica 2" width="600" height="350" class="thumb-img" />
-        <button class="play-btn-large" aria-label="Reproducir crónica">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-        </button>
-      </div>
-      <div class="video-info">
-        <h3>El café que une fronteras</h3>
-        <span class="video-type type-cronica">Crónica</span>
-        <p>Conoce cómo los productores del Catatumbo lograron transformar la narrativa de su región exportando cafés de especialidad a Europa, superando los estigmas a través de la calidad.</p>
+        <h3>Crónica #2</h3>
+        <p class="video-subtitle">Crónicaz</p>
+        <p class="video-desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</p>
       </div>
     </article>
   </div>
 </section>
 
 <style>
+  /* =========================================
+     CSS GENERAL
+     ========================================= */
   .productores-videos {
     display: flex;
     flex-direction: column;
@@ -83,22 +75,32 @@ import tucan from "../../assets/paissana/tucan.svg";
     align-items: center;
   }
 
-  @media (min-width: 768px) {
-    .productores-header-grid {
-      grid-template-columns: 3fr 1fr;
-    }
-  }
-
   .productores-header-text h2 {
     margin: 0;
+    font-family: var(--font-komet);
+    font-weight: var(--font-weight-komet-heavy, 800);
+    color: var(--color-nav-text, #32509d);
   }
 
   .productores-header-text h3 {
     margin-top: var(--space-2, 0.5rem);
     margin-bottom: var(--space-4, 1rem);
+    font-family: var(--font-komet);
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-komet-regular, 400);
+    color: var(--color-nav-text, #32509d);
   }
 
+  .productores-header-text p {
+    font-family: var(--font-komet);
+    font-weight: var(--font-weight-komet-light, 300);
+    line-height: 1.6;
+    color: var(--color-nav-text, #32509d);
+  }
 
+  .productores-header-text strong {
+    font-weight: var(--font-weight-komet-heavy, 800);
+  }
 
   .productores-header-tucan {
     display: flex;
@@ -122,7 +124,7 @@ import tucan from "../../assets/paissana/tucan.svg";
   .videos-list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-8, 2rem);
+    gap: var(--space-6, 1.5rem);
     margin-top: var(--space-4, 1rem);
   }
 
@@ -131,37 +133,13 @@ import tucan from "../../assets/paissana/tucan.svg";
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-6, 1.5rem);
-    background-color: var(--color-surface, #ffffff);
-    border: 1px solid var(--color-border, #d6d3d1);
-    border-radius: var(--radius-card, 8px);
-    overflow: hidden;
-    padding: var(--space-4, 1rem);
-    transition: box-shadow 0.3s ease;
-  }
-
-  .video-row-card:hover {
-    box-shadow: var(--shadow-soft);
-  }
-
-  @media (min-width: 768px) {
-    .video-row-card {
-      grid-template-columns: 1.2fr 1fr;
-      align-items: center;
-      padding: var(--space-6, 1.5rem);
-    }
-    
-    /* Alternate row layout for visual interest */
-    .video-row-card:nth-child(even) {
-      grid-template-columns: 1fr 1.2fr;
-    }
-    
-    .video-row-card:nth-child(even) .video-thumb {
-      order: 2;
-    }
-    
-    .video-row-card:nth-child(even) .video-info {
-      order: 1;
-    }
+    background-color: transparent;
+    border-top: 1px solid var(--color-nav-text, #32509d);
+    border-bottom: 1px solid var(--color-nav-text, #32509d);
+    border-left: none;
+    border-right: none;
+    padding-block: var(--space-6, 1.5rem);
+    padding-inline: 0;
   }
 
   /* THUMBNAIL */
@@ -170,7 +148,8 @@ import tucan from "../../assets/paissana/tucan.svg";
     border-radius: 6px;
     overflow: hidden;
     aspect-ratio: 16 / 9;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 100%;
+    order: 1;
   }
 
   .thumb-img {
@@ -189,21 +168,21 @@ import tucan from "../../assets/paissana/tucan.svg";
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80px;
-    height: 80px;
-    background-color: rgba(15, 118, 110, 0.85); /* brand accent */
+    width: 68px;
+    height: 68px;
+    background-color: rgba(255, 255, 255, 0.92);
     border: none;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     transition: all 0.2s ease;
   }
 
   .play-btn-large:hover {
-    background-color: var(--color-loquehacemos-bg, #008861);
+    background-color: #ffffff;
     transform: translate(-50%, -50%) scale(1.1);
   }
 
@@ -211,36 +190,65 @@ import tucan from "../../assets/paissana/tucan.svg";
   .video-info {
     display: flex;
     flex-direction: column;
-    gap: var(--space-3, 0.75rem);
-    align-items: flex-start;
+    gap: var(--space-2, 0.5rem);
+    justify-content: center;
+    color: var(--color-nav-text, #32509d);
+    font-family: var(--font-komet);
+    order: 2;
   }
 
   .video-info h3 {
     margin: 0;
+    font-family: var(--font-komet);
+    font-weight: var(--font-weight-komet-heavy, 800);
+    font-size: 1.75rem;
+    color: var(--color-nav-text, #32509d);
+    line-height: 1.2;
   }
 
-  .video-type {
-    display: inline-block;
-    padding: var(--space-1, 0.25rem) var(--space-3, 0.75rem);
-    border-radius: 4px;
-    font-size: 0.875rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  .video-subtitle {
+    margin: 0;
+    font-family: var(--font-komet);
+    font-weight: var(--font-weight-komet-light, 300);
+    font-size: 1rem;
+    color: var(--color-nav-text, #32509d);
+    opacity: 0.9;
   }
 
-  .type-documental {
-    background-color: var(--color-nav-bg-active, #cbe9f8);
+  .video-desc {
+    margin: 0;
+    margin-top: var(--space-3, 0.75rem);
+    font-family: var(--font-komet);
+    font-weight: var(--font-weight-komet-light, 300);
+    font-size: 1.05rem;
+    line-height: 1.5;
     color: var(--color-nav-text, #32509d);
   }
 
-  .type-cronica {
-    background-color: var(--color-actualidad-bg, #d49ec7);
-    color: var(--color-surface, #ffffff);
+  /* =========================================
+     BREAKPOINT 850px
+     ========================================= */
+  @media (min-width: 850px) {
+    .productores-header-grid {
+      grid-template-columns: 3fr 1fr;
+    }
+
+    .video-row-card {
+      grid-template-columns: 1.2fr 1fr;
+      align-items: center;
+      padding-block: var(--space-8, 2rem);
+    }
+
+    .video-thumb {
+      order: 1;
+    }
+
+    .video-info {
+      order: 2;
+    }
   }
 
-  .video-info p {
-    margin: 0;
-    margin-top: var(--space-2, 0.5rem);
-  }
+  /* =========================================
+     BREAKPOINT 360px
+     ========================================= */
 </style>
