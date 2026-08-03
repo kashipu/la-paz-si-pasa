@@ -1,27 +1,23 @@
 ---
 // Sección 4 · Mockup: documentacion/seccion4@2x-100.jpg
 // "El corazón del campo": reproductor de relatos sonoros. Card con botón de
-// micrófono, datos del productor (nombre, marca, municipio), barra de progreso
-// con timestamps y caja de subtítulos. Flechas para pasar de un audio a otro.
-// Usar <audio> + <input type="range"> nativos, sin librería.
+// reproducción, datos del productor (nombre, marca, municipio), barra de progreso
+// con timestamps, caja de subtítulos y flechas para pasar de un audio a otro.
 ---
 
 <section class="corazon-campo">
   <div class="audio-header">
     <div class="header-left">
       <h2>
-        EL CORAZÓN<br />DEL CAMPO:<br /><span class="highlight"
-          >La voz del territorio</span
-        >
+        EL CORAZÓN<br />DEL CAMPO:<br />
+        <span class="highlight">La voz del territorio</span>
       </h2>
     </div>
     <div class="header-right">
       <p>
         Nadie narra la transformación mejor que quienes la viven día a día en el
-        surco, la parcela o el taller. <strong
-          >Te invitamos a cerrar los ojos y escuchar estos relatos sonoros
-          grabados directamente en el territorio.</strong
-        >
+        surco, la parcela o el taller. <strong>Te invitamos a cerrar los ojos y escuchar estos relatos sonoros
+        grabados directamente en el territorio.</strong>
       </p>
       <p>
         En sus propias voces, las y los productores nos comparten sus memorias,
@@ -67,39 +63,10 @@
           </button>
 
           <div class="producer-info">
-            <h4>Andrés Pineda</h4>
-            <p class="brand">Café Montepineda</p>
-            <p class="location">Pradera, Valle del Cauca</p>
+            <h4 id="audioProducerName">Andrés Pineda</h4>
+            <p class="brand" id="audioBrand">Café Montepineda</p>
+            <p class="location" id="audioLocation">Pradera, Valle del Cauca</p>
           </div>
-        </div>
-
-        <div class="nav-controls">
-          <button class="nav-btn nav-prev" aria-label="Anterior audio">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              ><polyline points="15 18 9 12 15 6"></polyline></svg
-            >
-          </button>
-          <button class="nav-btn nav-next" aria-label="Siguiente audio">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              ><polyline points="9 18 15 12 9 6"></polyline></svg
-            >
-          </button>
         </div>
       </div>
 
@@ -118,20 +85,48 @@
             <span id="duration">01:50</span>
           </div>
         </div>
+
         <div class="subtitles-box">
-          <p>
+          <p id="audioSubtitles">
             Subtítulos: Lorem ipsum dolor sit amet, consectetuer adipiscing
             elit, sed diam nonummy nibh euismod tincidunt ut laoreet
           </p>
+        </div>
+
+        <div class="nav-controls">
+          <button class="nav-btn nav-prev" id="prevAudioBtn" aria-label="Anterior audio">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><polyline points="15 18 9 12 15 6"></polyline></svg
+            >
+          </button>
+          <button class="nav-btn nav-next" id="nextAudioBtn" aria-label="Siguiente audio">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><polyline points="9 18 15 12 9 6"></polyline></svg
+            >
+          </button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Elemento de audio nativo oculto -->
-  <audio id="audioElement" preload="metadata">
-    <!-- <source src="/audio/ejemplo.mp3" type="audio/mpeg"> -->
-  </audio>
+  <audio id="audioElement" preload="metadata"></audio>
 </section>
 
 <style>
@@ -143,13 +138,14 @@
     flex-direction: column;
     gap: var(--space-8, 2rem);
     width: 100%;
-    padding: var(--space-6, 1.5rem);
-    font-family: var(--font-monique-regular, sans-serif);
+    padding-block: var(--space-6, 1.5rem);
+    font-family: var(--font-komet);
   }
 
   .audio-header {
     display: flex;
     flex-direction: column;
+    gap: var(--space-4, 1rem);
   }
 
   .header-left h2 {
@@ -158,27 +154,36 @@
     line-height: 1.2;
     margin: 0;
     text-transform: uppercase;
+    font-family: var(--font-komet);
     font-weight: var(--font-weight-komet-heavy, 800);
   }
 
   .header-left h2 .highlight {
     display: block;
     font-size: 1.6rem;
-    font-weight: bold;
+    font-family: var(--font-komet);
+    font-weight: var(--font-weight-komet-bold, 700);
     text-transform: none;
   }
 
   .header-right {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4, 1rem);
+    gap: var(--space-5, 1.25rem);
     color: var(--color-nav-text, #32509d);
     font-size: 1.1rem;
-    line-height: 1.5;
+    line-height: 1.6;
+    font-family: var(--font-komet);
+    font-weight: var(--font-weight-komet-light, 300);
   }
 
   .header-right p {
     margin: 0;
+    line-height: 1.6;
+  }
+
+  .header-right strong {
+    font-weight: var(--font-weight-komet-bold, 700);
   }
 
   .audio-player-wrapper {
@@ -199,7 +204,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-6, 1.5rem);
-    align-items: center;
+    align-items: flex-start;
   }
 
   .producer-info-container {
@@ -221,9 +226,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition:
-      transform 0.2s ease,
-      opacity 0.2s ease;
+    transition: transform 0.2s ease, opacity 0.2s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   }
 
@@ -237,56 +240,34 @@
   }
 
   .play-pause-btn.playing .icon-pause {
-    display: block !important;
+    display: block;
   }
 
   .producer-info {
     display: flex;
     flex-direction: column;
     color: var(--color-nav-text, #32509d);
+    font-family: var(--font-komet);
   }
 
   .producer-info h4 {
     font-size: 1.1rem;
-    font-weight: bold;
+    font-weight: var(--font-weight-komet-bold, 700);
     margin: 0;
-    line-height: 1.2;
+    line-height: 1.3;
   }
 
   .producer-info .brand {
     font-size: 1rem;
-    font-weight: bold;
+    font-weight: var(--font-weight-komet-bold, 700);
     margin: 0 0 2px 0;
   }
 
   .producer-info .location {
     font-size: 0.9rem;
+    font-weight: var(--font-weight-komet-light, 300);
     margin: 0;
-    opacity: 0.8;
-  }
-
-  .nav-controls {
-    display: flex;
-    gap: var(--space-4, 1rem);
-    justify-content: center;
-  }
-
-  .nav-btn {
-    background-color: var(--color-nav-text, #32509d);
-    border: none;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: var(--color-surface, #ffffff);
-    transition: opacity 0.2s ease;
-  }
-
-  .nav-btn:hover {
-    opacity: 0.8;
+    opacity: 0.85;
   }
 
   .player-right {
@@ -337,30 +318,64 @@
     display: flex;
     justify-content: space-between;
     font-size: 0.9rem;
+    font-family: var(--font-komet);
+    font-weight: var(--font-weight-komet-light, 300);
     color: var(--color-nav-text, #32509d);
   }
 
   .subtitles-box {
     color: var(--color-nav-text, #32509d);
+    font-family: var(--font-komet);
   }
 
   .subtitles-box p {
     font-size: 1rem;
+    font-weight: var(--font-weight-komet-light, 300);
     margin: 0;
-    line-height: 1.5;
+    line-height: 1.6;
+  }
+
+  .nav-controls {
+    display: flex;
+    gap: var(--space-3, 0.75rem);
+    align-items: center;
+    margin-top: var(--space-2, 0.5rem);
+  }
+
+  .nav-btn {
+    background-color: var(--color-nav-text, #32509d);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--color-surface, #ffffff);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .nav-btn:hover {
+    opacity: 0.85;
+    transform: scale(1.08);
   }
 
   /* =========================================
-     BREAKPOINT 768px
+     BREAKPOINT 850px
      ========================================= */
-  @media (min-width: 768px) {
+  @media (min-width: 850px) {
+    .corazon-campo {
+      padding-block: var(--space-8, 2rem);
+    }
+
     .audio-header {
       display: grid;
       grid-template-columns: 380px 1fr;
       align-items: flex-start;
       gap: var(--space-8, 2rem);
     }
-    
+
     .header-left {
       max-width: 100%;
     }
@@ -380,7 +395,7 @@
     .audio-player-card {
       display: grid;
       grid-template-columns: 380px 1fr;
-      align-items: center;
+      align-items: flex-start;
       gap: var(--space-8, 2rem);
     }
 
@@ -389,38 +404,102 @@
       align-items: flex-start;
     }
 
-    .nav-controls {
-      align-self: center;
-    }
-
     .player-right {
       flex: 1;
     }
   }
 
   /* =========================================
-     BREAKPOINT 1024px
+     BREAKPOINT 360px
      ========================================= */
-  @media (min-width: 1024px) {
-    .corazon-campo {
-      padding: var(--space-8, 2rem);
-    }
-  }
 </style>
 
 <script>
-  // Script para manejar el reproductor de audio (mock)
+  // Script interactivo para el reproductor y carrusel de relatos sonoros (4 tracks mock)
   document.addEventListener("DOMContentLoaded", () => {
-    const playBtn = document.getElementById("playPauseBtn");
-    const progressBar = document.getElementById(
-      "audioProgress",
-    ) as HTMLInputElement;
-    const audioElement = document.getElementById(
-      "audioElement",
-    ) as HTMLAudioElement;
+    const tracks = [
+      {
+        producer: "Andrés Pineda",
+        brand: "Café Montepineda",
+        location: "Pradera, Valle del Cauca",
+        duration: "01:50",
+        seconds: 110,
+        subtitles: "Subtítulos: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet",
+      },
+      {
+        producer: "María del Carmen Valencia",
+        brand: "Cacao La Esperanza",
+        location: "Tumaco, Nariño",
+        duration: "02:15",
+        seconds: 135,
+        subtitles: "Subtítulos: El cacao nos devolvió la paz a nuestra vereda. Cuando sembramos el primer árbol, supimos que el futuro de nuestros hijos cambiaría para siempre.",
+      },
+      {
+        producer: "José Roberto Muelas",
+        brand: "Miel Silvestre PDET",
+        location: "La Montañita, Caquetá",
+        duration: "01:35",
+        seconds: 95,
+        subtitles: "Subtítulos: Las abejas no solo producen la mejor miel, cuidan el bosque amazónico y nos enseñan a trabajar en comunidad por la conservación de nuestro territorio.",
+      },
+      {
+        producer: "Esperanza Gómez",
+        brand: "Artesanías Tejidos de Paz",
+        location: "San Jacinto, Bolívar",
+        duration: "02:05",
+        seconds: 125,
+        subtitles: "Subtítulos: En cada hilo de nuestras hamacas tejemos la historia de resiliencia y el orgullo artesanal de las mujeres de los Montes de María.",
+      }
+    ];
 
+    let currentTrackIndex = 0;
     let isPlaying = false;
     let mockInterval: any = null;
+
+    const playBtn = document.getElementById("playPauseBtn");
+    const prevBtn = document.getElementById("prevAudioBtn");
+    const nextBtn = document.getElementById("nextAudioBtn");
+    const progressBar = document.getElementById("audioProgress") as HTMLInputElement;
+    const currentTimeEl = document.getElementById("currentTime");
+    const durationEl = document.getElementById("duration");
+    const producerNameEl = document.getElementById("audioProducerName");
+    const brandEl = document.getElementById("audioBrand");
+    const locationEl = document.getElementById("audioLocation");
+    const subtitlesEl = document.getElementById("audioSubtitles");
+    const audioElement = document.getElementById("audioElement") as HTMLAudioElement;
+
+    function formatTime(seconds: number): string {
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    }
+
+    function stopPlayback() {
+      isPlaying = false;
+      playBtn?.classList.remove("playing");
+      if (mockInterval) clearInterval(mockInterval);
+      if (audioElement && audioElement.src && audioElement.src !== window.location.href) {
+        audioElement.pause();
+      }
+    }
+
+    function loadTrack(index: number) {
+      stopPlayback();
+      currentTrackIndex = index;
+      const track = tracks[currentTrackIndex];
+
+      if (producerNameEl) producerNameEl.textContent = track.producer;
+      if (brandEl) brandEl.textContent = track.brand;
+      if (locationEl) locationEl.textContent = track.location;
+      if (durationEl) durationEl.textContent = track.duration;
+      if (subtitlesEl) subtitlesEl.textContent = track.subtitles;
+
+      if (progressBar) {
+        progressBar.max = track.seconds.toString();
+        progressBar.value = "0";
+      }
+      if (currentTimeEl) currentTimeEl.textContent = "00:00";
+    }
 
     if (playBtn && progressBar) {
       playBtn.addEventListener("click", () => {
@@ -428,33 +507,49 @@
 
         if (isPlaying) {
           playBtn.classList.add("playing");
-          // Simular reproducción si no hay source real
           if (!audioElement.src || audioElement.src === window.location.href) {
             mockInterval = setInterval(() => {
               let val = parseInt(progressBar.value);
-              if (val < parseInt(progressBar.max)) {
-                progressBar.value = (val + 1).toString();
-                // Aquí se actualizaría el tiempo actual (currentTime)
+              const maxVal = parseInt(progressBar.max);
+              if (val < maxVal) {
+                val += 1;
+                progressBar.value = val.toString();
+                if (currentTimeEl) currentTimeEl.textContent = formatTime(val);
               } else {
-                // Termina
-                clearInterval(mockInterval);
-                playBtn.classList.remove("playing");
-                isPlaying = false;
+                stopPlayback();
                 progressBar.value = "0";
+                if (currentTimeEl) currentTimeEl.textContent = "00:00";
               }
             }, 1000);
           } else {
             audioElement.play();
           }
         } else {
-          playBtn.classList.remove("playing");
-          if (!audioElement.src || audioElement.src === window.location.href) {
-            clearInterval(mockInterval);
-          } else {
-            audioElement.pause();
-          }
+          stopPlayback();
         }
       });
+
+      progressBar.addEventListener("input", () => {
+        const val = parseInt(progressBar.value);
+        if (currentTimeEl) currentTimeEl.textContent = formatTime(val);
+      });
     }
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        const nextIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+        loadTrack(nextIndex);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        const nextIndex = (currentTrackIndex + 1) % tracks.length;
+        loadTrack(nextIndex);
+      });
+    }
+
+    // Cargar pista inicial
+    loadTrack(0);
   });
 </script>
