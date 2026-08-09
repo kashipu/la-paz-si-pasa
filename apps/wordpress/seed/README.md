@@ -24,19 +24,25 @@ uid 82, pero la de WordPress es Debian y usa uid 33, que es quien posee
 
 Prerrequisito: **Secure Custom Fields tiene que estar instalado y activo**. Es un
 plugin, no vive en el repo, y sin él no se registra ningún CPT — el sitio queda
-con los tipos nativos de WordPress y nada más.
+con los tipos nativos de WordPress y nada más. Se instala desde
+`wp-admin` → Plugins → Añadir nuevo → «Secure Custom Fields».
 
-Desde el directorio del stack en el servidor:
+Después, un solo comando dentro del contenedor `cms` (no hace falta wp-cli ni
+instalar nada; el `su` es para que los archivos queden de www-data y no de root):
 
 ```bash
-docker compose -f compose.prod.yaml run --rm --user 33 wpcli \
-  wp plugin install secure-custom-fields --activate
-docker compose -f compose.prod.yaml run --rm --user 33 wpcli \
-  wp eval-file /opt/seed/seed.php
+su -s /bin/sh www-data -c 'php /opt/seed/seed.php'
 ```
 
-El servicio `wpcli` está bajo el perfil `tools`, así que no se levanta en los
-despliegues normales; solo cuando se invoca a mano como arriba.
+Se puede lanzar desde la terminal de Dokploy sobre el servicio `cms`, o como
+Schedule de tipo compose apuntando a ese servicio.
+
+También existe el servicio `wpcli` bajo el perfil `tools`, que no se levanta en
+los despliegues normales, por si hace falta wp-cli para otra cosa:
+
+```bash
+docker compose -f compose.prod.yaml run --rm --user 33 wpcli wp <comando>
+```
 
 Para comprobar:
 

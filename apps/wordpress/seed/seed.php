@@ -3,22 +3,40 @@
  * Carga el contenido de contenido.json en los CPT del micrositio.
  *
  * Esta carpeta se monta en /opt/seed (fuera del webroot: contiene PHP y no debe
- * ser accesible por HTTP). Se ejecuta con wp-cli:
+ * ser accesible por HTTP). Corre de dos formas.
  *
+ * Con wp-cli, en local:
  *   docker compose run --rm --user 33 wpcli wp eval-file /opt/seed/seed.php
+ *   (el --user 33 no es opcional: la imagen wpcli es Alpine y ahí www-data es
+ *   uid 82, pero la de WordPress es Debian y usa uid 33, dueño de uploads)
  *
- * El --user 33 es necesario: la imagen wpcli es Alpine y ahí www-data es uid 82,
- * pero la de WordPress es Debian y usa uid 33, dueño de wp-content/uploads.
+ * Con PHP a secas, dentro del contenedor de WordPress, sin instalar nada:
+ *   su -s /bin/sh www-data -c 'php /opt/seed/seed.php'
  *
  * Es idempotente: busca cada entrada por título y post_type, y la actualiza en
  * vez de duplicarla. Los medios se reconocen por nombre de archivo, así que si
  * ya los subiste por wp-admin no se duplican.
  */
 
-$base = __DIR__;
-$datos = json_decode(file_get_contents($base . '/contenido.json'), true);
+// Arranca WordPress si nos invocaron con php a secas; con wp-cli ya está cargado.
+if (!defined('ABSPATH')) {
+    require_once '/var/www/html/wp-load.php';
+}
+
+/** Escribe por wp-cli si está, y si no por salida estándar. */
+function aviso($texto, $error = false)
+{
+    if (class_exists('WP_CLI')) {
+        $error ? WP_CLI::warning($texto) : WP_CLI::log($texto);
+        return;
+    }
+    echo ($error ? '!! ' : '   ') . $texto . "\n";
+}
+
+$datos = json_decode(file_get_contents(__DIR__ . '/contenido.json'), true);
 if (!$datos) {
-    WP_CLI::error('No se pudo leer contenido.json');
+    aviso('No se pudo leer contenido.json', true);
+    exit(1);
 }
 
 require_once ABSPATH . 'wp-admin/includes/image.php';
@@ -30,7 +48,7 @@ function medio($ruta_relativa)
     // dentro de una función, así que $base de arriba no es global.
     $ruta = __DIR__ . '/media/' . $ruta_relativa;
     if (!file_exists($ruta)) {
-        WP_CLI::warning("falta el archivo: $ruta_relativa");
+        aviso("falta el archivo: $ruta_relativa", true);
         return 0;
     }
     $nombre = basename($ruta);
@@ -46,7 +64,7 @@ function medio($ruta_relativa)
 
     $subida = wp_upload_bits($nombre, null, file_get_contents($ruta));
     if (!empty($subida['error'])) {
-        WP_CLI::warning("no se pudo subir $nombre: {$subida['error']}");
+        aviso("no se pudo subir $nombre: {$subida['error']}", true);
         return 0;
     }
     $id = wp_insert_attachment([
@@ -76,13 +94,13 @@ function upsert($post_type, $titulo, $campos)
         ], true);
 
     if (is_wp_error($id)) {
-        WP_CLI::warning("$post_type «$titulo»: {$id->get_error_message()}");
+        aviso("$post_type «$titulo»: {$id->get_error_message()}", true);
         return;
     }
     foreach ($campos as $nombre => $valor) {
         update_field($nombre, $valor, $id);
     }
-    WP_CLI::log(sprintf('%-13s %s  #%d %s', $post_type, $previos ? 'actualizado' : 'creado     ', $id, $titulo));
+    aviso(sprintf('%-13s %s  #%d %s', $post_type, $previos ? 'actualizado' : 'creado     ', $id, $titulo));
 }
 
 foreach ($datos['retratos'] as $r) {
@@ -125,4 +143,4 @@ foreach ($datos['audio_relatos'] as $a) {
     ]);
 }
 
-WP_CLI::success('contenido cargado');
+aviso('listo: contenido cargado');
