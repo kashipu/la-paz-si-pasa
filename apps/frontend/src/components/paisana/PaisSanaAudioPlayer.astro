@@ -3,9 +3,23 @@
 // "El corazón del campo": reproductor de relatos sonoros. Card con botón de
 // reproducción, datos del productor (nombre, marca, municipio), barra de progreso
 // con timestamps, caja de subtítulos y flechas para pasar de un audio a otro.
+// Los relatos vienen del CPT `audio_relato` vía props de la página.
+import type { AudioRelato } from "@adapters/contracts";
+
+type Props = { relatos: AudioRelato[] };
+const { relatos } = Astro.props;
+
+const inicial = relatos[0];
+
+function formatearDuracion(segundos?: number) {
+  if (!segundos || !Number.isFinite(segundos)) return "00:00";
+  const minutos = Math.floor(segundos / 60);
+  const resto = Math.floor(segundos % 60);
+  return `${String(minutos).padStart(2, "0")}:${String(resto).padStart(2, "0")}`;
+}
 ---
 
-<section class="corazon-campo" id="escucha-el-corazon-del-campo">
+<section class="corazon-campo" id="escucha-el-corazon-del-campo" data-relatos={JSON.stringify(relatos)}>
   <div class="audio-header">
     <div class="header-left">
       <h2>
@@ -63,9 +77,9 @@
           </button>
 
           <div class="producer-info">
-            <h4 id="audioProducerName">Andrés Pineda</h4>
-            <p class="brand" id="audioBrand">Café Montepineda</p>
-            <p class="location" id="audioLocation">Pradera, Valle del Cauca</p>
+            <h4 id="audioProducerName">{inicial?.productor}</h4>
+            <p class="brand" id="audioBrand">{inicial?.marca}</p>
+            <p class="location" id="audioLocation">{inicial?.lugar}</p>
           </div>
         </div>
       </div>
@@ -75,22 +89,21 @@
           <input
             type="range"
             min="0"
-            max="110"
+            max={inicial?.duracionSegundos ?? 0}
             value="0"
+            step="1"
             class="progress-bar"
             id="audioProgress"
+            aria-label="Progreso del relato"
           />
           <div class="timestamps">
             <span id="currentTime">00:00</span>
-            <span id="duration">01:50</span>
+            <span id="duration">{formatearDuracion(inicial?.duracionSegundos)}</span>
           </div>
         </div>
 
         <div class="subtitles-box">
-          <p id="audioSubtitles">
-            Subtítulos: Lorem ipsum dolor sit amet, consectetuer adipiscing
-            elit, sed diam nonummy nibh euismod tincidunt ut laoreet
-          </p>
+          <p id="audioSubtitles">{inicial?.subtitulos}</p>
         </div>
 
         <div class="nav-controls">
@@ -126,7 +139,10 @@
   </div>
 
   <!-- Elemento de audio nativo oculto -->
-  <audio id="audioElement" preload="metadata"></audio>
+  <audio id="audioElement" preload="metadata" src={inicial?.audioUrl || undefined}></audio>
+  <p class="audio-aviso" id="audioAviso" role="status" hidden>
+    Este relato aún no tiene archivo de audio publicado.
+  </p>
 </section>
 
 <style>
@@ -233,6 +249,19 @@
   .play-pause-btn:hover {
     transform: scale(1.05);
     opacity: 0.9;
+  }
+
+  .play-pause-btn[disabled] {
+    cursor: not-allowed;
+    opacity: 0.45;
+    transform: none;
+  }
+
+  .audio-aviso {
+    margin: 0;
+    color: var(--color-nav-text, #32509d);
+    font-size: 0.95rem;
+    font-style: italic;
   }
 
   .play-pause-btn.playing .icon-play {
@@ -415,46 +444,16 @@
 </style>
 
 <script>
-  // Script interactivo para el reproductor y carrusel de relatos sonoros (4 tracks mock)
-  document.addEventListener("astro:page-load", () => {
-    const tracks = [
-      {
-        producer: "Andrés Pineda",
-        brand: "Café Montepineda",
-        location: "Pradera, Valle del Cauca",
-        duration: "01:50",
-        seconds: 110,
-        subtitles: "Subtítulos: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet",
-      },
-      {
-        producer: "María del Carmen Valencia",
-        brand: "Cacao La Esperanza",
-        location: "Tumaco, Nariño",
-        duration: "02:15",
-        seconds: 135,
-        subtitles: "Subtítulos: El cacao nos devolvió la paz a nuestra vereda. Cuando sembramos el primer árbol, supimos que el futuro de nuestros hijos cambiaría para siempre.",
-      },
-      {
-        producer: "José Roberto Muelas",
-        brand: "Miel Silvestre PDET",
-        location: "La Montañita, Caquetá",
-        duration: "01:35",
-        seconds: 95,
-        subtitles: "Subtítulos: Las abejas no solo producen la mejor miel, cuidan el bosque amazónico y nos enseñan a trabajar en comunidad por la conservación de nuestro territorio.",
-      },
-      {
-        producer: "Esperanza Gómez",
-        brand: "Artesanías Tejidos de Paz",
-        location: "San Jacinto, Bolívar",
-        duration: "02:05",
-        seconds: 125,
-        subtitles: "Subtítulos: En cada hilo de nuestras hamacas tejemos la historia de resiliencia y el orgullo artesanal de las mujeres de los Montes de María.",
-      }
-    ];
+  import type { AudioRelato } from "@adapters/contracts";
 
-    let currentTrackIndex = 0;
-    let isPlaying = false;
-    let mockInterval: any = null;
+  // Reproductor de relatos sonoros sobre el elemento <audio> nativo.
+  // Los relatos llegan serializados en data-relatos desde la página.
+  document.addEventListener("astro:page-load", () => {
+    const seccion = document.getElementById("escucha-el-corazon-del-campo");
+    if (!seccion) return;
+
+    const relatos: AudioRelato[] = JSON.parse(seccion.dataset.relatos || "[]");
+    if (relatos.length === 0) return;
 
     const playBtn = document.getElementById("playPauseBtn");
     const prevBtn = document.getElementById("prevAudioBtn");
@@ -466,90 +465,83 @@
     const brandEl = document.getElementById("audioBrand");
     const locationEl = document.getElementById("audioLocation");
     const subtitlesEl = document.getElementById("audioSubtitles");
-    const audioElement = document.getElementById("audioElement") as HTMLAudioElement;
+    const avisoEl = document.getElementById("audioAviso");
+    const audio = document.getElementById("audioElement") as HTMLAudioElement;
+    if (!audio || !playBtn || !progressBar) return;
+
+    let indiceActual = 0;
 
     function formatTime(seconds: number): string {
+      if (!Number.isFinite(seconds)) return "00:00";
       const mins = Math.floor(seconds / 60);
       const secs = Math.floor(seconds % 60);
-      return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
+      return `${mins < 10 ? "0" : ""}${mins}:${secs < 10 ? "0" : ""}${secs}`;
     }
 
-    function stopPlayback() {
-      isPlaying = false;
-      playBtn?.classList.remove("playing");
-      if (mockInterval) clearInterval(mockInterval);
-      if (audioElement && audioElement.src && audioElement.src !== window.location.href) {
-        audioElement.pause();
-      }
+    function pintarDuracion(segundos: number) {
+      if (durationEl) durationEl.textContent = formatTime(segundos);
+      progressBar.max = String(Math.floor(segundos) || 0);
     }
 
-    function loadTrack(index: number) {
-      stopPlayback();
-      currentTrackIndex = index;
-      const track = tracks[currentTrackIndex];
+    function cargarRelato(indice: number) {
+      audio.pause();
+      indiceActual = indice;
+      const relato = relatos[indiceActual];
 
-      if (producerNameEl) producerNameEl.textContent = track.producer;
-      if (brandEl) brandEl.textContent = track.brand;
-      if (locationEl) locationEl.textContent = track.location;
-      if (durationEl) durationEl.textContent = track.duration;
-      if (subtitlesEl) subtitlesEl.textContent = track.subtitles;
+      if (producerNameEl) producerNameEl.textContent = relato.productor;
+      if (brandEl) brandEl.textContent = relato.marca;
+      if (locationEl) locationEl.textContent = relato.lugar;
+      if (subtitlesEl) subtitlesEl.textContent = relato.subtitulos;
 
-      if (progressBar) {
-        progressBar.max = track.seconds.toString();
-        progressBar.value = "0";
-      }
+      progressBar.value = "0";
       if (currentTimeEl) currentTimeEl.textContent = "00:00";
+      pintarDuracion(relato.duracionSegundos ?? 0);
+
+      // Sin archivo publicado en WordPress: se avisa en vez de simular reproducción.
+      const disponible = Boolean(relato.audioUrl);
+      if (avisoEl) avisoEl.hidden = disponible;
+      playBtn?.toggleAttribute("disabled", !disponible);
+      progressBar.toggleAttribute("disabled", !disponible);
+
+      if (disponible) audio.src = relato.audioUrl;
+      else audio.removeAttribute("src");
     }
 
-    if (playBtn && progressBar) {
-      playBtn.addEventListener("click", () => {
-        isPlaying = !isPlaying;
+    playBtn.addEventListener("click", () => {
+      if (audio.paused) audio.play();
+      else audio.pause();
+    });
 
-        if (isPlaying) {
-          playBtn.classList.add("playing");
-          if (!audioElement.src || audioElement.src === window.location.href) {
-            mockInterval = setInterval(() => {
-              let val = parseInt(progressBar.value);
-              const maxVal = parseInt(progressBar.max);
-              if (val < maxVal) {
-                val += 1;
-                progressBar.value = val.toString();
-                if (currentTimeEl) currentTimeEl.textContent = formatTime(val);
-              } else {
-                stopPlayback();
-                progressBar.value = "0";
-                if (currentTimeEl) currentTimeEl.textContent = "00:00";
-              }
-            }, 1000);
-          } else {
-            audioElement.play();
-          }
-        } else {
-          stopPlayback();
-        }
-      });
+    audio.addEventListener("play", () => playBtn.classList.add("playing"));
+    audio.addEventListener("pause", () => playBtn.classList.remove("playing"));
 
-      progressBar.addEventListener("input", () => {
-        const val = parseInt(progressBar.value);
-        if (currentTimeEl) currentTimeEl.textContent = formatTime(val);
-      });
-    }
+    // La duración real del archivo manda sobre la que se cargó en WordPress.
+    audio.addEventListener("loadedmetadata", () => pintarDuracion(audio.duration));
 
-    if (prevBtn) {
-      prevBtn.addEventListener("click", () => {
-        const nextIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
-        loadTrack(nextIndex);
-      });
-    }
+    audio.addEventListener("timeupdate", () => {
+      progressBar.value = String(audio.currentTime);
+      if (currentTimeEl) currentTimeEl.textContent = formatTime(audio.currentTime);
+    });
 
-    if (nextBtn) {
-      nextBtn.addEventListener("click", () => {
-        const nextIndex = (currentTrackIndex + 1) % tracks.length;
-        loadTrack(nextIndex);
-      });
-    }
+    audio.addEventListener("ended", () => {
+      progressBar.value = "0";
+      if (currentTimeEl) currentTimeEl.textContent = "00:00";
+    });
 
-    // Cargar pista inicial
-    loadTrack(0);
+    progressBar.addEventListener("input", () => {
+      const valor = Number(progressBar.value);
+      audio.currentTime = valor;
+      if (currentTimeEl) currentTimeEl.textContent = formatTime(valor);
+    });
+
+    prevBtn?.addEventListener("click", () => {
+      cargarRelato((indiceActual - 1 + relatos.length) % relatos.length);
+    });
+
+    nextBtn?.addEventListener("click", () => {
+      cargarRelato((indiceActual + 1) % relatos.length);
+    });
+
+    cargarRelato(0);
   });
 </script>

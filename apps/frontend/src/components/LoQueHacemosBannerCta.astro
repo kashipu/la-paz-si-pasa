@@ -7,8 +7,10 @@ type Props = {
   href?: string;
 };
 
-// ponytail: placeholder hasta tener la URL final de la página de noticias
-const { imageAlt = "Más noticias del fondo aquí", href = "#" } = Astro.props;
+// La URL viene del campo noticias_cta_url de la página "home" en WordPress.
+// ponytail: "#" mientras ese campo esté vacío — quitar cuando la URL final esté publicada.
+const { imageAlt = "Más noticias del fondo aquí", href: hrefProp } = Astro.props;
+const href = hrefProp || "#";
 const [desktop, tablet, mobile] = await Promise.all([
   getImage({ src: noticiasBanner, width: 1440, format: "webp" }),
   getImage({ src: noticiasBanner, width: 960, format: "webp" }),

@@ -1,47 +1,46 @@
 ---
-export interface Props {
-  title: string;
-  description?: string;
-  isOpen?: boolean;
-}
+import type { Feria } from "@adapters/contracts";
 
-const { 
-  title, 
-  description = "En esta feria, nuestros productores presentaron lo mejor del campo colombiano, mostrando procesos sostenibles y fortaleciendo sus lazos comerciales directos con grandes superficies, sin intermediarios. Una muestra clara de resiliencia y calidad.", 
-  isOpen = false 
-} = Astro.props;
+type Props = { feria: Feria; isOpen?: boolean };
+const { feria, isOpen = false } = Astro.props;
+const { titulo, descripcion, galeria, video } = feria;
 ---
 
 <details class="feria-item" open={isOpen} name="ferias-acordeon">
   <summary class="feria-header">
-    <span class="feria-title">{title}</span>
+    <span class="feria-title">{titulo}</span>
     <span class="chevron">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
     </span>
   </summary>
   <div class="feria-body-grid">
     <div class="feria-left">
-      <p class="feria-desc">{description}</p>
-      <h3 class="gallery-title">GALERÍA FOTOGRÁFICA</h3>
-      <div class="gallery-grid-3x2">
-        <img src="https://placehold.co/300x200?text=Foto+Feria+1" alt={`${title} 1`} width="300" height="200" />
-        <img src="https://placehold.co/300x200?text=Foto+Feria+2" alt={`${title} 2`} width="300" height="200" />
-        <img src="https://placehold.co/300x200?text=Foto+Feria+3" alt={`${title} 3`} width="300" height="200" />
-        <img src="https://placehold.co/300x200?text=Foto+Feria+4" alt={`${title} 4`} width="300" height="200" />
-        <img src="https://placehold.co/300x200?text=Foto+Feria+5" alt={`${title} 5`} width="300" height="200" />
-        <img src="https://placehold.co/300x200?text=Foto+Feria+6" alt={`${title} 6`} width="300" height="200" />
-      </div>
+      <p class="feria-desc">{descripcion}</p>
+      {galeria.length > 0 && (
+        <>
+          <h3 class="gallery-title">GALERÍA FOTOGRÁFICA</h3>
+          <div class="gallery-grid-3x2">
+            {galeria.map((foto) => (
+              <img src={foto.url} alt={foto.alt} width="300" height="200" loading="lazy" decoding="async" />
+            ))}
+          </div>
+        </>
+      )}
     </div>
-    <div class="feria-right">
-      <div class="vertical-video-card">
-        <div class="video-media">
-          <img src="https://placehold.co/400x600?text=Video+Feria" alt={`Video ${title}`} width="400" height="600" />
-          <button class="play-btn-overlay" aria-label="Reproducir video">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-          </button>
+    {video && (
+      <div class="feria-right">
+        <div class="vertical-video-card">
+          <div class="video-media" data-video-source={video.fuente} data-video-src={video.url}>
+            {video.thumbnailUrl
+              ? <img src={video.thumbnailUrl} alt={video.alt} width="400" height="600" loading="lazy" decoding="async" />
+              : <div class="video-media__sin-miniatura" aria-hidden="true"></div>}
+            <button class="play-btn-overlay" aria-label={`Reproducir ${video.alt}`}>
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    )}
   </div>
 </details>
 
@@ -193,6 +192,20 @@ const {
     max-width: 320px;
   }
 
+  /* video sin miniatura cargada en WordPress: mantiene el 2:3 sin romper el layout */
+  .video-media__sin-miniatura {
+    aspect-ratio: 2 / 3;
+    width: 100%;
+    background: var(--color-nav-bg-active, #e6e6e6);
+  }
+
+  .video-media :is(iframe, video) {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    border: 0;
+  }
+
   .video-media {
     position: relative;
     border-radius: 6px;
@@ -246,3 +259,34 @@ const {
      BREAKPOINT 360px
      ========================================= */
 </style>
+
+<script>
+  // Reemplaza la miniatura por el reproductor real al pulsar play.
+  // Delegado en document: cubre todas las ferias con un solo listener.
+  document.addEventListener("astro:page-load", () => {
+    document.addEventListener("click", (event) => {
+      const boton = (event.target as HTMLElement)?.closest?.(".play-btn-overlay");
+      if (!boton) return;
+
+      const media = boton.closest<HTMLElement>(".video-media");
+      const src = media?.dataset.videoSrc;
+      if (!media || !src) return;
+
+      if (media.dataset.videoSource === "youtube") {
+        const iframe = document.createElement("iframe");
+        iframe.src = `${src}${src.includes("?") ? "&" : "?"}autoplay=1&rel=0&playsinline=1`;
+        iframe.title = boton.getAttribute("aria-label") ?? "Video";
+        iframe.allow = "accelerometer; autoplay; encrypted-media; picture-in-picture";
+        iframe.allowFullscreen = true;
+        media.replaceChildren(iframe);
+      } else {
+        const video = document.createElement("video");
+        video.src = src;
+        video.controls = true;
+        video.autoplay = true;
+        video.playsInline = true;
+        media.replaceChildren(video);
+      }
+    });
+  });
+</script>

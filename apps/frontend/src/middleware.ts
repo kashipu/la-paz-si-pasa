@@ -5,7 +5,13 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const { request } = context;
   const url = new URL(request.url);
 
-  if (request.method !== "GET" || url.pathname.startsWith("/api/") || url.pathname.startsWith("/_")) {
+  // En desarrollo nunca se cachea: al editar en WordPress el cambio debe verse al recargar.
+  if (
+    import.meta.env.DEV ||
+    request.method !== "GET" ||
+    url.pathname.startsWith("/api/") ||
+    url.pathname.startsWith("/_")
+  ) {
     return next();
   }
 

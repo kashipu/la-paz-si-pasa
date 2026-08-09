@@ -4,22 +4,46 @@ import Hero from "@components/Hero.astro";
 import RetratosPaz from "@components/RetratosPaz.astro";
 import LoQueHacemos from "@components/LoQueHacemos.astro";
 import ActualidadGaleria from "@components/ActualidadGaleria.astro";
-import { getRetratos, getSubcuentas, getNoticias, getVideos } from "../adapters";
+import { checkWordPressConnection, getHome, getRetratos, getSubcuentas, getNoticias, getVideos } from "../adapters";
+import type { ContentSourceStatus } from "../adapters";
 
-const [retratos, subcuentas, noticias, videos] = await Promise.all([
-  getRetratos(),
-  getSubcuentas(),
-  getNoticias(),
-  getVideos(),
+const dataSources = new Map<string, ContentSourceStatus["source"]>();
+const debugParam = Astro.url.searchParams.get("debug-content");
+const contentDebugEnabled = debugParam === "1" || (import.meta.env.DEV && debugParam !== "0");
+const reportContentSource = contentDebugEnabled
+  ? (status: ContentSourceStatus) => dataSources.set(status.content, status.source)
+  : undefined;
+const [home, retratos, subcuentas, noticias, videos, wordpressStatus] = await Promise.all([
+  getHome(reportContentSource),
+  getRetratos(reportContentSource),
+  getSubcuentas(reportContentSource),
+  getNoticias(undefined, reportContentSource),
+  getVideos(reportContentSource),
+  contentDebugEnabled ? checkWordPressConnection() : Promise.resolve(undefined),
 ]);
+const fuente = (clave: string) => dataSources.get(clave) ?? "mocks";
+const contentSources: ContentSourceStatus[] = contentDebugEnabled ? [
+  { content: "Página index.astro", source: "code" },
+  { content: "Hero.astro", source: fuente("home") },
+  { content: "IntroText.astro", source: "code" },
+  { content: "RetratosPaz", source: fuente("retratos") },
+  { content: "RetratosPazSlider", source: fuente("retratos") },
+  { content: "LoQueHacemos.astro", source: "code" },
+  { content: "LoQueHacemosTextoDestacado.astro", source: "code" },
+  { content: "LoQueHacemosSubcuentas", source: fuente("subcuentas") },
+  { content: "LoQueHacemosNoticiasTimeline", source: fuente("noticias") },
+  { content: "LoQueHacemosBannerCta.astro", source: fuente("home") },
+  { content: "ActualidadGaleria", source: fuente("videos") },
+  { content: "Footer.astro", source: "code" },
+] : [];
 ---
 
-<BaseLayout>
-  <Hero slot="hero" />
+<BaseLayout contentSources={contentSources} wordpressStatus={wordpressStatus}>
+  <Hero slot="hero" hero={home.hero} />
 
   <div class="contenedor container--wide">
     <RetratosPaz retratos={retratos} />
-    <LoQueHacemos noticias={noticias} subcuentas={subcuentas} />
+    <LoQueHacemos noticias={noticias} subcuentas={subcuentas} noticiasCtaUrl={home.noticiasCtaUrl} />
     <ActualidadGaleria videos={videos} />
   </div>
 </BaseLayout>

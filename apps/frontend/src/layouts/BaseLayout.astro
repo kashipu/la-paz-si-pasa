@@ -5,15 +5,46 @@ import Footer from "@components/Footer.astro";
 import Nav from "@components/Nav.astro";
 import NavMenu from "@components/NavMenu.astro";
 import NavMenuDesktop from "@components/NavMenuDesktop.astro";
+import { getMenuPrimary } from "../adapters";
+import type { ContentSourceStatus } from "../adapters";
+import type { WordPressConnectionStatus } from "../adapters";
 
 type Props = {
   title?: string;
   description?: string;
+  contentSources?: ContentSourceStatus[];
+  wordpressStatus?: WordPressConnectionStatus;
 };
 
 const siteName = "La Paz Sí Pasa";
 const title = Astro.props.title ? `${Astro.props.title} | ${siteName}` : siteName;
 const description = Astro.props.description ?? "Cierre de gestión del Fondo Colombia en Paz";
+
+// El menú se obtiene una sola vez aquí y se pasa a las dos variantes de Nav.
+const debugParam = Astro.url.searchParams.get("debug-content");
+const contentDebugEnabled = debugParam === "1" || (import.meta.env.DEV && debugParam !== "0");
+let menuSource: ContentSourceStatus["source"] = "mocks";
+const menuItems = await getMenuPrimary(
+  contentDebugEnabled ? (status) => { menuSource = status.source; } : undefined,
+);
+
+const contentSources = [
+  ...(Astro.props.contentSources ?? []),
+  ...(contentDebugEnabled
+    ? [
+        { content: "NavMenu.astro", source: menuSource },
+        { content: "NavMenuDesktop.astro", source: menuSource },
+      ]
+    : []),
+];
+const wordpressStatus = Astro.props.wordpressStatus;
+const wordpressLabel = wordpressStatus?.url.startsWith("http://localhost:")
+  ? "WordPress local"
+  : "WordPress";
+const showContentDebug = contentSources.length > 0 || Boolean(wordpressStatus);
+const debugOffUrl = new URL(Astro.url);
+if (import.meta.env.DEV) debugOffUrl.searchParams.set("debug-content", "0");
+else debugOffUrl.searchParams.delete("debug-content");
 ---
 
 <!doctype html>
@@ -28,12 +59,125 @@ const description = Astro.props.description ?? "Cierre de gestión del Fondo Col
   </head>
   <body>
     <Nav siteName={siteName} />
-    <NavMenu />
+    <NavMenu items={menuItems} />
     <slot name="hero" />
-    <NavMenuDesktop />
+    <NavMenuDesktop items={menuItems} />
     <main>
       <slot />
     </main>
     <Footer />
+    {showContentDebug && (
+      <aside class="content-debug" aria-label="Fuentes de contenido">
+        <strong>Fuentes de contenido</strong>
+        {wordpressStatus && (
+          <p class:list={["content-debug__connection", { "content-debug__connection--online": wordpressStatus.online }] }>
+            <span aria-hidden="true"></span>
+            {wordpressLabel}: {wordpressStatus.online ? "arriba" : "abajo"}
+            <small>{wordpressStatus.url}</small>
+          </p>
+        )}
+        <ul>
+          {contentSources.map(({ content, source }) => (
+            <li class:list={[`content-debug__source--${source}`]}>
+              <span aria-hidden="true"></span>
+              {content}: {source === "wordpress" ? "WordPress" : source === "mocks" ? "Mocks" : "Código"}
+            </li>
+          ))}
+        </ul>
+        <a href={`${debugOffUrl.pathname}${debugOffUrl.search}`}>Apagar depurador</a>
+      </aside>
+    )}
+    {showContentDebug && (
+      <script is:inline define:vars={{ contentSources, wordpressStatus }}>
+        console.groupCollapsed("[content-debug] Fuentes de contenido");
+        if (wordpressStatus) {
+          const label = wordpressStatus.url.startsWith("http://localhost:") ? "WordPress local" : "WordPress";
+          const message = `[content-debug] ${label} ${wordpressStatus.online ? "arriba" : "abajo"}: ${wordpressStatus.url}`;
+          wordpressStatus.online ? console.info(message) : console.error(message);
+        }
+        for (const { content, source } of contentSources) {
+          const label = source === "wordpress" ? "WordPress" : source === "mocks" ? "Mocks" : "Código";
+          const message = `[content-debug] ${content}: ${label}`;
+          source === "mocks" ? console.warn(message) : console.info(message);
+        }
+        console.groupEnd();
+      </script>
+    )}
   </body>
 </html>
+
+<style>
+  .content-debug {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 9999;
+    padding: 0.75rem 1rem;
+    border: 1px solid #fff3;
+    border-radius: 0.5rem;
+    background: #171717;
+    color: white;
+    font: 0.8rem/1.5 ui-monospace, monospace;
+    box-shadow: 0 0.5rem 1.5rem #0005;
+    max-height: calc(100vh - 2rem);
+    overflow: auto;
+  }
+
+  .content-debug__connection {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 0 0.5rem;
+    margin: 0.4rem 0 0;
+  }
+
+  .content-debug__connection small {
+    grid-column: 2;
+    color: #d1d5db;
+  }
+
+  .content-debug ul {
+    margin: 0.4rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .content-debug li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .content-debug li span {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: #f59e0b;
+  }
+
+  .content-debug__source--wordpress span {
+    background: #22c55e;
+  }
+
+  .content-debug__source--code span {
+    background: #60a5fa;
+  }
+
+  .content-debug__connection span {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: #ef4444;
+  }
+
+  .content-debug__connection--online span {
+    background: #22c55e;
+  }
+
+  .content-debug a {
+    display: block;
+    margin-top: 0.5rem;
+    color: #fff;
+    text-decoration: underline;
+  }
+</style>

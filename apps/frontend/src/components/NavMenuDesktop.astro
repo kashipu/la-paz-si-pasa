@@ -1,15 +1,14 @@
 ---
-const items = [
-  { href: "/#lo-que-hacemos", label: "Lo que hacemos" },
-  { href: "/proyectos-destacados", label: "Proyectos destacados" },
-  { href: "/#actualidad", label: "Actualidad" },
-];
+import type { MenuItem } from "../adapters";
+
+type Props = { items: MenuItem[] };
+const { items } = Astro.props;
 ---
 
 <nav class="nav container--wide" aria-label="Principal">
   <ul class="nav__list">
     {items.map((item) => (
-      <li><a href={item.href}>{item.label}</a></li>
+      <li><a href={item.url} target={item.target || undefined}>{item.label}</a></li>
     ))}
   </ul>
 </nav>
@@ -28,7 +27,9 @@ const items = [
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    /* se adapta al número de ítems que devuelva el menú de WordPress */
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
     gap: var(--space-4);
   }
 

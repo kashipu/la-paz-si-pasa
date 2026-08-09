@@ -2,10 +2,10 @@
 import tucan from "../../assets/paissana/tucan.svg";
 import type { Video } from "@adapters/contracts";
 import OptimizedImage from "../OptimizedImage.astro";
-import { mockVideos } from "../../adapters/mocks";
 
-// Seleccionamos los videos mock del proyecto con el sello PaiSana
-const paisanaVideos = mockVideos.filter((v) => v.tags.includes("PaiSana"));
+// La página filtra por el sello PaisSana y entrega los videos ya listos.
+type Props = { videos: Video[] };
+const { videos: paisanaVideos } = Astro.props;
 
 function playerUrl(video: Video, origin: string) {
   if (video.fuente !== "youtube") return video.videoUrl;

@@ -1,4 +1,13 @@
-import type { HeroData, Retrato, Subcuenta, Noticia, Video } from "./contracts";
+import type {
+  AudioRelato,
+  Feria,
+  HomeConfig,
+  MenuItem,
+  Noticia,
+  Retrato,
+  Subcuenta,
+  Video,
+} from "./contracts";
 import { youtubeId, youtubeVideo } from "./youtube.js";
 
 import logoVictimas from "../assets/subcuentas/victimas.png";
@@ -27,10 +36,18 @@ import logoSustitucion from "../assets/subcuentas/sustitucion.png";
 import fotoRetrato1 from "../assets/retratos/foto-retratos@3x.png";
 
 // ponytail: mocks de desarrollo — se usan como fallback mientras los CPT no existan en WP
-export const mockHero: HeroData = {
-  imageUrl: "https://picsum.photos/seed/hero/1600/700",
-  imageAlt: "Paisaje de Colombia",
+// imageUrl vacío = Hero.astro usa su asset local optimizado por astro:assets
+export const mockHome: HomeConfig = {
+  hero: { imageUrl: "", imageAlt: "" },
+  noticiasCtaUrl: "",
 };
+
+// Fallback del menú principal: los tres enlaces fijos actuales
+export const mockMenuPrimary: MenuItem[] = [
+  { id: 1, label: "Lo que hacemos", url: "/#lo-que-hacemos", parentId: 0, order: 1 },
+  { id: 2, label: "Proyectos destacados", url: "/proyectos-destacados", parentId: 0, order: 2 },
+  { id: 3, label: "Actualidad", url: "/#actualidad", parentId: 0, order: 3 },
+];
 
 export const mockRetratos: Retrato[] = [
   {
@@ -110,7 +127,7 @@ export const mockVideos: Video[] = [
     fuente: "youtube",
     estado: "disponible",
     ...youtubeVideo(youtubeId("https://www.youtube.com/watch?v=WEYN6vodbPc")!),
-    tags: ["PaiSana"],
+    tags: ["PaisSana"],
   },
   {
     id: "2",
@@ -120,7 +137,7 @@ export const mockVideos: Video[] = [
     fuente: "youtube",
     estado: "disponible",
     ...youtubeVideo(youtubeId("https://youtu.be/GlSj8XMwMyA")!),
-    tags: ["PaiSana"],
+    tags: ["PaisSana"],
   },
   {
     id: "3",
@@ -130,7 +147,7 @@ export const mockVideos: Video[] = [
     fuente: "youtube",
     estado: "disponible",
     ...youtubeVideo(youtubeId("https://www.youtube.com/embed/qzaVIDIdFPA")!),
-    tags: ["PaiSana"],
+    tags: ["PaisSana"],
   },
   {
     id: "4",
@@ -141,7 +158,7 @@ export const mockVideos: Video[] = [
     estado: "disponible",
     // ponytail: el CSV repite el enlace del vídeo 3 aquí — reemplazar cuando llegue el correcto
     ...youtubeVideo(youtubeId("https://www.youtube.com/shorts/qzaVIDIdFPA")!),
-    tags: ["Programa Colombia Sostenible"],
+    tags: ["Colombia Sostenible"],
   },
   {
     id: "5",
@@ -151,7 +168,7 @@ export const mockVideos: Video[] = [
     fuente: "youtube",
     estado: "disponible",
     ...youtubeVideo(youtubeId("https://www.youtube.com/live/QU9YVzdOX6Q")!),
-    tags: ["Programa Colombia Sostenible"],
+    tags: ["Colombia Sostenible"],
   },
   {
     id: "6",
@@ -161,6 +178,109 @@ export const mockVideos: Video[] = [
     fuente: "youtube",
     estado: "disponible",
     ...youtubeVideo(youtubeId("https://www.youtube.com/watch?v=mgSRb-MAUeM")!),
-    tags: ["Programa Colombia Sostenible"],
+    tags: ["Colombia Sostenible"],
+  },
+];
+
+// ponytail: audioUrl vacío hasta que se suban los MP3 al media de WP.
+// El reproductor deshabilita play y avisa en vez de simular progreso.
+export const mockAudioRelatos: AudioRelato[] = [
+  {
+    id: "1",
+    productor: "Andrés Pineda",
+    marca: "Café Montepineda",
+    lugar: "Pradera, Valle del Cauca",
+    audioUrl: "",
+    subtitulos:
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet",
+    duracionSegundos: 110,
+    orden: 1,
+  },
+  {
+    id: "2",
+    productor: "María del Carmen Valencia",
+    marca: "Cacao La Esperanza",
+    lugar: "Tumaco, Nariño",
+    audioUrl: "",
+    subtitulos:
+      "El cacao nos devolvió la paz a nuestra vereda. Cuando sembramos el primer árbol, supimos que el futuro de nuestros hijos cambiaría para siempre.",
+    duracionSegundos: 135,
+    orden: 2,
+  },
+  {
+    id: "3",
+    productor: "José Roberto Muelas",
+    marca: "Miel Silvestre PDET",
+    lugar: "La Montañita, Caquetá",
+    audioUrl: "",
+    subtitulos:
+      "Las abejas no solo producen la mejor miel, cuidan el bosque amazónico y nos enseñan a trabajar en comunidad por la conservación de nuestro territorio.",
+    duracionSegundos: 95,
+    orden: 3,
+  },
+  {
+    id: "4",
+    productor: "Esperanza Gómez",
+    marca: "Artesanías Tejidos de Paz",
+    lugar: "San Jacinto, Bolívar",
+    audioUrl: "",
+    subtitulos:
+      "En cada hilo de nuestras hamacas tejemos la historia de resiliencia y el orgullo artesanal de las mujeres de los Montes de María.",
+    duracionSegundos: 125,
+    orden: 4,
+  },
+];
+
+// ponytail: galería vacía a propósito — las fotos reales se cargan en WP.
+// Antes eran 7 URLs de placehold.co dentro del componente.
+export const mockFerias: Feria[] = [
+  {
+    id: "1",
+    titulo: "AGROEXPO 2025",
+    descripcion:
+      "En Agroexpo 2025, nuestros productores presentaron lo mejor del campo colombiano, mostrando procesos sostenibles y fortaleciendo sus lazos comerciales directos con grandes superficies, sin intermediarios. Una muestra clara de resiliencia y calidad.",
+    galeria: [],
+    orden: 1,
+    abiertaPorDefecto: true,
+  },
+  {
+    id: "2",
+    titulo: "CHOCOSHOW",
+    descripcion:
+      "En Chocoshow endulzamos a los asistentes con los mejores cacaos de nuestras regiones. Una exhibición de transformación y valor agregado que pone el chocolate de paz en el mapa internacional.",
+    galeria: [],
+    orden: 2,
+  },
+  {
+    id: "3",
+    titulo: "CAFÉS DE COLOMBIA",
+    descripcion:
+      "Nuestros caficultores llevaron el aroma de la paz a Cafés de Colombia. Relatos de montañas, procesos cuidadosos y perfiles de taza que cuentan la historia de un país que sana desde la tierra.",
+    galeria: [],
+    orden: 3,
+  },
+  {
+    id: "4",
+    titulo: "ANATO",
+    descripcion:
+      "En ANATO demostramos que el turismo rural y la producción agrícola van de la mano, creando experiencias únicas para quienes visitan nuestros territorios productivos.",
+    galeria: [],
+    orden: 4,
+  },
+  {
+    id: "5",
+    titulo: "CARNAVAL DE BARRANQUILLA",
+    descripcion:
+      "La alegría del carnaval también tiene sabor a campo. Nuestros productores hicieron presencia integrando la cultura y la tradición agrícola en esta fiesta nacional.",
+    galeria: [],
+    orden: 5,
+  },
+  {
+    id: "6",
+    titulo: "ICARRD+20",
+    descripcion:
+      "Participamos activamente en diálogos internacionales sobre desarrollo rural, mostrando que nuestro modelo de acompañamiento está alineado con las metas globales de sostenibilidad.",
+    galeria: [],
+    orden: 6,
   },
 ];

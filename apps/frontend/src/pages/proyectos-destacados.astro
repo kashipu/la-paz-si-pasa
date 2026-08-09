@@ -9,10 +9,45 @@ import PaisSanaFeriasAcordeon from "../components/paisana/PaisSanaFeriasAcordeon
 import PaisSanaProductoresVideos from "../components/paisana/PaisSanaProductoresVideos.astro";
 import ProyectosNav from "../components/ProyectosNav.astro";
 import Hero from "../components/Hero.astro";
+import { checkWordPressConnection, getAudioRelatos, getFerias, getHome, getVideos } from "../adapters";
+import type { ContentSourceStatus } from "../adapters";
+
+const dataSources = new Map<string, ContentSourceStatus["source"]>();
+const debugParam = Astro.url.searchParams.get("debug-content");
+const contentDebugEnabled = debugParam === "1" || (import.meta.env.DEV && debugParam !== "0");
+const reportContentSource = contentDebugEnabled
+  ? (status: ContentSourceStatus) => dataSources.set(status.content, status.source)
+  : undefined;
+const [home, audioRelatos, ferias, videos, wordpressStatus] = await Promise.all([
+  getHome(reportContentSource),
+  getAudioRelatos(reportContentSource),
+  getFerias(reportContentSource),
+  getVideos(reportContentSource),
+  contentDebugEnabled ? checkWordPressConnection() : Promise.resolve(undefined),
+]);
+
+// Productores PaisSana reutiliza el CPT `video`, filtrado por la etiqueta del sello.
+const productores = videos.filter((video) => video.tags.includes("PaisSana"));
+
+const fuente = (clave: string) => dataSources.get(clave) ?? "mocks";
+const contentSources: ContentSourceStatus[] = contentDebugEnabled ? [
+  { content: "Página proyectos-destacados.astro", source: "code" },
+  { content: "Hero.astro", source: fuente("home") },
+  { content: "ProyectosNav", source: "code" },
+  { content: "PaisSanaAudioPlayer.astro", source: fuente("audioRelatos") },
+  { content: "PaisSanaFeriasIntro", source: "code" },
+  { content: "PaisSanaFeriasAcordeon", source: fuente("ferias") },
+  { content: "PaisSanaFeriaItem", source: fuente("ferias") },
+  { content: "PaisSanaProductoresVideos.astro", source: fuente("videos") },
+] : [];
 ---
 
-<BaseLayout title="Proyectos destacados - PaisSana">
-  <Hero slot="hero" />
+<BaseLayout
+  title="Proyectos destacados - PaisSana"
+  contentSources={contentSources}
+  wordpressStatus={wordpressStatus}
+>
+  <Hero slot="hero" hero={home.hero} />
   <div class="paisana-page container--wide">
     <div class="paisana-header">
       <ProyectosNav />
@@ -21,10 +56,10 @@ import Hero from "../components/Hero.astro";
 
     <PaisSanaMapaIntro />
     <PaisSanaMapaCarrusel />
-    <PaisSanaAudioPlayer />
+    <PaisSanaAudioPlayer relatos={audioRelatos} />
     <PaisSanaFeriasIntro />
-    <PaisSanaFeriasAcordeon />
-    <PaisSanaProductoresVideos />
+    <PaisSanaFeriasAcordeon ferias={ferias} />
+    <PaisSanaProductoresVideos videos={productores} />
   </div>
 </BaseLayout>
 

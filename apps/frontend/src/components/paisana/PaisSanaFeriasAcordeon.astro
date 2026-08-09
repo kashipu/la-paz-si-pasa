@@ -1,45 +1,20 @@
 ---
+import type { Feria } from "@adapters/contracts";
 import PaisSanaFeriaItem from './PaisSanaFeriaItem.astro';
 
 // Sección 6 · Mockup: documentacion/seccion6@2x-100.jpg
-// Acordeones de ferias (Agroexpo, ChocoShow, Cafés de Colombia, ANATO, Carnaval
-// de Barranquilla, ICARRD+20, FILBO). Renderizamos el componente hijo
-// PaisSanaFeriaItem para cada una de las ferias, reutilizando su estructura (galería + video).
+// Las ferias vienen del CPT `feria` vía props de la página. Una sola abierta a la vez:
+// la primera marcada como "abierta por defecto" en WordPress, si hay alguna.
+type Props = { ferias: Feria[] };
+const { ferias } = Astro.props;
+
+const indiceAbierta = ferias.findIndex((feria) => feria.abiertaPorDefecto);
 ---
 
 <section class="ferias-acordeon-list">
-  
-  <PaisSanaFeriaItem 
-    title="AGROEXPO 2025" 
-    description="En Agroexpo 2025, nuestros productores presentaron lo mejor del campo colombiano, mostrando procesos sostenibles y fortaleciendo sus lazos comerciales directos con grandes superficies, sin intermediarios. Una muestra clara de resiliencia y calidad."
-    isOpen={true} 
-  />
-
-  <PaisSanaFeriaItem 
-    title="CHOCOSHOW" 
-    description="En Chocoshow endulzamos a los asistentes con los mejores cacaos de nuestras regiones. Una exhibición de transformación y valor agregado que pone el chocolate de paz en el mapa internacional."
-  />
-
-  <PaisSanaFeriaItem 
-    title="CAFÉS DE COLOMBIA" 
-    description="Nuestros caficultores llevaron el aroma de la paz a Cafés de Colombia. Relatos de montañas, procesos cuidadosos y perfiles de taza que cuentan la historia de un país que sana desde la tierra."
-  />
-
-  <PaisSanaFeriaItem 
-    title="ANATO" 
-    description="En ANATO demostramos que el turismo rural y la producción agrícola van de la mano, creando experiencias únicas para quienes visitan nuestros territorios productivos."
-  />
-  
-  <PaisSanaFeriaItem 
-    title="CARNAVAL DE BARRANQUILLA" 
-    description="La alegría del carnaval también tiene sabor a campo. Nuestros productores hicieron presencia integrando la cultura y la tradición agrícola en esta fiesta nacional."
-  />
-  
-  <PaisSanaFeriaItem 
-    title="ICARRD+20" 
-    description="Participamos activamente en diálogos internacionales sobre desarrollo rural, mostrando que nuestro modelo de acompañamiento está alineado con las metas globales de sostenibilidad."
-  />
-
+  {ferias.map((feria, i) => (
+    <PaisSanaFeriaItem feria={feria} isOpen={i === indiceAbierta} />
+  ))}
 </section>
 
 <style>

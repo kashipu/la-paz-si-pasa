@@ -5,8 +5,8 @@ import Subcuentas from "@components/LoQueHacemosSubcuentas.astro";
 import BannerCta from "@components/LoQueHacemosBannerCta.astro";
 import NoticiasTimeline from "@components/LoQueHacemosNoticiasTimeline.astro";
 
-type Props = { noticias: Noticia[]; subcuentas: Subcuenta[] };
-const { noticias, subcuentas } = Astro.props;
+type Props = { noticias: Noticia[]; subcuentas: Subcuenta[]; noticiasCtaUrl?: string };
+const { noticias, subcuentas, noticiasCtaUrl } = Astro.props;
 ---
 
 <section class="lo-que-hacemos" id="lo-que-hacemos">
@@ -21,7 +21,7 @@ const { noticias, subcuentas } = Astro.props;
         <Subcuentas subcuentas={subcuentas} />
       </div>
 
-      <BannerCta />
+      <BannerCta href={noticiasCtaUrl} />
     </div>
 
     <NoticiasTimeline noticias={noticias} />

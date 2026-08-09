@@ -1,5 +1,10 @@
 const WP_URL = import.meta.env.WORDPRESS_URL;
 
+export type WordPressConnectionStatus = {
+  online: boolean;
+  url: string;
+};
+
 export type QueryParams = Record<string, string | number | boolean | undefined>;
 
 function appendParams(url: URL, params: QueryParams) {
@@ -36,6 +41,15 @@ export async function wpApiFetch<T>(
 
 export function wpFetch<T>(path: string, params: QueryParams = {}) {
   return wpApiFetch<T>(`wp/v2/${path.replace(/^\//, "")}`, params);
+}
+
+export async function checkWordPressConnection(): Promise<WordPressConnectionStatus> {
+  try {
+    await wpApiFetch("wp/v2/types");
+    return { online: true, url: WP_URL };
+  } catch {
+    return { online: false, url: WP_URL || "WORDPRESS_URL sin configurar" };
+  }
 }
 
 type WpListResult<T> = {
