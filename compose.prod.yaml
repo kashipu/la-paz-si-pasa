@@ -45,6 +45,7 @@ services:
       - wordpress_data:/var/www/html
       - ./apps/wordpress/mu-plugins:/var/www/html/wp-content/mu-plugins
       - ./apps/wordpress/scf-json:/var/www/html/wp-content/scf-json
+      - ./apps/wordpress/seed:/opt/seed:ro
       - ./apps/wordpress/php/zz-opcache-overrides.ini:/usr/local/etc/php/conf.d/zz-opcache-overrides.ini
     expose:
       - "80"
@@ -74,6 +75,28 @@ services:
       resources:
         limits:
           memory: 384M
+
+  # Solo para tareas puntuales (cargar contenido, migraciones). El perfil "tools"
+  # lo deja fuera del despliegue normal; se levanta a mano con:
+  #   docker compose -f compose.prod.yaml run --rm --user 33 wpcli wp <comando>
+  wpcli:
+    image: wordpress:cli-php8.3
+    profiles:
+      - tools
+    depends_on:
+      - db
+      - cms
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME:-wordpress}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER:-wordpress}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX:-wp_}
+    volumes:
+      - wordpress_data:/var/www/html
+      - ./apps/wordpress/mu-plugins:/var/www/html/wp-content/mu-plugins
+      - ./apps/wordpress/scf-json:/var/www/html/wp-content/scf-json
+      - ./apps/wordpress/seed:/opt/seed:ro
 
 volumes:
   db_data:

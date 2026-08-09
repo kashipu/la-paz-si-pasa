@@ -1,0 +1,276 @@
+{
+  "_origen": "docs/contenido.xlsx (hojas «Home -Galeria» y «PAISSANA») + 00-descripciones.docx de HOME_GALERIA",
+  "retratos": [
+    {
+      "titulo": "Katherine Cadavid",
+      "archivo": "retratos/01-pss/20231023-pss-cafes-de-colombia-expo-01599.jpg",
+      "proyecto": "PaisSana",
+      "lugar": "Corferias, Bogotá",
+      "descripcion": "Katherine Cadavid, durante su participación en Cafés de Colombia Expo."
+    },
+    {
+      "titulo": "Fundadoras de Artonitas",
+      "archivo": "retratos/01-pss/20250626-pss-el-castillo-meta-retrato-artonitasgrupal-1.jpg",
+      "proyecto": "PaisSana",
+      "lugar": "El Castillo, Meta",
+      "descripcion": "Elena Gonzalez, Ruth Carrascal y Marinela Muñoz fundadoras de Artonitas."
+    },
+    {
+      "titulo": "César Ortega Torres",
+      "archivo": "retratos/01-pss/20260226-pss-cartagena-icarrd20-06431.jpg",
+      "proyecto": "PaisSana",
+      "lugar": "Cartagena, Bolívar",
+      "descripcion": "Cesar Ortega Torres productor de Ajicinto, durante su participación en la feria ICARRD+20."
+    },
+    {
+      "titulo": "Diana Tous",
+      "archivo": "retratos/01-pss/20260423-pss-sampues-bataticafit-retrato-diana-tous-002.jpg",
+      "proyecto": "PaisSana",
+      "lugar": "Sampués, Sucre",
+      "descripcion": "Diana Tous representante legal de Batatica Fit."
+    },
+    {
+      "titulo": "Robinson, productor de café",
+      "archivo": "retratos/01-pss/20260429-pss-san-jose-oriente-finca-09216.jpg",
+      "proyecto": "PaisSana",
+      "lugar": "Corregimiento San José del Oriente - La Paz, Cesar",
+      "descripcion": "Robinson, productor de café de la Asociación Jóvenes Agricultores del Perijá."
+    },
+    {
+      "titulo": "Productora de leche de ASOPROGRAMO",
+      "archivo": "retratos/02-pcs/20250129-pcs-canutal-ganaderia-predio-jorge-mitola-05443.jpg",
+      "proyecto": "Colombia Sostenible",
+      "lugar": "Canutal, Ovejas, Sucre",
+      "descripcion": "Productora de leche de la Asociación de Productores de Ganado del Municipio de Ovejas, Sucre – ASOPROGRAMO."
+    },
+    {
+      "titulo": "Yarisis Espinosa",
+      "archivo": "retratos/02-pcs/20251023-pcs-sjcalle-bojaya-retarto-yasiris-espinosa-001-edit.jpg",
+      "proyecto": "Colombia Sostenible",
+      "lugar": "San José de la Calle, Bojayá",
+      "descripcion": "Yarisis Espinosa, tesorera de la Asociación Forestal Sostenible para el Desarrollo Comunitario del Medio Atrato – ASOFODEMA."
+    },
+    {
+      "titulo": "Ramiro Rincón",
+      "archivo": "retratos/02-pcs/20260115-pcs-tumaco-retrato-ramiro-rincon-003-edit.jpg",
+      "proyecto": "Colombia Sostenible",
+      "lugar": "Tumaco, Nariño",
+      "descripcion": "Ramiro Rincón, productor de cacao del Consejo Comunitario Bajo Mira y Frontera."
+    },
+    {
+      "titulo": "Ingris Martínez",
+      "archivo": "retratos/02-pcs/20260124-pcs-tierralta-vda-angostura-recorrido-predio-ingris-martinez-04842.jpg",
+      "proyecto": "Colombia Sostenible",
+      "lugar": "Vereda Angostura, Tierralta, Córdoba",
+      "descripcion": "Ingris Martínez, participante del proyecto de restauración de bosques y desarrollo de modelos de producción apícola."
+    },
+    {
+      "titulo": "Amanda Cañas",
+      "archivo": "retratos/02-pcs/20260626-pcs-yondo-retrato-amanda-canas-606-edit.jpg",
+      "proyecto": "Colombia Sostenible",
+      "lugar": "Yondó, Antioquia",
+      "descripcion": "Amanda Cañas, zoocriadora del proyecto Bosques con alas de Yondó."
+    },
+    {
+      "titulo": "Beneficiario de la entrega de maquinaria",
+      "archivo": "retratos/03-kfw/20250625-san-jose-de-fragua-entrega-maquinaria-04995.jpg",
+      "proyecto": "Programa Piloto de Inversiones Prioritarias en Municipios PDET",
+      "lugar": "San José del Fragua, Caquetá",
+      "descripcion": "Beneficiario de la entrega de maquinaria amarilla."
+    },
+    {
+      "titulo": "Nancy Sánchez",
+      "archivo": "retratos/03-kfw/20260415-kfw-fragua-retrato-nancy-sanchez-3168-edit.jpg",
+      "proyecto": "Programa Piloto de Inversiones Prioritarias en Municipios PDET",
+      "lugar": "San José del Fragua, Caquetá",
+      "descripcion": "Nancy Sánchez, representante legal de la JAC de la vereda Palmeiras."
+    },
+    {
+      "titulo": "Yaneth Munar Nuñez",
+      "archivo": "retratos/03-kfw/kfw-morelia-yaneth-nunez.jpg",
+      "proyecto": "Programa Piloto de Inversiones Prioritarias en Municipios PDET",
+      "lugar": "Vereda La Raya, Morelia, Caquetá",
+      "descripcion": "Yaneth Munar Nuñez, miembro de la JAC."
+    },
+    {
+      "titulo": "Diego Silva Munar",
+      "archivo": "retratos/03-kfw/kfw-morelia-diego-munar.jpg",
+      "proyecto": "Programa Piloto de Inversiones Prioritarias en Municipios PDET",
+      "lugar": "Morelia, Caquetá",
+      "descripcion": "Diego Silva Munar, presidente de la JAC de la vereda La Raya, Morelia, Caquetá."
+    },
+    {
+      "titulo": "Karen Baracaldo",
+      "archivo": "retratos/03-kfw/kfw-morelia-karen-baracaldo.jpg",
+      "proyecto": "Programa Piloto de Inversiones Prioritarias en Municipios PDET",
+      "lugar": "Morelia, Caquetá",
+      "descripcion": "Karen Baracaldo, miembro de la JAC."
+    }
+  ],
+
+  "videos": [
+    {
+      "titulo": "Artonitas | El Castillo, Meta",
+      "youtube_url": "https://youtu.be/WEYN6vodbPc",
+      "tags": ["Actualidad", "PaisSana"],
+      "descripcion": "El Castillo, Meta, ha sido uno de los territorios más golpeados por la violencia. Pero allí, un grupo de mujeres decidió organizarse y crear un proyecto que las ha llevado de la tierra al aire. Sus Artonitas: tostaditas de plátano llanero, hoy se venden en supermercados y vuelan en los aviones de clic."
+    },
+    {
+      "titulo": "Aroma de Paz | Rionegro, Santander",
+      "youtube_url": "https://youtu.be/GlSj8XMwMyA",
+      "tags": ["Actualidad", "PaisSana"],
+      "descripcion": "Las mujeres de nuestro campo no solo cultivan: transforman realidades y siembran esperanza. Desde Rionegro, Santander, la asociación de cacaocultores víctimas, Aroma de Paz, nos enseña el verdadero significado de la resiliencia: estas mujeres decidieron darle un giro a sus vidas, pasando de la comercialización del grano a convertirse en empresarias de su propio chocolate de mesa."
+    },
+    {
+      "titulo": "Asociación Jóvenes Agricultores del Perijá | San José del Oriente, La Paz, Cesar",
+      "youtube_url": "https://youtu.be/XzR8SMTdQ9o",
+      "tags": ["Actualidad", "PaisSana"],
+      "descripcion": "Detrás de cada taza de Café Del Oriente hay una historia que se escribe con berraquera. Leylis, madre, líder comunitaria y representante legal de la Asociación Jóvenes Agricultores del Perijá, nos abre las puertas de San José del Oriente para mostrarnos cómo el campo se transforma gracias al empoderamiento femenino y juvenil."
+    },
+    {
+      "titulo": "Ruta Etnoecoturística del pueblo zenú | San Antonio de Palmito, Sucre",
+      "youtube_url": "https://youtu.be/qzaVIDIdFPA",
+      "tags": ["Actualidad", "Colombia Sostenible"],
+      "descripcion": "San Antonio de Palmito guarda un encanto que va más allá del paisaje, es un lugar donde la naturaleza y la espiritualidad se encuentran. La Ruta Etnoecoturística del Pueblo Zenú combina recorridos culturales, gastronómicos y productivos que permiten conocer una tradición viva. Los visitantes no solo llegan a un destino, llegan a una historia milenaria que los invita a descubrirse a sí mismos."
+    },
+    {
+      "titulo": "Juan Pablo | Corregimiento La Marina, Tolima",
+      "youtube_url": "https://youtu.be/QU9YVzdOX6Q",
+      "tags": ["Actualidad", "Colombia Sostenible"],
+      "descripcion": "A los 16 años, Juan Pablo quería irse de su vereda, dejar atrás el trabajo del campo y buscar una vida distinta. Pero eso cambió. Lo que antes era rutina se convirtió en pasión. Junto a su padre aprendió sobre la catación, el tostado y el valor que tiene cuidar cada planta de café. Entendió que su finca no era solo un terreno: era una empresa familiar, una herencia viva."
+    },
+    {
+      "titulo": "Chocolates Tumaco | Tumaco, Nariño",
+      "youtube_url": "https://youtu.be/mgSRb-MAUeM",
+      "tags": ["Actualidad", "Colombia Sostenible"],
+      "descripcion": "En medio de las dificultades nacen las mejores oportunidades. En el 2013, Tumaco enfrentaba un comercio de cacao desorganizado y lleno de intermediarios. Allí surgió la idea de unirse y crear Chocolates Tumaco, una asociación que se convirtió en referente de resiliencia y construcción de paz. Con el apoyo del Programa Colombia Sostenible del Fondo Colombia en Paz, 500 familias de 7 Consejos Comunitarios lograron mejorar la productividad, fortalecer la infraestructura y acceder a conocimientos técnicos que transformaron sus economías."
+    },
+    {
+      "titulo": "Artonitas y la alianza con clic",
+      "youtube_url": "https://youtu.be/ZNJ2XOHaQjM",
+      "tags": ["PaisSana"],
+      "descripcion": "Desde la tierra llanera hasta las nubes. Artonitas tuvo un vuelo diferente gracias a la alianza entre clic y PaisSana. Las tostadas de plátano elaboradas por las mujeres de Asodeleite llegaron a los cielos de Colombia para demostrar que vale la pena apostarle a la paz y a las economías comunitarias."
+    },
+    {
+      "titulo": "Artesanías Isamara | Valledupar",
+      "youtube_url": "https://youtu.be/HSO-DgZBppM",
+      "tags": ["PaisSana"],
+      "descripcion": "Mara Lucía, creadora de Isamara Artesanía, nos comparte desde Valledupar una historia que conmueve el alma: un grupo de 38 mujeres cabeza de familia y víctimas del conflicto, muchas provenientes de los Montes de María, encontraron en el diseño textil y la pintura de sombreros una terapia colectiva de apoyo y superación."
+    },
+    {
+      "titulo": "Cacaoma | Manaure, Cesar",
+      "youtube_url": "https://youtu.be/KnvmZExQrdY",
+      "tags": ["PaisSana"],
+      "descripcion": "En Manaure la historia del cacao se escribe con la fuerza, berraquera y autonomía de sus mujeres. Mariberta, representante legal de Cacaoma, junto a su mano derecha Diosa, lideran a 60 productores que pasaron de la tradición cafetera a transformar el cacao 100% especial en un chocolate de mesa artesanal con la marca Chocomac."
+    }
+  ],
+
+  "ferias": [
+    {
+      "titulo": "ART, Productos con sabor a paz",
+      "orden": 1,
+      "abierta_por_defecto": true,
+      "video_youtube": "https://youtube.com/shorts/ZwgOeWvZs_g",
+      "descripcion": "El sabor del café Caike, un producto con sello PaisSana, deleitó el paladar de los asistentes al lanzamiento de la campaña «Productos con sabor a Paz», convocado por la Agencia de Renovación del Territorio – ART y la FAO."
+    },
+    {
+      "titulo": "CLACSO 2025",
+      "orden": 2,
+      "video_youtube": "https://youtube.com/shorts/5pLdFt9oPWY",
+      "descripcion": "Creemos en una paz que se aprende, se enseña y se practica. Por eso, durante el evento CLACSO 2025, pudimos compartir con la comunidad académica internacional cómo, desde el diálogo y el trabajo con nuestros productores, estamos impulsando un modelo que promueve el desarrollo de los territorios."
+    },
+    {
+      "titulo": "Agroexpo 2025",
+      "orden": 3,
+      "video_youtube": "https://youtube.com/shorts/6m8NAKEPSUg",
+      "descripcion": "Estuvimos en Corferias en Agroexpo 2025 donde sembramos conversaciones, vínculos, confianza y admiración por el trabajo de nuestros productores PaisSana, quienes vinieron desde distintos territorios para compartir lo que hacen y lo que son."
+    },
+    {
+      "titulo": "BAEMCA, feria de empleados de Cancillería",
+      "orden": 4,
+      "video_youtube": "https://youtube.com/shorts/dRj4gBzhfjc",
+      "descripcion": "Estuvimos en la feria BAEMCA, una iniciativa de la Cancillería para visibilizar emprendimientos. Hicimos parte de este espacio donde pudimos compartir el trabajo de quienes, desde el campo, le apuestan a la paz y al desarrollo económico de sus comunidades: nuestros productores."
+    },
+    {
+      "titulo": "Cafés de Colombia Expo 2025",
+      "orden": 5,
+      "video_youtube": "https://youtube.com/shorts/wcOrGEqV7Pw",
+      "descripcion": "Cafés de Colombia Expo 2025 fue mucho más que una feria, fue un punto de encuentro entre historias, sueños y propósitos. Durante cuatro días, llevamos el sabor del campo colombiano a Corferias y mostramos cómo el café puede ser una herramienta de transformación y reconciliación."
+    },
+    {
+      "titulo": "Chocoshow",
+      "orden": 6,
+      "video_youtube": "https://youtube.com/shorts/4yjXuX3MNRQ",
+      "descripcion": "En Chocoshow vivimos un espacio donde el cacao, las historias y los territorios se encontraron, y le dieron a los asistentes una probadita de esos emprendimientos que construyen paz desde las regiones de Colombia."
+    },
+    {
+      "titulo": "Carnaval de Barranquilla",
+      "orden": 7,
+      "video_youtube": "https://youtube.com/shorts/4wZ8h6Fu9p0",
+      "descripcion": "PaisSana estuvo en el Carnaval para compartir con todos una semana de alegría, sabor y paz, junto a quienes hacen posible todo esto. Todos los barranquilleros disfrutaron de nuestros tres espacios y conocieron la marca y a los productores que hacen posible esta historia."
+    },
+    {
+      "titulo": "ANATO, Vitrina Turística",
+      "orden": 8,
+      "video_youtube": "https://youtube.com/shorts/d7Mi7yxJ7Ic",
+      "descripcion": "Cientos de personas pasaron por nuestro stand en la Vitrina Turística de ANATO, escucharon historias, conocieron territorios y entendieron que el turismo puede ser mucho más que un destino: puede ser oportunidad, puede ser transformación, puede ser construcción de paz. ¡Turismo que transforma!"
+    },
+    {
+      "titulo": "ICARRD+20 Cartagena",
+      "orden": 9,
+      "descripcion": "ICARRD+20 fue un escenario para conversar sobre tierra, desarrollo rural y futuro. Y allí estuvo PaisSana representando a cientos de productores que construyen país desde sus territorios. Porque cuando el campo tiene voz, Colombia avanza."
+    },
+    {
+      "titulo": "Mercados campesinos, Unidad de Víctimas",
+      "orden": 10,
+      "descripcion": "El 9 de abril, nos tomamos la Plaza de Lourdes para conmemorar el Día de las Víctimas demostrando que el campo es motor de paz. Detrás de cada producto PaisSana hay una historia de esfuerzo que hoy llega a tu mesa."
+    },
+    {
+      "titulo": "Macrorrueda de las Américas",
+      "orden": 11,
+      "video_youtube": "https://youtube.com/shorts/JS_vPqODneY",
+      "descripcion": "El Sabor de la Paz se tomó la Macrorrueda de las Américas «Colombia, el País de la Belleza». En un espacio con más de 900 mesas de negocios, los productores PaisSana cumplieron una agenda de altura, presentando sus proyectos y la riqueza de sus territorios ante compradores nacionales e internacionales."
+    },
+    {
+      "titulo": "Filbo, Feria del Libro de Bogotá",
+      "orden": 12,
+      "descripcion": "En la Feria del Libro vivimos el conversatorio «Lectura que transforma territorios», un espacio donde la resiliencia tomó la palabra. Allí escuchamos a Natalia Garro, una «PaisSana» que transformó su historia de desplazamiento en una industria de esperanza. Juntos descubrimos cómo sus «Bibliotecas Libres» de madera plástica están democratizando el acceso al conocimiento en todo el país."
+    },
+    {
+      "titulo": "PaisSana en Valledupar",
+      "orden": 13,
+      "video_youtube": "https://youtube.com/shorts/jGDEg-Js984",
+      "descripcion": "Recorrimos cada municipio de nuestra agenda en Cesar, para asegurar que el talento rural de esta región llegue más lejos. Estuvimos allí para escuchar, asesorar y crecer junto a nuestros productores y transformadores. Porque en PaisSana sabemos que el corazón de la paz está en lo que cosechamos."
+    },
+    {
+      "titulo": "Yopal, socialización",
+      "orden": 14,
+      "video_youtube": "https://youtube.com/shorts/fmywa86VVYE",
+      "descripcion": "¡El llano se fortalece con alianzas que transforman! En Yopal, vivimos una jornada increíble de socialización junto a la Gobernación de Casanare y la Fundación Amanecer. Nos llenó de orgullo ver a tantos productores y transformadores listos para dar el siguiente paso con PaisSana."
+    },
+    {
+      "titulo": "Medellín, socialización",
+      "orden": 15,
+      "video_youtube": "https://youtube.com/shorts/8nR2BFC6ba8",
+      "descripcion": "¡Nuevas historias de progreso se escribieron en Medellín! Vivimos una jornada increíble en la capital antioqueña, sumando a nuevos productores y transformadores a esta gran red nacional que impulsa nuestro campo."
+    }
+  ],
+
+  "audio_relatos": [
+    { "orden": 1, "productor": "María Cristina Canchila", "marca": "Lácteos Calamar", "lugar": "Calamar, Guaviare", "archivo": "audio/01-pss-maria-cristina-canchilla-asocamposur.m4a" },
+    { "orden": 2, "productor": "Carlos Darío Moreno", "marca": "Pronacela", "lugar": "Aquitania, Boyacá", "archivo": "audio/02-pss-carlos-dario-moreno-pronacela.m4a" },
+    { "orden": 3, "productor": "Amparo Nieto", "marca": "Colágeno Victorias", "lugar": "Yopal, Casanare", "archivo": "audio/03-pss-amparo-nieto-colageno-victorias.m4a" },
+    { "orden": 4, "productor": "Dina Luz Padia", "marca": "ASOREPP", "lugar": "María La Baja, Bolívar", "archivo": "audio/04-pss-dina-luz-padia-asorepp.m4a" },
+    { "orden": 5, "productor": "Emilce Rocío Prieto", "marca": "El Gallinero", "lugar": "Jenesano, Boyacá", "archivo": "audio/05-pss-emilce-rocio-prieto-el-gallinero.m4a" },
+    { "orden": 6, "productor": "Sandra Marcela Alarcón", "marca": "Café Amanecer", "lugar": "Yopal, Casanare", "archivo": "audio/06-pss-sandra-marcela-alarcon-cafe-amanecer.m4a" },
+    { "orden": 7, "productor": "Zaira Milena Caro", "marca": "SachaCaro", "lugar": "Arauquita, Arauca", "archivo": "audio/07-pss-zaira-milena-caro-sachacaro.m4a" },
+    { "orden": 8, "productor": "Ángel María Obando", "marca": "Chocolates Obangu", "lugar": "Valle del Guamuez, Putumayo", "archivo": "audio/08-pss-angel-maria-obando-chocolates-obangu.m4a" },
+    { "orden": 9, "productor": "Edilsa Gómez Ramos", "marca": "Ricuras del Cacao", "lugar": "Valencia, Córdoba", "archivo": "audio/09-pss-edilsa-gomez-ramos-ricuras-del-cacao.m4a" },
+    { "orden": 10, "productor": "Betsy Rueda", "marca": "Ocaroma S.A.S.", "lugar": "El Playón, Santander", "archivo": "audio/10-pss-betsy-rueda-ocaroma-sas.m4a" },
+    { "orden": 11, "productor": "Noredys Muñoz", "marca": "Fashion Store", "lugar": "Tuluá, Valle del Cauca", "archivo": "audio/11-pss-noredys-munoz-fashionn-store.m4a" },
+    { "orden": 12, "productor": "Blanca Márquez", "marca": "Chocolates Arrayanes", "lugar": "Remedios, Antioquia", "archivo": "audio/12-pss-blanca-marquez-chocolate-arrayanes.m4a" },
+    { "orden": 13, "productor": "Hernán Velásquez", "marca": "Sufruta", "lugar": "Planeta Rica, Córdoba", "archivo": "audio/13-pss-hernan-velasquez-sufruta.m4a" },
+    { "orden": 14, "productor": "Leocadio Enrique Bermúdez", "marca": "Frutti Pulpas Sam y San", "lugar": "Tame, Arauca", "archivo": "audio/14-pss-leocadio-enrique-bermudez.m4a" },
+    { "orden": 15, "productor": "María Mosquera Ruiz", "marca": "Ser Chocó", "lugar": "Condoto, Chocó", "archivo": "audio/15-pss-maria-mosquera-ser-choco.m4a" }
+  ]
+}
