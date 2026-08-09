@@ -1,0 +1,30 @@
+{
+  "key": "group_subcuentas_lapazsipasa",
+  "title": "Datos de la subcuenta",
+  "fields": [
+    {
+      "key": "field_subcuenta_icono",
+      "label": "Logo",
+      "name": "icono",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "Logo de la subcuenta. Preferiblemente SVG o PNG con fondo transparente.",
+      "required": 1,
+      "conditional_logic": false,
+      "wrapper": { "width": "", "class": "", "id": "" },
+      "return_format": "array",
+      "library": "all",
+      "preview_size": "medium"
+    }
+  ],
+  "location": [[{ "param": "post_type", "operator": "==", "value": "subcuenta" }]],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": [],
+  "active": true,
+  "description": "Logo del carrusel de subcuentas. El orden se controla con el atributo de orden del post.",
+  "show_in_rest": 1
+}

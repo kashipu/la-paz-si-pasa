@@ -1,0 +1,43 @@
+{
+  "key": "group_noticias_lapazsipasa",
+  "title": "Datos de la noticia",
+  "fields": [
+    {
+      "key": "field_noticia_url",
+      "label": "URL externa",
+      "name": "url",
+      "aria-label": "",
+      "type": "url",
+      "instructions": "Enlace completo al medio que publicó la noticia. Incluye https://",
+      "required": 1,
+      "conditional_logic": false,
+      "wrapper": { "width": "", "class": "", "id": "" },
+      "default_value": "",
+      "placeholder": "https://"
+    },
+    {
+      "key": "field_noticia_fecha",
+      "label": "Fecha de publicación",
+      "name": "fecha",
+      "aria-label": "",
+      "type": "date_picker",
+      "instructions": "Se usa para ordenar y agrupar por año. Si se deja vacía, se usa la fecha del post.",
+      "required": 0,
+      "conditional_logic": false,
+      "wrapper": { "width": "", "class": "", "id": "" },
+      "display_format": "d/m/Y",
+      "return_format": "Y-m-d",
+      "first_day": 1
+    }
+  ],
+  "location": [[{ "param": "post_type", "operator": "==", "value": "noticia" }]],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": [],
+  "active": true,
+  "description": "Campos de la línea de tiempo de noticias del fondo.",
+  "show_in_rest": 1
+}

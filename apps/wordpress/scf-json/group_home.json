@@ -1,0 +1,43 @@
+{
+  "key": "group_home_lapazsipasa",
+  "title": "Configuración de la home",
+  "fields": [
+    {
+      "key": "field_home_hero_imagen",
+      "label": "Imagen del hero",
+      "name": "hero_imagen",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "Foto de fondo de la portada. Súbela ya redimensionada (ancho recomendado 1920 px) y comprimida. El logo no se edita aquí.",
+      "required": 0,
+      "conditional_logic": false,
+      "wrapper": { "width": "", "class": "", "id": "" },
+      "return_format": "array",
+      "library": "all",
+      "preview_size": "large"
+    },
+    {
+      "key": "field_home_noticias_cta_url",
+      "label": "URL del banner «Más noticias del fondo»",
+      "name": "noticias_cta_url",
+      "aria-label": "",
+      "type": "url",
+      "instructions": "Destino del banner al final de la sección de noticias.",
+      "required": 0,
+      "conditional_logic": false,
+      "wrapper": { "width": "", "class": "", "id": "" },
+      "default_value": "",
+      "placeholder": "https://"
+    }
+  ],
+  "location": [[{ "param": "post_type", "operator": "==", "value": "page" }]],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": [],
+  "active": true,
+  "description": "Campos que Astro lee de la página con slug «home». Se ubican en todas las páginas para que la definición sea reproducible entre entornos (un ID de página concreto cambiaría entre local y producción).",
+  "show_in_rest": 1
+}

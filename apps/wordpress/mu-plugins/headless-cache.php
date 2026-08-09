@@ -23,6 +23,9 @@ function headless_cache_notify() {
         'headers' => [
             'X-Revalidate-Secret' => $secret,
             'Content-Type' => 'application/json',
+            // Astro 5 valida el origen en las peticiones POST (security.checkOrigin).
+            // Sin esta cabecera responde 403 y la purga nunca llega al endpoint.
+            'Origin' => rtrim($frontend_url, '/'),
         ],
         'body' => '{}',
     ]);
