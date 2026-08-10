@@ -103,7 +103,12 @@ function upsert($post_type, $titulo, $campos)
     aviso(sprintf('%-13s %s  #%d %s', $post_type, $previos ? 'actualizado' : 'creado     ', $id, $titulo));
 }
 
-foreach ($datos['retratos'] as $r) {
+// Un argumento opcional limita la carga a una seccion. Sirve cuando el entorno
+// corta la ejecucion por tiempo: cada pasada avanza sobre lo que falta.
+$solo = $argv[1] ?? getenv('SEED_SOLO') ?: '';
+$toca = fn($seccion) => $solo === '' || $solo === $seccion;
+
+if ($toca('retratos')) foreach ($datos['retratos'] as $r) {
     upsert('retrato', $r['titulo'], [
         'foto' => medio($r['archivo']),
         'descripcion' => $r['descripcion'],
@@ -112,7 +117,7 @@ foreach ($datos['retratos'] as $r) {
     ]);
 }
 
-foreach ($datos['videos'] as $v) {
+if ($toca('videos')) foreach ($datos['videos'] as $v) {
     upsert('video', $v['titulo'], [
         'descripcion' => $v['descripcion'],
         'fuente_video' => 'youtube',
@@ -121,7 +126,7 @@ foreach ($datos['videos'] as $v) {
     ]);
 }
 
-foreach ($datos['ferias'] as $f) {
+if ($toca('ferias')) foreach ($datos['ferias'] as $f) {
     upsert('feria', $f['titulo'], [
         'descripcion' => $f['descripcion'],
         // galeria se deja vacía: las fotos siguen sin enlace en SharePoint
@@ -132,7 +137,7 @@ foreach ($datos['ferias'] as $f) {
     ]);
 }
 
-foreach ($datos['audio_relatos'] as $a) {
+if ($toca('audio_relatos')) foreach ($datos['audio_relatos'] as $a) {
     upsert('audio_relato', $a['productor'] . ' — ' . $a['marca'], [
         'productor' => $a['productor'],
         'marca' => $a['marca'],
@@ -143,4 +148,4 @@ foreach ($datos['audio_relatos'] as $a) {
     ]);
 }
 
-aviso('listo: contenido cargado');
+aviso('listo: ' . ($solo ?: 'contenido completo'));
