@@ -69,7 +69,6 @@ function formatearDuracion(segundos?: number) {
               viewBox="0 0 24 24"
               fill="currentColor"
               stroke="none"
-              style="display: none;"
             >
               <rect x="6" y="4" width="4" height="16"></rect>
               <rect x="14" y="4" width="4" height="16"></rect>
@@ -255,6 +254,10 @@ function formatearDuracion(segundos?: number) {
     cursor: not-allowed;
     opacity: 0.45;
     transform: none;
+  }
+
+  .icon-pause {
+    display: none;
   }
 
   .audio-aviso {
@@ -485,6 +488,7 @@ function formatearDuracion(segundos?: number) {
 
     function cargarRelato(indice: number) {
       audio.pause();
+      playBtn.classList.remove("playing");
       indiceActual = indice;
       const relato = relatos[indiceActual];
 

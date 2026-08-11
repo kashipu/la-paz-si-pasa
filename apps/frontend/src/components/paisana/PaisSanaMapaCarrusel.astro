@@ -178,7 +178,7 @@ const regions = [
     display: none;
     grid-template-columns: 1fr;
     gap: var(--space-8, 2rem);
-    align-items: center;
+    align-items: start;
   }
 
   .region-content-grid.active {
@@ -195,6 +195,7 @@ const regions = [
   .region-stats {
     display: flex;
     flex-direction: column;
+    align-self: start;
     gap: var(--space-8, 2rem);
     background-color: transparent;
     padding: 0;
@@ -279,7 +280,6 @@ const regions = [
   @media (min-width: 850px) {
     .region-content-grid {
       grid-template-columns: 1fr 2fr;
-      align-items: center;
     }
 
     .region-map-wrapper {

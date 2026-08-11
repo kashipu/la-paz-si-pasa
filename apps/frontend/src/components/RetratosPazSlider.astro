@@ -244,4 +244,30 @@ const [fondoDesktopImage, fondoMobileImage] = await Promise.all([
     border-color: var(--color-nav-text);
     color: var(--color-surface);
   }
+
+  @media (min-width: 361px) and (max-width: 849px) {
+    .retratos-slider__foto {
+      width: 80%;
+      height: auto;
+    }
+
+    .retratos-slider__arrow {
+      top: 91%;
+      bottom: auto;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .retratos-slider__foto {
+      width: 80%;
+      height: auto;
+    }
+
+    .retratos-slider__arrow {
+      bottom: -2%;
+      width: 38px;
+      height: 38px;
+      z-index: 2;
+    }
+  }
 </style>
