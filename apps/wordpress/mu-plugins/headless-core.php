@@ -8,6 +8,14 @@
 
 defined('ABSPATH') || exit;
 
+// WordPress escala las cargas grandes y guarda el original como respaldo. El tope
+// de fabrica son 2560px, por el que pasaban fotos de 1920x1280 y ~600 KB. El
+// frontend nunca sirve esas dimensiones (astro:assets redimensiona antes), pero si
+// se baja el archivo entero del CMS en cada transformacion en frio.
+add_filter('big_image_size_threshold', function () {
+    return 1500;
+});
+
 add_filter('acf/settings/save_json', function () {
     return WP_CONTENT_DIR . '/scf-json';
 });

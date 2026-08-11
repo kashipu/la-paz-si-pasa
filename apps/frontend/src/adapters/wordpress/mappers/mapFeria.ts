@@ -1,5 +1,6 @@
 import type { Feria, FeriaMedia } from "../../contracts/Feria";
 import { videoSource } from "../../youtube.js";
+import { imagenUrl } from "./imagen.ts";
 
 // ACF esperado: descripcion, galeria (gallery), fuente_video, video_youtube XOR video_file,
 // thumbnail_video, orden, abierta_por_defecto
@@ -8,7 +9,7 @@ export function mapFeria(wpPost: any): Feria {
   const orden = Number(wpPost.acf?.orden);
 
   const galeria: FeriaMedia[] = (wpPost.acf?.galeria ?? []).map((img: any, i: number) => ({
-    url: img?.url ?? "",
+    url: imagenUrl(img),
     alt: img?.alt || `${titulo} ${i + 1}`,
     tipo: "imagen" as const,
   }));
@@ -37,6 +38,6 @@ function mapFeriaVideo(wpPost: any, titulo: string): FeriaMedia | undefined {
     alt: `Video ${titulo}`,
     tipo: "video",
     fuente: source.fuente,
-    thumbnailUrl: wpPost.acf?.thumbnail_video?.url || source.thumbnailUrl,
+    thumbnailUrl: imagenUrl(wpPost.acf?.thumbnail_video) || source.thumbnailUrl,
   };
 }

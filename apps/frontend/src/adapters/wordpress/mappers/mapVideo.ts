@@ -1,5 +1,6 @@
 import type { Video } from "../../contracts/Video";
 import { videoSource } from "../../youtube.js";
+import { imagenUrl } from "./imagen.ts";
 
 // ACF esperado: youtube_url (texto) XOR video_file (archivo MP4); thumbnail (imagen, opcional si es YouTube)
 export function mapVideo(wpPost: any): Video {
@@ -12,7 +13,7 @@ export function mapVideo(wpPost: any): Video {
     titulo: wpPost.title?.rendered ?? "",
     descripcion: wpPost.acf?.descripcion ?? "",
     ...source,
-    thumbnailUrl: wpPost.acf?.thumbnail?.url ?? source.thumbnailUrl,
+    thumbnailUrl: imagenUrl(wpPost.acf?.thumbnail) || source.thumbnailUrl,
     tags: (wpPost.acf?.tags ?? []).map((t: any) => (typeof t === "string" ? t : (t?.name ?? ""))),
   };
 }
