@@ -1,13 +1,14 @@
 ---
-import { Image } from "astro:assets";
 import type { HeroData } from "../adapters";
-import heroImage from "../assets/hero/hero-image.png";
 import heroLogo from "../assets/hero/hero-logo.svg";
 
 type Props = { hero?: HeroData };
 const { hero } = Astro.props;
 
-// Sin imagen en WordPress se usa el asset local, que Astro optimiza en build.
+// Sin imagen en WordPress se usan los JPEG de public/hero/, pregenerados por
+// scripts/optimize-assets.mjs. Este es el elemento LCP y a proposito no pasa por
+// astro:assets: con output:"server" cada request pagaria una transformacion de
+// sharp sin cache. Como archivo estatico se sirve directo.
 // El logo no es editable: siempre sale de assets.
 const imagenWp = hero?.imageUrl;
 ---
@@ -15,7 +16,18 @@ const imagenWp = hero?.imageUrl;
 <section class="hero">
   {imagenWp
     ? <img src={imagenWp} alt={hero?.imageAlt ?? ""} class="hero__bg" loading="eager" fetchpriority="high" />
-    : <Image src={heroImage} alt="" class="hero__bg" loading="eager" format="webp" sizes="100vw" widths={[640, 960, 1440, 1920]} />}
+    : <img
+        src="/hero/hero-1200.jpg"
+        srcset="/hero/hero-640.jpg 640w, /hero/hero-960.jpg 960w, /hero/hero-1200.jpg 1200w"
+        sizes="100vw"
+        width="1200"
+        height="800"
+        alt=""
+        class="hero__bg"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />}
   <a href="/" class="hero__logo-link" aria-label="Ir al inicio">
     <img src={heroLogo.src} alt="La Paz Sí Pasa" class="hero__logo" width="420" />
   </a>
