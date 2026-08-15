@@ -8,9 +8,8 @@ type Props = {
 };
 
 // La URL viene del campo noticias_cta_url de la página "home" en WordPress.
-// ponytail: "#" mientras ese campo esté vacío — quitar cuando la URL final esté publicada.
-const { imageAlt = "Más noticias del fondo aquí", href: hrefProp } = Astro.props;
-const href = hrefProp || "#";
+const { imageAlt = "Más noticias del fondo aquí (abre en una pestaña nueva)", href: hrefProp } = Astro.props;
+const href = hrefProp || "https://fcp.gov.co/sala-de-prensa/";
 const [desktop, tablet, mobile] = await Promise.all([
   getImage({ src: noticiasBanner, width: 1440, format: "webp" }),
   getImage({ src: noticiasBanner, width: 960, format: "webp" }),
@@ -18,7 +17,7 @@ const [desktop, tablet, mobile] = await Promise.all([
 ]);
 ---
 
-<a href={href} class="banner-cta">
+<a href={href} class="banner-cta" target="_blank" rel="noopener">
   <picture>
     <source media="(max-width: 360px)" srcset={mobile.src} width={mobile.attributes.width} height={mobile.attributes.height} />
     <source media="(max-width: 849px)" srcset={tablet.src} width={tablet.attributes.width} height={tablet.attributes.height} />

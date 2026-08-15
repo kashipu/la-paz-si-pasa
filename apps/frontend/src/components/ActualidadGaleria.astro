@@ -4,7 +4,7 @@ import OptimizedImage from "./OptimizedImage.astro";
 
 type Props = { videos: Video[] };
 const { videos } = Astro.props;
-const [destacado, ...resto] = videos;
+const [destacado] = videos;
 ---
 
 <section class="actualidad" aria-labelledby="actualidad-titulo" id="actualidad">
@@ -40,15 +40,17 @@ const [destacado, ...resto] = videos;
       </div>
     </div>
 
-    {resto.length > 0 && (
+    {videos.length > 1 && (
       <div class="actualidad__carrusel">
         <h4 class="actualidad__carrusel-titulo">Ver más:</h4>
         <div class="actualidad__carrusel-fila">
           <button type="button" class="actualidad__nav" data-dir="-1" aria-label="Anterior">‹</button>
 
+          {/* Se listan todos los videos; el destacado se oculta con li[data-activo] en vez de
+              intercambiar datos entre la card y el destacado (eso desincronizaba srcset/título). */}
           <ul class="actualidad__track" data-track>
-            {resto.map((video) => (
-              <li>
+            {videos.map((video, i) => (
+              <li data-activo={i === 0 ? "true" : undefined}>
                 <button
                   type="button"
                   class="actualidad__card"
@@ -82,16 +84,6 @@ const [destacado, ...resto] = videos;
 
 <script>
   document.addEventListener("astro:page-load", () => {
-  type VideoData = {
-    id: string;
-    titulo: string;
-    descripcion: string;
-    fuente: string;
-    src: string;
-    thumbnail: string;
-    tags: string[];
-  };
-
   // Elementos creados por JS no tienen el atributo data-astro-cid-* del CSS scoped de Astro,
   // así que se estilan inline para que .actualidad__player los cubra igual que al thumbnail estático.
   const FILL_STYLE = "display:block;width:100%;height:100%;border:none;object-fit:cover;";
@@ -163,59 +155,64 @@ const [destacado, ...resto] = videos;
       renderPlayer(player!, fuente, src, alt);
     });
 
-    function setDestacado(data: VideoData) {
-      if (tituloEl) tituloEl.textContent = data.titulo;
-      if (descripcionEl) descripcionEl.textContent = data.descripcion;
+    // Las cards nunca mutan: son la fuente de verdad. Destacar solo copia hacia arriba.
+    function destacar(card: HTMLElement) {
+      const titulo = card.dataset.titulo ?? "";
+      const thumbnail = card.dataset.thumbnail ?? "";
+
+      if (tituloEl) tituloEl.textContent = titulo;
+      if (descripcionEl) descripcionEl.textContent = card.dataset.descripcion ?? "";
       if (tagsEl) {
-        tagsEl.innerHTML = "";
-        data.tags.forEach((tag) => {
-          const span = document.createElement("span");
-          span.className = "actualidad__tag";
-          span.textContent = tag;
-          tagsEl!.appendChild(span);
-        });
+        tagsEl.replaceChildren(
+          ...(JSON.parse(card.dataset.tags ?? "[]") as string[]).map((tag) => {
+            const span = document.createElement("span");
+            span.className = "actualidad__tag";
+            span.textContent = tag;
+            return span;
+          }),
+        );
       }
-      resetPlayer(player!, data.thumbnail, data.titulo);
-      player!.dataset.fuente = data.fuente;
-      player!.dataset.src = data.src;
-      player!.dataset.thumbnail = data.thumbnail;
+
+      resetPlayer(player!, thumbnail, titulo);
+      player!.dataset.fuente = card.dataset.fuente ?? "";
+      player!.dataset.src = card.dataset.src ?? "";
+      player!.dataset.thumbnail = thumbnail;
+
+      track?.querySelectorAll("li[data-activo]").forEach((li) => li.removeAttribute("data-activo"));
+      card.closest("li")?.setAttribute("data-activo", "true");
     }
 
     const track = actualidad.querySelector<HTMLElement>("[data-track]");
 
     actualidad.querySelectorAll<HTMLButtonElement>(".actualidad__card").forEach((card) => {
-      card.addEventListener("click", () => {
-        const swap: VideoData = {
-          id: card.dataset.videoId ?? "",
-          titulo: card.dataset.titulo ?? "",
-          descripcion: card.dataset.descripcion ?? "",
-          fuente: card.dataset.fuente ?? "",
-          src: card.dataset.src ?? "",
-          thumbnail: card.dataset.thumbnail ?? "",
-          tags: JSON.parse(card.dataset.tags ?? "[]"),
-        };
+      card.addEventListener("click", async () => {
+        const irAlDestacado = () => destacadoEl!.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        const thumb = card.querySelector<HTMLElement>(".actualidad__card-thumb");
 
-        const previoTitulo = tituloEl?.textContent ?? "";
-        const previoDescripcion = descripcionEl?.textContent ?? "";
-        const previoFuente = player!.dataset.fuente ?? "";
-        const previoSrc = player!.dataset.src ?? "";
-        const previoThumbTags = Array.from(tagsEl?.children ?? []).map((el) => el.textContent ?? "");
-        const previoThumb = player!.dataset.thumbnail ?? "";
+        // El player usa el thumbnail en tamaño completo, distinto del srcset de la card:
+        // sin precargarlo la transición interpola hacia un recuadro negro.
+        const previa = new Image();
+        previa.src = card.dataset.thumbnail ?? "";
+        await previa.decode().catch(() => {});
 
-        setDestacado(swap);
+        if (!document.startViewTransition || !thumb) {
+          destacar(card);
+          irAlDestacado();
+          return;
+        }
 
-        card.dataset.titulo = previoTitulo;
-        card.dataset.descripcion = previoDescripcion;
-        card.dataset.fuente = previoFuente;
-        card.dataset.src = previoSrc;
-        card.dataset.thumbnail = previoThumb;
-        card.dataset.tags = JSON.stringify(previoThumbTags);
-        const cardImg = card.querySelector("img");
-        const cardTitulo = card.querySelector(".actualidad__card-titulo");
-        if (cardImg) cardImg.src = previoThumb;
-        if (cardTitulo) cardTitulo.textContent = previoTitulo;
-
-        destacadoEl!.scrollIntoView({ behavior: "smooth", block: "start" });
+        // El nombre vive en la miniatura antes del cambio y en el player después:
+        // el navegador interpola entre ambas posiciones y se ve subir el video.
+        thumb.style.viewTransitionName = "actualidad-video";
+        const vt = document.startViewTransition(() => {
+          thumb.style.viewTransitionName = "";
+          player!.style.viewTransitionName = "actualidad-video";
+          destacar(card);
+        });
+        vt.finished.finally(() => {
+          player!.style.viewTransitionName = "";
+          irAlDestacado();
+        });
       });
     });
 
@@ -228,6 +225,25 @@ const [destacado, ...resto] = videos;
   });
   });
 </script>
+
+<style is:global>
+  /* Los pseudo-elementos ::view-transition-* cuelgan del root, no admiten scope de Astro. */
+  ::view-transition-group(actualidad-video) {
+    animation-duration: 320ms;
+  }
+
+  ::view-transition-old(actualidad-video),
+  ::view-transition-new(actualidad-video) {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(actualidad-video) {
+      animation-duration: 1ms;
+    }
+  }
+</style>
 
 <style>
   /* =========================================
@@ -370,6 +386,10 @@ const [destacado, ...resto] = videos;
   .actualidad__track li {
     scroll-snap-align: start;
     flex: 0 0 calc((100% - (var(--space-4) * 2)) / 3);
+  }
+
+  .actualidad__track li[data-activo] {
+    display: none;
   }
 
   .actualidad__card {

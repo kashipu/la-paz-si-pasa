@@ -101,10 +101,6 @@ function formatearDuracion(segundos?: number) {
           </div>
         </div>
 
-        <div class="subtitles-box">
-          <p id="audioSubtitles">{inicial?.subtitulos}</p>
-        </div>
-
         <div class="nav-controls">
           <button class="nav-btn nav-prev" id="prevAudioBtn" aria-label="Anterior audio">
             <svg
@@ -139,9 +135,6 @@ function formatearDuracion(segundos?: number) {
 
   <!-- Elemento de audio nativo oculto -->
   <audio id="audioElement" preload="metadata" src={inicial?.audioUrl || undefined}></audio>
-  <p class="audio-aviso" id="audioAviso" role="status" hidden>
-    Este relato aún no tiene archivo de audio publicado.
-  </p>
 </section>
 
 <style>
@@ -169,8 +162,8 @@ function formatearDuracion(segundos?: number) {
     line-height: 1.2;
     margin: 0;
     text-transform: uppercase;
-    font-family: var(--font-komet);
-    font-weight: var(--font-weight-komet-heavy, 800);
+    font-family: var(--font-monique-regular);
+    font-weight: 700;
   }
 
   .header-left h2 .highlight {
@@ -260,13 +253,6 @@ function formatearDuracion(segundos?: number) {
     display: none;
   }
 
-  .audio-aviso {
-    margin: 0;
-    color: var(--color-nav-text, #32509d);
-    font-size: 0.95rem;
-    font-style: italic;
-  }
-
   .play-pause-btn.playing .icon-play {
     display: none;
   }
@@ -283,6 +269,8 @@ function formatearDuracion(segundos?: number) {
   }
 
   .producer-info h4 {
+    /* typography.css pone Monique en h1-h4 y eso gana sobre el Komet heredado del contenedor. */
+    font-family: var(--font-komet);
     font-size: 1.1rem;
     font-weight: var(--font-weight-komet-bold, 700);
     margin: 0;
@@ -353,18 +341,6 @@ function formatearDuracion(segundos?: number) {
     font-family: var(--font-komet);
     font-weight: var(--font-weight-komet-light, 300);
     color: var(--color-nav-text, #32509d);
-  }
-
-  .subtitles-box {
-    color: var(--color-nav-text, #32509d);
-    font-family: var(--font-komet);
-  }
-
-  .subtitles-box p {
-    font-size: 1rem;
-    font-weight: var(--font-weight-komet-light, 300);
-    margin: 0;
-    line-height: 1.6;
   }
 
   .nav-controls {
@@ -467,8 +443,6 @@ function formatearDuracion(segundos?: number) {
     const producerNameEl = document.getElementById("audioProducerName");
     const brandEl = document.getElementById("audioBrand");
     const locationEl = document.getElementById("audioLocation");
-    const subtitlesEl = document.getElementById("audioSubtitles");
-    const avisoEl = document.getElementById("audioAviso");
     const audio = document.getElementById("audioElement") as HTMLAudioElement;
     if (!audio || !playBtn || !progressBar) return;
 
@@ -495,15 +469,14 @@ function formatearDuracion(segundos?: number) {
       if (producerNameEl) producerNameEl.textContent = relato.productor;
       if (brandEl) brandEl.textContent = relato.marca;
       if (locationEl) locationEl.textContent = relato.lugar;
-      if (subtitlesEl) subtitlesEl.textContent = relato.subtitulos;
 
       progressBar.value = "0";
       if (currentTimeEl) currentTimeEl.textContent = "00:00";
       pintarDuracion(relato.duracionSegundos ?? 0);
 
-      // Sin archivo publicado en WordPress: se avisa en vez de simular reproducción.
+      // Sin archivo publicado en WordPress: controles deshabilitados, sin aviso visible.
       const disponible = Boolean(relato.audioUrl);
-      if (avisoEl) avisoEl.hidden = disponible;
+      playBtn?.setAttribute("aria-label", disponible ? "Reproducir audio" : "Audio no disponible");
       playBtn?.toggleAttribute("disabled", !disponible);
       progressBar.toggleAttribute("disabled", !disponible);
 
