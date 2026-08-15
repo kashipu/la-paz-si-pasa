@@ -35,6 +35,9 @@ services:
       - ./apps/wordpress/mu-plugins:/var/www/html/wp-content/mu-plugins
       - ./apps/wordpress/scf-json:/var/www/html/wp-content/scf-json
       - ./apps/wordpress/seed:/opt/seed:ro
+      # Bind mounts a proposito: en local se editan y el cambio se ve sin reconstruir.
+      # En produccion van horneados en la imagen, porque montados quedaban colgando en
+      # cada deploy de Dokploy (ver docker/wordpress/Dockerfile).
       - ./apps/wordpress/apache/loopback-8080.conf:/etc/apache2/conf-enabled/loopback-8080.conf:ro
       - ./apps/wordpress/php/zz-opcache-overrides.ini:/usr/local/etc/php/conf.d/zz-opcache-overrides.ini
     ports:
