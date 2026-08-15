@@ -5,6 +5,8 @@ export interface FeriaMedia {
   /** solo cuando tipo === "video" */
   fuente?: "youtube" | "wordpress";
   thumbnailUrl?: string;
+  /** solo cuando tipo === "video": texto bajo el reproductor */
+  pie?: string;
 }
 
 export interface Feria {
@@ -13,8 +15,8 @@ export interface Feria {
   descripcion: string;
   /** hasta 6 fotos */
   galeria: FeriaMedia[];
-  /** vertical 9:16, opcional */
-  video?: FeriaMedia;
+  /** verticales 9:16, se navegan con flechas; vacío si la feria no tiene video */
+  videos: FeriaMedia[];
   orden?: number;
   abiertaPorDefecto?: boolean;
 }

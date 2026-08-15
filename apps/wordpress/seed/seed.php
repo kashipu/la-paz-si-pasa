@@ -127,11 +127,21 @@ if ($toca('videos')) foreach ($datos['videos'] as $v) {
 }
 
 if ($toca('ferias')) foreach ($datos['ferias'] as $f) {
+    // Los ids en 0 son archivos que no se encontraron: medio() ya avisó de cada uno.
+    $galeria = array_values(array_filter(array_map(
+        fn($archivo) => medio("ferias/$archivo"),
+        $f['galeria'] ?? []
+    )));
+    // Repetidor: una fila por video. Tres ferias no tienen ninguno y quedan vacías.
+    $videos = array_map(
+        fn($url) => ['fuente_video' => 'youtube', 'video_youtube' => $url],
+        $f['videos'] ?? []
+    );
+
     upsert('feria', $f['titulo'], [
         'descripcion' => $f['descripcion'],
-        // galeria se deja vacía: las fotos siguen sin enlace en SharePoint
-        'fuente_video' => isset($f['video_youtube']) ? 'youtube' : '',
-        'video_youtube' => $f['video_youtube'] ?? '',
+        'galeria' => $galeria,
+        'videos' => $videos,
         'orden' => $f['orden'],
         'abierta_por_defecto' => !empty($f['abierta_por_defecto']),
     ]);

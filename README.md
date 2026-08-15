@@ -61,3 +61,25 @@ npm run build
 `compose.prod.yaml` define los servicios de producción para Dokploy. Las
 credenciales y variables reales deben configurarse en el entorno de despliegue;
 nunca se guardan en Git.
+
+### Después de cada deploy
+
+Dokploy re-clona el repositorio en cada despliegue y los bind mounts del servicio
+`cms` quedan apuntando al directorio borrado. WordPress deja de cargar los
+mu-plugins sin emitir ningún error, y el frontend cae a contenido de prueba.
+Comprobación obligatoria:
+
+```sh
+curl -sL "https://cms.lapazsipasa.com/index.php?rest_route=/" | grep -q headless/v1 \
+  && echo OK || echo "ROTO: recrear cms"
+```
+
+Si sale `ROTO`, recrear el contenedor (los volúmenes no se tocan):
+
+```sh
+docker compose -f compose.prod.yaml up -d --force-recreate cms
+```
+
+Sin acceso al host, cambiar cualquier variable que consuma `cms` en el panel de
+Dokploy y desplegar: al cambiar su entorno cambia el `config-hash` y Compose lo
+recrea solo. El detalle está en `compose.prod.yaml`, junto al montaje.

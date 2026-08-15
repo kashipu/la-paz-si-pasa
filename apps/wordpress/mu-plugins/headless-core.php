@@ -25,6 +25,21 @@ add_filter('acf/settings/load_json', function ($paths) {
     return array_unique($paths);
 });
 
+// El campo `gallery` sale por REST como ids sueltos: su format_value_for_rest solo
+// aplica acf_format_numerics(), a diferencia de `image`, que devuelve el adjunto
+// entero. El frontend necesita las URL, y pedirlas una por una seria una peticion
+// por foto. acf_get_attachment() da la misma forma que ya devuelve `image`.
+add_filter('acf/rest/format_value_for_rest/type=gallery', function ($formateado) {
+    if (!is_array($formateado)) {
+        return $formateado;
+    }
+
+    return array_values(array_filter(array_map(
+        fn($item) => is_array($item) ? $item : acf_get_attachment($item),
+        $formateado
+    )));
+}, 10, 1);
+
 add_action('after_setup_theme', function () {
     add_theme_support('custom-logo');
 

@@ -41,6 +41,14 @@ services:
         define('DISALLOW_FILE_EDIT', true);
         define('FORCE_SSL_ADMIN', true);
         define('WP_ENVIRONMENT_TYPE', 'production');
+    # TRAMPA: Dokploy borra y re-clona code/ en cada deploy. Estos bind mounts quedan
+    # atados al directorio que existia al CREAR el contenedor, asi que tras un deploy
+    # apuntan a un directorio borrado y se ven vacios adentro. WordPress no carga ningun
+    # mu-plugin y no falla: se pierden headless/v1, el redirect y el SMTP en silencio.
+    # Compose no lo arregla solo (el config-hash de cms no cambia; "Redeploy" tampoco).
+    # Despues de CADA deploy:
+    #   curl -sL "https://cms.lapazsipasa.com/index.php?rest_route=/" | grep -q headless/v1
+    # Si no aparece:  docker compose -f compose.prod.yaml up -d --force-recreate cms
     volumes:
       - wordpress_data:/var/www/html
       - ./apps/wordpress/mu-plugins:/var/www/html/wp-content/mu-plugins

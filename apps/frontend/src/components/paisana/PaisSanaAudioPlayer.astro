@@ -434,7 +434,7 @@ function formatearDuracion(segundos?: number) {
     const relatos: AudioRelato[] = JSON.parse(seccion.dataset.relatos || "[]");
     if (relatos.length === 0) return;
 
-    const playBtn = document.getElementById("playPauseBtn");
+    const playBtn = document.getElementById("playPauseBtn") as HTMLButtonElement;
     const prevBtn = document.getElementById("prevAudioBtn");
     const nextBtn = document.getElementById("nextAudioBtn");
     const progressBar = document.getElementById("audioProgress") as HTMLInputElement;

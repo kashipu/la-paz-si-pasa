@@ -107,170 +107,447 @@
       "descripcion": "Karen Baracaldo, miembro de la JAC."
     }
   ],
-
   "videos": [
     {
       "titulo": "Artonitas | El Castillo, Meta",
       "youtube_url": "https://youtu.be/WEYN6vodbPc",
-      "tags": ["Actualidad", "PaisSana"],
+      "tags": [
+        "Actualidad",
+        "PaisSana"
+      ],
       "descripcion": "El Castillo, Meta, ha sido uno de los territorios más golpeados por la violencia. Pero allí, un grupo de mujeres decidió organizarse y crear un proyecto que las ha llevado de la tierra al aire. Sus Artonitas: tostaditas de plátano llanero, hoy se venden en supermercados y vuelan en los aviones de clic."
     },
     {
       "titulo": "Aroma de Paz | Rionegro, Santander",
       "youtube_url": "https://youtu.be/GlSj8XMwMyA",
-      "tags": ["Actualidad", "PaisSana"],
+      "tags": [
+        "Actualidad",
+        "PaisSana"
+      ],
       "descripcion": "Las mujeres de nuestro campo no solo cultivan: transforman realidades y siembran esperanza. Desde Rionegro, Santander, la asociación de cacaocultores víctimas, Aroma de Paz, nos enseña el verdadero significado de la resiliencia: estas mujeres decidieron darle un giro a sus vidas, pasando de la comercialización del grano a convertirse en empresarias de su propio chocolate de mesa."
     },
     {
       "titulo": "Asociación Jóvenes Agricultores del Perijá | San José del Oriente, La Paz, Cesar",
       "youtube_url": "https://youtu.be/XzR8SMTdQ9o",
-      "tags": ["Actualidad", "PaisSana"],
+      "tags": [
+        "Actualidad",
+        "PaisSana"
+      ],
       "descripcion": "Detrás de cada taza de Café Del Oriente hay una historia que se escribe con berraquera. Leylis, madre, líder comunitaria y representante legal de la Asociación Jóvenes Agricultores del Perijá, nos abre las puertas de San José del Oriente para mostrarnos cómo el campo se transforma gracias al empoderamiento femenino y juvenil."
     },
     {
       "titulo": "Ruta Etnoecoturística del pueblo zenú | San Antonio de Palmito, Sucre",
       "youtube_url": "https://youtu.be/qzaVIDIdFPA",
-      "tags": ["Actualidad", "Colombia Sostenible"],
+      "tags": [
+        "Actualidad",
+        "Colombia Sostenible"
+      ],
       "descripcion": "San Antonio de Palmito guarda un encanto que va más allá del paisaje, es un lugar donde la naturaleza y la espiritualidad se encuentran. La Ruta Etnoecoturística del Pueblo Zenú combina recorridos culturales, gastronómicos y productivos que permiten conocer una tradición viva. Los visitantes no solo llegan a un destino, llegan a una historia milenaria que los invita a descubrirse a sí mismos."
     },
     {
       "titulo": "Juan Pablo | Corregimiento La Marina, Tolima",
       "youtube_url": "https://youtu.be/QU9YVzdOX6Q",
-      "tags": ["Actualidad", "Colombia Sostenible"],
+      "tags": [
+        "Actualidad",
+        "Colombia Sostenible"
+      ],
       "descripcion": "A los 16 años, Juan Pablo quería irse de su vereda, dejar atrás el trabajo del campo y buscar una vida distinta. Pero eso cambió. Lo que antes era rutina se convirtió en pasión. Junto a su padre aprendió sobre la catación, el tostado y el valor que tiene cuidar cada planta de café. Entendió que su finca no era solo un terreno: era una empresa familiar, una herencia viva."
     },
     {
       "titulo": "Chocolates Tumaco | Tumaco, Nariño",
       "youtube_url": "https://youtu.be/mgSRb-MAUeM",
-      "tags": ["Actualidad", "Colombia Sostenible"],
+      "tags": [
+        "Actualidad",
+        "Colombia Sostenible"
+      ],
       "descripcion": "En medio de las dificultades nacen las mejores oportunidades. En el 2013, Tumaco enfrentaba un comercio de cacao desorganizado y lleno de intermediarios. Allí surgió la idea de unirse y crear Chocolates Tumaco, una asociación que se convirtió en referente de resiliencia y construcción de paz. Con el apoyo del Programa Colombia Sostenible del Fondo Colombia en Paz, 500 familias de 7 Consejos Comunitarios lograron mejorar la productividad, fortalecer la infraestructura y acceder a conocimientos técnicos que transformaron sus economías."
     },
     {
       "titulo": "Artonitas y la alianza con clic",
       "youtube_url": "https://youtu.be/ZNJ2XOHaQjM",
-      "tags": ["PaisSana"],
+      "tags": [
+        "PaisSana"
+      ],
       "descripcion": "Desde la tierra llanera hasta las nubes. Artonitas tuvo un vuelo diferente gracias a la alianza entre clic y PaisSana. Las tostadas de plátano elaboradas por las mujeres de Asodeleite llegaron a los cielos de Colombia para demostrar que vale la pena apostarle a la paz y a las economías comunitarias."
     },
     {
       "titulo": "Artesanías Isamara | Valledupar",
       "youtube_url": "https://youtu.be/HSO-DgZBppM",
-      "tags": ["PaisSana"],
+      "tags": [
+        "PaisSana"
+      ],
       "descripcion": "Mara Lucía, creadora de Isamara Artesanía, nos comparte desde Valledupar una historia que conmueve el alma: un grupo de 38 mujeres cabeza de familia y víctimas del conflicto, muchas provenientes de los Montes de María, encontraron en el diseño textil y la pintura de sombreros una terapia colectiva de apoyo y superación."
     },
     {
       "titulo": "Cacaoma | Manaure, Cesar",
       "youtube_url": "https://youtu.be/KnvmZExQrdY",
-      "tags": ["PaisSana"],
+      "tags": [
+        "PaisSana"
+      ],
       "descripcion": "En Manaure la historia del cacao se escribe con la fuerza, berraquera y autonomía de sus mujeres. Mariberta, representante legal de Cacaoma, junto a su mano derecha Diosa, lideran a 60 productores que pasaron de la tradición cafetera a transformar el cacao 100% especial en un chocolate de mesa artesanal con la marca Chocomac."
     }
   ],
-
   "ferias": [
     {
       "titulo": "ART, Productos con sabor a paz",
       "orden": 1,
       "abierta_por_defecto": true,
-      "video_youtube": "https://youtube.com/shorts/ZwgOeWvZs_g",
-      "descripcion": "El sabor del café Caike, un producto con sello PaisSana, deleitó el paladar de los asistentes al lanzamiento de la campaña «Productos con sabor a Paz», convocado por la Agencia de Renovación del Territorio – ART y la FAO."
+      "descripcion": "El sabor del café Caike, un producto con sello PaisSana, deleitó el paladar de los asistentes al lanzamiento de la campaña «Productos con sabor a Paz», convocado por la Agencia de Renovación del Territorio – ART y la FAO.",
+      "galeria": [
+        "20250522-artproductosconsabor/20250522-pss-artlanzamientoproductosconsabor-edit-02.jpg",
+        "20250522-artproductosconsabor/20250522-pss-artlanzamientoproductosconsabor-edit-03.jpg",
+        "20250522-artproductosconsabor/20250522-pss-artlanzamientoproductosconsabor-edit-05.jpg",
+        "20250522-artproductosconsabor/20250522-pss-artlanzamientoproductosconsabor-edit-06.jpg",
+        "20250522-artproductosconsabor/20250522-pss-artlanzamientoproductosconsabor-edit-09.jpg"
+      ],
+      "videos": [
+        "https://youtube.com/shorts/ZwgOeWvZs_g"
+      ]
     },
     {
       "titulo": "CLACSO 2025",
       "orden": 2,
-      "video_youtube": "https://youtube.com/shorts/5pLdFt9oPWY",
-      "descripcion": "Creemos en una paz que se aprende, se enseña y se practica. Por eso, durante el evento CLACSO 2025, pudimos compartir con la comunidad académica internacional cómo, desde el diálogo y el trabajo con nuestros productores, estamos impulsando un modelo que promueve el desarrollo de los territorios."
+      "descripcion": "Creemos en una paz que se aprende, se enseña y se practica. Por eso, durante el evento CLACSO 2025, pudimos compartir con la comunidad académica internacional cómo, desde el diálogo y el trabajo con nuestros productores, estamos impulsando un modelo que promueve el desarrollo de los territorios.",
+      "galeria": [
+        "20250610-clacso2025/20250610-pss-clacso2025-dia2-04.jpg",
+        "20250610-clacso2025/20250610-pss-clacso2025-dia2-08.jpg",
+        "20250610-clacso2025/20250610-pss-clacso2025-dia2-10.jpg",
+        "20250610-clacso2025/20250610-pss-clacso2025-dia2-17.jpg",
+        "20250610-clacso2025/20250610-pss-clacso2025-dia2-30.jpg",
+        "20250610-clacso2025/20250610-pss-clacso2025-dia2-41.jpg"
+      ],
+      "videos": [
+        "https://youtube.com/shorts/5pLdFt9oPWY"
+      ]
     },
     {
       "titulo": "Agroexpo 2025",
       "orden": 3,
-      "video_youtube": "https://youtube.com/shorts/6m8NAKEPSUg",
-      "descripcion": "Estuvimos en Corferias en Agroexpo 2025 donde sembramos conversaciones, vínculos, confianza y admiración por el trabajo de nuestros productores PaisSana, quienes vinieron desde distintos territorios para compartir lo que hacen y lo que son."
+      "descripcion": "Estuvimos en Corferias en Agroexpo 2025 donde sembramos conversaciones, vínculos, confianza y admiración por el trabajo de nuestros productores PaisSana, quienes vinieron desde distintos territorios para compartir lo que hacen y lo que son.",
+      "galeria": [
+        "20250709-agroexpo/20250709-pss-agroexpo-edit-29.jpg",
+        "20250709-agroexpo/20250709-pss-agroexpo-retrato-carlos-moreno-pronacela-edit-1.jpg",
+        "20250709-agroexpo/20250711-pss-agroexpo-edit-08.jpg",
+        "20250709-agroexpo/20250711-pss-agroexpo-edit-22.jpg",
+        "20250709-agroexpo/20250716-pss-agroexpo-26.jpg",
+        "20250709-agroexpo/20250720-pss-agroexpo-edit-24.jpg"
+      ],
+      "videos": [
+        "https://youtube.com/shorts/6m8NAKEPSUg",
+        "https://youtube.com/shorts/nzgpt7ER3_k",
+        "https://youtube.com/shorts/fmLoyeBdxns",
+        "https://youtube.com/shorts/lorcLP6IVt4"
+      ]
     },
     {
       "titulo": "BAEMCA, feria de empleados de Cancillería",
       "orden": 4,
-      "video_youtube": "https://youtube.com/shorts/dRj4gBzhfjc",
-      "descripcion": "Estuvimos en la feria BAEMCA, una iniciativa de la Cancillería para visibilizar emprendimientos. Hicimos parte de este espacio donde pudimos compartir el trabajo de quienes, desde el campo, le apuestan a la paz y al desarrollo económico de sus comunidades: nuestros productores."
+      "descripcion": "Estuvimos en la feria BAEMCA, una iniciativa de la Cancillería para visibilizar emprendimientos. Hicimos parte de este espacio donde pudimos compartir el trabajo de quienes, desde el campo, le apuestan a la paz y al desarrollo económico de sus comunidades: nuestros productores.",
+      "galeria": [
+        "20250718-feria-baemca-cancilleria/20250718-pss-feria-baemca-cancilleria-33.jpg",
+        "20250718-feria-baemca-cancilleria/20250718-pss-feria-baemca-cancilleria-48.jpg",
+        "20250718-feria-baemca-cancilleria/20250718-pss-feria-baemca-cancilleria-70.jpg",
+        "20250718-feria-baemca-cancilleria/20250718-pss-feria-baemca-cancilleria-73.jpg",
+        "20250718-feria-baemca-cancilleria/20250718-pss-feria-baemca-cancilleria-79.jpg"
+      ],
+      "videos": [
+        "https://youtube.com/shorts/dRj4gBzhfjc"
+      ]
     },
     {
       "titulo": "Cafés de Colombia Expo 2025",
       "orden": 5,
-      "video_youtube": "https://youtube.com/shorts/wcOrGEqV7Pw",
-      "descripcion": "Cafés de Colombia Expo 2025 fue mucho más que una feria, fue un punto de encuentro entre historias, sueños y propósitos. Durante cuatro días, llevamos el sabor del campo colombiano a Corferias y mostramos cómo el café puede ser una herramienta de transformación y reconciliación."
+      "descripcion": "Cafés de Colombia Expo 2025 fue mucho más que una feria, fue un punto de encuentro entre historias, sueños y propósitos. Durante cuatro días, llevamos el sabor del campo colombiano a Corferias y mostramos cómo el café puede ser una herramienta de transformación y reconciliación.",
+      "galeria": [
+        "20251023-cafes-de-colombia-expo/20231023-pss-cafes-de-colombia-expo-01466.jpg",
+        "20251023-cafes-de-colombia-expo/20231023-pss-cafes-de-colombia-expo-01537.jpg",
+        "20251023-cafes-de-colombia-expo/20231023-pss-cafes-de-colombia-expo-01685.jpg",
+        "20251023-cafes-de-colombia-expo/20231023-pss-cafes-de-colombia-expo-01791.jpg",
+        "20251023-cafes-de-colombia-expo/20231023-pss-cafes-de-colombia-expo-retrato-sandra-marcela-alarcon-01678.jpg",
+        "20251023-cafes-de-colombia-expo/20231026-pss-cafes-de-colombia-expo-02053.jpg"
+      ],
+      "videos": [
+        "https://youtube.com/shorts/wcOrGEqV7Pw",
+        "https://youtu.be/0w8U_DHRpD8",
+        "https://youtube.com/shorts/2H_JcXmUuXA",
+        "https://youtube.com/shorts/vBcNOkXcHBU",
+        "https://youtube.com/shorts/QGCTzCdhZMc"
+      ]
     },
     {
       "titulo": "Chocoshow",
       "orden": 6,
-      "video_youtube": "https://youtube.com/shorts/4yjXuX3MNRQ",
-      "descripcion": "En Chocoshow vivimos un espacio donde el cacao, las historias y los territorios se encontraron, y le dieron a los asistentes una probadita de esos emprendimientos que construyen paz desde las regiones de Colombia."
+      "descripcion": "En Chocoshow vivimos un espacio donde el cacao, las historias y los territorios se encontraron, y le dieron a los asistentes una probadita de esos emprendimientos que construyen paz desde las regiones de Colombia.",
+      "galeria": [
+        "20251128-chocoshow/20251128-pss-chocoshow-02429.jpg",
+        "20251128-chocoshow/20251128-pss-chocoshow-02681.jpg",
+        "20251128-chocoshow/20251128-pss-chocoshow-02736.jpg",
+        "20251128-chocoshow/20251129-pss-chocoshow-02823.jpg",
+        "20251128-chocoshow/20251129-pss-chocoshow-02857.jpg",
+        "20251128-chocoshow/20251130-pss-chocoshow-03057.jpg"
+      ],
+      "videos": [
+        "https://youtube.com/shorts/4yjXuX3MNRQ",
+        "https://youtube.com/shorts/GTSMpooOFqc",
+        "https://youtube.com/shorts/b1jnyGE0C-A",
+        "https://youtube.com/shorts/JVDqPR6KNH4"
+      ]
     },
     {
       "titulo": "Carnaval de Barranquilla",
       "orden": 7,
-      "video_youtube": "https://youtube.com/shorts/4wZ8h6Fu9p0",
-      "descripcion": "PaisSana estuvo en el Carnaval para compartir con todos una semana de alegría, sabor y paz, junto a quienes hacen posible todo esto. Todos los barranquilleros disfrutaron de nuestros tres espacios y conocieron la marca y a los productores que hacen posible esta historia."
+      "descripcion": "PaisSana estuvo en el Carnaval para compartir con todos una semana de alegría, sabor y paz, junto a quienes hacen posible todo esto. Todos los barranquilleros disfrutaron de nuestros tres espacios y conocieron la marca y a los productores que hacen posible esta historia.",
+      "galeria": [
+        "20260206-pss-carnaval-barranquilla/20260207-pss-puerto-mocho-4761-edit-1.jpg",
+        "20260206-pss-carnaval-barranquilla/20260211-pss-malecon-009-edit.jpg",
+        "20260206-pss-carnaval-barranquilla/20260211-pss-malecon-611-edit.jpg",
+        "20260206-pss-carnaval-barranquilla/20260211-pss-malecon-retrato-edgar-mendoza-190-edit-1.jpg",
+        "20260206-pss-carnaval-barranquilla/20260212-pss-barranquilla-dron-0818-edit.jpg",
+        "20260206-pss-carnaval-barranquilla/20260212-pss-malecon-700-edit.jpg"
+      ],
+      "videos": [
+        "https://youtube.com/shorts/4wZ8h6Fu9p0",
+        "https://youtube.com/shorts/bnQIIdJK070",
+        "https://youtube.com/shorts/J5G7zKrO9FE",
+        "https://youtube.com/shorts/yRLoKyWcCRs",
+        "https://youtube.com/shorts/byOO8xWxtHc",
+        "https://youtube.com/shorts/Z0XFVwTHQTI",
+        "https://youtube.com/shorts/FHMXYwFEur4",
+        "https://youtube.com/shorts/gR0vLi8dNVY",
+        "https://youtube.com/shorts/PS-aeAB0S3s"
+      ]
     },
     {
       "titulo": "ANATO, Vitrina Turística",
       "orden": 8,
-      "video_youtube": "https://youtube.com/shorts/d7Mi7yxJ7Ic",
-      "descripcion": "Cientos de personas pasaron por nuestro stand en la Vitrina Turística de ANATO, escucharon historias, conocieron territorios y entendieron que el turismo puede ser mucho más que un destino: puede ser oportunidad, puede ser transformación, puede ser construcción de paz. ¡Turismo que transforma!"
+      "descripcion": "Cientos de personas pasaron por nuestro stand en la Vitrina Turística de ANATO, escucharon historias, conocieron territorios y entendieron que el turismo puede ser mucho más que un destino: puede ser oportunidad, puede ser transformación, puede ser construcción de paz. ¡Turismo que transforma!",
+      "galeria": [
+        "20260224-pss-anato/20260225-pss-anato-8222-edit.jpg",
+        "20260224-pss-anato/20260226-pss-anato-8823-edit-1.jpg",
+        "20260224-pss-anato/20260226-pss-anato-9241-edit-1.jpg",
+        "20260224-pss-anato/20260226-pss-anato-retrato-melissa-lopez-9544-edit-1.jpg",
+        "20260224-pss-anato/20260227-pss-anato-9841-edit.jpg",
+        "20260224-pss-anato/20260227-pss-anato-retrato-yaned-barrero-129-edit.jpg"
+      ],
+      "videos": [
+        "https://youtube.com/shorts/d7Mi7yxJ7Ic",
+        "https://youtube.com/shorts/h-slmc3tSA8",
+        "https://youtube.com/shorts/gIFbNuK8Jik",
+        "https://youtube.com/shorts/vuiJQSZc4G4",
+        "https://youtube.com/shorts/sl82CwKmbhQ"
+      ]
     },
     {
       "titulo": "ICARRD+20 Cartagena",
       "orden": 9,
-      "descripcion": "ICARRD+20 fue un escenario para conversar sobre tierra, desarrollo rural y futuro. Y allí estuvo PaisSana representando a cientos de productores que construyen país desde sus territorios. Porque cuando el campo tiene voz, Colombia avanza."
+      "descripcion": "ICARRD+20 fue un escenario para conversar sobre tierra, desarrollo rural y futuro. Y allí estuvo PaisSana representando a cientos de productores que construyen país desde sus territorios. Porque cuando el campo tiene voz, Colombia avanza.",
+      "galeria": [
+        "20260226-pss-cartagena-icarrd20/20260226-pss-cartagena-icarrd20-06382.jpg",
+        "20260226-pss-cartagena-icarrd20/20260226-pss-cartagena-icarrd20-06415.jpg",
+        "20260226-pss-cartagena-icarrd20/20260226-pss-cartagena-icarrd20-06423.jpg",
+        "20260226-pss-cartagena-icarrd20/20260226-pss-cartagena-icarrd20-06429.jpg",
+        "20260226-pss-cartagena-icarrd20/20260226-pss-cartagena-icarrd20-06442.jpg"
+      ],
+      "videos": []
     },
     {
       "titulo": "Mercados campesinos, Unidad de Víctimas",
       "orden": 10,
-      "descripcion": "El 9 de abril, nos tomamos la Plaza de Lourdes para conmemorar el Día de las Víctimas demostrando que el campo es motor de paz. Detrás de cada producto PaisSana hay una historia de esfuerzo que hoy llega a tu mesa."
+      "descripcion": "El 9 de abril, nos tomamos la Plaza de Lourdes para conmemorar el Día de las Víctimas demostrando que el campo es motor de paz. Detrás de cada producto PaisSana hay una historia de esfuerzo que hoy llega a tu mesa.",
+      "galeria": [
+        "20260409-mercados-campesinos/20260409-mercados-campesinos-dia-de-victimas-07680.jpg",
+        "20260409-mercados-campesinos/20260409-mercados-campesinos-dia-de-victimas-07700.jpg",
+        "20260409-mercados-campesinos/20260409-mercados-campesinos-dia-de-victimas-07711.jpg",
+        "20260409-mercados-campesinos/20260409-mercados-campesinos-dia-de-victimas-07754.jpg",
+        "20260409-mercados-campesinos/20260409-mercados-campesinos-dia-de-victimas-07762.jpg",
+        "20260409-mercados-campesinos/20260409-mercados-campesinos-dia-de-victimas-07843.jpg"
+      ],
+      "videos": []
     },
     {
       "titulo": "Macrorrueda de las Américas",
       "orden": 11,
-      "video_youtube": "https://youtube.com/shorts/JS_vPqODneY",
-      "descripcion": "El Sabor de la Paz se tomó la Macrorrueda de las Américas «Colombia, el País de la Belleza». En un espacio con más de 900 mesas de negocios, los productores PaisSana cumplieron una agenda de altura, presentando sus proyectos y la riqueza de sus territorios ante compradores nacionales e internacionales."
+      "descripcion": "El Sabor de la Paz se tomó la Macrorrueda de las Américas «Colombia, el País de la Belleza». En un espacio con más de 900 mesas de negocios, los productores PaisSana cumplieron una agenda de altura, presentando sus proyectos y la riqueza de sus territorios ante compradores nacionales e internacionales.",
+      "galeria": [
+        "20260414-pss-macrorrueda-las-americas/20260414-pss-macrorrueda-las-americas-07912.jpg",
+        "20260414-pss-macrorrueda-las-americas/20260414-pss-macrorrueda-las-americas-07930.jpg",
+        "20260414-pss-macrorrueda-las-americas/20260414-pss-macrorrueda-las-americas-07987.jpg",
+        "20260414-pss-macrorrueda-las-americas/20260415-pss-macrorrueda-las-americas-08061.jpg",
+        "20260414-pss-macrorrueda-las-americas/20260415-pss-macrorrueda-las-americas-08068.jpg",
+        "20260414-pss-macrorrueda-las-americas/20260415-pss-macrorrueda-las-americas-08170.jpg"
+      ],
+      "videos": [
+        "https://youtube.com/shorts/JS_vPqODneY"
+      ]
     },
     {
       "titulo": "Filbo, Feria del Libro de Bogotá",
       "orden": 12,
-      "descripcion": "En la Feria del Libro vivimos el conversatorio «Lectura que transforma territorios», un espacio donde la resiliencia tomó la palabra. Allí escuchamos a Natalia Garro, una «PaisSana» que transformó su historia de desplazamiento en una industria de esperanza. Juntos descubrimos cómo sus «Bibliotecas Libres» de madera plástica están democratizando el acceso al conocimiento en todo el país."
+      "descripcion": "En la Feria del Libro vivimos el conversatorio «Lectura que transforma territorios», un espacio donde la resiliencia tomó la palabra. Allí escuchamos a Natalia Garro, una «PaisSana» que transformó su historia de desplazamiento en una industria de esperanza. Juntos descubrimos cómo sus «Bibliotecas Libres» de madera plástica están democratizando el acceso al conocimiento en todo el país.",
+      "galeria": [
+        "20260422-pss-filbo/20260422-pss-filbo-conversatorio-08301.jpg",
+        "20260422-pss-filbo/20260422-pss-filbo-conversatorio-08323.jpg",
+        "20260422-pss-filbo/20260422-pss-filbo-conversatorio-08329.jpg",
+        "20260422-pss-filbo/20260422-pss-filbo-conversatorio-08378.jpg",
+        "20260422-pss-filbo/20260422-pss-filbo-conversatorio-08404.jpg",
+        "20260422-pss-filbo/20260422-pss-filbo-conversatorio-08408.jpg"
+      ],
+      "videos": []
     },
     {
       "titulo": "PaisSana en Valledupar",
       "orden": 13,
-      "video_youtube": "https://youtube.com/shorts/jGDEg-Js984",
-      "descripcion": "Recorrimos cada municipio de nuestra agenda en Cesar, para asegurar que el talento rural de esta región llegue más lejos. Estuvimos allí para escuchar, asesorar y crecer junto a nuestros productores y transformadores. Porque en PaisSana sabemos que el corazón de la paz está en lo que cosechamos."
+      "descripcion": "Recorrimos cada municipio de nuestra agenda en Cesar, para asegurar que el talento rural de esta región llegue más lejos. Estuvimos allí para escuchar, asesorar y crecer junto a nuestros productores y transformadores. Porque en PaisSana sabemos que el corazón de la paz está en lo que cosechamos.",
+      "galeria": [
+        "20260424-pss-valledupar/20260427-pss-agustin-codazzi-socializacion-08484.jpg",
+        "20260424-pss-valledupar/20260427-pss-agustin-codazzi-socializacion-08647.jpg",
+        "20260424-pss-valledupar/20260427-pss-agustin-codazzi-socializacion-08663.jpg",
+        "20260424-pss-valledupar/20260428-pss-pueblo-bello-socializacion-08779.jpg",
+        "20260424-pss-valledupar/20260428-pss-pueblo-bello-socializacion-08838.jpg",
+        "20260424-pss-valledupar/20260428-pss-pueblo-bello-socializacion-08841.jpg"
+      ],
+      "videos": [
+        "https://youtube.com/shorts/jGDEg-Js984"
+      ]
     },
     {
       "titulo": "Yopal, socialización",
       "orden": 14,
-      "video_youtube": "https://youtube.com/shorts/fmywa86VVYE",
-      "descripcion": "¡El llano se fortalece con alianzas que transforman! En Yopal, vivimos una jornada increíble de socialización junto a la Gobernación de Casanare y la Fundación Amanecer. Nos llenó de orgullo ver a tantos productores y transformadores listos para dar el siguiente paso con PaisSana."
+      "descripcion": "¡El llano se fortalece con alianzas que transforman! En Yopal, vivimos una jornada increíble de socialización junto a la Gobernación de Casanare y la Fundación Amanecer. Nos llenó de orgullo ver a tantos productores y transformadores listos para dar el siguiente paso con PaisSana.",
+      "galeria": [
+        "20260430-pss-yopal-socializacion/20260430-pss-yopal-fundacion-amanecer-4596.jpg",
+        "20260430-pss-yopal-socializacion/20260430-pss-yopal-fundacion-amanecer-4654.jpg",
+        "20260430-pss-yopal-socializacion/20260430-pss-yopal-fundacion-amanecer-4673.jpg",
+        "20260430-pss-yopal-socializacion/20260430-pss-yopal-fundacion-amanecer-4695-1.jpg",
+        "20260430-pss-yopal-socializacion/20260430-pss-yopal-fundacion-amanecer-4898.jpg",
+        "20260430-pss-yopal-socializacion/20260430-pss-yopal-fundacion-amanecer-4923.jpg"
+      ],
+      "videos": [
+        "https://youtube.com/shorts/fmywa86VVYE"
+      ]
     },
     {
       "titulo": "Medellín, socialización",
       "orden": 15,
-      "video_youtube": "https://youtube.com/shorts/8nR2BFC6ba8",
-      "descripcion": "¡Nuevas historias de progreso se escribieron en Medellín! Vivimos una jornada increíble en la capital antioqueña, sumando a nuevos productores y transformadores a esta gran red nacional que impulsa nuestro campo."
+      "descripcion": "¡Nuevas historias de progreso se escribieron en Medellín! Vivimos una jornada increíble en la capital antioqueña, sumando a nuevos productores y transformadores a esta gran red nacional que impulsa nuestro campo.",
+      "galeria": [
+        "20260618-pss-medellin-socializacion/20260618-pss-medellin-socializacion-00010.jpg",
+        "20260618-pss-medellin-socializacion/20260618-pss-medellin-socializacion-00158.jpg",
+        "20260618-pss-medellin-socializacion/20260618-pss-medellin-socializacion-00163.jpg",
+        "20260618-pss-medellin-socializacion/20260618-pss-medellin-socializacion-00197.jpg",
+        "20260618-pss-medellin-socializacion/20260618-pss-medellin-socializacion-00231.jpg",
+        "20260618-pss-medellin-socializacion/20260618-pss-medellin-socializacion-00250-topaz.jpg"
+      ],
+      "videos": [
+        "https://youtube.com/shorts/8nR2BFC6ba8"
+      ]
     }
   ],
-
   "audio_relatos": [
-    { "orden": 1, "productor": "María Cristina Canchila", "marca": "Lácteos Calamar", "lugar": "Calamar, Guaviare", "archivo": "audio/01-pss-maria-cristina-canchilla-asocamposur.m4a" },
-    { "orden": 2, "productor": "Carlos Darío Moreno", "marca": "Pronacela", "lugar": "Aquitania, Boyacá", "archivo": "audio/02-pss-carlos-dario-moreno-pronacela.m4a" },
-    { "orden": 3, "productor": "Amparo Nieto", "marca": "Colágeno Victorias", "lugar": "Yopal, Casanare", "archivo": "audio/03-pss-amparo-nieto-colageno-victorias.m4a" },
-    { "orden": 4, "productor": "Dina Luz Padia", "marca": "ASOREPP", "lugar": "María La Baja, Bolívar", "archivo": "audio/04-pss-dina-luz-padia-asorepp.m4a" },
-    { "orden": 5, "productor": "Emilce Rocío Prieto", "marca": "El Gallinero", "lugar": "Jenesano, Boyacá", "archivo": "audio/05-pss-emilce-rocio-prieto-el-gallinero.m4a" },
-    { "orden": 6, "productor": "Sandra Marcela Alarcón", "marca": "Café Amanecer", "lugar": "Yopal, Casanare", "archivo": "audio/06-pss-sandra-marcela-alarcon-cafe-amanecer.m4a" },
-    { "orden": 7, "productor": "Zaira Milena Caro", "marca": "SachaCaro", "lugar": "Arauquita, Arauca", "archivo": "audio/07-pss-zaira-milena-caro-sachacaro.m4a" },
-    { "orden": 8, "productor": "Ángel María Obando", "marca": "Chocolates Obangu", "lugar": "Valle del Guamuez, Putumayo", "archivo": "audio/08-pss-angel-maria-obando-chocolates-obangu.m4a" },
-    { "orden": 9, "productor": "Edilsa Gómez Ramos", "marca": "Ricuras del Cacao", "lugar": "Valencia, Córdoba", "archivo": "audio/09-pss-edilsa-gomez-ramos-ricuras-del-cacao.m4a" },
-    { "orden": 10, "productor": "Betsy Rueda", "marca": "Ocaroma S.A.S.", "lugar": "El Playón, Santander", "archivo": "audio/10-pss-betsy-rueda-ocaroma-sas.m4a" },
-    { "orden": 11, "productor": "Noredys Muñoz", "marca": "Fashion Store", "lugar": "Tuluá, Valle del Cauca", "archivo": "audio/11-pss-noredys-munoz-fashionn-store.m4a" },
-    { "orden": 12, "productor": "Blanca Márquez", "marca": "Chocolates Arrayanes", "lugar": "Remedios, Antioquia", "archivo": "audio/12-pss-blanca-marquez-chocolate-arrayanes.m4a" },
-    { "orden": 13, "productor": "Hernán Velásquez", "marca": "Sufruta", "lugar": "Planeta Rica, Córdoba", "archivo": "audio/13-pss-hernan-velasquez-sufruta.m4a" },
-    { "orden": 14, "productor": "Leocadio Enrique Bermúdez", "marca": "Frutti Pulpas Sam y San", "lugar": "Tame, Arauca", "archivo": "audio/14-pss-leocadio-enrique-bermudez.m4a" },
-    { "orden": 15, "productor": "María Mosquera Ruiz", "marca": "Ser Chocó", "lugar": "Condoto, Chocó", "archivo": "audio/15-pss-maria-mosquera-ser-choco.m4a" }
+    {
+      "orden": 1,
+      "productor": "María Cristina Canchila",
+      "marca": "Lácteos Calamar",
+      "lugar": "Calamar, Guaviare",
+      "archivo": "audio/01-pss-maria-cristina-canchilla-asocamposur.m4a"
+    },
+    {
+      "orden": 2,
+      "productor": "Carlos Darío Moreno",
+      "marca": "Pronacela",
+      "lugar": "Aquitania, Boyacá",
+      "archivo": "audio/02-pss-carlos-dario-moreno-pronacela.m4a"
+    },
+    {
+      "orden": 3,
+      "productor": "Amparo Nieto",
+      "marca": "Colágeno Victorias",
+      "lugar": "Yopal, Casanare",
+      "archivo": "audio/03-pss-amparo-nieto-colageno-victorias.m4a"
+    },
+    {
+      "orden": 4,
+      "productor": "Dina Luz Padia",
+      "marca": "ASOREPP",
+      "lugar": "María La Baja, Bolívar",
+      "archivo": "audio/04-pss-dina-luz-padia-asorepp.m4a"
+    },
+    {
+      "orden": 5,
+      "productor": "Emilce Rocío Prieto",
+      "marca": "El Gallinero",
+      "lugar": "Jenesano, Boyacá",
+      "archivo": "audio/05-pss-emilce-rocio-prieto-el-gallinero.m4a"
+    },
+    {
+      "orden": 6,
+      "productor": "Sandra Marcela Alarcón",
+      "marca": "Café Amanecer",
+      "lugar": "Yopal, Casanare",
+      "archivo": "audio/06-pss-sandra-marcela-alarcon-cafe-amanecer.m4a"
+    },
+    {
+      "orden": 7,
+      "productor": "Zaira Milena Caro",
+      "marca": "SachaCaro",
+      "lugar": "Arauquita, Arauca",
+      "archivo": "audio/07-pss-zaira-milena-caro-sachacaro.m4a"
+    },
+    {
+      "orden": 8,
+      "productor": "Ángel María Obando",
+      "marca": "Chocolates Obangu",
+      "lugar": "Valle del Guamuez, Putumayo",
+      "archivo": "audio/08-pss-angel-maria-obando-chocolates-obangu.m4a"
+    },
+    {
+      "orden": 9,
+      "productor": "Edilsa Gómez Ramos",
+      "marca": "Ricuras del Cacao",
+      "lugar": "Valencia, Córdoba",
+      "archivo": "audio/09-pss-edilsa-gomez-ramos-ricuras-del-cacao.m4a"
+    },
+    {
+      "orden": 10,
+      "productor": "Betsy Rueda",
+      "marca": "Ocaroma S.A.S.",
+      "lugar": "El Playón, Santander",
+      "archivo": "audio/10-pss-betsy-rueda-ocaroma-sas.m4a"
+    },
+    {
+      "orden": 11,
+      "productor": "Noredys Muñoz",
+      "marca": "Fashion Store",
+      "lugar": "Tuluá, Valle del Cauca",
+      "archivo": "audio/11-pss-noredys-munoz-fashionn-store.m4a"
+    },
+    {
+      "orden": 12,
+      "productor": "Blanca Márquez",
+      "marca": "Chocolates Arrayanes",
+      "lugar": "Remedios, Antioquia",
+      "archivo": "audio/12-pss-blanca-marquez-chocolate-arrayanes.m4a"
+    },
+    {
+      "orden": 13,
+      "productor": "Hernán Velásquez",
+      "marca": "Sufruta",
+      "lugar": "Planeta Rica, Córdoba",
+      "archivo": "audio/13-pss-hernan-velasquez-sufruta.m4a"
+    },
+    {
+      "orden": 14,
+      "productor": "Leocadio Enrique Bermúdez",
+      "marca": "Frutti Pulpas Sam y San",
+      "lugar": "Tame, Arauca",
+      "archivo": "audio/14-pss-leocadio-enrique-bermudez.m4a"
+    },
+    {
+      "orden": 15,
+      "productor": "María Mosquera Ruiz",
+      "marca": "Ser Chocó",
+      "lugar": "Condoto, Chocó",
+      "archivo": "audio/15-pss-maria-mosquera-ser-choco.m4a"
+    }
   ]
 }

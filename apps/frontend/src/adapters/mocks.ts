@@ -240,6 +240,7 @@ export const mockFerias: Feria[] = [
     descripcion:
       "En Agroexpo 2025, nuestros productores presentaron lo mejor del campo colombiano, mostrando procesos sostenibles y fortaleciendo sus lazos comerciales directos con grandes superficies, sin intermediarios. Una muestra clara de resiliencia y calidad.",
     galeria: [],
+    videos: [],
     orden: 1,
     abiertaPorDefecto: true,
   },
@@ -249,6 +250,7 @@ export const mockFerias: Feria[] = [
     descripcion:
       "En Chocoshow endulzamos a los asistentes con los mejores cacaos de nuestras regiones. Una exhibición de transformación y valor agregado que pone el chocolate de paz en el mapa internacional.",
     galeria: [],
+    videos: [],
     orden: 2,
   },
   {
@@ -257,6 +259,7 @@ export const mockFerias: Feria[] = [
     descripcion:
       "Nuestros caficultores llevaron el aroma de la paz a Cafés de Colombia. Relatos de montañas, procesos cuidadosos y perfiles de taza que cuentan la historia de un país que sana desde la tierra.",
     galeria: [],
+    videos: [],
     orden: 3,
   },
   {
@@ -265,6 +268,7 @@ export const mockFerias: Feria[] = [
     descripcion:
       "En ANATO demostramos que el turismo rural y la producción agrícola van de la mano, creando experiencias únicas para quienes visitan nuestros territorios productivos.",
     galeria: [],
+    videos: [],
     orden: 4,
   },
   {
@@ -273,6 +277,7 @@ export const mockFerias: Feria[] = [
     descripcion:
       "La alegría del carnaval también tiene sabor a campo. Nuestros productores hicieron presencia integrando la cultura y la tradición agrícola en esta fiesta nacional.",
     galeria: [],
+    videos: [],
     orden: 5,
   },
   {
@@ -281,6 +286,7 @@ export const mockFerias: Feria[] = [
     descripcion:
       "Participamos activamente en diálogos internacionales sobre desarrollo rural, mostrando que nuestro modelo de acompañamiento está alineado con las metas globales de sostenibilidad.",
     galeria: [],
+    videos: [],
     orden: 6,
   },
 ];

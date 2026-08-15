@@ -3,7 +3,7 @@ import type { Feria } from "@adapters/contracts";
 
 type Props = { feria: Feria; isOpen?: boolean };
 const { feria, isOpen = false } = Astro.props;
-const { titulo, descripcion, galeria, video } = feria;
+const { titulo, descripcion, galeria, videos } = feria;
 ---
 
 <details class="feria-item" open={isOpen} name="ferias-acordeon">
@@ -13,7 +13,7 @@ const { titulo, descripcion, galeria, video } = feria;
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
     </span>
   </summary>
-  <div class="feria-body-grid">
+  <div class:list={["feria-body-grid", videos.length === 0 && "sin-video"]}>
     <div class="feria-left">
       <p class="feria-desc">{descripcion}</p>
       {galeria.length > 0 && (
@@ -27,17 +27,35 @@ const { titulo, descripcion, galeria, video } = feria;
         </>
       )}
     </div>
-    {video && (
+    {videos.length > 0 && (
       <div class="feria-right">
-        <div class="vertical-video-card">
-          <div class="video-media" data-video-source={video.fuente} data-video-src={video.url}>
-            {video.thumbnailUrl
-              ? <img src={video.thumbnailUrl} alt={video.alt} width="400" height="600" loading="lazy" decoding="async" />
-              : <div class="video-media__sin-miniatura" aria-hidden="true"></div>}
-            <button class="play-btn-overlay" aria-label={`Reproducir ${video.alt}`}>
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-            </button>
-          </div>
+        <div class="vertical-video-card" data-carrusel>
+          {videos.map((video, i) => (
+            <div class="video-slide" hidden={i !== 0}>
+              <div class="video-media" data-video-source={video.fuente} data-video-src={video.url}>
+                {video.thumbnailUrl
+                  ? <img src={video.thumbnailUrl} alt={video.alt} width="400" height="600" loading="lazy" decoding="async" />
+                  : <div class="video-media__sin-miniatura" aria-hidden="true"></div>}
+                <button class="play-btn-overlay" aria-label={`Reproducir ${video.alt}`}>
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </button>
+              </div>
+              {video.pie && <p class="video-pie">{video.pie}</p>}
+            </div>
+          ))}
+          {videos.length > 1 && (
+            <div class="video-nav">
+              <p class="video-contador" aria-live="polite">1 / {videos.length}</p>
+              <div class="video-nav-btns">
+                <button class="video-nav-btn" data-paso="-1" aria-label={`Video anterior de ${titulo}`}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <button class="video-nav-btn" data-paso="1" aria-label={`Video siguiente de ${titulo}`}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     )}
@@ -192,6 +210,68 @@ const { titulo, descripcion, galeria, video } = feria;
     width: 80%;
   }
 
+  .video-slide {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3, 0.75rem);
+  }
+
+  .video-slide[hidden] {
+    display: none;
+  }
+
+  .video-pie {
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    font-family: var(--font-komet);
+    font-weight: var(--font-weight-komet-light, 300);
+    color: var(--color-nav-text, #32509d);
+  }
+
+  .video-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4, 1rem);
+    border-top: 1px solid var(--color-nav-text, #32509d);
+    padding-top: var(--space-3, 0.75rem);
+  }
+
+  .video-contador {
+    font-family: var(--font-komet);
+    font-size: 0.875rem;
+    color: var(--color-nav-text, #32509d);
+  }
+
+  .video-nav-btns {
+    display: flex;
+    gap: var(--space-2, 0.5rem);
+  }
+
+  .video-nav-btn {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--color-nav-text, #32509d);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .video-nav-btn:hover {
+    background-color: var(--color-loquehacemos-bg, #008861);
+    transform: scale(1.1);
+  }
+
+  .video-nav-btn:focus-visible {
+    outline: 2px solid var(--color-loquehacemos-bg, #008861);
+    outline-offset: 2px;
+  }
+
   /* Video sin miniatura: ocupa la proporción del contenedor. */
   .video-media__sin-miniatura {
     width: 100%;
@@ -247,14 +327,22 @@ const { titulo, descripcion, galeria, video } = feria;
      BREAKPOINT 850px
      ========================================= */
   @media (min-width: 850px) {
-    .video-media {
-      aspect-ratio: 16 / 9;
+    /* Texto + galería a la izquierda, carrusel de video a la derecha. Sin video
+       la galería se queda con todo el ancho. */
+    .feria-body-grid {
+      grid-template-columns: 2fr 1fr;
     }
-  }
 
-  @media (min-width: 1200px) {
+    .feria-body-grid.sin-video {
+      grid-template-columns: 1fr;
+    }
+
     .gallery-grid-3x2 {
       grid-template-columns: repeat(3, 1fr);
+    }
+
+    .vertical-video-card {
+      width: 100%;
     }
   }
 
@@ -268,6 +356,23 @@ const { titulo, descripcion, galeria, video } = feria;
   // Delegado en document: cubre todas las ferias con un solo listener.
   document.addEventListener("astro:page-load", () => {
     document.addEventListener("click", (event) => {
+      const paso = (event.target as HTMLElement)?.closest?.<HTMLElement>(".video-nav-btn");
+      if (paso) {
+        const carrusel = paso.closest<HTMLElement>("[data-carrusel]");
+        const slides = [...(carrusel?.querySelectorAll<HTMLElement>(".video-slide") ?? [])];
+        if (!slides.length) return;
+
+        const actual = slides.findIndex((slide) => !slide.hidden);
+        // El módulo da la vuelta en los dos sentidos: +slides.length porque en
+        // JS el resto de un negativo es negativo.
+        const siguiente = (actual + Number(paso.dataset.paso) + slides.length) % slides.length;
+        slides.forEach((slide, i) => (slide.hidden = i !== siguiente));
+
+        const contador = carrusel?.querySelector(".video-contador");
+        if (contador) contador.textContent = `${siguiente + 1} / ${slides.length}`;
+        return;
+      }
+
       const boton = (event.target as HTMLElement)?.closest?.(".play-btn-overlay");
       if (!boton) return;
 
