@@ -22,7 +22,7 @@ import heroImage from "../../assets/paissana/paisana-hero-image@3x.png";
         height="116"
         class="brand-logo"
       />
-      <h2>Un país que sana desde la tierra</h2>
+      <h1>Un país que sana desde la tierra</h1>
       <p>
         PaisSana no es solo una marca; es la voz, las manos y el orgullo de
         miles de familias productoras que decidieron transformar la historia de
@@ -166,10 +166,12 @@ import heroImage from "../../assets/paissana/paisana-hero-image@3x.png";
     object-fit: contain;
   }
 
-  .hero-brand h2 {
+  /* Es el h1 de la pagina, pero mantiene el tamano de h2 del mockup. */
+  .hero-brand h1 {
     margin-top: var(--space-4, 1rem);
     font-family: var(--font-komet);
     font-weight: var(--font-weight-komet-heavy, 800);
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
   }
 
   /* STATS SECTION */

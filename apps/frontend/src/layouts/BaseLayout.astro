@@ -12,13 +12,32 @@ import type { WordPressConnectionStatus } from "../adapters";
 type Props = {
   title?: string;
   description?: string;
+  /** Ruta o URL de la imagen para compartir. Por defecto la portada del sitio. */
+  image?: string;
   contentSources?: ContentSourceStatus[];
   wordpressStatus?: WordPressConnectionStatus;
 };
 
+// Titulos y descripciones se miden en pixeles, no en caracteres, pero como regla
+// practica Google corta el titulo cerca de los 60 caracteres y la descripcion
+// cerca de los 160: pasarse no penaliza, solo trunca la frase a media palabra.
+// La marca es "La Paz Sí Pasa" y la entidad "Fondo Colombia en Paz"; el titulo de
+// portada lleva las dos porque la busqueda por el nombre de la entidad es la
+// que trae trafico.
 const siteName = "La Paz Sí Pasa";
-const title = Astro.props.title ? `${Astro.props.title} | ${siteName}` : siteName;
-const description = Astro.props.description ?? "Cierre de gestión del Fondo Colombia en Paz";
+const title = Astro.props.title
+  ? `${Astro.props.title} | ${siteName}`
+  : `${siteName} | Fondo Colombia en Paz`;
+const description = Astro.props.description
+  ?? "El Fondo Colombia en Paz ejecuta los recursos para implementar la paz: conoce las "
+     + "subcuentas, las cifras de gestión y las historias de los territorios PDET.";
+
+// Astro.site sale de PUBLIC_SITE_URL y se hornea en el build. Si falta, se cae a
+// la URL de la petición para no emitir enlaces canónicos ni og:image relativos,
+// que las redes sociales descartan.
+const base = Astro.site ?? new URL(Astro.url.origin);
+const canonical = new URL(Astro.url.pathname, base);
+const ogImage = new URL(Astro.props.image ?? "/og.jpg", base);
 
 // El menú se obtiene una sola vez aquí y se pasa a las dos variantes de Nav.
 const debugParam = Astro.url.searchParams.get("debug-content");
@@ -51,10 +70,33 @@ else debugOffUrl.searchParams.delete("debug-content");
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'></svg>" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    {!Astro.props.image && (
+      <>
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="La Paz Sí Pasa, pasa en los territorios" />
+      </>
+    )}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <ClientRouter />
   </head>
   <body>

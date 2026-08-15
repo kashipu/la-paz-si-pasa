@@ -58,6 +58,11 @@ npm run build
 
 ## Despliegue
 
+`PUBLIC_SITE_URL` debe apuntar al dominio público real: Astro lo hornea en el
+build (llega como build arg) y de ahí salen el enlace canónico, `og:url`,
+`og:image` y el sitemap. Si queda con el valor local, esas etiquetas se publican
+apuntando a `localhost` y las redes sociales no muestran la previsualización.
+
 `compose.prod.yaml` define los servicios de producción para Dokploy. Las
 credenciales y variables reales deben configurarse en el entorno de despliegue;
 nunca se guardan en Git.

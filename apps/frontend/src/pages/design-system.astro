@@ -1,5 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Pagina de referencia interna: existe solo en desarrollo. En produccion no se
+// publica, responde 404 como cualquier ruta inexistente.
+if (import.meta.env.PROD) return new Response(null, { status: 404 });
 ---
 
 <BaseLayout title="Design System" description="Guía de estilos y tokens del proyecto">
