@@ -35,10 +35,10 @@ const contentSources: ContentSourceStatus[] = contentDebugEnabled ? [
   { content: "Hero.astro", source: fuente("home") },
   { content: "ProyectosNav", source: "code" },
   { content: "PaisSanaAudioPlayer.astro", source: fuente("audioRelatos") },
+  { content: "PaisSanaProductoresVideos.astro", source: fuente("videos") },
   { content: "PaisSanaFeriasIntro", source: "code" },
   { content: "PaisSanaFeriasAcordeon", source: fuente("ferias") },
   { content: "PaisSanaFeriaItem", source: fuente("ferias") },
-  { content: "PaisSanaProductoresVideos.astro", source: fuente("videos") },
 ] : [];
 ---
 
@@ -57,9 +57,9 @@ const contentSources: ContentSourceStatus[] = contentDebugEnabled ? [
     <PaisSanaMapaIntro />
     <PaisSanaMapaCarrusel />
     <PaisSanaAudioPlayer relatos={audioRelatos} />
+    <PaisSanaProductoresVideos videos={productores} />
     <PaisSanaFeriasIntro />
     <PaisSanaFeriasAcordeon ferias={ferias} />
-    <PaisSanaProductoresVideos videos={productores} />
   </div>
 </BaseLayout>
 
