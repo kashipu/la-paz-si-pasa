@@ -46,9 +46,15 @@ services:
     # apuntan a un directorio borrado y se ven vacios adentro. WordPress no carga ningun
     # mu-plugin y no falla: se pierden headless/v1, el redirect y el SMTP en silencio.
     # Compose no lo arregla solo (el config-hash de cms no cambia; "Redeploy" tampoco).
-    # Despues de CADA deploy:
-    #   curl -sL "https://cms.lapazsipasa.com/index.php?rest_route=/" | grep -q headless/v1
+    # Despues de CADA deploy, comprobar que el cms se recreo y no solo el frontend:
+    #   curl -s https://cms.lapazsipasa.com/wp-json/ | grep -q headless
+    # OJO: WordPress escapa la barra en JSON, asi que el cuerpo dice headless\/v1: son
+    # dos caracteres entre "headless" y "v1", y por eso no coinciden ni "headless/v1"
+    # ni "headless.v1". La comprobacion que estaba documentada aqui usaba la primera y
+    # daba falsa alarma siempre, estuviera el mount bien o mal.
     # Si no aparece:  docker compose -f compose.prod.yaml up -d --force-recreate cms
+    # Desde Dokploy, que no expone --force-recreate: borrar el contenedor del cms y
+    # lanzar un Deploy. Los datos viven en el volumen wordpress_data, no en el contenedor.
     volumes:
       - wordpress_data:/var/www/html
       - ./apps/wordpress/mu-plugins:/var/www/html/wp-content/mu-plugins
