@@ -431,7 +431,20 @@ const { titulo, descripcion, galeria, videos } = feria;
     dialogo.showModal();
   }
 
+  import { detenerVideos, guardarMiniatura } from "./feriaVideos.ts";
+
   document.addEventListener("astro:page-load", () => {
+    // toggle no burbujea: se captura. Al cerrarse una feria (a mano o por la
+    // exclusividad del acordeón) se detiene cualquier video que sonara dentro.
+    document.addEventListener(
+      "toggle",
+      (event) => {
+        const item = event.target;
+        if (item instanceof HTMLDetailsElement && !item.open) detenerVideos(item);
+      },
+      true,
+    );
+
     document.addEventListener("click", (event) => {
       const paso = (event.target as HTMLElement)?.closest?.<HTMLElement>(".video-nav-btn");
       if (paso) {
@@ -444,6 +457,7 @@ const { titulo, descripcion, galeria, videos } = feria;
         // JS el resto de un negativo es negativo.
         const siguiente = (actual + Number(paso.dataset.paso) + slides.length) % slides.length;
         slides.forEach((slide, i) => (slide.hidden = i !== siguiente));
+        detenerVideos(slides[actual]!);
 
         const contador = carrusel?.querySelector(".video-contador");
         if (contador) contador.textContent = `${siguiente + 1} / ${slides.length}`;
@@ -463,6 +477,8 @@ const { titulo, descripcion, galeria, videos } = feria;
       const media = boton.closest<HTMLElement>(".video-media");
       const src = media?.dataset.videoSrc;
       if (!media || !src) return;
+
+      guardarMiniatura(media);
 
       if (media.dataset.videoSource === "youtube") {
         const iframe = document.createElement("iframe");
