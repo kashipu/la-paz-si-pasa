@@ -1,4 +1,5 @@
-FROM wordpress:php8.3-apache
+# Tag fijo: un tag nuevo obliga a Docker a bajar la base; con uno flotante reutiliza la cacheada.
+FROM wordpress:7.1.3-php8.3-apache
 
 # Todo esto viajaba como bind mount desde el repo. Dokploy borra y re-clona code/ en
 # cada deploy, y un bind mount queda atado al directorio que existia al CREAR el

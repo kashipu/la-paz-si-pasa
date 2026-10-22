@@ -1,4 +1,4 @@
-FROM node:22-alpine AS builder
+FROM node:22.23.4-alpine AS builder
 WORKDIR /app
 
 ARG WORDPRESS_URL
@@ -14,7 +14,7 @@ RUN npm run build
 # drop devDependencies before they get copied into the runtime image
 RUN npm prune --omit=dev
 
-FROM node:22-alpine
+FROM node:22.23.4-alpine
 WORKDIR /app
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
