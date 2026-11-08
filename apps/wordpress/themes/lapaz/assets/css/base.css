@@ -1,0 +1,120 @@
+/*
+ * Base del tema: lo que theme.json no expresa.
+ *
+ * 1. Alias de los tokens de Astro (src/styles/foundations/tokens.css) hacia los
+ *    presets de theme.json, para que el CSS copiado de cada componente funcione
+ *    sin reescribirlo. Si cambia un color en theme.json, cambia aquí también.
+ * 2. Reset y utilidades de layout de foundations/reset.css y layout.css.
+ */
+
+:root {
+	--color-brand: var(--wp--preset--color--brand);
+	--color-accent: var(--wp--preset--color--accent);
+	--color-surface: var(--wp--preset--color--surface);
+	--color-surface-muted: var(--wp--preset--color--surface-muted);
+	--color-text: var(--wp--preset--color--text);
+	--color-text-muted: var(--wp--preset--color--text-muted);
+	--color-border: var(--wp--preset--color--border);
+	--color-nav-text: var(--wp--preset--color--nav-text);
+	--color-nav-border: var(--wp--preset--color--nav-border);
+	--color-nav-bg-active: var(--wp--preset--color--nav-bg-active);
+	--color-loquehacemos-bg: var(--wp--preset--color--loquehacemos-bg);
+	--color-actualidad-bg: var(--wp--preset--color--actualidad-bg);
+	--color-scrollbar-thumb: var(--wp--preset--color--scrollbar-thumb);
+	--border-subtle-light: rgba(255, 255, 255, 0.6);
+
+	--font-komet: var(--wp--preset--font-family--komet);
+	--font-monique-regular: var(--wp--preset--font-family--monique);
+	--font-weight-komet-light: var(--wp--custom--font-weight--light);
+	--font-weight-komet-regular: var(--wp--custom--font-weight--regular);
+	--font-weight-komet-bold: var(--wp--custom--font-weight--bold);
+	--font-weight-komet-heavy: var(--wp--custom--font-weight--heavy);
+	--font-weight-komet-black: var(--wp--custom--font-weight--black);
+
+	--space-1: var(--wp--preset--spacing--1);
+	--space-2: var(--wp--preset--spacing--2);
+	--space-3: var(--wp--preset--spacing--3);
+	--space-4: var(--wp--preset--spacing--4);
+	--space-5: var(--wp--preset--spacing--5);
+	--space-6: var(--wp--preset--spacing--6);
+	--space-8: var(--wp--preset--spacing--8);
+	--space-10: var(--wp--preset--spacing--10);
+	--space-12: var(--wp--preset--spacing--12);
+	--space-16: var(--wp--preset--spacing--16);
+
+	--radius-card: var(--wp--custom--radius--card);
+	--radius-control: var(--wp--custom--radius--control);
+	--shadow-soft: var(--wp--custom--shadow--soft);
+
+	--content-width: var(--wp--style--global--content-size);
+	--narrow-width: 48rem;
+	--container-max-width: var(--wp--style--global--wide-size);
+	--wide-width: var(--wp--style--global--wide-size);
+}
+
+/* Reset (foundations/reset.css) */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	min-height: 100%;
+	text-size-adjust: 100%;
+}
+
+body {
+	min-height: 100%;
+	margin: 0;
+}
+
+img,
+picture,
+svg,
+video {
+	display: block;
+	max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+	font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+	margin-block: 0;
+}
+
+/* Layout (foundations/layout.css) */
+.container,
+.container--wide {
+	width: 100%;
+	max-width: var(--wide-width);
+	margin-inline: auto;
+	padding-inline: clamp(1rem, 3vw, 1.5rem);
+}
+
+.container--narrow {
+	width: min(100% - 2rem, var(--narrow-width));
+	margin-inline: auto;
+}
+
+.section {
+	padding-block: var(--space-16);
+}
+
+.section-spacing {
+	padding-block: 10rem;
+}
+
+html,
+body {
+	overflow-x: hidden;
+}
