@@ -42,6 +42,8 @@ jobs:
       - name: WordPress local (compose + override)
         run: |
           {
+            # compose.yaml exige WORDPRESS_URL antes de aplicar el override.
+            echo "WORDPRESS_URL=http://localhost:8090"
             echo "WORDPRESS_DB_PASSWORD=$(openssl rand -hex 16)"
             echo "WORDPRESS_DB_ROOT_PASSWORD=$(openssl rand -hex 16)"
             echo "WP_ADMIN_EMAIL=ci@example.test"
