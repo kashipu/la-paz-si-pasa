@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ruleset name="La Paz Sí Pasa">
+    <file>../wordpress/themes/lapaz</file>
+    <!-- El CSS y el JS se revisan aparte; PHPCS solo para PHP. -->
+    <arg name="extensions" value="php"/>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <rule ref="WordPress"/>
+    <rule ref="WordPress.WP.I18n">
+        <properties>
+            <property name="text_domain" type="array" value="lapaz"/>
+        </properties>
+    </rule>
+    <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+        <properties>
+            <property name="prefixes" type="array" value="lapaz"/>
+        </properties>
+    </rule>
+</ruleset>
