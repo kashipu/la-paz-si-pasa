@@ -7,6 +7,7 @@
 // Variables: SITE_URL (por defecto http://localhost:8090), CHROME_BIN.
 // Lo visual es solo local: las fuentes se rasterizan distinto en Linux (CI) y macOS.
 import { spawn } from 'node:child_process';
+import { once } from 'node:events';
 import fs from 'node:fs';
 import path from 'node:path';
 import { PNG } from 'pngjs';
@@ -173,9 +174,15 @@ try {
 	}
 	d.close();
 } finally {
+	// Se espera a que Chrome salga antes de borrar su perfil; la limpieza nunca falla la prueba.
+	const exited = once( browser, 'exit' );
 	browser.kill();
-	// Chrome tarda en soltar el perfil: se reintenta el borrado.
-	fs.rmSync( profile, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 } );
+	await Promise.race( [ exited, sleep( 5000 ) ] );
+	try {
+		fs.rmSync( profile, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 } );
+	} catch {
+		console.warn( `No se pudo borrar ${ profile }` );
+	}
 }
 
 process.exitCode = failures ? 1 : 0;
