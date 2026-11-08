@@ -1,0 +1,54 @@
+#!/bin/bash
+set -euo pipefail
+
+: "${WORDPRESS_URL:?Define WORDPRESS_URL}"
+wp=(wp --path=/var/www/html)
+
+if ! "${wp[@]}" core is-installed; then
+    : "${WP_ADMIN_EMAIL:?Define WP_ADMIN_EMAIL}"
+    admin_password="$(openssl rand -base64 18)"
+    # La contraseña pasa por stdin para que no aparezca en los argumentos del proceso.
+    printf '%s\n' "$admin_password" | "${wp[@]}" core install \
+        --url="$WORDPRESS_URL" \
+        --title="La Paz Sí Pasa" \
+        --admin_user="${WP_ADMIN_USER:-admin}" \
+        --admin_email="$WP_ADMIN_EMAIL" \
+        --prompt=admin_password \
+        --skip-email
+    printf 'Guarda esta contraseña de administrador; se muestra una sola vez: %s\n' "$admin_password"
+    unset admin_password
+fi
+
+if ! "${wp[@]}" language core install es_CO --activate; then
+    "${wp[@]}" language core install es_ES --activate
+fi
+"${wp[@]}" theme activate lapaz
+"${wp[@]}" rewrite structure '/%postname%/' --hard
+
+page_id="$("${wp[@]}" post list --post_type=page --name=proyectos-destacados --post_status=any --format=ids)"
+if [ -z "$page_id" ]; then
+    "${wp[@]}" post create --post_type=page --post_name=proyectos-destacados \
+        --post_title="Proyectos destacados" --post_status=publish
+fi
+
+nav_id="$("${wp[@]}" option get lapaz_nav_ref 2>/dev/null || true)"
+if [[ ! "$nav_id" =~ ^[1-9][0-9]*$ ]] || [ "$("${wp[@]}" post get "$nav_id" --field=post_type 2>/dev/null || true)" != wp_navigation ]; then
+    nav_content='<!-- wp:navigation-link {"label":"Lo que hacemos","url":"/#lo-que-hacemos","kind":"custom"} /-->
+<!-- wp:navigation-link {"label":"Proyectos destacados","url":"/proyectos-destacados","kind":"custom"} /-->
+<!-- wp:navigation-link {"label":"Actualidad","url":"/#actualidad","kind":"custom"} /-->'
+    nav_id="$("${wp[@]}" post create --post_type=wp_navigation --post_title=Principal \
+        --post_status=publish --post_content="$nav_content" --porcelain)"
+    "${wp[@]}" option update lapaz_nav_ref "$nav_id"
+fi
+
+if [ "${WP_ENVIRONMENT_TYPE:-production}" = local ]; then
+    for plugin in query-monitor create-block-theme; do
+        if ! "${wp[@]}" plugin is-installed "$plugin"; then
+            "${wp[@]}" plugin install "$plugin"
+        fi
+        "${wp[@]}" plugin activate "$plugin"
+    done
+fi
+
+printf '\nURL: %s\nTema activo: %s\nID del menú: %s\n' \
+    "$WORDPRESS_URL" "$("${wp[@]}" option get stylesheet)" "$nav_id"
