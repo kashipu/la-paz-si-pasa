@@ -11,6 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+require_once __DIR__ . '/inc/blocks.php';
+
 /**
  * Versión del tema, para invalidar la caché de los assets al publicar.
  */

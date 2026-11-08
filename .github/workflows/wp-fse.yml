@@ -1,4 +1,4 @@
-# Calidad del tema FSE: mismo bin/check que en local, más pruebas de comportamiento del navbar.
+# Calidad del tema FSE: mismo bin/check que en local, más pruebas del navbar y Retratos.
 # La comparación visual contra Astro es solo local (Linux y macOS rasterizan distinto las fuentes).
 name: wp-fse
 
@@ -50,10 +50,15 @@ jobs:
           } > .env
           docker compose up -d --build --wait
           docker compose exec -T -u www-data cms lapaz-setup > /dev/null
+          docker compose exec -T -u www-data -e SEED_SOLO=retratos cms wp eval-file /opt/seed/seed.php
       - name: Navbar (comportamiento)
         env:
           CHROME_BIN: google-chrome
         run: node tests/e2e/navbar.mjs
+      - name: Retratos (comportamiento)
+        env:
+          CHROME_BIN: google-chrome
+        run: node tests/e2e/retratos.mjs
       - name: Logs si falla
         if: failure()
         run: docker compose logs cms

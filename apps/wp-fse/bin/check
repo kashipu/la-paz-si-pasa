@@ -36,6 +36,34 @@ paso "PHPStan (nivel máximo)" en_composer "vendor/bin/phpstan analyse --no-prog
 
 # CSS y JS
 paso "Stylelint" en_node "npm run -s lint:css"
+# Las interpolaciones ${...} pertenecen a JavaScript y deben llegar intactas a Node.
+# shellcheck disable=SC2016
+paso "Prefijo de bloque en CSS" en_node 'node --input-type=module << "JS"
+import fs from "node:fs";
+import path from "node:path";
+import postcss from "postcss";
+import selectorParser from "postcss-selector-parser";
+
+const blocks = "../wordpress/themes/lapaz/blocks";
+for (const block of fs.existsSync(blocks) ? fs.readdirSync(blocks, { withFileTypes: true }) : []) {
+    const file = path.join(blocks, block.name, "style.css");
+    if (!block.isDirectory() || !fs.existsSync(file)) continue;
+    const prefix = `wp-block-lapaz-${block.name}`;
+    postcss.parse(fs.readFileSync(file, "utf8"), { from: file }).walkRules(rule => {
+        // Las at-rules y su contenido quedan fuera de esta regla de prefijos.
+        for (let parent = rule.parent; parent; parent = parent.parent) {
+            if (parent.type === "atrule") return;
+        }
+        selectorParser(selectors => selectors.each(selector => {
+            const first = selector.nodes.find(node => node.type !== "comment");
+            if (first?.type !== "class" || first.value !== prefix) {
+                console.error(`${file}:${rule.source.start.line}: ${selector} debe empezar por .${prefix}`);
+                process.exitCode = 1;
+            }
+        })).processSync(rule.selector);
+    });
+}
+JS'
 paso "ESLint" en_node "npm run -s lint:js"
 paso "TypeScript estricto sobre JS" en_node "npm run -s typecheck:js"
 

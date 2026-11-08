@@ -23,6 +23,7 @@ if ! "${wp[@]}" language core install es_CO --activate; then
     "${wp[@]}" language core install es_ES --activate
 fi
 "${wp[@]}" theme activate lapaz
+"${wp[@]}" plugin activate secure-custom-fields
 "${wp[@]}" rewrite structure '/%postname%/' --hard
 
 page_id="$("${wp[@]}" post list --post_type=page --name=proyectos-destacados --post_status=any --format=ids)"

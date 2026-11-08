@@ -34,6 +34,7 @@ cd apps/wp-fse
 cp .env.example .env          # poner contraseñas de la base y WP_ADMIN_EMAIL
 docker compose up -d --build  # compose.yaml + compose.override.yaml (local)
 docker compose exec -u www-data cms lapaz-setup
+docker compose exec -u www-data -e SEED_SOLO=retratos cms wp eval-file /opt/seed/seed.php   # contenido inicial (sin SEED_SOLO: todo)
 ```
 
 - `lapaz-setup` es idempotente. Instala WordPress en español, activa el tema y crea la página "Proyectos destacados" y el menú "Principal". Solo en local agrega además Query Monitor y Create Block Theme.
@@ -44,7 +45,8 @@ docker compose exec -u www-data cms lapaz-setup
   ```
 - **Lo que solo existe en local** (`compose.override.yaml`):
   - puerto 8090;
-  - bind mount del tema, así lo editado se ve sin reconstruir;
+  - bind mount del tema y de `mu-plugins/`, así lo editado se ve sin reconstruir;
+  - `scf-json/` montado **solo lectura**: es compartido con el headless, y los cambios al modelo de contenido se hacen a propósito en el repo, no desde el admin;
   - `WP_DEBUG`;
   - `WP_DEVELOPMENT_MODE=theme`, para que WordPress no cachee `theme.json` ni las plantillas.
 - **Producción (Dokploy)** usa solo `compose.yaml`: el tema va horneado en la imagen, sin puertos publicados. Ver [buenas prácticas, sección Dokploy](buenas-practicas-wordpress.md#7-despliegue-en-dokploy).

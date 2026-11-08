@@ -8,7 +8,9 @@ También quedó hecha la etapa 1.5 (calidad determinista): `apps/wp-fse/bin/chec
 
 **Bloqueo:** ninguno. Falta el contenido real de las noticias.
 
-**Siguiente paso:** etapa 2 (bloques hero y footer, y las plantillas). Antes, aprobar su documento.
+Etapa 2 hecha: la sección Retratos («La Paz Sí Pasa» + slider) se edita desde WordPress y se ve igual que en Astro (0,01 % de diferencia). Aprendizajes en [etapa-2-retratos.md](specs/wordpress-fse/etapa-2-retratos.md#aprendizajes).
+
+**Siguiente paso:** etapa 3 (hero y footer). Antes, aprobar su documento.
 
 ## 2026-11-08
 

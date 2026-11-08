@@ -83,6 +83,14 @@ Checklist para construir el tema `lapaz` (WP 7.1, PHP 8.3, SCF, Dokploy). Está 
 - **Los tests tienen que poder fallar.** Antes de dar por buena una regla nueva, se rompe a propósito y se confirma que falla. Para la lógica (etapa 4), mutation testing con Infection.
 - **Archivos pequeños:** cuando un archivo pasa el límite de líneas, se divide. No se sube el límite.
 
+### Lecciones que ya son regla (etapa 2)
+
+- **Prueba visual con los mismos datos:** Astro apuntado al WordPress FSE (`WORDPRESS_URL=http://localhost:8090`) antes de capturar bases.
+- **Cada `viewScript` lleva `view.asset.php`** con `filemtime()` como versión.
+- **Datos de SCF siempre por los helpers tipados** de `inc/blocks.php`, nunca `get_field()` suelto en `render.php`.
+- **Cambios a los CPT compartidos con el headless** se hacen por filtro en `lapaz-core.php`, no en `scf-json/`.
+- **Un solo agente corre `bin/check` a la vez.**
+
 ## 9. Kit de desarrollo
 
 | Herramienta | Uso | Estado |

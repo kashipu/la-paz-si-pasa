@@ -10,3 +10,5 @@ services:
     # Permite editar el tema sin reconstruir la imagen en cada cambio.
     volumes:
       - ../wordpress/themes/lapaz:/var/www/html/wp-content/themes/lapaz
+      - ./mu-plugins:/var/www/html/wp-content/mu-plugins
+      - ../wordpress/scf-json:/var/www/html/wp-content/scf-json:ro

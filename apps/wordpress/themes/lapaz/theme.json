@@ -99,7 +99,7 @@
 				"color": { "text": "var(--wp--preset--color--nav-text)" },
 				"typography": {
 					"fontFamily": "var(--wp--preset--font-family--monique)",
-					"fontWeight": "400",
+					"fontWeight": "700",
 					"lineHeight": "1.1"
 				}
 			},

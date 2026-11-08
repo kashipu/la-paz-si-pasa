@@ -118,3 +118,11 @@ html,
 body {
 	overflow-x: hidden;
 }
+
+/* Contenedor de la home (index.astro .contenedor): secciones separadas por 10rem. */
+.lapaz-home {
+	display: flex;
+	flex-direction: column;
+	gap: 10rem;
+	padding-block: clamp(2rem, 4vw, 3.5rem) 10rem;
+}

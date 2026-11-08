@@ -2,6 +2,7 @@
 
 Qué cambió, con fecha y PR. Lo reciente arriba.
 
+- **2026-11-08** · feat(retratos): sección «La Paz Sí Pasa» + slider como bloque `lapaz/retratos`; SCF 6.9.8 y `lapaz-core` en la imagen; e2e y visual contra Astro con los mismos datos · [etapa 2](specs/wordpress-fse/etapa-2-retratos.md)
 - **2026-11-08** · chore(wp-fse): calidad determinista: `bin/check` (PHPCS, PHPStan max, Stylelint, ESLint, TS estricto, esquemas, plantillas, tamaños, ShellCheck, Hadolint, actionlint, Semgrep), E2E y visual del navbar, workflow de CI · [etapa 1.5](specs/wordpress-fse/etapa-1-5-calidad.md)
 - **2026-11-08** · feat(wp-fse): WordPress en cero listo para Dokploy (`apps/wp-fse/`) y tema `lapaz` con navbar en `core/navigation`: etapas 0 y 1 de la [migración FSE](specs/wordpress-fse.md) · rama `feat/wordpress-fse`, sin PR
 - **2026-10-22** · fix(deploy): fija bases con PHP 8.3.36 y Node 22.23.4 · PR #3 (squash `dcc8af3`, commit `a7ef6a6`)

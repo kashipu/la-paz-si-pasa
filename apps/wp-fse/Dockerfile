@@ -9,9 +9,25 @@ RUN curl -fsSL https://github.com/wp-cli/wp-cli/releases/download/v2.12.0/wp-cli
     && echo 'ce34ddd838f7351d6759068d09793f26755463b4a4610a5a5c0a97b68220d85c  /usr/local/bin/wp' | sha256sum -c - \
     && chmod +x /usr/local/bin/wp
 
+# Secure Custom Fields con versión fija: sin él no existe ningún CPT.
+ARG SCF_VERSION=6.9.8
+ARG SCF_SHA256=6decfa4414b2325f838b37f4910bc9c5dc5afb2e59651fb76317eb2a9bcdad6d
+# El $ de php -r va entre comillas simples a propósito: es PHP, no shell.
+# hadolint ignore=SC2016
+RUN curl -fsSL "https://downloads.wordpress.org/plugin/secure-custom-fields.${SCF_VERSION}.zip" -o /tmp/scf.zip \
+    && echo "${SCF_SHA256}  /tmp/scf.zip" | sha256sum -c - \
+    && mkdir -p /opt/wp-content/plugins \
+    && php -r '$z = new ZipArchive(); $z->open("/tmp/scf.zip") === true || exit(1); $z->extractTo("/opt/wp-content/plugins"); $z->close();' \
+    && rm /tmp/scf.zip
+
 COPY apps/wordpress/php/zz-opcache-overrides.ini /usr/local/etc/php/conf.d/
 # /var/www/html es un volumen: el entrypoint lleva el tema a su destino en cada arranque.
 COPY apps/wordpress/themes/lapaz /opt/wp-content/themes/lapaz
+COPY apps/wp-fse/mu-plugins /opt/wp-content/mu-plugins
+# CPT y campos: los mismos JSON del headless, sin cambios.
+COPY apps/wordpress/scf-json /opt/wp-content/scf-json
+# Contenido inicial (fotos, audios, contenido.json) para seed.php.
+COPY apps/wordpress/seed /opt/seed
 COPY apps/wp-fse/docker/entrypoint.sh apps/wp-fse/docker/lapaz-setup /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/lapaz-setup
 

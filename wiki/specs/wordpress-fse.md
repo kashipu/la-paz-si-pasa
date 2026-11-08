@@ -1,6 +1,6 @@
 # Spec: sitio en WordPress con tema de bloques (FSE)
 
-Estado: **etapa 1 hecha; siguiente: etapa 2 (layout)** · rama `feat/wordpress-fse` · inicio 2026-11-08
+Estado: **etapa 2 (Retratos) hecha; siguiente: etapa 3 (hero y footer)** · rama `feat/wordpress-fse` · inicio 2026-11-08
 
 ## Objetivo
 
@@ -39,8 +39,9 @@ Cada etapa tiene su documento en [`wordpress-fse/`](wordpress-fse/), que se escr
 | 0 | Documentación, kit y WordPress en cero (`apps/wp-fse/`) | hecha | este archivo + [buenas prácticas](../buenas-practicas-wordpress.md) |
 | 1 | Prueba de concepto: navbar con `core/navigation` | hecha | [etapa-1-navbar.md](wordpress-fse/etapa-1-navbar.md) |
 | 1.5 | Calidad determinista: `bin/check` (13 capas), E2E y visual del navbar, CI | hecha | [etapa-1-5-calidad.md](wordpress-fse/etapa-1-5-calidad.md) |
-| 2 | Layout: bloques hero (imagen editable) y footer; plantillas front-page, proyectos-destacados y 404 | pendiente | — |
-| 3 | Modelo de contenido: mu-plugin `lapaz-core.php`, SCF con versión fija en la imagen, `scf-json/` reutilizado, CPT con `public: false`, seed más subcuentas, portada y menú | pendiente | — |
+| 2 | Sección Retratos ("La Paz Sí Pasa" + slider): SCF fijo en la imagen, `lapaz-core`, seed y bloque `lapaz/retratos` | hecha | [etapa-2-retratos.md](wordpress-fse/etapa-2-retratos.md) |
+| 3 | Hero (imagen editable), footer y plantillas (portada con página Inicio, proyectos-destacados, 404) | propuesta | [etapa-3-hero-footer.md](wordpress-fse/etapa-3-hero-footer.md) |
+| 3b | Modelo de contenido restante: seed de subcuentas, portada y menú (SCF, `lapaz-core` y `scf-json/` ya entraron en la etapa 2) | pendiente | — |
 | 4 | Bloques de la home: retratos, lo-que-hacemos, actualidad, y `inc/helpers.php` con los ports de los mappers y su autoverificación | pendiente | — |
 | 5 | Bloques de PaisSana: hero (cifras), mapa (regiones), audios, productores (Plyr local), ferias; `group_proyectos.json` | pendiente | — |
 | 6 | SEO y rendimiento: head OG/canonical, sitemap, preload, WebP, comparación con Unlighthouse frente a Astro | pendiente | — |
