@@ -113,6 +113,10 @@ Se revisaron el tema, los mu-plugins y la imagen.
 - **Variación:** la red y el servidor hacen que el puntaje varíe ±7 entre corridas. Por eso se mide la mediana de 3, y nunca contra `astro dev`.
 
 **Pendiente:**
-- **Caché de página.** El TTFB medido en el servidor real es de 220–280 ms, por encima del umbral de unos 200 ms que fijó esta etapa. Se propone **WP Super Cache** en modo simple, con versión fija en la imagen. Es lo que más falta para bajar el LCP en móvil.
-- **Contraste del título «Actualidad»** sobre el fondo rosa: falla WCAG AA. Es del diseño original; hay que decidirlo con diseño.
+- ~~Caché de página~~ **hecho (2026-11-09):** WP Super Cache 3.1.5, con versión fija y sha256 en la imagen.
+  - **Cuándo está activa:** solo con `WP_CACHE=true` (en Dokploy). En local y en CI queda apagada, porque las pruebas editan contenido.
+  - **Configuración:** `lapaz-setup` lo activa en modo simple (PHP, sin tocar `.htaccess`), sin caché para usuarios con sesión y con `wp_cache_slash_check=1`. `WP_CACHE` y `WPCACHEHOME` se definen en el compose, así el plugin no edita `wp-config.php`.
+  - **Medido en local:** TTFB de 50–65 ms a **1–2 ms**. Al editar un retrato, la caché se vacía y la página se regenera.
+  - **Hallazgo:** sin `wp_cache_slash_check=1` solo la portada salía de caché. El plugin ajusta esa opción al guardar su panel, que aquí no se usa.
+- **Contraste del título «Actualidad»** sobre el fondo rosa: falla WCAG AA. **Decisión de William (2026-11-09): no se cambia**, se respeta el diseño.
 - **Fondo de papel de Retratos en móvil:** se estira (`object-fit: fill`), igual que en Astro. Hace bajar Best Practices.

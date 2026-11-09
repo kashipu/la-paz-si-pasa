@@ -38,6 +38,8 @@ services:
       WORDPRESS_URL: ${WORDPRESS_URL:?Define WORDPRESS_URL}
       WP_ENVIRONMENT_TYPE: ${WP_ENVIRONMENT_TYPE:-production}
       WP_DEVELOPMENT_MODE: ${WP_DEVELOPMENT_MODE:-}
+      # true en Dokploy (staging y producción); vacío en local y CI, donde las pruebas editan contenido.
+      WP_CACHE: ${WP_CACHE:-}
       WP_ADMIN_USER: ${WP_ADMIN_USER:-admin}
       WP_ADMIN_EMAIL: ${WP_ADMIN_EMAIL:-}
       # SMTP (lapaz-smtp.php): sin SMTP_HOST no se usa. En producción: Resend, como el headless.
@@ -51,6 +53,10 @@ services:
         define('WP_HOME', getenv('WORDPRESS_URL'));
         define('WP_SITEURL', getenv('WORDPRESS_URL'));
         define('DISALLOW_FILE_EDIT', true);
+        // Caché de página (WP Super Cache): solo con WP_CACHE=true. WPCACHEHOME definido aquí
+        // para que el plugin no intente editar wp-config.php.
+        defined('WP_CACHE') || define('WP_CACHE', getenv('WP_CACHE') === 'true');
+        defined('WPCACHEHOME') || define('WPCACHEHOME', '/var/www/html/wp-content/plugins/wp-super-cache/');
         // En producción todo (tema, plugins, mu-plugins) viene en la imagen: nadie instala nada desde el admin.
         define('DISALLOW_FILE_MODS', getenv('WP_ENVIRONMENT_TYPE') === 'production');
         define('WP_ENVIRONMENT_TYPE', getenv('WP_ENVIRONMENT_TYPE'));

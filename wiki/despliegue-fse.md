@@ -49,6 +49,7 @@ Al importar la base, los usuarios del headless pasan tal cual: se entra a `/wp-a
 | `WP_ENVIRONMENT_TYPE` | `staging` (noindex, se pueden instalar plugins) | `production` (indexable, `DISALLOW_FILE_MODS`) |
 | `WP_ADMIN_USER`, `WP_ADMIN_EMAIL` | un usuario que **no** sea `admin` | ídem |
 | `SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` | los de Resend (los mismos del headless) | ídem |
+| `WP_CACHE` | `true` (caché de página; después del deploy, correr `lapaz-setup`) | `true` |
 
 ## 2. Primer arranque
 

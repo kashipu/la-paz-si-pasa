@@ -28,6 +28,16 @@ RUN curl -fsSL "https://downloads.wordpress.org/plugin/secure-custom-fields.${SC
     && php -r '$z = new ZipArchive(); $z->open("/tmp/scf.zip") === true || exit(1); $z->extractTo("/opt/wp-content/plugins"); $z->close();' \
     && rm /tmp/scf.zip
 
+# WP Super Cache con versión fija: caché de página (TTFB de 220–280 ms sin caché en el servidor).
+# Solo se activa con WP_CACHE=true (ver compose.yaml y lapaz-setup).
+ARG WPSC_VERSION=3.1.5
+ARG WPSC_SHA256=5a1af59e8a8289083de64d28ded9fb1dfb56ee996d4a84d3ed1f76c5f2224eb6
+# hadolint ignore=SC2016
+RUN curl -fsSL "https://downloads.wordpress.org/plugin/wp-super-cache.${WPSC_VERSION}.zip" -o /tmp/wpsc.zip \
+    && echo "${WPSC_SHA256}  /tmp/wpsc.zip" | sha256sum -c - \
+    && php -r '$z = new ZipArchive(); $z->open("/tmp/wpsc.zip") === true || exit(1); $z->extractTo("/opt/wp-content/plugins"); $z->close();' \
+    && rm /tmp/wpsc.zip
+
 COPY apps/wordpress/php/zz-opcache-overrides.ini /usr/local/etc/php/conf.d/
 COPY apps/wp-fse/docker/apache/zz-lapaz-seguridad.conf /etc/apache2/conf-enabled/
 # Sin cabecera X-Powered-By con la versión de PHP.
