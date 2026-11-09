@@ -135,7 +135,7 @@ paso "Configuración de Apache" docker run --rm \
 	--mount "type=bind,source=$FSE/docker/apache/zz-lapaz-seguridad.conf,target=/etc/apache2/conf-enabled/zz-lapaz-seguridad.conf,readonly" \
 	"$WP_IMAGE" bash -c 'a2enmod headers >/dev/null && apache2ctl -t'
 paso "ShellCheck" docker run --rm -v "$ROOT":/app -w /app/apps/wp-fse koalaman/shellcheck:v0.10.0 \
-	docker/entrypoint.sh docker/lapaz-setup docker/lapaz-importar bin/check
+	docker/entrypoint.sh docker/lapaz-setup docker/lapaz-importar bin/check bin/migrar-desde-headless.sh
 paso "Hadolint" sh -c "docker run --rm -i hadolint/hadolint:v2.12.0-alpine hadolint - <'$FSE/Dockerfile'"
 paso "Workflow de CI (actionlint)" docker run --rm -v "$ROOT":/repo -w /repo rhysd/actionlint:1.7.7 .github/workflows/wp-fse.yml
 paso "Compose de producción" sh -c "cd '$FSE' && WORDPRESS_DB_PASSWORD=x WORDPRESS_DB_ROOT_PASSWORD=x WORDPRESS_URL=https://ejemplo.test docker compose -f compose.yaml config -q"

@@ -12,6 +12,25 @@ Guía para levantar el sitio de bloques (`apps/wp-fse/`) en el **servidor nuevo*
 - **MCP:** `dokploy-lapaz` (solo para este proyecto). La key se lee del Llavero de macOS (`security … -s dokploy-lapaz`) y no está en ningún archivo.
 - **Pendiente de seguridad:** el panel nuevo va por HTTP en el puerto 3000. Hay que ponerle un dominio con HTTPS, cerrar el 3000 y rotar la key.
 
+## Staging actual (creado el 2026-11-08)
+
+| Dato | Valor |
+|---|---|
+| Servidor | nuevo (`2.25.237.45`), proyecto La Paz Si Pasa, **entorno `staging`** (separado del `production`, donde sigue el headless) |
+| Servicio | compose `FSE` (`appName` `compose-compress-back-end-array-fuf9qm`), rama `feat/wordpress-fse`, `apps/wp-fse/compose.yaml`, despliegue automático apagado |
+| URL | https://compose-compress-back-end-array-fuf9qm-34fdbb-2-25-237-45.sslip.io (Let's Encrypt; HTTP redirige a HTTPS) |
+| Variables | contraseñas de la base generadas y guardadas en Dokploy (nunca se mostraron), `WP_ENVIRONMENT_TYPE=staging` (noindex), SMTP de Resend **sin `SMTP_PASS`** (lo pone William) |
+| Headless en el mismo servidor | compose `MonoRepo` (`appName` `compose-transmit-virtual-protocol-6qurgn`), corriendo: cms, db y frontend |
+
+**Contenido:** como el headless corre en el mismo servidor, se copia de contenedor a contenedor con `apps/wp-fse/bin/migrar-desde-headless.sh`. Se corre por SSH en el servidor. El headless solo se lee.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/lapazsipasa/-la-paz-si-pasa/feat/wordpress-fse/apps/wp-fse/bin/migrar-desde-headless.sh -o migrar.sh
+bash migrar.sh compose-transmit-virtual-protocol-6qurgn compose-compress-back-end-array-fuf9qm
+```
+
+Al importar la base, los usuarios del headless pasan tal cual: se entra a `/wp-admin` con las mismas credenciales del CMS actual. `lapaz-setup` corre al final de la importación, así que no hace falta correrlo antes.
+
 ## 1. Servicio en Dokploy
 
 | Campo | Valor |
