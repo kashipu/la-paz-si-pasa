@@ -52,8 +52,10 @@ $lapaz_img      = get_theme_file_uri( 'assets/img/retratos/' );
 								'class'         => 'retratos-slider__foto',
 								'alt'           => $lapaz_retrato['descripcion'],
 								'sizes'         => '(min-width: 850px) 45vw, 55vw',
+								// La primera se carga sin esperar (en escritorio queda al borde del primer pantallazo),
+								// pero sin prioridad alta: competía con el hero, que es el LCP.
 								'loading'       => 0 === $lapaz_i ? 'eager' : 'lazy',
-								'fetchpriority' => 0 === $lapaz_i ? 'high' : 'auto',
+								'fetchpriority' => 'auto',
 								'data-slide'    => (string) $lapaz_i,
 								'aria-hidden'   => 0 === $lapaz_i ? 'false' : 'true',
 							)
