@@ -6,3 +6,5 @@ parameters:
     paths:
         - ../wordpress/themes/lapaz
         - mu-plugins
+    scanFiles:
+        - phpstan/scf-stubs.php

@@ -5,6 +5,7 @@
     <!-- El CSS y el JS se revisan aparte; PHPCS solo para PHP. -->
     <arg name="extensions" value="php"/>
     <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>phpstan/*</exclude-pattern>
     <exclude-pattern>*/node_modules/*</exclude-pattern>
     <rule ref="WordPress"/>
     <!-- view.asset.php es el nombre que exige WordPress para los assets de un bloque. -->

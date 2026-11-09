@@ -35,7 +35,8 @@ paso "PHPCS (WordPress Coding Standards)" en_composer "vendor/bin/phpcs -q"
 paso "PHPStan (nivel máximo)" en_composer "vendor/bin/phpstan analyse --no-progress --memory-limit=1G"
 
 # CSS y JS
-paso "Stylelint" en_node "npm run -s lint:css"
+# Las copias de terceros se actualizan desde su distribución, no con los linters del tema.
+paso "Stylelint" en_node "cd ../wordpress/themes/lapaz && ../../../wp-fse/node_modules/.bin/stylelint '**/*.css' --config ../../../wp-fse/.stylelintrc.json --ignore-pattern 'assets/vendor/**'"
 # Las interpolaciones ${...} pertenecen a JavaScript y deben llegar intactas a Node.
 # shellcheck disable=SC2016
 paso "Prefijo de bloque en CSS" en_node 'node --input-type=module << "JS"
@@ -56,6 +57,7 @@ for (const block of fs.existsSync(blocks) ? fs.readdirSync(blocks, { withFileTyp
         }
         selectorParser(selectors => selectors.each(selector => {
             const first = selector.nodes.find(node => node.type !== "comment");
+            if (first?.type === "pseudo" && first.value.startsWith("::view-transition-") && selector.nodes.filter(node => node.type !== "comment").length === 1) return;
             if (first?.type !== "class" || first.value !== prefix) {
                 console.error(`${file}:${rule.source.start.line}: ${selector} debe empezar por .${prefix}`);
                 process.exitCode = 1;
@@ -64,7 +66,7 @@ for (const block of fs.existsSync(blocks) ? fs.readdirSync(blocks, { withFileTyp
     });
 }
 JS'
-paso "ESLint" en_node "npm run -s lint:js"
+paso "ESLint" en_node "npm run -s lint:js -- --ignore-pattern 'assets/vendor/**'"
 paso "TypeScript estricto sobre JS" en_node "npm run -s typecheck:js"
 
 # Esquemas oficiales (copiados en schemas/ para que el resultado no dependa de la red)
@@ -99,21 +101,35 @@ limites() {
 			echo "$archivo: $lineas líneas (máximo $max)"
 			ok=1
 		fi
-	done < <(cd "$ROOT" && find "$THEME" -type f \( -name '*.php' -o -name '*.css' -o -name '*.js' \) -not -path '*/vendor/*' | sed "s|^|$ROOT/|")
+	done < <(cd "$ROOT" && find "$THEME" apps/wp-fse/mu-plugins -type f \( -name '*.php' -o -name '*.css' -o -name '*.js' \) -not -path '*/vendor/*' | sed "s|^|$ROOT/|")
 	return "$ok"
 }
 paso "Tamaño de archivos" limites
 
+# Código de terceros (assets/vendor): debe ser idéntico al publicado. Un autofixer o una
+# edición a mano lo rompen sin que ningún linter lo note (pasó con plyr.min.js).
+vendor_intacto() {
+	local ok=0 sums
+	while IFS= read -r sums; do
+		(cd "$(dirname "$sums")" && sha256sum -c --quiet SHA256SUMS) || ok=1
+	done < <(find "$ROOT/$THEME/assets/vendor" -name SHA256SUMS 2>/dev/null)
+	return "$ok"
+}
+paso "Integridad de assets/vendor" vendor_intacto
+
 # Infraestructura
+paso "Configuración de Apache" docker run --rm \
+	--mount "type=bind,source=$FSE/docker/apache/zz-lapaz-seguridad.conf,target=/etc/apache2/conf-enabled/zz-lapaz-seguridad.conf,readonly" \
+	"$WP_IMAGE" bash -c 'a2enmod headers >/dev/null && apache2ctl -t'
 paso "ShellCheck" docker run --rm -v "$ROOT":/app -w /app/apps/wp-fse koalaman/shellcheck:v0.10.0 \
-	docker/entrypoint.sh docker/lapaz-setup bin/check
+	docker/entrypoint.sh docker/lapaz-setup docker/lapaz-importar bin/check
 paso "Hadolint" sh -c "docker run --rm -i hadolint/hadolint:v2.12.0-alpine hadolint - <'$FSE/Dockerfile'"
 paso "Workflow de CI (actionlint)" docker run --rm -v "$ROOT":/repo -w /repo rhysd/actionlint:1.7.7 .github/workflows/wp-fse.yml
 paso "Compose de producción" sh -c "cd '$FSE' && WORDPRESS_DB_PASSWORD=x WORDPRESS_DB_ROOT_PASSWORD=x WORDPRESS_URL=https://ejemplo.test docker compose -f compose.yaml config -q"
 
 # Seguridad
 paso "Semgrep (p/php)" docker run --rm -v "$ROOT":/src -w /src semgrep/semgrep:1.140.0 \
-	semgrep scan --config p/php --error --quiet --metrics=off "$THEME"
+	semgrep scan --config p/php --error --quiet --metrics=off "$THEME" apps/wp-fse/mu-plugins
 
 printf '\n'
 if [ "${#fallos[@]}" -gt 0 ]; then

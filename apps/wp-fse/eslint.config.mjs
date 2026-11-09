@@ -3,6 +3,8 @@ import prettierConfig from '@wordpress/prettier-config';
 import globals from 'globals';
 
 export default [
+	// Código de terceros copiado tal cual (Plyr): no se lintea.
+	{ ignores: [ 'assets/vendor/**' ] },
 	...wordpress.configs.recommended,
 	{
 		languageOptions: { globals: { ...globals.browser } },

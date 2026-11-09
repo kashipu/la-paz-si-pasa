@@ -9,8 +9,17 @@
 		"noImplicitReturns": true,
 		"target": "ES2022",
 		"module": "ESNext",
-		"lib": [ "ES2022", "DOM", "DOM.Iterable" ],
+		"lib": [
+			"ES2022",
+			"DOM",
+			"DOM.Iterable"
+		],
 		"skipLibCheck": true
 	},
-	"include": [ "../wordpress/themes/lapaz/**/*.js" ]
+	"include": [
+		"../wordpress/themes/lapaz/**/*.js"
+	],
+	"exclude": [
+		"../wordpress/themes/lapaz/assets/vendor/**"
+	]
 }

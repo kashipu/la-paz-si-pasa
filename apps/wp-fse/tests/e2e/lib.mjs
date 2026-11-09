@@ -63,9 +63,12 @@ export function createBrowserTests() {
 		).json();
 		const ws = new WebSocket( tab.webSocketDebuggerUrl );
 		const pending = new Map();
+		const requests = [];
 		let id = 0;
 		ws.onmessage = ( e ) => {
 			const m = JSON.parse( e.data );
+			if ( m.method === 'Network.requestWillBeSent' )
+				requests.push( m.params.request.url );
 			pending.get( m.id )?.( m.result );
 			pending.delete( m.id );
 		};
@@ -82,6 +85,7 @@ export function createBrowserTests() {
 			mobile: width < 850,
 		} );
 		await send( 'Page.enable' );
+		await send( 'Network.enable' );
 		await send( 'Page.navigate', { url } );
 		await sleep( 2500 );
 		const evaluate = async ( expression ) =>
@@ -97,20 +101,25 @@ export function createBrowserTests() {
 				type: 'keyDown',
 				key: k,
 				code: k,
+				windowsVirtualKeyCode: k === 'Escape' ? 27 : undefined,
 			} );
 			await send( 'Input.dispatchKeyEvent', {
 				type: 'keyUp',
 				key: k,
 				code: k,
+				windowsVirtualKeyCode: k === 'Escape' ? 27 : undefined,
 			} );
 			await sleep( 300 );
 		};
 		// Captura recortada al rectángulo de un elemento.
 		const shot = async ( selector ) => {
 			const r = await evaluate(
-				`(() => { const b = document.querySelector(${ JSON.stringify(
+				// Alinea el elemento a píxel entero antes de capturarlo: la misma sección cae en
+				// fracciones de píxel distintas según lo que haya arriba (Astro tiene más secciones
+				// en la portada) y el texto se suaviza distinto, aunque el diseño sea idéntico.
+				`(() => { const e = document.querySelector(${ JSON.stringify(
 					selector
-				) })?.getBoundingClientRect(); return b && { x: b.x, y: b.y + scrollY, width: b.width, height: b.height }; })()`
+				) }); if (!e) return null; let b = e.getBoundingClientRect(); const fx = (b.x + scrollX) % 1, fy = (b.y + scrollY) % 1; if (fx || fy) { e.style.translate = (-fx) + 'px ' + (-fy) + 'px'; b = e.getBoundingClientRect(); } return { x: Math.round(b.x + scrollX), y: Math.round(b.y + scrollY), width: Math.round(b.width), height: Math.round(b.height) }; })()`
 			);
 			if ( ! r ) {
 				return null;
@@ -128,7 +137,7 @@ export function createBrowserTests() {
 				`document.querySelector('astro-dev-toolbar')?.remove(); [...document.querySelectorAll('body > *')].filter(e => e.textContent.trim().startsWith('Fuentes de contenido')).forEach(e => e.remove()); 1`
 			);
 		}
-		return { evaluate, key, shot, close: () => ws.close() };
+		return { evaluate, key, shot, requests, close: () => ws.close() };
 	}
 
 	function compare( name, png ) {
