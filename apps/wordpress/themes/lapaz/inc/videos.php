@@ -196,3 +196,39 @@ function lapaz_player_url( array $video ): string {
 		$video['video_url']
 	);
 }
+
+/**
+ * Marca que la página muestra miniaturas de YouTube (la llaman los render.php de los bloques
+ * con video, que en temas de bloques corren antes de wp_head). Sin argumento, solo consulta.
+ *
+ * @param bool $usar Si la página las usa.
+ */
+function lapaz_usa_ytimg( bool $usar = false ): bool {
+	/**
+	 * Si alguna parte de la página muestra miniaturas de YouTube.
+	 *
+	 * @var bool $usa
+	 */
+	static $usa = false;
+	if ( $usar ) {
+		$usa = true;
+	}
+
+	return $usa;
+}
+
+/**
+ * Agrega preconnect a i.ytimg.com en páginas con miniaturas de YouTube (Lighthouse: ~340 ms).
+ *
+ * @param array<int, mixed> $urls          URLs de la pista.
+ * @param string            $relation_type Tipo de pista.
+ * @return array<int, mixed>
+ */
+function lapaz_preconnect_ytimg( array $urls, string $relation_type ): array {
+	if ( 'preconnect' === $relation_type && lapaz_usa_ytimg() ) {
+		$urls[] = 'https://i.ytimg.com';
+	}
+
+	return $urls;
+}
+add_filter( 'wp_resource_hints', 'lapaz_preconnect_ytimg', 10, 2 );

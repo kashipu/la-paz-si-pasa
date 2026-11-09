@@ -60,8 +60,7 @@ $lapaz_wrapper    = get_block_wrapper_attributes(
 
 			<a href="<?php echo esc_url( $lapaz_cta ); ?>" class="banner-cta" target="_blank" rel="noopener">
 				<picture>
-					<source media="(max-width: 360px)" srcset="<?php echo esc_url( $lapaz_banner . 'noticias-banner-640.webp' ); ?>" width="640" height="84" />
-					<source media="(max-width: 849px)" srcset="<?php echo esc_url( $lapaz_banner . 'noticias-banner-960.webp' ); ?>" width="960" height="125" />
+					<source media="(max-width: 849px)" srcset="<?php echo esc_attr( $lapaz_banner . 'noticias-banner-640.webp 640w, ' . $lapaz_banner . 'noticias-banner-960.webp 960w' ); ?>" sizes="100vw" width="960" height="125" />
 					<img src="<?php echo esc_url( $lapaz_banner . 'noticias-banner-1440.webp' ); ?>" width="1440" height="188" alt="<?php esc_attr_e( 'Más noticias del fondo aquí (abre en una pestaña nueva)', 'lapaz' ); ?>" loading="lazy" decoding="async" />
 				</picture>
 			</a>

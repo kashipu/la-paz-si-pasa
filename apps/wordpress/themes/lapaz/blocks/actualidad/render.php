@@ -12,7 +12,8 @@ declare( strict_types = 1 );
 
 defined( 'ABSPATH' ) || exit;
 
-$lapaz_videos    = lapaz_get_videos();
+$lapaz_videos = lapaz_get_videos();
+lapaz_usa_ytimg( array() !== $lapaz_videos );
 $lapaz_destacado = $lapaz_videos[0] ?? null;
 $lapaz_play_svg  = '<svg viewBox="0 0 24 24" width="%1$d" height="%1$d" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="white" opacity="0.9" /><path d="M9.5 7.5v9l7-4.5z" fill="var(--color-actualidad-bg)" /></svg>';
 $lapaz_wrapper   = get_block_wrapper_attributes(

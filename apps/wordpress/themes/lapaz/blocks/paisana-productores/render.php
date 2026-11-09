@@ -11,7 +11,8 @@ declare( strict_types = 1 );
 
 defined( 'ABSPATH' ) || exit;
 
-$lapaz_videos  = lapaz_get_videos_paisana();
+$lapaz_videos = lapaz_get_videos_paisana();
+lapaz_usa_ytimg( array() !== $lapaz_videos );
 $lapaz_plyr    = get_theme_file_uri( 'assets/vendor/plyr/' );
 $lapaz_wrapper = get_block_wrapper_attributes(
 	array(

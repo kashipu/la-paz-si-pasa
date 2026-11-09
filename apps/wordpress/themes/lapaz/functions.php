@@ -47,6 +47,8 @@ function lapaz_enqueue_assets(): void {
 		array(),
 		lapaz_version()
 	);
+	// Con 'path', WordPress lo puede incrustar en el HTML en vez de pedirlo aparte (no bloquea el render).
+	wp_style_add_data( 'lapaz-base', 'path', get_theme_file_path( 'assets/css/base.css' ) );
 }
 add_action( 'wp_enqueue_scripts', 'lapaz_enqueue_assets' );
 
@@ -156,3 +158,14 @@ function lapaz_navigation_ref( array $parsed_block ): array {
 	return $parsed_block;
 }
 add_filter( 'render_block_data', 'lapaz_navigation_ref' );
+
+/**
+ * Límite de CSS incrustado en el HTML. El de fábrica (40 KB en total) dejaba afuera la
+ * navegación y los bloques de PaisSana como hojas externas que bloqueaban el render: el LCP
+ * (foto del hero) se descargaba en 0,3 s y tardaba 1,8 s más en pintarse (Lighthouse móvil).
+ * Es un sitio de dos páginas y el HTML viaja comprimido: todo el CSS va dentro.
+ */
+function lapaz_styles_inline_size_limit(): int {
+	return 150000;
+}
+add_filter( 'styles_inline_size_limit', 'lapaz_styles_inline_size_limit' );
