@@ -30,7 +30,8 @@ fi
 "${wp[@]}" plugin activate secure-custom-fields
 
 # Contenido de ejemplo de una instalación nueva: no es parte del sitio y entraría al sitemap.
-for slug in hello-world sample-page; do
+# Los nombres cambian con el idioma del instalador: en español son hola-mundo y pagina-ejemplo.
+for slug in hello-world sample-page hola-mundo pagina-ejemplo; do
     for id in $("${wp[@]}" post list --post_type=post,page --name="$slug" --post_status=any --format=ids); do
         "${wp[@]}" post delete "$id" --force
     done
