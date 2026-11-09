@@ -109,10 +109,23 @@ paso "Tamaño de archivos" limites
 # Código de terceros (assets/vendor): debe ser idéntico al publicado. Un autofixer o una
 # edición a mano lo rompen sin que ningún linter lo note (pasó con plyr.min.js).
 vendor_intacto() {
-	local ok=0 sums
-	while IFS= read -r sums; do
-		(cd "$(dirname "$sums")" && sha256sum -c --quiet SHA256SUMS) || ok=1
-	done < <(find "$ROOT/$THEME/assets/vendor" -name SHA256SUMS 2>/dev/null)
+	local ok=0 total=0 dir
+	# Cada carpeta de assets/vendor debe tener su SHA256SUMS. Si no hay ninguna, falla:
+	# un .gitignore que excluya vendor/ haría pasar este chequeo en vacío (pasó con Plyr).
+	for dir in "$ROOT/$THEME"/assets/vendor/*/; do
+		[ -d "$dir" ] || continue
+		total=$((total + 1))
+		if [ ! -f "$dir/SHA256SUMS" ]; then
+			echo "Falta SHA256SUMS en $dir"
+			ok=1
+			continue
+		fi
+		(cd "$dir" && sha256sum -c --quiet SHA256SUMS) || ok=1
+	done
+	if [ "$total" -eq 0 ]; then
+		echo "No hay nada en $THEME/assets/vendor: ¿quedó fuera del repo por .gitignore?"
+		ok=1
+	fi
 	return "$ok"
 }
 paso "Integridad de assets/vendor" vendor_intacto
