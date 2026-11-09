@@ -60,37 +60,3 @@ function lapaz_field_image_id( string $name, int $post_id ): int {
 
 	return is_string( $value ) ? attachment_url_to_postid( $value ) : 0;
 }
-
-/**
- * Retratos publicados, en el orden del adapter de Astro (fecha, más reciente primero).
- * Mismos valores por defecto que mapRetrato.ts. Se omiten los que no tienen foto.
- *
- * @return list<array{foto_id: int, descripcion: string, proyecto: string, lugar: string}>
- */
-function lapaz_get_retratos(): array {
-	$post_ids = get_posts(
-		array(
-			'post_type'      => 'retrato',
-			'post_status'    => 'publish',
-			'posts_per_page' => 100,
-			'fields'         => 'ids',
-		)
-	);
-
-	$retratos = array();
-	foreach ( $post_ids as $post_id ) {
-		$foto_id = lapaz_field_image_id( 'foto', $post_id );
-		if ( $foto_id <= 0 ) {
-			continue;
-		}
-		$proyecto   = lapaz_field_text( 'proyecto', $post_id );
-		$retratos[] = array(
-			'foto_id'     => $foto_id,
-			'descripcion' => lapaz_field_text( 'descripcion', $post_id ),
-			'proyecto'    => '' !== $proyecto ? $proyecto : 'Colombia Sostenible',
-			'lugar'       => lapaz_field_text( 'lugar', $post_id ),
-		);
-	}
-
-	return $retratos;
-}

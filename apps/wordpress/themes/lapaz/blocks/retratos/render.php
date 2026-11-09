@@ -4,12 +4,14 @@
  *
  * Mismo marcado y clases que los componentes de apps/frontend. Los retratos salen
  * del CPT `retrato` (campos SCF foto, descripcion, proyecto, lugar). Sin retratos
- * publicados, el slider no se pinta pero la intro sí.
+ * publicados se pinta el marco vacío, como en Astro, para no descuadrar la grilla.
  *
  * @package lapaz
  */
 
 declare( strict_types = 1 );
+
+defined( 'ABSPATH' ) || exit;
 
 $lapaz_retratos = lapaz_get_retratos();
 $lapaz_img      = get_theme_file_uri( 'assets/img/retratos/' );
@@ -32,7 +34,6 @@ $lapaz_img      = get_theme_file_uri( 'assets/img/retratos/' );
 		</div>
 	</div>
 
-	<?php if ( $lapaz_retratos ) : ?>
 		<section class="retratos-slider" aria-roledescription="<?php esc_attr_e( 'carrusel', 'lapaz' ); ?>" aria-label="<?php esc_attr_e( 'Retratos de la Paz', 'lapaz' ); ?>">
 			<div class="retratos-slider__page">
 				<div class="retratos-slider__visual">
@@ -82,5 +83,4 @@ $lapaz_img      = get_theme_file_uri( 'assets/img/retratos/' );
 				</div>
 			</div>
 		</section>
-	<?php endif; ?>
 </section>

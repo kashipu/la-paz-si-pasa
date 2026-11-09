@@ -12,6 +12,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 require_once __DIR__ . '/inc/blocks.php';
+require_once __DIR__ . '/inc/portada.php';
+require_once __DIR__ . '/inc/retratos.php';
+require_once __DIR__ . '/inc/lo-que-hacemos.php';
+require_once __DIR__ . '/inc/videos.php';
+require_once __DIR__ . '/inc/paisana.php';
+require_once __DIR__ . '/inc/ferias.php';
+require_once __DIR__ . '/inc/seo.php';
 
 /**
  * Versión del tema, para invalidar la caché de los assets al publicar.

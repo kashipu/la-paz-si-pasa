@@ -126,3 +126,59 @@ body {
 	gap: 10rem;
 	padding-block: clamp(2rem, 4vw, 3.5rem) 10rem;
 }
+
+/* Página no encontrada (404.astro). */
+.not-found {
+	min-height: 50vh;
+	display: grid;
+	place-items: center;
+	padding: var(--space-16) var(--space-4);
+	text-align: center;
+}
+
+.not-found > .wp-block-group {
+	display: grid;
+	gap: var(--space-4);
+}
+
+/* Página Proyectos destacados (proyectos-destacados.astro): contenedor y tipografía común PaisSana. */
+.paisana-page {
+	display: flex;
+	flex-direction: column;
+	padding-block: 0 10rem;
+	gap: 10rem;
+	font-family: var(--font-komet);
+	color: var(--color-nav-text);
+}
+
+.paisana-page h1,
+.paisana-page h2,
+.paisana-page h3 {
+	font-family: var(--font-monique-regular);
+	font-weight: 400;
+	color: var(--color-nav-text);
+	line-height: 1.15;
+}
+
+.paisana-page h2 {
+	font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+}
+
+.paisana-page h3 {
+	font-size: clamp(1.25rem, 2.5vw, 1.85rem);
+}
+
+.paisana-page p,
+.paisana-page li,
+.paisana-page .text {
+	font-family: var(--font-komet);
+	font-size: clamp(1rem, 2vw, 1.125rem);
+	font-weight: var(--font-weight-komet-light, 300);
+	line-height: 1.6;
+	letter-spacing: -0.02em;
+	color: var(--color-nav-text);
+}
+
+.paisana-page strong {
+	font-weight: var(--font-weight-komet-heavy, 800);
+}
