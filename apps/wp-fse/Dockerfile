@@ -11,6 +11,8 @@ RUN apt-get update \
 
 # wp-cli guarda su caché en /tmp: el home de www-data (/var/www) no es escribible.
 ENV WP_CLI_CACHE_DIR=/tmp/wp-cli-cache
+# Config global de WP-CLI (mod_rewrite): sin ella, wp rewrite --hard deja .htaccess sin reglas.
+ENV WP_CLI_CONFIG_PATH=/etc/wp-cli/config.yml
 RUN curl -fsSL https://github.com/wp-cli/wp-cli/releases/download/v2.12.0/wp-cli-2.12.0.phar -o /usr/local/bin/wp \
     && echo 'ce34ddd838f7351d6759068d09793f26755463b4a4610a5a5c0a97b68220d85c  /usr/local/bin/wp' | sha256sum -c - \
     && chmod +x /usr/local/bin/wp
@@ -40,6 +42,7 @@ COPY apps/wordpress/scf-json /opt/wp-content/scf-json
 COPY apps/wp-fse/scf-json /opt/wp-content/scf-json-lapaz
 # Contenido inicial (fotos, audios, contenido.json) para seed.php.
 COPY apps/wordpress/seed /opt/seed
+COPY apps/wp-fse/docker/wp-cli.yml /etc/wp-cli/config.yml
 COPY apps/wp-fse/docker/entrypoint.sh apps/wp-fse/docker/lapaz-setup apps/wp-fse/docker/lapaz-importar /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/lapaz-setup /usr/local/bin/lapaz-importar
 

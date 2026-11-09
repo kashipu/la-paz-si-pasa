@@ -52,6 +52,8 @@ done
 "${wp[@]}" option update default_comment_status closed
 "${wp[@]}" option update default_ping_status closed
 "${wp[@]}" rewrite structure '/%postname%/' --hard
+# Verificación: si .htaccess quedó sin reglas, todas las páginas darían 404 de Apache.
+grep -q "RewriteRule" /var/www/html/.htaccess || { echo "ERROR: .htaccess sin reglas de reescritura" >&2; exit 1; }
 
 # Portada: la página Inicio (slug home) guarda los campos de group_home, como lee Astro.
 home_id="$("${wp[@]}" post list --post_type=page --name=home --post_status=any --format=ids)"
