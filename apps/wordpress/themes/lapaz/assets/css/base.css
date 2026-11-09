@@ -182,3 +182,20 @@ body {
 .paisana-page strong {
 	font-weight: var(--font-weight-komet-heavy, 800);
 }
+
+/*
+ * Secciones debajo del primer pantallazo: el navegador no calcula ni pinta su contenido hasta
+ * que se acercan a la pantalla. En Proyectos destacados (1.000+ nodos, ferias a ~10.000 px)
+ * bajaba el tiempo de render del hero. contain-intrinsic-size «auto» recuerda el alto real
+ * una vez pintada, para que el scroll y las anclas no salten.
+ */
+.wp-block-lapaz-lo-que-hacemos,
+.wp-block-lapaz-actualidad,
+.wp-block-lapaz-paisana-mapa,
+.wp-block-lapaz-paisana-audios,
+.wp-block-lapaz-paisana-productores,
+.wp-block-lapaz-paisana-ferias,
+.wp-block-lapaz-footer {
+	content-visibility: auto;
+	contain-intrinsic-size: auto 900px;
+}
