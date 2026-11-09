@@ -1,6 +1,6 @@
 # Spec: sitio en WordPress con tema de bloques (FSE)
 
-Estado: **etapa 2 (Retratos) hecha; siguiente: etapa 3 (hero y footer)** · rama `feat/wordpress-fse` · inicio 2026-11-08
+Estado: **etapas 0–7.5 hechas (bin/check y 12 suites e2e en verde); siguiente: staging (etapa 8)** · rama `feat/wordpress-fse` · inicio 2026-11-08
 
 ## Objetivo
 
@@ -38,15 +38,16 @@ Cada etapa tiene su documento en [`wordpress-fse/`](wordpress-fse/), que se escr
 |---|---|---|---|
 | 0 | Documentación, kit y WordPress en cero (`apps/wp-fse/`) | hecha | este archivo + [buenas prácticas](../buenas-practicas-wordpress.md) |
 | 1 | Prueba de concepto: navbar con `core/navigation` | hecha | [etapa-1-navbar.md](wordpress-fse/etapa-1-navbar.md) |
-| 1.5 | Calidad determinista: `bin/check` (13 capas), E2E y visual del navbar, CI | hecha | [etapa-1-5-calidad.md](wordpress-fse/etapa-1-5-calidad.md) |
-| 2 | Sección Retratos ("La Paz Sí Pasa" + slider): SCF fijo en la imagen, `lapaz-core`, seed y bloque `lapaz/retratos` | hecha | [etapa-2-retratos.md](wordpress-fse/etapa-2-retratos.md) |
-| 3 | Hero (imagen editable), footer y plantillas (portada con página Inicio, proyectos-destacados, 404) | propuesta | [etapa-3-hero-footer.md](wordpress-fse/etapa-3-hero-footer.md) |
-| 3b | Modelo de contenido restante: seed de subcuentas, portada y menú (SCF, `lapaz-core` y `scf-json/` ya entraron en la etapa 2) | pendiente | — |
-| 4 | Bloques de la home: retratos, lo-que-hacemos, actualidad, y `inc/helpers.php` con los ports de los mappers y su autoverificación | pendiente | — |
-| 5 | Bloques de PaisSana: hero (cifras), mapa (regiones), audios, productores (Plyr local), ferias; `group_proyectos.json` | pendiente | — |
-| 6 | SEO y rendimiento: head OG/canonical, sitemap, preload, WebP, comparación con Unlighthouse frente a Astro | pendiente | — |
-| 7 | Staging y cambio en Dokploy: copia de la base, `search-replace`, mover el dominio, `cms.` con 301 | pendiente | — |
-| 8 | Limpieza: retirar `apps/frontend/`, `docker/astro/`, los mu-plugins headless y los docs viejos | pendiente | — |
+| 1.5 | Calidad determinista: `bin/check`, E2E y visual, CI | hecha | [etapa-1-5-calidad.md](wordpress-fse/etapa-1-5-calidad.md) |
+| 2 | Retratos («La Paz Sí Pasa» + slider), SCF y `lapaz-core` en la imagen | hecha | [etapa-2-retratos.md](wordpress-fse/etapa-2-retratos.md) |
+| 3 | Hero (editable), footer y plantillas (portada Inicio, proyectos-destacados, 404) | hecha | [etapa-3-hero-footer.md](wordpress-fse/etapa-3-hero-footer.md) |
+| 4 | Lo que hacemos: subcuentas, noticias por año, banner | hecha | [etapa-4-lo-que-hacemos.md](wordpress-fse/etapa-4-lo-que-hacemos.md) |
+| 5 | Actualidad: videos, destacado y carrusel | hecha | [etapa-5-actualidad.md](wordpress-fse/etapa-5-actualidad.md) |
+| 6 | Proyectos destacados (PaisSana): 5 bloques; cifras y regiones editables | hecha | [etapa-6-paisana.md](wordpress-fse/etapa-6-paisana.md) |
+| 7 | SEO, rendimiento, limpieza de WordPress y seguridad | hecha | [etapa-7-seo-rendimiento.md](wordpress-fse/etapa-7-seo-rendimiento.md) |
+| 7.5 | Operación: SMTP, `lapaz-setup --seed`, `lapaz-importar` (contenido de producción), guía de Dokploy | hecha | [despliegue-fse.md](../despliegue-fse.md) |
+| 8 | Staging en el servidor nuevo y cambio a producción | pendiente (aprobación) | [despliegue-fse.md](../despliegue-fse.md) |
+| 9 | Limpieza: retirar `apps/frontend/`, `docker/astro/`, los mu-plugins headless y los docs viejos. **Solo al final, con aprobación explícita de William** ([decisión 7](../decisions/wordpress-fse-arquitectura.md#7-el-headless-sigue-en-pie-hasta-el-final)) | pendiente | — |
 
 ## Inventario (2026-11-08)
 
@@ -61,10 +62,10 @@ Cada etapa tiene su documento en [`wordpress-fse/`](wordpress-fse/), que se escr
 | Imágenes de diseño | `apps/frontend/src/assets/` | 46 png, 15 svg (28 MB de origen) |
 | Fuentes, favicon, OG, hero | `apps/frontend/public/` | 7 woff2, `og.jpg` 1200×630, hero 640/960/1200 |
 
-El seed (`seed.php`, idempotente) carga 54 entradas: 15 retratos, 9 videos, 15 ferias y 15 audios.
+El seed (`seed.php`, idempotente) carga 77 entradas: 15 retratos, 9 videos, 15 ferias, 15 audios y, desde la etapa 4, 23 subcuentas con sus logos.
 
 **Faltantes:**
-- Noticias y subcuentas no están en el seed. Las subcuentas están en `adapters/mocks.ts`, con 23 logos en `src/assets/subcuentas/`. Las noticias de los mocks apuntan a `example.com`, así que falta contenido real.
+- Las noticias no están en el seed: las de los mocks apuntan a `example.com`, así que falta contenido real del cliente. En local y en CI se crean 6 noticias de ejemplo con wp-cli, que nunca llegan al seed. (Las subcuentas entraron al seed en la etapa 4.)
 - Lo que se haya subido directamente en producción vive solo en el servidor: hay que hacer respaldo de la base y de `uploads` antes de la etapa 7.
 
 ### Componentes

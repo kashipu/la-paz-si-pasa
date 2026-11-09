@@ -27,7 +27,8 @@ docker compose up -d cms db
 # migración FSE (rama feat/wordpress-fse): WordPress con tema lapaz en http://localhost:8090
 cd apps/wp-fse && cp .env.example .env   # completar contraseñas y WP_ADMIN_EMAIL
 docker compose up -d --build
-docker compose exec -u www-data cms lapaz-setup
+docker compose exec -u www-data cms lapaz-setup --seed   # primer arranque: configura y carga el seed
+docker compose exec -u www-data cms lapaz-importar /tmp/headless.sql /tmp/uploads.tar.gz   # contenido de producción, ver despliegue
 docker run --rm -v "$PWD/../..":/app -w /app/apps/wp-fse composer:2 sh -c "composer install && vendor/bin/phpcs"
 ```
 
@@ -40,3 +41,4 @@ docker run --rm -v "$PWD/../..":/app -w /app/apps/wp-fse composer:2 sh -c "compo
 - Tras cada deploy, comprobar el CMS (ver README, "Después de cada deploy").
 - Secretos por entorno, nunca en el repo.
 - Tema FSE: sigue [`wiki/buenas-practicas-wordpress.md`](wiki/buenas-practicas-wordpress.md). Un componente equivale a un bloque. `apps/wp-fse/bin/check` en verde antes de cerrar una etapa o abrir un PR. Nunca se relaja una regla para que pase.
+- Despliegue del sitio FSE (Dokploy, servidores, `lapaz-importar`): [`wiki/despliegue-fse.md`](wiki/despliegue-fse.md).

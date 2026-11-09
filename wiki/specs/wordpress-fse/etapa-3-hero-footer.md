@@ -1,6 +1,6 @@
 # Etapa 3: hero, footer y plantillas de página
 
-Estado: **propuesta, pendiente de aprobación** · 2026-11-08 · spec principal: [wordpress-fse.md](../wordpress-fse.md)
+Estado: **hecha** (pruebas `layout.mjs` 49/49 y `bin/check` en verde) · 2026-11-08 · spec principal: [wordpress-fse.md](../wordpress-fse.md)
 
 ## Objetivo
 
@@ -40,7 +40,7 @@ Hoy WordPress muestra las últimas entradas en la portada. El hero lee sus campo
 | Plantilla | Orden (igual que `BaseLayout.astro`) |
 |---|---|
 | `front-page.html` | header · **hero** · nav-desktop · `main.lapaz-home` (retratos) · **footer** |
-| `page-proyectos-destacados.html` (`customTemplates`, solo páginas) | header · **hero** · nav-desktop · main (vacío hasta la etapa PaisSana) · **footer**. `lapaz-setup` se la asigna a la página Proyectos destacados |
+| `page-proyectos-destacados.html` (jerarquía por slug; no hizo falta `customTemplates`) | header · **hero** · nav-desktop · main (vacío hasta la etapa PaisSana) · **footer**. `lapaz-setup` se la asigna a la página Proyectos destacados |
 | `404.html` | header · nav-desktop · bloque "Página no encontrada" con "Volver al inicio" (`404.astro`, textos traducibles en un patrón PHP) · footer |
 | `index.html` | header · nav-desktop · main · footer |
 
@@ -76,3 +76,27 @@ Regla de la etapa 2: solo un agente corre `bin/check` a la vez. Claude lo corre 
 - **Compatibilidad del filtro `acf/load_field_group` con SCF 6.9:** si no existe, la alternativa es `acf/location/rule_match` acotado al grupo `group_home`.
 
 Estimación: 1 día.
+
+## Resultado (2026-11-08)
+
+| Verificación | Resultado |
+|---|---|
+| Orden de piezas | `/` y `/proyectos-destacados/`: header, hero, nav de escritorio, main y footer, igual que `BaseLayout.astro`. `/no-existe` responde 404 con su texto |
+| Hero editable | Con una foto en el campo de Inicio, sale en las dos páginas con srcset y su precarga. Sin foto, vuelve a los JPEG del tema |
+| Campo del hero | `group_home` solo aparece al editar Inicio; en Proyectos destacados no |
+| Visual | Hero: 0,00 % a 1440 y 360. Footer completo: 0,36 % a 1440. La foto con trama da 4,4 % a 360 por el reescalado de srcset, aunque el archivo pesa lo mismo que el de Astro (189 KB). Codex compara el panel aparte. El panel a 850 px quedó en manos de Codex (es un desfase de fracción de píxel, no de diseño) |
+| Rendimiento (móvil, 4× CPU, red lenta, sin caché, frente al **build de producción** de Astro) | LCP: WordPress **1,34 s**, Astro 1,41 s. Bytes: WordPress **434 KB**, Astro 507 KB |
+| Pruebas | `tests/e2e/layout.mjs` de Codex: 49 comprobaciones que pasan |
+| Calidad | `bin/check` en verde (antes del traspaso de las pruebas a Codex) |
+
+## Aprendizajes
+
+1. **La plantilla por slug (`page-<slug>.html`) es más simple que `customTemplates`:** no hay que asignarla ni guardar nada en la base. `customTemplates` solo hace falta si el editor tiene que elegir la plantilla.
+2. **SCF 6.9 no tiene `acf/load_field_group`**, el riesgo que se anotó en la propuesta. La ubicación se acota con `acf/location/match_rule`. Antes de asumir un hook de SCF, se busca en su código (`grep apply_filters`) dentro del contenedor.
+3. **En temas de bloques la plantilla se pinta antes de `wp_head`.** Por eso el bloque puede avisar qué imagen precargar y el `<head>` la imprime, sin adivinar por URL ni por plantilla.
+4. **No se compara rendimiento contra `astro dev`:** el modo desarrollo daba 4,1 s de LCP frente a 1,4 s del build. La referencia es `astro build` + `node dist/server/entry.mjs`.
+5. **Las imágenes se generan con el mismo encoder y calidad que Astro** (sharp, WebP 80, resolución original en los logos). Si no, la prueba visual marca diferencias de suavizado que no son de diseño.
+6. **`bin/astro-css-to-block.mjs` automatiza el paso del CSS** (sin `:global()`, la raíz pasa a ser el wrapper, el resto queda dentro, con tabs). Se usó en hero y footer y queda para las secciones que siguen.
+7. **PHPCBF puede romper una etiqueta HTML** que tenga PHP en medio (`<footer <?php …?>>`). Los atributos del wrapper se calculan en una variable antes del HTML.
+8. **Reparto:** depurar pruebas visuales consume mucho tiempo de desarrollo. Desde esta etapa Claude solo desarrolla y Codex se encarga de pruebas, bases y `bin/check` (pedido de William).
+9. **AGY en `accept-edits` pide permiso para cada comando**, y en tareas con muchos comandos (generar imágenes) se traba. Sirve para revisiones de lectura; los assets los generó Claude.

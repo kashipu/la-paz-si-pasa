@@ -6,9 +6,9 @@ Estas decisiones son caras de revertir. Cada una dice qué se decidió, por qué
 
 ## 1. Prueba en un WordPress nuevo, en paralelo al headless
 
-- **Qué:** `apps/wp-fse/` es un proyecto de compose aparte (`name: lapaz-fse`, puerto 8090, volúmenes propios). El headless, Astro y producción no se tocan hasta la etapa 7.
+- **Qué:** `apps/wp-fse/` es un proyecto de compose aparte (`name: lapaz-fse`, puerto 8090, volúmenes propios). El headless, Astro y producción no se tocan hasta el cambio a producción (etapa 8).
 - **Por qué:** es una prueba de concepto y no se puede perder lo que ya funciona.
-- **Cambiaría si** la prueba se aprueba. Entonces este stack pasa a ser el de producción y el headless se retira en la etapa 8.
+- **Cambiaría si** la prueba se aprueba. Entonces este stack pasa a ser el de producción. El headless se retira recién en la etapa 9, con aprobación explícita de William (ver decisión 7).
 
 ## 2. Un solo compose y una sola imagen para local y Dokploy
 
@@ -54,3 +54,9 @@ Estas decisiones son caras de revertir. Cada una dice qué se decidió, por qué
 
 - **Qué:** los campos SCF se leen en PHP. Block Bindings solo se usará, si acaso, para valores simples.
 - **Por qué:** los campos repeater y gallery de SCF declaran `bindings => false`, así que no se pueden enlazar.
+
+## 7. El headless sigue en pie hasta el final
+
+- **Qué:** `apps/frontend/`, `docker/astro/`, el stack headless (`docker-compose.yml` y `compose.prod.yaml` de la raíz) y sus mu-plugins **no se retiran** hasta que el sitio FSE esté en producción y William lo apruebe explícitamente. Staging y el cambio de dominio se hacen con el headless funcionando en paralelo, como respaldo.
+- **Por qué:** decisión de William (2026-11-08). Si algo falla después del cambio, se vuelve al headless moviendo el dominio otra vez.
+- **Cambiaría si** William da por cerrada la migración. Recién ahí se ejecuta la etapa de limpieza.

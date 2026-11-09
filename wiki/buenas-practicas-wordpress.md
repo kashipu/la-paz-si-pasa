@@ -90,6 +90,11 @@ Checklist para construir el tema `lapaz` (WP 7.1, PHP 8.3, SCF, Dokploy). Está 
 - **Datos de SCF siempre por los helpers tipados** de `inc/blocks.php`, nunca `get_field()` suelto en `render.php`.
 - **Cambios a los CPT compartidos con el headless** se hacen por filtro en `lapaz-core.php`, no en `scf-json/`.
 - **Un solo agente corre `bin/check` a la vez.**
+- **Lo que WordPress trae y el sitio no usa se quita en `lapaz-limpieza.php`, no en el tema:** metadatos de descubrimiento, comentarios, feeds, XML-RPC y presets por defecto de `theme.json`. Antes de quitar algo, se hace el inventario de lo que imprime la página.
+- **Plugins y temas que no se usan se borran, no se desactivan.**
+- **Seguridad en capas:** lo que puede bloquearse antes de WordPress va en la imagen (Apache: uploads sin PHP, xmlrpc, scf-json, cabeceras; wp-config: `DISALLOW_FILE_EDIT` y `DISALLOW_FILE_MODS` en producción). Lo que depende de WordPress va en `lapaz-seguridad.php` (sin enumeración de usuarios).
+- **Todo `render.php` y todo patrón empiezan con `defined( 'ABSPATH' ) || exit;`.**
+- **No se expone ninguna versión:** ni la de WordPress en el `<head>`, ni la de Apache ni la de PHP en las cabeceras.
 
 ## 9. Kit de desarrollo
 

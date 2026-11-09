@@ -11,8 +11,8 @@ Cómo se trabaja en La Paz Sí Pasa: máquina, servicios locales, agentes, herra
 | Node | 24 en la máquina; 22.23.4 en contenedores y CI | Astro, Stylelint, ESLint, TypeScript y las pruebas E2E |
 | Google Chrome | estable | pruebas E2E y visuales vía CDP (headless) |
 | Orca | 1.4 | terminales, worktrees y paneles de agentes |
-| Claude Code | 2.1 | agente principal: implementa, coordina y verifica |
-| Codex CLI | 0.166 | agente de apoyo para tareas acotadas |
+| Claude Code | 2.1 | agente principal: desarrolla, coordina y hace commit |
+| Codex CLI | 0.166 | pruebas, bases visuales, `bin/check` y CI |
 | AGY (Antigravity CLI) | 1.5 | agente de apoyo para tareas acotadas |
 
 PHP, Composer, wp-cli y los linters no se instalan en la máquina: van en imágenes Docker con versión fija.
@@ -34,7 +34,8 @@ cd apps/wp-fse
 cp .env.example .env          # poner contraseñas de la base y WP_ADMIN_EMAIL
 docker compose up -d --build  # compose.yaml + compose.override.yaml (local)
 docker compose exec -u www-data cms lapaz-setup
-docker compose exec -u www-data -e SEED_SOLO=retratos cms wp eval-file /opt/seed/seed.php   # contenido inicial (sin SEED_SOLO: todo)
+docker compose exec -u www-data cms lapaz-setup --seed     # o configura y carga todo el seed de una vez
+docker compose exec -u www-data cms lapaz-importar /tmp/dump.sql /tmp/uploads.tar.gz   # contenido real de otro WordPress (ver despliegue-fse.md)
 ```
 
 - `lapaz-setup` es idempotente. Instala WordPress en español, activa el tema y crea la página "Proyectos destacados" y el menú "Principal". Solo en local agrega además Query Monitor y Create Block Theme.
@@ -83,7 +84,7 @@ node tests/e2e/navbar.mjs --baseline http://127.0.0.1:4321
 
 ## Agentes
 
-**Claude implementa.** Tiene más cuota y lleva el contexto del proyecto. Codex y AGY reciben tareas acotadas cuando conviene trabajar en paralelo.
+**Claude desarrolla; los otros agentes prueban.** Claude tiene más cuota y lleva el contexto del proyecto, así que se dedica a construir. Desde la etapa 3, Codex se encarga de pruebas, bases visuales, `bin/check` y CI, y reporta los fallos del código del tema con archivo:línea para que Claude los arregle. AGY hace revisiones independientes de lectura. Claude corre a lo sumo un smoke rápido (que la página cargue).
 
 Cómo se delega, siempre en la misma ventana de Orca para ver a todos trabajar:
 
@@ -97,7 +98,8 @@ Cómo se delega, siempre en la misma ventana de Orca para ver a todos trabajar:
      --command "agy --mode accept-edits -i \"\$(cat brief.md)\""
    orca terminal set-pane-title --terminal <handle> --title "CODEX · infra"
    ```
-3. Claude sigue el avance con `orca terminal read --terminal <handle> --screen`, revisa lo entregado y verifica con `bin/check`. Solo Claude hace commit.
+3. Claude sigue el avance con `orca terminal read --terminal <handle> --screen`, integra lo que reportan y hace commit cuando Codex confirma `bin/check` en verde. Solo Claude hace commit.
+4. **Un solo agente corre `bin/check` a la vez** (Codex). Dos en paralelo chocan en `node_modules` y dan falsos rojos.
 
 No se usan otras pestañas ni worktrees para delegar, salvo que se pida.
 
@@ -121,6 +123,10 @@ npx skills add WordPress/agent-skills --skill wp-block-development wp-block-them
 - **Dokploy MCP:** dominios, deploys, logs, volúmenes y backups. Se usa en la etapa de staging y cambio de dominio.
 - **Claude in Chrome:** la extensión no estaba conectada el 2026-11-08. Las pruebas visuales usan Chrome headless por CDP (`tests/e2e/navbar.mjs`), que no depende de la extensión.
 - **Se descartaron:** los MCP de WordPress (mcp-adapter, Playground). wp-cli por `docker compose exec` cubre lo mismo con menos riesgo.
+
+## Despliegue
+
+[despliegue-fse.md](despliegue-fse.md): servidores, servicio en Dokploy, primer arranque, migración del contenido real y cambio a producción. MCP `dokploy-lapaz` (servidor nuevo, key en el Llavero).
 
 ## Documentación
 

@@ -33,6 +33,18 @@ La CI (`.github/workflows/wp-fse.yml`) corre `bin/check` y las pruebas de compor
 | Comportamiento | `tests/e2e/navbar.mjs` (CDP) | overlay, foco, Esc, bloqueo de scroll, cierre con ancla, ítems iguales en móvil y escritorio | — |
 | Visual | `navbar.mjs --visual` contra `tests/e2e/baseline/` (capturas de Astro) | más de 1 % de píxeles distintos en el header, el overlay o el menú de escritorio | solo local |
 
+## Capas agregadas después
+
+| Capa | Desde | Qué frena |
+|---|---|---|
+| Prefijo de bloque en CSS | etapa 2 | selectores de `blocks/*/style.css` fuera de `.wp-block-lapaz-<bloque>` (con excepción para `::view-transition-*`) |
+| Configuración de Apache | etapa 7 | `.conf` del tema inválidos |
+| **Integridad de `assets/vendor`** | etapa 7.5 | cualquier cambio en código de terceros: cada carpeta lleva `SHA256SUMS` y se verifica con `sha256sum -c` |
+
+**Por qué existe la última:** en la etapa 7.5 se pasaron los autofixers (ESLint y Stylelint con `--fix`) sobre todo el tema **antes** de excluir `assets/vendor/`. Reformatearon `plyr.min.js` y `plyr.css`, y el JS quedó con un error de sintaxis (`Unexpected token 'else'`): Plyr dejó de montarse. Ningún linter lo detectó, porque después se excluyó vendor. Lo descubrió la prueba `paisana-productores.mjs`. Se restauró desde `npm pack plyr@3.7.8`.
+
+**Regla:** el código de terceros se copia tal cual, se excluye de los linters y lleva su `SHA256SUMS`. Para actualizarlo se reemplazan los archivos y se regenera la suma. Los autofixers nunca se corren sobre `assets/vendor/`.
+
 ## Verificación
 
 - `bin/check` pasa en verde las 13 capas sobre el tema actual.

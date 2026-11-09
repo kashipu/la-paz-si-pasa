@@ -13,7 +13,7 @@ El equipo edita el contenido en WordPress y el sitio lo lee por API REST.
 - **CMS:** WordPress headless sobre PHP 8.3 (Apache), con SCF para CPT y campos. Código en `apps/wordpress/`; las definiciones viven en `apps/wordpress/scf-json/`.
 - **Base de datos:** MariaDB 11.
 - **Contenedores:** Docker. `docker-compose.yml` para local, `compose.prod.yaml` para Dokploy.
-- **Versiones fijas:** Node 22.23.4 (`docker/astro/Dockerfile`) y WordPress 7.1.3 con PHP 8.3 (`docker/wordpress/Dockerfile`). TODO: confirmar que la imagen de WordPress trae PHP 8.3.36; el commit a7ef6a6 lo afirma, el tag `php8.3-apache` no lo fija.
+- **Versiones fijas:** Node 22.23.4 (`docker/astro/Dockerfile`) y WordPress 7.1.3 con PHP 8.3 (`docker/wordpress/Dockerfile`). Confirmado el 2026-11-08: la imagen `wordpress:7.1.3-php8.3-apache` corre PHP 8.3.36 (se vio en la cabecera `X-Powered-By` antes de ocultarla).
 
 ## Arquitectura
 
@@ -36,15 +36,18 @@ Componente Astro (props tipadas)
 
 ## Migración a tema de bloques (en curso)
 
-Prueba en `feat/wordpress-fse`: WordPress pinta el sitio con el tema `lapaz` (`apps/wordpress/themes/lapaz/`), sin Astro. Stack aparte en `apps/wp-fse/`.
+Estado: etapas 0 a 7.5 construidas, en `feat/wordpress-fse` y **sin commit** desde la etapa 3. Siguiente: staging en el servidor nuevo (etapa 8, con aprobación). El headless sigue en producción hasta el final.
+
+WordPress pinta el sitio con el tema `lapaz` (`apps/wordpress/themes/lapaz/`), sin Astro. Stack aparte en `apps/wp-fse/`.
 - [Spec, etapas e inventario](specs/wordpress-fse.md)
+- [Despliegue en Dokploy, servidores y `lapaz-importar`](despliegue-fse.md)
 - [Buenas prácticas y kit](buenas-practicas-wordpress.md)
 - [Decisiones de arquitectura](decisions/wordpress-fse-arquitectura.md)
 
 ## Contenido y medios
 
 - `apps/wordpress/seed/`: 102 fotos (ferias y retratos), 15 audios m4a y 43 enlaces de YouTube. `seed.php` carga 54 entradas.
-- Faltan en el seed: noticias (sin contenido real) y subcuentas (están en `mocks.ts`, con logos en `apps/frontend/src/assets/subcuentas/`).
+- Faltan en el seed: noticias (sin contenido real). Las subcuentas ya están en el seed de `apps/wordpress/seed/` (23, con logos).
 - Lo subido en producción vive solo en el servidor. Hay que respaldar la base y `uploads` antes del cambio.
 
 ## Enlaces
