@@ -19,7 +19,7 @@ for origen in /opt/wp-content/themes/* /opt/wp-content/plugins/*; do
     [ -d "$origen" ] || continue
     sincronizar "$origen" "/var/www/html/wp-content/${origen#/opt/wp-content/}"
 done
-for carpeta in mu-plugins scf-json; do
+for carpeta in mu-plugins scf-json scf-json-lapaz; do
     [ -d "/opt/wp-content/$carpeta" ] && sincronizar "/opt/wp-content/$carpeta" "/var/www/html/wp-content/$carpeta"
 done
 

@@ -40,10 +40,19 @@ services:
       WP_DEVELOPMENT_MODE: ${WP_DEVELOPMENT_MODE:-}
       WP_ADMIN_USER: ${WP_ADMIN_USER:-admin}
       WP_ADMIN_EMAIL: ${WP_ADMIN_EMAIL:-}
+      # SMTP (lapaz-smtp.php): sin SMTP_HOST no se usa. En producción: Resend, como el headless.
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      SMTP_FROM: ${SMTP_FROM:-}
+      SMTP_FROM_NAME: ${SMTP_FROM_NAME:-La Paz Sí Pasa}
       WORDPRESS_CONFIG_EXTRA: |
         define('WP_HOME', getenv('WORDPRESS_URL'));
         define('WP_SITEURL', getenv('WORDPRESS_URL'));
         define('DISALLOW_FILE_EDIT', true);
+        // En producción todo (tema, plugins, mu-plugins) viene en la imagen: nadie instala nada desde el admin.
+        define('DISALLOW_FILE_MODS', getenv('WP_ENVIRONMENT_TYPE') === 'production');
         define('WP_ENVIRONMENT_TYPE', getenv('WP_ENVIRONMENT_TYPE'));
         // 'theme' en local: WordPress no cachea theme.json ni plantillas mientras se edita.
         define('WP_DEVELOPMENT_MODE', getenv('WP_DEVELOPMENT_MODE') ?: '');

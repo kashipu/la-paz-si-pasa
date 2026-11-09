@@ -3,6 +3,12 @@ FROM wordpress:7.1.3-php8.3-apache
 # pipefail: si curl falla, la verificación de sha256 no debe pasar en silencio.
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+# Cliente de MariaDB: lo usan wp db export/import (respaldos y lapaz-importar).
+# hadolint ignore=DL3008
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends mariadb-client \
+    && rm -rf /var/lib/apt/lists/*
+
 # wp-cli guarda su caché en /tmp: el home de www-data (/var/www) no es escribible.
 ENV WP_CLI_CACHE_DIR=/tmp/wp-cli-cache
 RUN curl -fsSL https://github.com/wp-cli/wp-cli/releases/download/v2.12.0/wp-cli-2.12.0.phar -o /usr/local/bin/wp \
@@ -21,15 +27,21 @@ RUN curl -fsSL "https://downloads.wordpress.org/plugin/secure-custom-fields.${SC
     && rm /tmp/scf.zip
 
 COPY apps/wordpress/php/zz-opcache-overrides.ini /usr/local/etc/php/conf.d/
+COPY apps/wp-fse/docker/apache/zz-lapaz-seguridad.conf /etc/apache2/conf-enabled/
+# Sin cabecera X-Powered-By con la versión de PHP.
+RUN a2enmod headers \
+    && echo 'expose_php = Off' > /usr/local/etc/php/conf.d/zz-lapaz-seguridad.ini
 # /var/www/html es un volumen: el entrypoint lleva el tema a su destino en cada arranque.
 COPY apps/wordpress/themes/lapaz /opt/wp-content/themes/lapaz
 COPY apps/wp-fse/mu-plugins /opt/wp-content/mu-plugins
 # CPT y campos: los mismos JSON del headless, sin cambios.
 COPY apps/wordpress/scf-json /opt/wp-content/scf-json
+# Grupos de campos propios del sitio FSE (no compartidos con el headless).
+COPY apps/wp-fse/scf-json /opt/wp-content/scf-json-lapaz
 # Contenido inicial (fotos, audios, contenido.json) para seed.php.
 COPY apps/wordpress/seed /opt/seed
-COPY apps/wp-fse/docker/entrypoint.sh apps/wp-fse/docker/lapaz-setup /usr/local/bin/
-RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/lapaz-setup
+COPY apps/wp-fse/docker/entrypoint.sh apps/wp-fse/docker/lapaz-setup apps/wp-fse/docker/lapaz-importar /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/lapaz-setup /usr/local/bin/lapaz-importar
 
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["apache2-foreground"]

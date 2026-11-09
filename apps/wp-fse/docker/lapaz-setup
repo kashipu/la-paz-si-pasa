@@ -1,6 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
+# Uso: lapaz-setup [--seed]   (--seed carga además el contenido inicial de /opt/seed)
+cargar_seed=false
+[ "${1:-}" = "--seed" ] && cargar_seed=true
+
 : "${WORDPRESS_URL:?Define WORDPRESS_URL}"
 wp=(wp --path=/var/www/html)
 
@@ -24,7 +28,38 @@ if ! "${wp[@]}" language core install es_CO --activate; then
 fi
 "${wp[@]}" theme activate lapaz
 "${wp[@]}" plugin activate secure-custom-fields
+
+# Contenido de ejemplo de una instalación nueva: no es parte del sitio y entraría al sitemap.
+for slug in hello-world sample-page; do
+    for id in $("${wp[@]}" post list --post_type=post,page --name="$slug" --post_status=any --format=ids); do
+        "${wp[@]}" post delete "$id" --force
+    done
+done
+
+# Plugins y temas que trae la imagen y el sitio no usa (AI es experimental). Se borran:
+# desactivados igual quedan en el disco, se actualizan y amplían la superficie de ataque.
+for plugin in ai ai-provider-for-anthropic ai-provider-for-google hello akismet; do
+    if "${wp[@]}" plugin is-installed "$plugin" 2>/dev/null; then
+        "${wp[@]}" plugin deactivate "$plugin" 2>/dev/null || true
+        "${wp[@]}" plugin delete "$plugin"
+    fi
+done
+for tema in $("${wp[@]}" theme list --status=inactive --field=name); do
+    "${wp[@]}" theme delete "$tema"
+done
+
+# Sin comentarios ni pingbacks por defecto en contenido nuevo.
+"${wp[@]}" option update default_comment_status closed
+"${wp[@]}" option update default_ping_status closed
 "${wp[@]}" rewrite structure '/%postname%/' --hard
+
+# Portada: la página Inicio (slug home) guarda los campos de group_home, como lee Astro.
+home_id="$("${wp[@]}" post list --post_type=page --name=home --post_status=any --format=ids)"
+if [ -z "$home_id" ]; then
+    home_id="$("${wp[@]}" post create --post_type=page --post_name=home --post_title=Inicio --post_status=publish --porcelain)"
+fi
+"${wp[@]}" option update show_on_front page
+"${wp[@]}" option update page_on_front "$home_id"
 
 page_id="$("${wp[@]}" post list --post_type=page --name=proyectos-destacados --post_status=any --format=ids)"
 if [ -z "$page_id" ]; then
@@ -48,6 +83,13 @@ if [ "${WP_ENVIRONMENT_TYPE:-production}" = local ]; then
             "${wp[@]}" plugin install "$plugin"
         fi
         "${wp[@]}" plugin activate "$plugin"
+    done
+fi
+
+if [ "$cargar_seed" = true ]; then
+    # Por secciones: en el servidor una sola corrida larga puede cortarse por tiempo.
+    for seccion in retratos videos ferias audio_relatos subcuentas; do
+        SEED_SOLO="$seccion" "${wp[@]}" eval-file /opt/seed/seed.php
     done
 fi
 

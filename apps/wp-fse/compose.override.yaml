@@ -12,3 +12,4 @@ services:
       - ../wordpress/themes/lapaz:/var/www/html/wp-content/themes/lapaz
       - ./mu-plugins:/var/www/html/wp-content/mu-plugins
       - ../wordpress/scf-json:/var/www/html/wp-content/scf-json:ro
+      - ./scf-json:/var/www/html/wp-content/scf-json-lapaz:ro
