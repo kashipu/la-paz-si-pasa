@@ -100,3 +100,19 @@ Se revisaron el tema, los mu-plugins y la imagen.
   - sin emojis.
 - Con `compose.yaml` y `WP_ENVIRONMENT_TYPE=production`: sin noindex.
 - `bin/check`.
+
+## Lighthouse en el staging (2026-11-09, móvil, mediana de 3 corridas)
+
+| Página | Antes | Después | Qué se hizo |
+|---|---|---|---|
+| Portada | 82 (1 corrida) | **91–98** | Todo el CSS incrustado (antes había hojas externas que bloqueaban el render: el hero se descargaba en 0,3 s y tardaba 1,8 s más en pintarse), `preconnect` a `i.ytimg.com`, banner a la medida, la primera foto de Retratos sin `fetchpriority` alto (competía con el hero) |
+| Proyectos destacados | — | **88–91** | Lo mismo, más `content-visibility: auto` en las secciones bajo el primer pantallazo (1.000+ nodos; las ferias quedan a unos 10.000 px) |
+
+- **Accesibilidad 94–96, Best Practices 96–100.** CLS 0 y TBT 0 en todas las corridas.
+- **SEO 69 es esperado en staging:** la única falla es `is-crawlable`, por el `noindex` puesto a propósito. En producción desaparece.
+- **Variación:** la red y el servidor hacen que el puntaje varíe ±7 entre corridas. Por eso se mide la mediana de 3, y nunca contra `astro dev`.
+
+**Pendiente:**
+- **Caché de página.** El TTFB medido en el servidor real es de 220–280 ms, por encima del umbral de unos 200 ms que fijó esta etapa. Se propone **WP Super Cache** en modo simple, con versión fija en la imagen. Es lo que más falta para bajar el LCP en móvil.
+- **Contraste del título «Actualidad»** sobre el fondo rosa: falla WCAG AA. Es del diseño original; hay que decidirlo con diseño.
+- **Fondo de papel de Retratos en móvil:** se estira (`object-fit: fill`), igual que en Astro. Hace bajar Best Practices.
