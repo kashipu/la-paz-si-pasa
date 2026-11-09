@@ -4,6 +4,11 @@
  * Sin los estilos inline de Astro: aquí el CSS del bloque alcanza a lo que crea el JS.
  */
 
+const MOVIMIENTO = window.matchMedia( '(prefers-reduced-motion: reduce)' )
+	.matches
+	? 'auto'
+	: 'smooth';
+
 const PLAY_SVG =
 	'<svg viewBox="0 0 24 24" width="48" height="48" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="white" opacity="0.9" /><path d="M9.5 7.5v9l7-4.5z" fill="var(--color-actualidad-bg)" /></svg>';
 
@@ -113,7 +118,7 @@ document
 			}
 			if ( tagsEl ) {
 				/** @type {unknown} */
-				const tags = JSON.parse( card.dataset.tags ?? '[]' );
+				const tags = JSON.parse( card.dataset.tags || '[]' );
 				tagsEl.replaceChildren(
 					...( Array.isArray( tags ) ? tags : [] ).map( ( tag ) => {
 						const span = document.createElement( 'span' );
@@ -142,7 +147,7 @@ document
 				card.addEventListener( 'click', async () => {
 					const irAlDestacado = () =>
 						destacadoEl.scrollIntoView( {
-							behavior: 'smooth',
+							behavior: MOVIMIENTO,
 							block: 'nearest',
 						} );
 					const thumb = card.querySelector(
@@ -179,7 +184,7 @@ document
 			btn.addEventListener( 'click', () => {
 				const dir =
 					btn instanceof HTMLElement ? Number( btn.dataset.dir ) : 0;
-				track?.scrollBy( { left: dir * 280, behavior: 'smooth' } );
+				track?.scrollBy( { left: dir * 280, behavior: MOVIMIENTO } );
 			} );
 		} );
 	} );

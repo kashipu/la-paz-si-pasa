@@ -51,10 +51,12 @@ $lapaz_wrapper   = get_block_wrapper_attributes(
 				<?php if ( $lapaz_destacado ) : ?>
 					<?php echo lapaz_video_thumb( $lapaz_destacado, $lapaz_destacado['titulo'], '(min-width: 850px) 60vw, 100vw', 'data-campo="thumbnail"' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- lapaz_video_thumb() escapa. ?>
 				<?php endif; ?>
-				<?php /* translators: %s: título del video. */ ?>
-				<button type="button" class="actualidad__play" aria-label="<?php echo esc_attr( sprintf( __( 'Reproducir %s', 'lapaz' ), $lapaz_destacado['titulo'] ?? '' ) ); ?>">
+				<?php if ( $lapaz_destacado ) : ?>
+					<?php /* translators: %s: título del video. */ ?>
+				<button type="button" class="actualidad__play" aria-label="<?php echo esc_attr( sprintf( __( 'Reproducir %s', 'lapaz' ), $lapaz_destacado['titulo'] ) ); ?>">
 					<?php printf( $lapaz_play_svg, 48 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG fijo del tema. ?>
 				</button>
+				<?php endif; ?>
 			</div>
 		</div>
 

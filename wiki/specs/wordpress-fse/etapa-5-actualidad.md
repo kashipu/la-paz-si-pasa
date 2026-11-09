@@ -38,3 +38,13 @@ Que los editores carguen videos (YouTube o MP4 subido) con título, descripción
 
   Además: la base visual contra Astro, la excepción `::view-transition-*` en la regla de prefijo de `bin/check`, y en el workflow el seed de videos y el paso de prueba.
 - **AGY:** revisión de solo lectura del bloque frente a `ActualidadGaleria.astro`, `youtube.js` y `mapVideo.ts`.
+
+## Revisión independiente (AGY, solo lectura)
+
+| # | Hallazgo | Prioridad | Decisión |
+|---|---|---|---|
+| 1 | Si la miniatura del video se borraba de la biblioteca, no se usaba la de YouTube | Media | Corregido: una miniatura que ya no existe cuenta como vacía |
+| 2 | `JSON.parse( data-tags ?? '[]' )` falla con un atributo vacío | Media | Corregido con `\|\| '[]'`. No pasa con el HTML actual, que siempre escribe un arreglo JSON, pero el JS ya no depende de eso |
+| 3 | Sin videos, quedaba un botón «Reproducir » sin título | Baja | Corregido: sin destacado no hay botón |
+| 4 | Una URL de YouTube pegada con espacios no se reconocía (`new URL()` de Astro sí los quitaba) | Baja | Corregido: `trim()` antes de `wp_parse_url()` |
+| 5 | El scroll suave no respetaba `prefers-reduced-motion` | Baja | Corregido |

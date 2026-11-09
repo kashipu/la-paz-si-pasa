@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
  * @param string $url URL del video.
  */
 function lapaz_youtube_id( string $url ): string {
-	$partes = wp_parse_url( $url );
+	$partes = wp_parse_url( trim( $url ) );
 	if ( ! is_array( $partes ) || empty( $partes['host'] ) ) {
 		return '';
 	}
@@ -94,6 +94,8 @@ function lapaz_get_videos(): array {
 		$file_url     = is_array( $archivo ) && is_string( $archivo['url'] ?? null ) ? $archivo['url'] : '';
 		$source       = lapaz_video_source( lapaz_field_text( 'youtube_url', $post->ID ), $file_url );
 		$thumbnail_id = lapaz_field_image_id( 'thumbnail', $post->ID );
+		// Si la miniatura se borró de la biblioteca, se cae a la de YouTube.
+		$thumbnail_id = $thumbnail_id > 0 && wp_attachment_is_image( $thumbnail_id ) ? $thumbnail_id : 0;
 		$tags_raw     = function_exists( 'get_field' ) ? get_field( 'tags', $post->ID ) : array();
 		$tags         = array();
 		foreach ( is_array( $tags_raw ) ? $tags_raw : array() as $tag ) {
